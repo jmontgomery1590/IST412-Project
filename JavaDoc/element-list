@@ -1,0 +1,11 @@
+CourseManagement.Controller
+CourseManagement.Model
+CourseManagement.View
+CourseworkManagement.Controller
+CourseworkManagement.Model
+CourseworkManagement.View
+StaffManagement.Controller
+StaffManagement.Model
+StaffManagement.View
+StudentManagement
+UserAuthentication
