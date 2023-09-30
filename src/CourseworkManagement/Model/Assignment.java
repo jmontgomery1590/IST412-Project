@@ -3,9 +3,16 @@ package CourseworkManagement.Model;
 import java.util.ArrayList;
 
 public class Assignment {
-    public ArrayList<Question> assignmentQuestions;
-    public double possibleScore;
-    public double earnedScore;
+    private String assignmentTitle;
+    private ArrayList<Question> assignmentQuestions;
+    private double possibleScore;
+    private double earnedScore;
+
+    public Assignment(String assignmentTitle){
+        this.setAssignmentQuestions(new ArrayList<>());
+        this.setPossibleScore(0.0);
+        this.setEarnedScore(0.0);
+    }
 
     /**
      * Returns the total possible score for this assignment
@@ -43,4 +50,20 @@ public class Assignment {
      * Grade assignment and post grade
      */
     public void gradeAssignment() {}
+
+    public ArrayList<Question> getAssignmentQuestions() {
+        return assignmentQuestions;
+    }
+
+    public void setAssignmentQuestions(ArrayList<Question> assignmentQuestions) {
+        this.assignmentQuestions = assignmentQuestions;
+    }
+
+    public String getAssignmentTitle() {
+        return assignmentTitle;
+    }
+
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
+    }
 }

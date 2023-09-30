@@ -1,5 +1,6 @@
 package StaffManagement.Controller;
 
+import CourseManagement.Controller.CourseMgmtController;
 import StaffManagement.Model.Admin;
 import StaffManagement.Model.Instructor;
 import StaffManagement.Model.TA;
@@ -8,6 +9,7 @@ import UserAuthentication.User;
 
 public class StaffMgmtController {
     private StaffMgmtInterface staffInterface;
+    private CourseMgmtController courseMgmtCntrl;
     private Instructor instructor;
     private Admin admin;
     private TA ta;
@@ -87,5 +89,13 @@ public class StaffMgmtController {
 
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    public CourseMgmtController getCourseMgmtCntrl() {
+        return courseMgmtCntrl;
+    }
+
+    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
+        this.courseMgmtCntrl = courseMgmtCntrl;
     }
 }
