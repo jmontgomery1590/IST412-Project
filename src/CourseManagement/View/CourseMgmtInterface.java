@@ -12,7 +12,7 @@ public class CourseMgmtInterface {
      */
     public Course createCourse() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Course ID#:");
+        System.out.println("\nCourse ID#:");
         String courseID = scanner.nextLine();
         System.out.println("Course Name:");
         String courseName = scanner.nextLine();
@@ -27,6 +27,7 @@ public class CourseMgmtInterface {
                 break;
             }
         }
+        System.out.println("\n---Course Created Successfully---\n");
         return new Course(courseID, courseName, max);
     }
 }

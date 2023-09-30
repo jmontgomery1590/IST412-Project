@@ -6,6 +6,8 @@ public class User {
     private String userNum;
     private String userName;
     public String roleID;
+    private String successful = "\n---Login Successful---\n";
+    private String unsuccessful = "\n---Login Unsuccessful---\n";
 
     /**
      * Constructor for User class
@@ -19,26 +21,22 @@ public class User {
     }
 
     /**
-     * Returns username for this User
-     * @return String representing the username for the user
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
      * Verify a user profile exists
      */
     public String verifyUser() {
         if (loginID.equalsIgnoreCase("Student") && password.equals("Student123")) {
+            System.out.println(successful);
             return "STUDENT";
         } else if (loginID.equalsIgnoreCase("Instructor") && password.equals("Instructor123")) {
+            System.out.println(successful);
             return "INSTRUCTOR";
         } else if (loginID.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
+            System.out.println(successful);
             return "ADMIN";
         } else if (loginID.equalsIgnoreCase("ta") && password.equals("TA123")) {
+            System.out.println(successful);
             return "TA";
-        } else return "Not Enrolled";
+        } else return unsuccessful;
     }
 
     /**
@@ -78,6 +76,14 @@ public class User {
 
     public void setUserNum(String userNum) {
         this.userNum = userNum;
+    }
+
+    /**
+     * Returns username for this User
+     * @return String representing the username for the user
+     */
+    public String getUserName() {
+        return userName;
     }
 
     public void setUserName(String userName) {

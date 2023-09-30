@@ -43,6 +43,7 @@ public class CourseworkMgmtController {
         // add possible answers to the question
         this.setAnswerInterface(new AnswerInterface());
         this.createAllPossibleAnswers();
+
     }
 
     public CourseworkMgmtController(CourseMgmtController courseMgmtControllerStudent, Student student){

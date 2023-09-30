@@ -24,7 +24,7 @@ public class QuestionInterface {
                 break;
             }
         }
-
+        System.out.println("\n---Question Created Successfully---\n");
         return new Question(question, pointValue);
     }
 }

@@ -49,6 +49,7 @@ public class CourseMgmtController {
      * will utilize a different constructor
      */
     public CourseMgmtController(StudentMgmtController studentMgmtController){
+        String successful = "\n---Course Information Displayed Correctly---";
         this.setStudentMgmtController(studentMgmtController);
 
         // Creating a course w/ pages/assignments/questions for student to access as an example
@@ -67,7 +68,7 @@ public class CourseMgmtController {
         this.setCurrentCourse(studentsCourse);
         this.setCurrentPage(studentsCourse.getCoursePages().get(0));
 
-        // initiates the courseworkmgmtcontroller made for students
+        // initiates the courseworkMgmtController made for students
         this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
     }
 
@@ -75,17 +76,17 @@ public class CourseMgmtController {
         this.setPi(new PageMgmtInterface());
     }
 
-    public void printCourseInfo(){
-        System.out.println(this.getCurrentCourse().getCourseID());
-        System.out.println(this.getCurrentCourse().getCourseName());
-        System.out.println(this.getCurrentCourse().getMaxEnrolled());
+    public void printCourseInfo() {
+        System.out.println("Course ID: " + this.getCurrentCourse().getCourseID());
+        System.out.println("Course Name: " + this.getCurrentCourse().getCourseName());
+        System.out.println("Max Enrolled Students: " + this.getCurrentCourse().getMaxEnrolled());
     }
 
-    public void printCoursePages(){
+    public void printCoursePages() {
         for (Page pages: this.getCurrentCourse().getCoursePages())
         {
-            System.out.println(pages.getPageTitle());
-            System.out.println("\n" + pages.getPageBody());
+            System.out.println("Page Title: " + pages.getPageTitle());
+            System.out.println("Page Content: " + pages.getPageBody() + "\n");
         }
     }
 

@@ -6,7 +6,6 @@ import StudentManagement.StudentMgmtController;
 // test update
 public class LoginController {
     private User u1;
-
     private LoginInterface loginInt;
     private StudentMgmtController studentCntrl;
     private StaffMgmtController staffMgmtCntrl;

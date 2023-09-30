@@ -14,6 +14,7 @@ public class AssignmentInterface {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What is the assignment title:");
         String assignmentTitle = scanner.nextLine();
+        System.out.println("\n---Assignment Created Successfully---\n");
         return new Assignment(assignmentTitle);
     }
 
@@ -34,5 +35,6 @@ public class AssignmentInterface {
                 i ++;
             }
         }
+        System.out.println("\n---Assignment Information Displayed Successfully---");
     }
 }
