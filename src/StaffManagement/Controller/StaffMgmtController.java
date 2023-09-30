@@ -23,6 +23,11 @@ public class StaffMgmtController {
         this.getStaffInterface().displayProfile(u1,this.getAccessLevel());
     }
 
+    /**
+     * Assigns RoleLevel for restricting access to parts of interface
+     * @param u1
+     * @return
+     */
     public int checkFacultyLevel(User u1){
         int roleLevel = 0;
         switch (u1.getRoleID()){
