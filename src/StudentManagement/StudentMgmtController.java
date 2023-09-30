@@ -1,9 +1,11 @@
 package StudentManagement;
 
+import CourseManagement.Controller.CourseMgmtController;
 import UserAuthentication.User;
 
 public class StudentMgmtController {
     private StudentMgmtInterface si;
+    private CourseMgmtController courseMgmtController;
     private Student student;
 
     /**
@@ -14,6 +16,9 @@ public class StudentMgmtController {
         this.setSi(new StudentMgmtInterface());
         this.setStudent(new Student(u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
         this.getSi().displayProfile(this.getStudent());
+
+        // interact with courses
+        this.setCourseMgmtController(new CourseMgmtController(this));
     }
 
     public StudentMgmtInterface getSi() {
@@ -30,5 +35,13 @@ public class StudentMgmtController {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public CourseMgmtController getCourseMgmtController() {
+        return courseMgmtController;
+    }
+
+    public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
+        this.courseMgmtController = courseMgmtController;
     }
 }

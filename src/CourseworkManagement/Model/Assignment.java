@@ -9,6 +9,7 @@ public class Assignment {
     private double earnedScore;
 
     public Assignment(String assignmentTitle){
+        this.setAssignmentTitle(assignmentTitle);
         this.setAssignmentQuestions(new ArrayList<>());
         this.setPossibleScore(0.0);
         this.setEarnedScore(0.0);

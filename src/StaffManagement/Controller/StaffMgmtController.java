@@ -23,6 +23,7 @@ public class StaffMgmtController {
         this.setStaffInterface(new StaffMgmtInterface());
         this.setAccessLevel(this.checkFacultyLevel(u1));
         this.getStaffInterface().displayProfile(u1,this.getAccessLevel());
+        this.setCourseMgmtCntrl(new CourseMgmtController());
     }
 
     /**

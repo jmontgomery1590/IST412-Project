@@ -8,6 +8,7 @@ import CourseworkManagement.Model.Question;
 import CourseworkManagement.View.AnswerInterface;
 import CourseworkManagement.View.AssignmentInterface;
 import CourseworkManagement.View.QuestionInterface;
+import StudentManagement.Student;
 
 public class CourseworkMgmtController {
     private AssignmentInterface assignmentInterface; // changed this to private
@@ -19,6 +20,7 @@ public class CourseworkMgmtController {
     private Question currentQuestion;
     private Answer currentAnswer;
     private Assignment assignment;
+    private Student student;
 
     /**
      * Constructor for the coursework management interface
@@ -41,6 +43,15 @@ public class CourseworkMgmtController {
         // add possible answers to the question
         this.setAnswerInterface(new AnswerInterface());
         this.createAllPossibleAnswers();
+    }
+
+    public CourseworkMgmtController(CourseMgmtController courseMgmtControllerStudent, Student student){
+        this.setCourseMgmtController(courseMgmtControllerStudent);
+        this.setStudent(student);
+
+        this.setAssignmentInterface(new AssignmentInterface());
+        this.getAssignmentInterface().displayAssignments(this.getStudent().getEnrolledCourses()
+                .get(0).getCoursePages().get(0).getLessonAssignments().get(0));
     }
 
     private void createAllPossibleAnswers(){
@@ -113,5 +124,13 @@ public class CourseworkMgmtController {
 
     public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
