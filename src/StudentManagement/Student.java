@@ -11,23 +11,13 @@ public class Student extends User {
     /**
      * Super constructor for Student User class
      * @param userLogin Given login username for authentication
-     * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
+     * @param password Given login password for authentication
      */
-    public Student(String userLogin, String userPassword, String roleID) {
-        super(userLogin, userPassword, roleID);
-    }
-
-    /**
-     * Constructor for Student class
-     * @param userLogin Given login username for authentication
-     * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
-     * @param userMajor Student's major area of study
-     */
-    public Student(String userLogin, String userPassword, String roleID, String userMajor) {
-        super(userLogin, userPassword, roleID);
-        this.major = userMajor;
+    public Student(String userLogin, String password, String roleID) {
+        super(userLogin, password);
+        this.setRoleID(roleID);
+        this.major = "Undecided";
+        this.enrolledCourses = new ArrayList<>();
     }
 
     /**

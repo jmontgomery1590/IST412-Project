@@ -13,21 +13,20 @@ public class Admin extends User {
      * Super constructor for Admin User class
      * @param userLogin Given login username for authentication
      * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
      */
     public Admin(String userLogin, String userPassword, String roleID) {
-        super(userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
+        this.setRoleID(roleID);
     }
 
     /**
      * Constructor for Admin class
      * @param userLogin Given login username for authentication
      * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
      * @param overseen List of instructors overseen
      */
-    public Admin(String userLogin, String userPassword, String roleID, ArrayList<Instructor> overseen) {
-        super(userLogin, userPassword, roleID);
+    public Admin(String userLogin, String userPassword, ArrayList<Instructor> overseen) {
+        super(userLogin, userPassword);
         this.instructorsOverseen = overseen;
     }
 
