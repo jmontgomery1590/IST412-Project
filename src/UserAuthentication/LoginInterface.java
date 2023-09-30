@@ -1,13 +1,17 @@
 package UserAuthentication;
 
+import java.util.Scanner;
+
 public class LoginInterface {
 
     public LoginInterface() {}
 
     public User Login() {
-        String login = "login";
-        String password = "password";
-        User u = new User(login, password);
-        return u;
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Username:");
+        String userName = scn.next();
+        System.out.println("Password:");
+        String password = scn.next();
+        return new User(userName, password);
     }
 }
