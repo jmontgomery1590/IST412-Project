@@ -5,11 +5,17 @@ import CourseManagement.Model.Page;
 import CourseManagement.View.CourseMgmtInterface;
 import CourseManagement.View.PageMgmtInterface;
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import CourseworkManagement.Model.Answer;
+import CourseworkManagement.Model.Assignment;
+import CourseworkManagement.Model.Question;
+import StudentManagement.Student;
+import StudentManagement.StudentMgmtController;
 
 public class CourseMgmtController {
     private CourseMgmtInterface ci;
     private PageMgmtInterface pi;
     private CourseworkMgmtController courseworkMgmtCntrl;
+    private StudentMgmtController studentMgmtController;
     private Course currentCourse;
     private Page currentPage;
 
@@ -36,6 +42,33 @@ public class CourseMgmtController {
 
         // Initiates CourseWork Management Controller passing in the current course
         this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this));
+    }
+
+    /**
+     * Students will have different access to Courses than staff, so they
+     * will utilize a different constructor
+     */
+    public CourseMgmtController(StudentMgmtController studentMgmtController){
+        this.setStudentMgmtController(studentMgmtController);
+
+        // Creating a course w/ pages/assignments/questions for student to access as an example
+        Course studentsCourse = new Course("IST 412", "Complicated Stuff", 15);
+        Page studentsCoursePage = new Page("L01 Lesson Description", "This is your lesson.");
+        Assignment studentsAssignment = new Assignment("L01: Your Assignment");
+        Question studentsQuestion = new Question("L01 Question #1", 9001);
+        Answer studentAnswer = new Answer("It's over 9000", true);
+        Answer studentAnswer2 = new Answer("It's not over 9000", false);
+        studentsQuestion.addPossibleAnswer(studentAnswer);
+        studentsQuestion.addPossibleAnswer(studentAnswer2);
+        studentsAssignment.getAssignmentQuestions().add(studentsQuestion);
+        studentsCoursePage.getLessonAssignments().add(studentsAssignment);
+        studentsCourse.getCoursePages().add(studentsCoursePage);
+        this.getStudentMgmtController().getStudent().getEnrolledCourses().add(studentsCourse);
+        this.setCurrentCourse(studentsCourse);
+        this.setCurrentPage(studentsCourse.getCoursePages().get(0));
+
+        // initiates the courseworkmgmtcontroller made for students
+        this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
     }
 
     public void createNewCoursePage(){
@@ -94,5 +127,13 @@ public class CourseMgmtController {
 
     public void setCourseworkMgmtCntrl(CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
+    }
+
+    public StudentMgmtController getStudentMgmtController() {
+        return studentMgmtController;
+    }
+
+    public void setStudentMgmtController(StudentMgmtController studentMgmtController) {
+        this.studentMgmtController = studentMgmtController;
     }
 }

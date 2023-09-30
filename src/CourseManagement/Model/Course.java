@@ -8,10 +8,10 @@ public class Course {
     private int maxEnrolled;
     private ArrayList<Page> coursePages;
 
-    public Course(String id, String coursename, int maxenrolled) {
+    public Course(String id, String courseName, int maxEnrolled) {
         this.courseID = id;
-        this.courseName = coursename;
-        this.maxEnrolled = maxenrolled;
+        this.courseName = courseName;
+        this.maxEnrolled = maxEnrolled;
         this.setCoursePages(new ArrayList<>());
     }
 
