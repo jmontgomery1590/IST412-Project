@@ -52,7 +52,7 @@ public class CourseMgmtController {
         String successful = "\n---Course Information Displayed Correctly---";
         this.setStudentMgmtController(studentMgmtController);
 
-        // Creating a course w/ pages/assignments/questions for student to access as an example
+        // Creating an example course w/ pages/assignments/questions for student to access during integration test
         Course studentsCourse = new Course("IST 412", "Complicated Stuff", 15);
         Page studentsCoursePage = new Page("L01 Lesson Description", "This is your lesson.");
         Assignment studentsAssignment = new Assignment("L01: Your Assignment");
