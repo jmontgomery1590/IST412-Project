@@ -56,7 +56,7 @@ public class CourseMgmtController {
         Course studentsCourse = new Course("IST 412", "Complicated Stuff", 15);
         Page studentsCoursePage = new Page("L01 Lesson Description", "This is your lesson.");
         Assignment studentsAssignment = new Assignment("L01: Your Assignment");
-        Question studentsQuestion = new Question("L01 Question #1", 9001);
+        Question studentsQuestion = new Question("How many points is this question worth?", 9001);
         Answer studentAnswer = new Answer("It's over 9000", true);
         Answer studentAnswer2 = new Answer("It's not over 9000", false);
         studentsQuestion.addPossibleAnswer(studentAnswer);
