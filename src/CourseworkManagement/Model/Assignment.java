@@ -16,6 +16,27 @@ public class Assignment {
     }
 
     /**
+     * Grade assignment and post grade
+     */
+    public void gradeAssignment() {}
+
+    public String getAssignmentTitle() {
+        return assignmentTitle;
+    }
+
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
+    }
+
+    public ArrayList<Question> getAssignmentQuestions() {
+        return assignmentQuestions;
+    }
+
+    public void setAssignmentQuestions(ArrayList<Question> assignmentQuestions) {
+        this.assignmentQuestions = assignmentQuestions;
+    }
+
+    /**
      * Returns the total possible score for this assignment
      * @return Double representation of the total possible score for this assignment
      */
@@ -45,26 +66,5 @@ public class Assignment {
      */
     public void setEarnedScore(double userScore) {
         this.earnedScore = userScore;
-    }
-
-    /**
-     * Grade assignment and post grade
-     */
-    public void gradeAssignment() {}
-
-    public ArrayList<Question> getAssignmentQuestions() {
-        return assignmentQuestions;
-    }
-
-    public void setAssignmentQuestions(ArrayList<Question> assignmentQuestions) {
-        this.assignmentQuestions = assignmentQuestions;
-    }
-
-    public String getAssignmentTitle() {
-        return assignmentTitle;
-    }
-
-    public void setAssignmentTitle(String assignmentTitle) {
-        this.assignmentTitle = assignmentTitle;
     }
 }

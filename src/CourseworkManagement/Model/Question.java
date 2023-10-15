@@ -20,14 +20,6 @@ public class Question {
     }
 
     /**
-     * Returns the user response for this assignment
-     * @return String representation of the user response for this assignment
-     */
-    public String getResponse() {
-        return this.response;
-    }
-
-    /**
      * Compares user response against the answer to check for correct answer
      * @param userResponse User response given for this question
      * @param Answer Actual answer for this question
@@ -56,6 +48,14 @@ public class Question {
 
     public void setPossibleAnswers(ArrayList<Answer> possibleAnswers) {
         this.possibleAnswers = possibleAnswers;
+    }
+
+    /**
+     * Returns the user response for this assignment
+     * @return String representation of the user response for this assignment
+     */
+    public String getResponse() {
+        return this.response;
     }
 
     public void setResponse(String response) {

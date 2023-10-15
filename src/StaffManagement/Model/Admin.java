@@ -6,8 +6,8 @@ import UserAuthentication.User;
 import java.util.ArrayList;
 
 public class Admin extends User {
-    ArrayList<Instructor> instructorsOverseen;
-    ArrayList<Course> masterCourseList;
+    public ArrayList<Instructor> instructorsOverseen;
+    public ArrayList<Course> masterCourseList;
 
     /**
      * Super constructor for Admin User class

@@ -46,14 +46,6 @@ public class User {
      */
     public void changePassword(String loginName, String userPassword) {}
 
-    public String getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(String roleID) {
-        this.roleID = roleID;
-    }
-
     public String getLoginID() {
         return loginID;
     }
@@ -88,5 +80,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(String roleID) {
+        this.roleID = roleID;
     }
 }
