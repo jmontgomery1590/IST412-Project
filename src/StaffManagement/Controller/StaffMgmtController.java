@@ -5,7 +5,7 @@ import StaffManagement.Model.Admin;
 import StaffManagement.Model.Instructor;
 import StaffManagement.Model.TA;
 import StaffManagement.View.StaffMgmtInterface;
-import UserAuthentication.User;
+import UserAuthentication.Model.User;
 
 public class StaffMgmtController {
     private StaffMgmtInterface staffInterface;

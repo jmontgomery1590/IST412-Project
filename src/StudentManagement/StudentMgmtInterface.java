@@ -1,6 +1,6 @@
 package StudentManagement;
 
-import UserAuthentication.User;
+import UserAuthentication.Model.User;
 
 public class StudentMgmtInterface {
     public StudentMgmtInterface() {}

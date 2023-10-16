@@ -1,17 +1,13 @@
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.Course;
-import CourseManagement.Model.Page;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.Assignment;
-import CourseworkManagement.Model.Question;
-import UserAuthentication.HomepageUI;
-import UserAuthentication.LoginController;
-
-import java.sql.SQLOutput;
+import CourseManagement.View.CourseMgmtInterface;
+import UserAuthentication.View.HomepageUI;
 
 public class TestHarness {
     public static void main(String[] args) {
         //LoginController loginCTRL = new LoginController();
     	HomepageUI homeUI = new HomepageUI();
+        //CourseMgmtInterface courseUI = new CourseMgmtInterface();
+
+        //CourseMgmtController courseCntl = new CourseMgmtController();
     }
 }

@@ -1,4 +1,6 @@
-package UserAuthentication;
+package UserAuthentication.View;
+
+import UserAuthentication.Model.User;
 
 import java.util.Scanner;
 

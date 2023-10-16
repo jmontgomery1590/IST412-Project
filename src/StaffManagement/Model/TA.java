@@ -2,7 +2,7 @@ package StaffManagement.Model;
 
 import CourseManagement.Model.Course;
 import CourseworkManagement.Model.Assignment;
-import UserAuthentication.User;
+import UserAuthentication.Model.User;
 
 import java.util.ArrayList;
 

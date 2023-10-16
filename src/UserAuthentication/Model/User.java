@@ -1,4 +1,4 @@
-package UserAuthentication;
+package UserAuthentication.Model;
 
 public class User {
     private String loginID;

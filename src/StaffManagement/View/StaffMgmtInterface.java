@@ -1,6 +1,6 @@
 package StaffManagement.View;
 
-import UserAuthentication.User;
+import UserAuthentication.Model.User;
 
 public class StaffMgmtInterface {
     public StaffMgmtInterface() {}

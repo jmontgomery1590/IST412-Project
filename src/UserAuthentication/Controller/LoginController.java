@@ -1,7 +1,9 @@
-package UserAuthentication;
+package UserAuthentication.Controller;
 
 import StaffManagement.Controller.StaffMgmtController;
 import StudentManagement.StudentMgmtController;
+import UserAuthentication.View.LoginInterface;
+import UserAuthentication.Model.User;
 
 // test update
 public class LoginController {

@@ -1,7 +1,7 @@
 package StudentManagement;
 
 import CourseManagement.Controller.CourseMgmtController;
-import UserAuthentication.User;
+import UserAuthentication.Model.User;
 
 public class StudentMgmtController {
     private StudentMgmtInterface si;
