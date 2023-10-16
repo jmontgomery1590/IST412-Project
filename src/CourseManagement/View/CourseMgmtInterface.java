@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class CourseMgmtInterface {
     public DefaultTableModel tableModel;
     public JFrame courseFrame;
-    public JButton homeButton, coursesButton, profileButton, viewButton, addButton, editButton, exitButton;
+    public JButton homeButton, coursesButton, profileButton, viewButton, addButton, editButton, deleteButton, exitButton;
     public JPanel navigationPanel, controlPanel;
     public JTable courseTable;
 
@@ -56,8 +56,17 @@ public class CourseMgmtInterface {
         });
 
         viewButton = new JButton("View Course");
+        viewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CourseDetailInterface courseDetailUI = new CourseDetailInterface();
+                courseFrame.setVisible(false);
+            }
+        });
+
         addButton = new JButton("Add Course");
         editButton = new JButton("Edit Course");
+        deleteButton = new JButton("Delete Course");
 
         navigationPanel = new JPanel(new GridLayout(1, 4));
         navigationPanel.add(homeButton);
@@ -69,6 +78,7 @@ public class CourseMgmtInterface {
         controlPanel.add(viewButton);
         controlPanel.add(addButton);
         controlPanel.add(editButton);
+        controlPanel.add(deleteButton);
 
         courseFrame.getContentPane().add(navigationPanel, BorderLayout.NORTH);
         courseFrame.getContentPane().add(controlPanel, BorderLayout.SOUTH);
