@@ -23,20 +23,20 @@ public class User {
     /**
      * Verify a user profile exists
      */
-    public String verifyUser() {
+    public Boolean verifyUser() {
         if (loginID.equalsIgnoreCase("Student") && password.equals("Student123")) {
             System.out.println(successful);
-            return "STUDENT";
+            return true;
         } else if (loginID.equalsIgnoreCase("Instructor") && password.equals("Instructor123")) {
             System.out.println(successful);
-            return "INSTRUCTOR";
+            return true;
         } else if (loginID.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
             System.out.println(successful);
-            return "ADMIN";
+            return true;
         } else if (loginID.equalsIgnoreCase("ta") && password.equals("TA123")) {
             System.out.println(successful);
-            return "TA";
-        } else return unsuccessful;
+            return true;
+        } else return false;
     }
 
     /**

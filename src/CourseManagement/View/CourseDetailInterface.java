@@ -31,7 +31,7 @@ public class CourseDetailInterface {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HomepageUI homepageUI = new HomepageUI();
+                //HomepageUI homepageUI = new HomepageUI();
                 courseDetailFrame.setVisible(false);
             }
         });

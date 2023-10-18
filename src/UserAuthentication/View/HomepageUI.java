@@ -1,67 +1,105 @@
 package UserAuthentication.View;
 
 import CourseManagement.View.CourseMgmtInterface;
+import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomepageUI {
-	public JFrame homeFrame;
-	public JButton homeButton, coursesButton, profileButton, exitButton;
-	public JPanel navigationPanel;
-	public JLabel welcomeText;
+public class HomepageUI extends JFrame{
+	private JFrame homeFrame;
+	private JButton homeButton, coursesButton, profileButton, exitButton;
+	private JPanel navigationPanel;
+	private JPanel HomePage;
+	private JPanel viewPanel;
+	private HomepageController homepageCntrl;
 
-	public HomepageUI () {
-		homeFrame = new JFrame("Slate LMS");
-		homeFrame.getContentPane().setBackground(Color.BLACK);
-		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		homeButton = new JButton("Home");
-		homeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				HomepageUI homepageUI = new HomepageUI();
-				homeFrame.setVisible(false);
-			}
-		});
+	public HomepageUI (HomepageController homepageController) {
+		this.setHomepageCntrl(homepageController);
+		this.setHomeFrame(new JFrame("Slate LMS"));
+		this.getHomeFrame().add(this.getHomePage());
+		this.getHomeFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getHomeFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.getHomeFrame().setVisible(true);
+	}
 
-		coursesButton = new JButton("Courses");
-		coursesButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				CourseMgmtInterface courseUI = new CourseMgmtInterface();
-				homeFrame.setVisible(false);
-			}
-		});
+	public void loadNewView(JPanel newViewPanel){
+		this.setViewPanel(newViewPanel);
+	}
 
-		profileButton = new JButton("Profile");
 
-		exitButton = new JButton("Exit");
-		exitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+	public JFrame getHomeFrame() {
+		return homeFrame;
+	}
 
-		welcomeText = new JLabel("Welcome to the Slate Learning Management System. Please choose an option above.");
-		welcomeText.setFont(new Font("Times New Roman", Font.BOLD, 38));
-		welcomeText.setForeground(Color.WHITE);
-		welcomeText.setHorizontalAlignment(JLabel.CENTER);
-		welcomeText.setVerticalAlignment(JLabel.CENTER);
+	public void setHomeFrame(JFrame homeFrame) {
+		this.homeFrame = homeFrame;
+	}
 
-		navigationPanel = new JPanel(new GridLayout(1, 4));
-		navigationPanel.add(homeButton);
-		navigationPanel.add(coursesButton);
-		navigationPanel.add(profileButton);
-		navigationPanel.add(exitButton);
+	public JButton getHomeButton() {
+		return homeButton;
+	}
 
-		homeFrame.getContentPane().add(navigationPanel, BorderLayout.NORTH);
-		homeFrame.add(welcomeText);
-		homeFrame.setSize(1500, 1000);
-		homeFrame.setVisible(true);
+	public void setHomeButton(JButton homeButton) {
+		this.homeButton = homeButton;
+	}
 
+	public JButton getCoursesButton() {
+		return coursesButton;
+	}
+
+	public void setCoursesButton(JButton coursesButton) {
+		this.coursesButton = coursesButton;
+	}
+
+	public JButton getProfileButton() {
+		return profileButton;
+	}
+
+	public void setProfileButton(JButton profileButton) {
+		this.profileButton = profileButton;
+	}
+
+	public JButton getExitButton() {
+		return exitButton;
+	}
+
+	public void setExitButton(JButton exitButton) {
+		this.exitButton = exitButton;
+	}
+
+	public JPanel getNavigationPanel() {
+		return navigationPanel;
+	}
+
+	public void setNavigationPanel(JPanel navigationPanel) {
+		this.navigationPanel = navigationPanel;
+	}
+
+	public JPanel getHomePage() {
+		return HomePage;
+	}
+
+	public void setHomePage(JPanel homePage) {
+		HomePage = homePage;
+	}
+
+	public JPanel getViewPanel() {
+		return viewPanel;
+	}
+
+	public void setViewPanel(JPanel viewPanel) {
+		this.viewPanel = viewPanel;
+	}
+
+	public HomepageController getHomepageCntrl() {
+		return homepageCntrl;
+	}
+
+	public void setHomepageCntrl(HomepageController homepageCntrl) {
+		this.homepageCntrl = homepageCntrl;
 	}
 }

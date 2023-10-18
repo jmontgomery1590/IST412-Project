@@ -10,6 +10,7 @@ import CourseworkManagement.Model.Assignment;
 import CourseworkManagement.Model.Question;
 import StudentManagement.Student;
 import StudentManagement.StudentMgmtController;
+import UserAuthentication.Controller.HomepageController;
 
 public class CourseMgmtController {
     private CourseMgmtInterface ci;
@@ -18,12 +19,14 @@ public class CourseMgmtController {
     private StudentMgmtController studentMgmtController;
     private Course currentCourse;
     private Page currentPage;
+    private HomepageController homepageController;
 
 
     /**
      * Constructor for Course Management Interface
      */
-    public CourseMgmtController() {
+    public CourseMgmtController(HomepageController homepageController) {
+        this.homepageController = homepageController;
         this.setCi(new CourseMgmtInterface());
         this.setCurrentCourse(this.getCi().createCourse());
         this.printCourseInfo();

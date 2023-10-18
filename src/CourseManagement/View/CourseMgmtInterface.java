@@ -1,7 +1,6 @@
 package CourseManagement.View;
 
 import CourseManagement.Model.Course;
-import UserAuthentication.View.HomepageUI;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +15,9 @@ public class CourseMgmtInterface {
     public JButton homeButton, coursesButton, profileButton, viewButton, addButton, editButton, deleteButton, exitButton;
     public JPanel navigationPanel, controlPanel;
     public JTable courseTable;
+    private JPanel courseMgmtPanel;
+    private JButton button2;
+    private JButton button3;
 
     public CourseMgmtInterface() {
         courseFrame = new JFrame("Courses");
@@ -31,7 +33,8 @@ public class CourseMgmtInterface {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HomepageUI homepageUI = new HomepageUI();
+
+                //HomepageUI homepageUI = new HomepageUI();
                 courseFrame.setVisible(false);
             }
         });
