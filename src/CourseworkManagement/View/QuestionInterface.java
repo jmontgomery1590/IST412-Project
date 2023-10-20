@@ -2,10 +2,13 @@ package CourseworkManagement.View;
 
 import CourseworkManagement.Model.Question;
 
-import java.sql.SQLOutput;
+import javax.swing.*;
 import java.util.Scanner;
 
 public class QuestionInterface {
+
+    private JPanel questionViewPanel;
+
     public QuestionInterface(){
     }
 

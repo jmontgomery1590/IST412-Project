@@ -2,9 +2,12 @@ package CourseworkManagement.View;
 
 import CourseworkManagement.Model.Answer;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class AnswerInterface {
+    private JPanel answerInterfacePanel;
+
     public AnswerInterface(){
 
     }

@@ -33,35 +33,19 @@ public class CourseMgmtController {
         this.courseList = new CourseList();
         this.courseTable = new CourseTableModel(this.courseList.getCourses());
         this.setCi(new CourseMgmtInterface(this));
+        verifyButtonAccess();
     }
 
-
-    /**
-     * Students will have different access to Courses than staff, so they
-     * will utilize a different constructor
-     */
-    public CourseMgmtController(StudentMgmtController studentMgmtController){
-        String successful = "\n---Course Information Displayed Correctly---";
-        this.setStudentMgmtController(studentMgmtController);
-
-        // Creating an example course w/ pages/assignments/questions for student to access during integration test
-        Course studentsCourse = new Course("IST 412", "Complicated Stuff", 15);
-        Page studentsCoursePage = new Page("L01 Lesson Description", "This is your lesson.");
-        Assignment studentsAssignment = new Assignment("L01: Your Assignment");
-        Question studentsQuestion = new Question("How many points is this question worth?", 9001);
-        Answer studentAnswer = new Answer("It's over 9000", true);
-        Answer studentAnswer2 = new Answer("It's not over 9000", false);
-        studentsQuestion.addPossibleAnswer(studentAnswer);
-        studentsQuestion.addPossibleAnswer(studentAnswer2);
-        studentsAssignment.getAssignmentQuestions().add(studentsQuestion);
-        studentsCoursePage.getLessonAssignments().add(studentsAssignment);
-        studentsCourse.getCoursePages().add(studentsCoursePage);
-        this.getStudentMgmtController().getStudent().getEnrolledCourses().add(studentsCourse);
-        this.setCurrentCourse(studentsCourse);
-        this.setCurrentPage(studentsCourse.getCoursePages().get(0));
-
-        // initiates the courseworkMgmtController made for students
-        this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
+    private void verifyButtonAccess(){
+        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || (homepageController.getUser().getLoginID().equalsIgnoreCase("TA")))
+        {
+            ci.getAddCourseButton().setVisible(false);
+            ci.getDeleteCourseButton().setVisible(false);
+            ci.getEditCourseButton().setVisible(false);
+        } else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor")){
+            ci.getAddCourseButton().setVisible(false);
+            ci.getDeleteCourseButton().setVisible(false);
+        }
     }
 
     public void createNewCoursePage(){

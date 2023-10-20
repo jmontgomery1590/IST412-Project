@@ -1,5 +1,6 @@
 package CourseworkManagement.Model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Assignment {
@@ -8,17 +9,27 @@ public class Assignment {
     private double possibleScore;
     private double earnedScore;
 
+    private String grade;
+    private boolean completed;
+
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
         this.setAssignmentQuestions(new ArrayList<>());
         this.setPossibleScore(0.0);
         this.setEarnedScore(0.0);
+        this.setCompleted(false);
+        this.setGrade("--");
     }
 
     /**
      * Grade assignment and post grade
      */
-    public void gradeAssignment() {}
+    public void gradeAssignment() {
+        double num = (this.getEarnedScore() / this.getPossibleScore());
+        DecimalFormat df = new DecimalFormat("#.#");
+        String roundedGrade = df.format(num);
+        this.setGrade(roundedGrade+ "%");
+    }
 
     public String getAssignmentTitle() {
         return assignmentTitle;
@@ -66,5 +77,21 @@ public class Assignment {
      */
     public void setEarnedScore(double userScore) {
         this.earnedScore = userScore;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

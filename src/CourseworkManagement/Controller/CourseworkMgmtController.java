@@ -2,16 +2,16 @@ package CourseworkManagement.Controller;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.Assignment;
-import CourseworkManagement.Model.Question;
+import CourseworkManagement.Model.*;
 import CourseworkManagement.View.AnswerInterface;
 import CourseworkManagement.View.AssignmentInterface;
+import CourseworkManagement.View.CourseworkMgmtInterface;
 import CourseworkManagement.View.QuestionInterface;
 import StudentManagement.Student;
+import UserAuthentication.Model.User;
 
 public class CourseworkMgmtController {
-    private AssignmentInterface assignmentInterface; // changed this to private
+    private CourseworkMgmtInterface courseworkMgmtInterface; // changed this to private
 
     private CourseMgmtController courseMgmtController;
     private QuestionInterface questionInterface;
@@ -20,39 +20,19 @@ public class CourseworkMgmtController {
     private Question currentQuestion;
     private Answer currentAnswer;
     private Assignment assignment;
-    private Student student;
+    private User currentUser;
+    private AssignmentTableModel assignmentTable;
+    private AssignmentList assignmentList;
 
     /**
      * Constructor for the coursework management interface
      */
     public CourseworkMgmtController(CourseMgmtController courseMgmtController) {
         this.setCourseMgmtController(courseMgmtController);
-
-        // initiates the interface
-        this.setAssignmentInterface(new AssignmentInterface());
-        this.setCurrentCourse(this.getCourseMgmtController().getCurrentCourse());
-
-        // creates new assignment for the course page
-        this.setAssignment(this.getAssignmentInterface().createNewAssignment());
-        this.getCourseMgmtController().getCurrentPage().getLessonAssignments().add(this.getAssignment());
-
-        // creating questions for the assignment
-        this.setQuestionInterface(new QuestionInterface());
-        this.setCurrentQuestion(this.getQuestionInterface().createAQuestion());
-
-        // add possible answers to the question
-        this.setAnswerInterface(new AnswerInterface());
-        this.createAllPossibleAnswers();
-
-    }
-
-    public CourseworkMgmtController(CourseMgmtController courseMgmtControllerStudent, Student student){
-        this.setCourseMgmtController(courseMgmtControllerStudent);
-        this.setStudent(student);
-
-        this.setAssignmentInterface(new AssignmentInterface());
-        this.getAssignmentInterface().displayAssignments(this.getStudent().getEnrolledCourses()
-                .get(0).getCoursePages().get(0).getLessonAssignments().get(0));
+        this.setCurrentUser(this.getCourseMgmtController().getCourseworkMgmtCntrl().getCurrentUser());
+        this.setAssignmentList(new AssignmentList());
+        this.setAssignmentTable(new AssignmentTableModel(this.getAssignmentList().getAssignments()));
+        this.setCourseworkMgmtInterface(new CourseworkMgmtInterface(this));
     }
 
     private void createAllPossibleAnswers(){
@@ -111,12 +91,12 @@ public class CourseworkMgmtController {
         this.assignment = assignment;
     }
 
-    public AssignmentInterface getAssignmentInterface() {
-        return assignmentInterface;
+    public CourseworkMgmtInterface getAssignmentInterface() {
+        return courseworkMgmtInterface;
     }
 
-    public void setAssignmentInterface(AssignmentInterface assignmentInterface) {
-        this.assignmentInterface = assignmentInterface;
+    public void setAssignmentInterface(CourseworkMgmtInterface courseworkMgmtInterface) {
+        this.courseworkMgmtInterface = courseworkMgmtInterface;
     }
 
     public CourseMgmtController getCourseMgmtController() {
@@ -127,11 +107,35 @@ public class CourseworkMgmtController {
         this.courseMgmtController = courseMgmtController;
     }
 
-    public Student getStudent() {
-        return student;
+    public CourseworkMgmtInterface getCourseworkMgmtInterface() {
+        return courseworkMgmtInterface;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setCourseworkMgmtInterface(CourseworkMgmtInterface courseworkMgmtInterface) {
+        this.courseworkMgmtInterface = courseworkMgmtInterface;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public AssignmentTableModel getAssignmentTable() {
+        return assignmentTable;
+    }
+
+    public void setAssignmentTable(AssignmentTableModel assignmentTable) {
+        this.assignmentTable = assignmentTable;
+    }
+
+    public AssignmentList getAssignmentList() {
+        return assignmentList;
+    }
+
+    public void setAssignmentList(AssignmentList assignmentList) {
+        this.assignmentList = assignmentList;
     }
 }
