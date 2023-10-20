@@ -1,6 +1,8 @@
 package CourseManagement.Controller;
 
 import CourseManagement.Model.Course;
+import CourseManagement.Model.CourseList;
+import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Page;
 import CourseManagement.View.CourseMgmtInterface;
 import CourseManagement.View.PageMgmtInterface;
@@ -8,7 +10,6 @@ import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Answer;
 import CourseworkManagement.Model.Assignment;
 import CourseworkManagement.Model.Question;
-import StudentManagement.Student;
 import StudentManagement.StudentMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
@@ -18,8 +19,10 @@ public class CourseMgmtController {
     private CourseworkMgmtController courseworkMgmtCntrl;
     private StudentMgmtController studentMgmtController;
     private Course currentCourse;
+    private CourseList courseList;
     private Page currentPage;
     private HomepageController homepageController;
+    private CourseTableModel courseTable;
 
 
     /**
@@ -27,25 +30,11 @@ public class CourseMgmtController {
      */
     public CourseMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
-        this.setCi(new CourseMgmtInterface());
-        this.setCurrentCourse(this.getCi().createCourse());
-        this.printCourseInfo();
-        this.createNewCoursePage();
-
-        // Add page to the current created course
-        this.setCurrentPage(this.getPi().createPage());
-        this.getCurrentCourse().getCoursePages().add(this.getCurrentPage());
-
-        // Add more pages to the current created course for purpose of testing
-        this.setCurrentPage(this.getPi().createPage());
-        this.getCurrentCourse().getCoursePages().add(this.getCurrentPage());
-
-        // Iterate through list of pages within the course
-        this.printCoursePages();
-
-        // Initiates CourseWork Management Controller passing in the current course
-        this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this));
+        this.courseList = new CourseList();
+        this.courseTable = new CourseTableModel(this.courseList.getCourses());
+        this.setCi(new CourseMgmtInterface(this));
     }
+
 
     /**
      * Students will have different access to Courses than staff, so they
@@ -139,5 +128,29 @@ public class CourseMgmtController {
 
     public void setStudentMgmtController(StudentMgmtController studentMgmtController) {
         this.studentMgmtController = studentMgmtController;
+    }
+
+    public CourseList getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(CourseList courseList) {
+        this.courseList = courseList;
+    }
+
+    public HomepageController getHomepageController() {
+        return homepageController;
+    }
+
+    public void setHomepageController(HomepageController homepageController) {
+        this.homepageController = homepageController;
+    }
+
+    public CourseTableModel getCourseTable() {
+        return courseTable;
+    }
+
+    public void setCourseTable(CourseTableModel courseTable) {
+        this.courseTable = courseTable;
     }
 }

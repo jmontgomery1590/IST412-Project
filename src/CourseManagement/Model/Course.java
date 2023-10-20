@@ -1,5 +1,7 @@
 package CourseManagement.Model;
 
+import StaffManagement.Model.Instructor;
+
 import java.util.ArrayList;
 
 public class Course {
@@ -7,6 +9,7 @@ public class Course {
     private String courseName;
     private int maxEnrolled;
     private ArrayList<Page> coursePages;
+    private Instructor instructor;
 
     public Course(String id, String courseName, int maxEnrolled) {
         this.courseID = id;
@@ -63,5 +66,13 @@ public class Course {
 
     public void setCoursePages(ArrayList<Page> coursePages) {
         this.coursePages = coursePages;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

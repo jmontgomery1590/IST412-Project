@@ -35,7 +35,7 @@ public class CourseDetailInterface {
                 courseDetailFrame.setVisible(false);
             }
         });
-
+/*
         coursesButton = new JButton("Courses");
         coursesButton.addActionListener(new ActionListener() {
             @Override
@@ -44,7 +44,7 @@ public class CourseDetailInterface {
                 courseDetailFrame.setVisible(false);
             }
         });
-
+*/
         profileButton = new JButton("Profile");
 
         exitButton = new JButton("Exit");

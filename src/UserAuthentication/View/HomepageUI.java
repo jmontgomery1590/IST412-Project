@@ -12,18 +12,27 @@ public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
 	private JButton homeButton, coursesButton, profileButton, exitButton;
 	private JPanel navigationPanel;
-	private JPanel HomePage;
-	private JPanel viewPanel;
+	private JPanel HomePage, viewPanel, homePanel;
+	private JLabel homeWelcomeLabel;
 	private HomepageController homepageCntrl;
+	private CardLayout cardSwapper;
 
 
 	public HomepageUI (HomepageController homepageController) {
-		this.setHomepageCntrl(homepageController);
-		this.setHomeFrame(new JFrame("Slate LMS"));
-		this.getHomeFrame().add(this.getHomePage());
-		this.getHomeFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getHomeFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.getHomeFrame().setVisible(true);
+		homepageCntrl = homepageController;
+		JFrame homeFrame = new JFrame();
+
+		// CardSwapper creates an easy-to-use way to swap
+		// between our different UI's without reloading a
+		// new window over and over
+		cardSwapper = new CardLayout();
+		viewPanel.setLayout(cardSwapper);
+		homeFrame.getContentPane().add(HomePage);
+		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		homeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		homeFrame.setUndecorated(true);
+		//homeFrame.pack();
+		homeFrame.setVisible(true);
 	}
 
 	public void loadNewView(JPanel newViewPanel){
@@ -101,5 +110,29 @@ public class HomepageUI extends JFrame{
 
 	public void setHomepageCntrl(HomepageController homepageCntrl) {
 		this.homepageCntrl = homepageCntrl;
+	}
+
+	public JPanel getHomePanel() {
+		return homePanel;
+	}
+
+	public void setHomePanel(JPanel homePanel) {
+		this.homePanel = homePanel;
+	}
+
+	public JLabel getHomeWelcomeLabel() {
+		return homeWelcomeLabel;
+	}
+
+	public void setHomeWelcomeLabel(JLabel homeWelcomeLabel) {
+		this.homeWelcomeLabel = homeWelcomeLabel;
+	}
+
+	public CardLayout getCardSwapper() {
+		return cardSwapper;
+	}
+
+	public void setCardSwapper(CardLayout cardSwapper) {
+		this.cardSwapper = cardSwapper;
 	}
 }

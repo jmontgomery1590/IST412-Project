@@ -9,6 +9,8 @@ import UserAuthentication.Model.User;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // test update
 public class LoginController implements ActionListener {
@@ -36,10 +38,16 @@ public class LoginController implements ActionListener {
         this.getLoginInt().getExitButton().addActionListener(this);
     }
 
+    /**
+     * Recognizes user's button click and checks for which button
+     * was clicked and acts accordingly
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
 
+        // gathers the user's input and passes to User Model class to verify password
         if (obj == this.getLoginInt().getLoginButton()){
             this.setUsername(this.getLoginInt().getUsernameField().getText());
             this.setPassword("");
@@ -51,9 +59,13 @@ public class LoginController implements ActionListener {
                 }
             }
             this.setU1(new User(this.getUsername(), this.getPassword()));
+
+            // if successful, initiate homepage and close the login window
             if (this.getU1().verifyUser()){
                 this.setHomepageCntrl(new HomepageController(this));
-                this.getLoginInt().dispose();
+                this.getLoginInt().getLoginFrame().dispose();
+
+                // if unsuccessful, alert user and reset the text entry/password fields
             } else {
                 this.getLoginInt().getUsernameField().setText("");
                 this.getLoginInt().getPasswordField().setText("");
