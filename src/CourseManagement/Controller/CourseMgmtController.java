@@ -33,6 +33,18 @@ public class CourseMgmtController {
         this.courseList = new CourseList();
         this.courseTable = new CourseTableModel(this.courseList.getCourses());
         this.setCi(new CourseMgmtInterface(this));
+        verifyButtonAccess();
+    }
+
+    private void verifyButtonAccess() {
+        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA")) {
+            ci.getAddCourseButton().setVisible(false);
+            ci.getDeleteCourseButton().setVisible(false);
+            ci.getEditCourseButton().setVisible(false);
+        } else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor")) {
+            ci.getAddCourseButton().setVisible(false);
+            ci.getDeleteCourseButton().setVisible(false);
+        }
     }
 
 
