@@ -31,11 +31,11 @@ public class CourseDetailInterface {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HomepageUI homepageUI = new HomepageUI();
+                //HomepageUI homepageUI = new HomepageUI();
                 courseDetailFrame.setVisible(false);
             }
         });
-
+/*
         coursesButton = new JButton("Courses");
         coursesButton.addActionListener(new ActionListener() {
             @Override
@@ -44,7 +44,7 @@ public class CourseDetailInterface {
                 courseDetailFrame.setVisible(false);
             }
         });
-
+*/
         profileButton = new JButton("Profile");
 
         exitButton = new JButton("Exit");

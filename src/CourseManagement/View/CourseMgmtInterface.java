@@ -1,89 +1,29 @@
 package CourseManagement.View;
 
+import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Course;
-import UserAuthentication.View.HomepageUI;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class CourseMgmtInterface {
-    public DefaultTableModel tableModel;
+    public CourseTableModel tableModel;
     public JFrame courseFrame;
-    public JButton homeButton, coursesButton, profileButton, viewButton, addButton, editButton, deleteButton, exitButton;
     public JPanel navigationPanel, controlPanel;
     public JTable courseTable;
+    private JPanel courseMgmtPanel;
+    private JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
+    private JPanel crudPanel;
+    private CourseMgmtController courseMgmtCntrl;
 
-    public CourseMgmtInterface() {
-        courseFrame = new JFrame("Courses");
-        courseFrame.getContentPane().setBackground(Color.WHITE);
-        courseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Object columnNames[] = {"Course Name", "Course Number", "Instructor"};
-        Object rowData[][] = {};
-        tableModel = new DefaultTableModel(rowData, columnNames);
-        courseTable = new JTable(tableModel);
+    public CourseMgmtInterface(CourseMgmtController courseMgmtController) {
+        courseMgmtCntrl = courseMgmtController;
 
-        homeButton = new JButton("Home");
-        homeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                HomepageUI homepageUI = new HomepageUI();
-                courseFrame.setVisible(false);
-            }
-        });
-
-        coursesButton = new JButton("Courses");
-        coursesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CourseMgmtInterface courseUI = new CourseMgmtInterface();
-                courseFrame.setVisible(false);
-            }
-        });
-
-        profileButton = new JButton("Profile");
-
-        exitButton = new JButton("Exit");
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        viewButton = new JButton("View Course");
-        viewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CourseDetailInterface courseDetailUI = new CourseDetailInterface();
-                courseFrame.setVisible(false);
-            }
-        });
-
-        addButton = new JButton("Add Course");
-        editButton = new JButton("Edit Course");
-        deleteButton = new JButton("Delete Course");
-
-        navigationPanel = new JPanel(new GridLayout(1, 4));
-        navigationPanel.add(homeButton);
-        navigationPanel.add(coursesButton);
-        navigationPanel.add(profileButton);
-        navigationPanel.add(exitButton);
-
-        controlPanel = new JPanel(new GridLayout(1, 3));
-        controlPanel.add(viewButton);
-        controlPanel.add(addButton);
-        controlPanel.add(editButton);
-        controlPanel.add(deleteButton);
-
-        courseFrame.getContentPane().add(navigationPanel, BorderLayout.NORTH);
-        courseFrame.getContentPane().add(controlPanel, BorderLayout.SOUTH);
-        courseFrame.setSize(1500, 1000);
-        courseFrame.setVisible(true);
+        // load the table data (pulled from CourseList, put into CourseTableModel, then
+        // loaded into this forms table
+        courseTable.setModel(courseMgmtCntrl.getCourseTable());
     }
 
     /**
@@ -108,5 +48,49 @@ public class CourseMgmtInterface {
         }
         System.out.println("\n---Course Created Successfully---\n");
         return new Course(courseID, courseName, max);
+    }
+
+    public CourseTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public JFrame getCourseFrame() {
+        return courseFrame;
+    }
+
+    public JPanel getNavigationPanel() {
+        return navigationPanel;
+    }
+
+    public JPanel getControlPanel() {
+        return controlPanel;
+    }
+
+    public JTable getCourseTable() {
+        return courseTable;
+    }
+
+    public JPanel getCourseMgmtPanel() {
+        return courseMgmtPanel;
+    }
+
+    public JButton getAddCourseButton() {
+        return addCourseButton;
+    }
+
+    public JButton getEditCourseButton() {
+        return editCourseButton;
+    }
+
+    public JButton getDeleteCourseButton() {
+        return deleteCourseButton;
+    }
+
+    public JButton getViewCourseButton() {
+        return viewCourseButton;
+    }
+
+    public CourseMgmtController getCourseMgmtCntrl() {
+        return courseMgmtCntrl;
     }
 }
