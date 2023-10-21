@@ -25,8 +25,8 @@ public class Assignment {
      * Grade assignment and post grade
      */
     public void gradeAssignment() {
-        double num = (this.getEarnedScore() / this.getPossibleScore());
-        DecimalFormat df = new DecimalFormat("#.#");
+        double num = ((this.getEarnedScore() / this.getPossibleScore()) * 100);
+        DecimalFormat df = new DecimalFormat("###.#");
         String roundedGrade = df.format(num);
         this.setGrade(roundedGrade+ "%");
     }

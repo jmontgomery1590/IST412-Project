@@ -16,9 +16,9 @@ public class AssignmentList {
 
     public void createAssignmentsList(){
         for (int i = 1; i <= 6; i++){
-            this.setAssignment(new Assignment("Assignment #" + (i+1)));
-            this.getAssignment().setEarnedScore(i * 5);
-            this.getAssignment().setPossibleScore(i * 6);
+            this.setAssignment(new Assignment("Assignment #" + (i)));
+            this.getAssignment().setEarnedScore(i * 15);
+            this.getAssignment().setPossibleScore((i + 1) * 15);
             this.getAssignment().gradeAssignment();
             this.getAssignments().add(this.getAssignment());
         }

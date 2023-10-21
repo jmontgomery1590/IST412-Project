@@ -18,7 +18,7 @@ public class StudentMgmtController {
         this.getSi().displayProfile(this.getStudent());
 
         // interact with courses
-        this.setCourseMgmtController(new CourseMgmtController(this));
+        //this.setCourseMgmtController(new CourseMgmtController(this));
     }
 
     public StudentMgmtInterface getSi() {
