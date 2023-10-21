@@ -14,7 +14,7 @@ public class Assignment {
 
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
-        this.setAssignmentQuestions(new ArrayList<>());
+        //this.setAssignmentQuestions(new ArrayList<>());
         this.setPossibleScore(0.0);
         this.setEarnedScore(0.0);
         this.setCompleted(false);
@@ -25,8 +25,8 @@ public class Assignment {
      * Grade assignment and post grade
      */
     public void gradeAssignment() {
-        double num = (this.getEarnedScore() / this.getPossibleScore());
-        DecimalFormat df = new DecimalFormat("#.#");
+        double num = ((this.getEarnedScore() / this.getPossibleScore()) * 100);
+        DecimalFormat df = new DecimalFormat("###.#");
         String roundedGrade = df.format(num);
         this.setGrade(roundedGrade+ "%");
     }
