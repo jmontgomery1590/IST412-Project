@@ -77,7 +77,7 @@ public class LoginController implements ActionListener {
         }
     }
 
-    /** public void loginTestMethod(){
+    /* public void loginTestMethod(){
         this.getU1().setRoleID(this.getU1().verifyUser());
 
         switch (this.getU1().getRoleID()){
@@ -95,7 +95,7 @@ public class LoginController implements ActionListener {
                 break;
         }
     }
-     **/
+     */
 
     public LoginInterface getLoginInt() {
         return loginInt;

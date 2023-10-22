@@ -1,11 +1,8 @@
 package CourseManagement.Controller;
 
-import CourseManagement.Model.Course;
-import CourseManagement.Model.CourseList;
-import CourseManagement.Model.CourseTableModel;
-import CourseManagement.Model.Page;
+import CourseManagement.Model.*;
 import CourseManagement.View.CourseMgmtInterface;
-import CourseManagement.View.PageMgmtInterface;
+import CourseManagement.View.ViewCourseUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Answer;
 import CourseworkManagement.Model.Assignment;
@@ -13,9 +10,12 @@ import CourseworkManagement.Model.Question;
 import StudentManagement.StudentMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
-public class CourseMgmtController {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CourseMgmtController implements ActionListener {
     private CourseMgmtInterface ci;
-    private PageMgmtInterface pi;
+    private ViewCourseUI pi;
     private CourseworkMgmtController courseworkMgmtCntrl;
     private StudentMgmtController studentMgmtController;
     private Course currentCourse;
@@ -23,6 +23,8 @@ public class CourseMgmtController {
     private Page currentPage;
     private HomepageController homepageController;
     private CourseTableModel courseTable;
+    private PageTableModel pageTable;
+    private PageList pageList;
 
 
     /**
@@ -33,6 +35,9 @@ public class CourseMgmtController {
         this.courseList = new CourseList();
         this.courseTable = new CourseTableModel(this.courseList.getCourses());
         this.setCi(new CourseMgmtInterface(this));
+        this.pageList = new PageList();
+        this.pageTable = new PageTableModel(this.pageList.getPages());
+        addALCourseButtons();
         verifyButtonAccess();
     }
 
@@ -41,12 +46,31 @@ public class CourseMgmtController {
             ci.getAddCourseButton().setVisible(false);
             ci.getDeleteCourseButton().setVisible(false);
             ci.getEditCourseButton().setVisible(false);
+            pi.getAddPageButton().setVisible(false);
+            pi.getDeletePageButton().setVisible(false);
+            pi.getEditPageButton().setVisible(false);
         } else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor")) {
             ci.getAddCourseButton().setVisible(false);
             ci.getDeleteCourseButton().setVisible(false);
         }
     }
 
+    public void addALCourseButtons() {
+        this.getCi().getEditCourseButton().addActionListener(this);
+        this.getCi().getAddCourseButton().addActionListener(this);
+        this.getCi().getViewCourseButton().addActionListener(this);
+        this.getCi().getDeleteCourseButton().addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+
+        if (obj == this.getCi().getViewCourseButton()) {
+            this.setPi(new ViewCourseUI(this));
+            this.addALCourseButtons();
+        }
+    }
 
     /**
      * Students will have different access to Courses than staff, so they
@@ -58,7 +82,7 @@ public class CourseMgmtController {
 
         // Creating an example course w/ pages/assignments/questions for student to access during integration test
         Course studentsCourse = new Course("IST 412", "Complicated Stuff", 15);
-        Page studentsCoursePage = new Page("L01 Lesson Description", "This is your lesson.");
+        Page studentsCoursePage = new Page("L01 Lesson Description");
         Assignment studentsAssignment = new Assignment("L01: Your Assignment");
         Question studentsQuestion = new Question("How many points is this question worth?", 9001);
         Answer studentAnswer = new Answer("It's over 9000", true);
@@ -66,7 +90,6 @@ public class CourseMgmtController {
         studentsQuestion.addPossibleAnswer(studentAnswer);
         studentsQuestion.addPossibleAnswer(studentAnswer2);
         studentsAssignment.getAssignmentQuestions().add(studentsQuestion);
-        studentsCoursePage.getLessonAssignments().add(studentsAssignment);
         studentsCourse.getCoursePages().add(studentsCoursePage);
         this.getStudentMgmtController().getStudent().getEnrolledCourses().add(studentsCourse);
         this.setCurrentCourse(studentsCourse);
@@ -76,9 +99,9 @@ public class CourseMgmtController {
         this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
     }
 
-    public void createNewCoursePage(){
+    /*public void createNewCoursePage(){
         this.setPi(new PageMgmtInterface());
-    }
+    }*/
 
     public void printCourseInfo() {
         System.out.println("Course ID: " + this.getCurrentCourse().getCourseID());
@@ -90,7 +113,7 @@ public class CourseMgmtController {
         for (Page pages: this.getCurrentCourse().getCoursePages())
         {
             System.out.println("Page Title: " + pages.getPageTitle());
-            System.out.println("Page Content: " + pages.getPageBody() + "\n");
+            System.out.println("Page Content: ");
         }
     }
 
@@ -110,11 +133,11 @@ public class CourseMgmtController {
         this.currentCourse = currentCourse;
     }
 
-    public PageMgmtInterface getPi() {
+    public ViewCourseUI getPi() {
         return pi;
     }
 
-    public void setPi(PageMgmtInterface pi) {
+    public void setPi(ViewCourseUI pi) {
         this.pi = pi;
     }
 
@@ -164,5 +187,13 @@ public class CourseMgmtController {
 
     public void setCourseTable(CourseTableModel courseTable) {
         this.courseTable = courseTable;
+    }
+
+    public PageTableModel getPageTable() {
+        return pageTable;
+    }
+
+    public void setPageTable(PageTableModel pageTable) {
+        this.pageTable = pageTable;
     }
 }

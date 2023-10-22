@@ -5,6 +5,8 @@ import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Course;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class CourseMgmtInterface {
@@ -13,7 +15,7 @@ public class CourseMgmtInterface {
     public JPanel navigationPanel, controlPanel;
     public JTable courseTable;
     private JPanel courseMgmtPanel;
-    private JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
+    public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
     private JPanel crudPanel;
     private CourseMgmtController courseMgmtCntrl;
 
