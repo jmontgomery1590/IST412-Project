@@ -12,6 +12,11 @@ public class Announcement extends Page{
         super(title);
     }
 
+    public Announcement(String title, String body) {
+        super (title);
+        this.announcementBody = body;
+    }
+
     public String getAnnouncementBody() {
         return announcementBody;
     }

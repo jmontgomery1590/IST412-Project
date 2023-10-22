@@ -12,6 +12,12 @@ public class Lesson extends Page{
         super(title);
     }
 
+    public Lesson(String title, String content, String reading) {
+        super (title);
+        this.lessonContent = content;
+        this.assignedReading = reading;
+    }
+
     public String getLessonContent() {
         return lessonContent;
     }
