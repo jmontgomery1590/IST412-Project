@@ -3,6 +3,7 @@ package CourseManagement.Controller;
 import CourseManagement.Model.*;
 import CourseManagement.View.CourseMgmtInterface;
 import CourseManagement.View.ViewCourseUI;
+import CourseManagement.View.ViewPageUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Answer;
 import CourseworkManagement.Model.Assignment;
@@ -25,6 +26,7 @@ public class CourseMgmtController implements ActionListener {
     private CourseTableModel courseTable;
     private PageTableModel pageTable;
     private PageList pageList;
+    private ViewPageUI pageUI;
 
 
     /**
@@ -46,9 +48,11 @@ public class CourseMgmtController implements ActionListener {
             ci.getAddCourseButton().setVisible(false);
             ci.getDeleteCourseButton().setVisible(false);
             ci.getEditCourseButton().setVisible(false);
-            pi.getAddPageButton().setVisible(false);
-            pi.getDeletePageButton().setVisible(false);
-            pi.getEditPageButton().setVisible(false);
+            if (pi != null) {
+                pi.getAddPageButton().setVisible(false);
+                pi.getDeletePageButton().setVisible(false);
+                pi.getEditPageButton().setVisible(false);
+            }
         } else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor")) {
             ci.getAddCourseButton().setVisible(false);
             ci.getDeleteCourseButton().setVisible(false);
@@ -62,13 +66,34 @@ public class CourseMgmtController implements ActionListener {
         this.getCi().getDeleteCourseButton().addActionListener(this);
     }
 
+    public void addALPageButtons() {
+        this.getPi().getViewPageButton().addActionListener(this);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
 
         if (obj == this.getCi().getViewCourseButton()) {
-            this.setPi(new ViewCourseUI(this));
-            this.addALCourseButtons();
+            if (this.getPi() == null) {
+                this.setPi(new ViewCourseUI(this));
+                this.addALPageButtons();
+                verifyButtonAccess();
+                this.homepageController.getHomepageUI().getViewPanel().add(this.pi.getPageMgmtPanel(), "View Course");
+            }
+            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Course");
+            this.homepageController.getHomepageUI().getViewPanel().revalidate();
+            this.homepageController.getHomepageUI().getViewPanel().repaint();
+        }
+
+        else if (obj == this.getPi().getViewPageButton()) {
+            if(this.getPageUI() == null) {
+                this.setPageUI(new ViewPageUI());
+                this.homepageController.getHomepageUI().getViewPanel().add(this.pageUI.getPagePanel(), "View Page");
+            }
+            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Page");
+            this.homepageController.getHomepageUI().getViewPanel().revalidate();
+            this.homepageController.getHomepageUI().getViewPanel().repaint();
         }
     }
 
@@ -99,10 +124,6 @@ public class CourseMgmtController implements ActionListener {
         this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
     }
 
-    /*public void createNewCoursePage(){
-        this.setPi(new PageMgmtInterface());
-    }*/
-
     public void printCourseInfo() {
         System.out.println("Course ID: " + this.getCurrentCourse().getCourseID());
         System.out.println("Course Name: " + this.getCurrentCourse().getCourseName());
@@ -115,6 +136,22 @@ public class CourseMgmtController implements ActionListener {
             System.out.println("Page Title: " + pages.getPageTitle());
             System.out.println("Page Content: ");
         }
+    }
+
+    public PageList getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(PageList pageList) {
+        this.pageList = pageList;
+    }
+
+    public ViewPageUI getPageUI() {
+        return pageUI;
+    }
+
+    public void setPageUI(ViewPageUI pageUI) {
+        this.pageUI = pageUI;
     }
 
     public CourseMgmtInterface getCi() {

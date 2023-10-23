@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Page {
     private String pageTitle;
+    private ArrayList<Assignment> lessonAssignments;
 
     /**
      * Constructor for the Page class
@@ -21,5 +22,13 @@ public class Page {
 
     public void setPageTitle(String pageTitle) {
         this.pageTitle = pageTitle;
+    }
+
+    public ArrayList<Assignment> getLessonAssignments() {
+        return lessonAssignments;
+    }
+
+    public void setLessonAssignments(ArrayList<Assignment> lessonAssignments) {
+        this.lessonAssignments = lessonAssignments;
     }
 }
