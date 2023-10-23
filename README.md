@@ -7,6 +7,9 @@ Test profiles have the following login info for various user functionalities:
       Student:
           Username: student
           Password: Student123
+      TA:
+          Username: ta
+          Password: TA123
       Instructor:
           Username: instructor
           Password: Instructor123
@@ -16,8 +19,13 @@ Test profiles have the following login info for various user functionalities:
 
 As of current, TestHarness application flow for these profiles are:
 
-	Student: Upon successful login, system displays preset sample course info.
-	
- 	Instructor and Admin: Upon successful login, allows user to create a course, then to create course pages,
-          then to create an assignment, which includes creating a custom question and filling in a user selected
-          number of answers with clarification if the respective answer is the correct choice or not.
+	All Users: Upon successful login, LMS homepage is displayed with navigation bar at the top of the page.
+          To view this deliverable's use case (view courses and pages within a course), follow the listed sequence:
+          
+          Start at homepage -> Click "Courses" within the navigation bar -> Select a course from the list provided ->
+          Click "View Course" from the option menu on the left -> Select a page from the list provided ->
+          Click "View Page" from the option menu on the left.
+
+    ***Student and TA will only have the "View Course" and "View Page" buttons on the option menu. Admins and 
+       Instructors will have additional "Add", "Edit", and "Delete" buttons: Admins for both Course and Page, 
+       Instructors only Page. 
