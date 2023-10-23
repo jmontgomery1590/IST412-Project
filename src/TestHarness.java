@@ -2,7 +2,7 @@ import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
 import CourseManagement.View.CourseMgmtInterface;
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.AssignmentList;
+import CourseworkManagement.Model.*;
 import StaffManagement.Model.Instructor;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.User;
@@ -26,5 +26,15 @@ public class TestHarness {
         AssignmentList testCourseList = new AssignmentList();
         testCourseList.createAssignmentsList();
         CourseworkMgmtController testController = new CourseworkMgmtController(testAdmin);
+
+
+        MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
+        multipleChoiceQuestion.ask();
+        MultipleChoiceAnswer multipleChoiceAnswer = new MultipleChoiceAnswer();
+        multipleChoiceAnswer.respond();
+        OpenEndedQuestion openEndedQuestion = new OpenEndedQuestion();
+        openEndedQuestion.ask();
+        OpenEndedAnswer openEndedAnswer = new OpenEndedAnswer();
+        openEndedAnswer.respond();
     }
 }
