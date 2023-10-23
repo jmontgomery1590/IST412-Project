@@ -27,5 +27,5 @@ As of current, TestHarness application flow for these profiles are:
           Click "View Page" from the option menu on the left.
 
     ***Student and TA will only have the "View Course" and "View Page" buttons on the option menu. Admins and 
-       Instructors will have additional "Add", "Edit", and "Delete" buttons: Admins for both Course and Page, 
-       Instructors only Page. 
+       Instructors will have additional "Add", "Edit", and "Delete" buttons (not yet functional): Admins for both
+       Course and Page, Instructors only Page. 
