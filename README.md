@@ -17,6 +17,12 @@ Test profiles have the following login info for various user functionalities:
           Username: admin
           Password: Admin123
 
+*For my UI design pattern, I chose the Navigation Panel. This is persistent throughout our entire system Interface, 
+with it implemented in the HomepageUI view class under UserAuthentication.
+
+*For my OO Design pattern, I chose Factory Method. I used my Page model class under CourseManagement, and extended it 
+to three subclasses: Announcement, Lesson, and Activity.
+
 As of current, TestHarness application flow for these profiles are:
 
 	All Users: Upon successful login, LMS homepage is displayed with navigation bar at the top of the page.

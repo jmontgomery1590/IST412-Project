@@ -39,13 +39,6 @@ public class User {
         } else return false;
     }
 
-    /**
-     * Change password linked to User profile
-     * @param loginName Given username to change password on
-     * @param userPassword New password to set to user account.
-     */
-    public void changePassword(String loginName, String userPassword) {}
-
     public String getLoginID() {
         return loginID;
     }
