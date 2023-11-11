@@ -5,11 +5,9 @@ import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Course;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Scanner;
 
-public class CourseMgmtInterface {
+public class CourseMgmtUI {
     public CourseTableModel tableModel;
     public JFrame courseFrame;
     public JPanel navigationPanel, controlPanel;
@@ -20,7 +18,7 @@ public class CourseMgmtInterface {
     private CourseMgmtController courseMgmtCntrl;
 
 
-    public CourseMgmtInterface(CourseMgmtController courseMgmtController) {
+    public CourseMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
 
         // load the table data (pulled from CourseList, put into CourseTableModel, then

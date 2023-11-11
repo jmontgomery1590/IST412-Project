@@ -6,7 +6,8 @@ import CourseManagement.Model.Page;
 import javax.swing.*;
 import java.util.Scanner;
 
-public class ViewCourseUI {
+public class PageMgmtUI {
+    private JFrame viewPageMgmtUI;
     private JPanel pageMgmtPanel;
     private JPanel crudPanel;
     private JButton addPageButton;
@@ -14,15 +15,12 @@ public class ViewCourseUI {
     private JButton viewPageButton;
     private JButton deletePageButton;
     private JTable pageTable;
-
     private CourseMgmtController courseMgmtCntrl;
 
-    public ViewCourseUI(CourseMgmtController courseMgmtController) {
+    public PageMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
         pageTable.setModel(courseMgmtCntrl.getPageTable());
     }
-
-
 
     public Page createPage(){
         Scanner scanner = new Scanner(System.in);
@@ -32,6 +30,14 @@ public class ViewCourseUI {
         String pageBody = scanner.nextLine();
         System.out.println("\n---Page Created Successfully---\n");
         return new Page(pageTitle);
+    }
+
+    public JFrame getViewPageMgmtUI() {
+        return viewPageMgmtUI;
+    }
+
+    public void setViewPageMgmtUI(JFrame viewPageMgmtUI) {
+        this.viewPageMgmtUI = viewPageMgmtUI;
     }
 
     public JPanel getPageMgmtPanel() {

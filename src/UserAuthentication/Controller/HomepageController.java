@@ -55,7 +55,7 @@ public class HomepageController implements ActionListener {
                 this.setCourseMgmtCntrl(new CourseMgmtController(this));
 
                 // Add the UI to the homepage view panel
-                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseInterface().getCourseMgmtPanel(), "Courses");
+                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
             }
 
             // Choose to show the courses UI in the view panel

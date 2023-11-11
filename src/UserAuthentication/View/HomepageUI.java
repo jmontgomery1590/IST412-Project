@@ -1,12 +1,9 @@
 package UserAuthentication.View;
 
-import CourseManagement.View.CourseMgmtInterface;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
