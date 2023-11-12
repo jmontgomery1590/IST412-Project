@@ -19,7 +19,6 @@ public class CourseMgmtUI {
     public JTable courseTable;
     private JPanel courseMgmtPanel;
     public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
-    private JPanel crudPanel;
     private CourseMgmtController courseMgmtCntrl;
     private PageMgmtUI pageMgmtUI;
     private HomepageController homepageController;

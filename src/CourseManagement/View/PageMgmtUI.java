@@ -76,40 +76,21 @@ public class PageMgmtUI {
         return viewPageMgmtFrame;
     }
 
-    public void setViewPageMgmtUI(JFrame viewPageMgmtUI) {
-        this.viewPageMgmtFrame = viewPageMgmtUI;
-    }
-
     public JButton getLessonsButton() {
         return lessonsButton;
     }
 
-    public void setLessonsButton(JButton lessonsButton) {
-        this.lessonsButton = lessonsButton;
-    }
 
     public JButton getAnnouncementsButton() {
         return announcementsButton;
-    }
-
-    public void setAnnouncementsButton(JButton announcementsButton) {
-        this.announcementsButton = announcementsButton;
     }
 
     public JButton getAssignmentsButton() {
         return assignmentsButton;
     }
 
-    public void setAssignmentsButton(JButton assignmentsButton) {
-        this.assignmentsButton = assignmentsButton;
-    }
-
     public JPanel getPageMgmtPanel() {
         return pageMgmtPanel;
-    }
-
-    public void setPageMgmtPanel(JPanel pageMgmtPanel) {
-        this.pageMgmtPanel = pageMgmtPanel;
     }
 
     public CourseMgmtController getCourseMgmtCntrl() {
