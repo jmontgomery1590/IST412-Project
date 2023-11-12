@@ -1,24 +1,83 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import CourseworkManagement.Model.Assignment;
+import CourseworkManagement.Model.Question;
+import CourseworkManagement.Model.QuestionList;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.Objects;
 
-public class AssignmentInterface extends JFrame{
+public class AssignmentInterface extends JFrame {
     public AssignmentInterface (CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
+        this.currentAssignment = new Assignment("");
+        initComponents();
+    }
+
+    private void initComponents(){
         assignmentFrame = new JFrame("Assignment Builder");
         assignmentFrame.setResizable(false);
         assignmentFrame.setMinimumSize(new Dimension(700, 600));
         assignmentFrame.setContentPane(newAssignmentPanel);
         assignmentFrame.setLocationRelativeTo(null);
+        this.addQuestionButton.setEnabled(false);
+        this.createAssignmentButton.setEnabled(false);
+        this.isValidAssignmentName = false;
         assignmentFrame.setVisible(true);
         assignmentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addALButtons();
+        addFocusListeners();
+    }
+
+
+    // This method will be called when the window is closing
+    private void onWindowClosing() {
+        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().setEnabled(true);
+        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().transferFocus();
+    }
+
+    private void addALButtons(){
+        this.addQuestionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.setQuestionInterface(new QuestionInterface(courseworkMgmtCntrl));
+                assignmentFrame.setEnabled(false);
+            }
+        });
+        this.cancelButton.addActionListener(this.courseworkMgmtCntrl);
+        this.createAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentAssignment.updatePossibleScore();
+                courseworkMgmtCntrl.getAssignmentList().getAssignments().add(currentAssignment);
+                courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().setEnabled(true);
+                assignmentFrame.dispose();
+            }
+        });
+        this.submitButton.addActionListener(e -> {
+            if (!assignmentNameTextField.getText().isEmpty() && !Objects.equals(assignmentNameTextField.getText(), "Enter Assignment Name Here"))
+            {
+                isValidAssignmentName = true;
+                addQuestionButton.setEnabled(true);
+                createAssignmentButton.setEnabled(true);
+                assignmentNameTextField.setEnabled(false);
+                submitButton.setEnabled(false);
+                currentAssignment.setAssignmentTitle(assignmentNameTextField.getText());
+                courseworkMgmtCntrl.setAssignment(currentAssignment);
+            }
+            else
+            {
+                isValidAssignmentName = false;
+                addQuestionButton.setEnabled(false);
+                createAssignmentButton.setEnabled(false);
+            }
+        });
+    }
+
+    private void addFocusListeners(){
         assignmentFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -42,15 +101,21 @@ public class AssignmentInterface extends JFrame{
                 }
             }
         });
+
+        assignmentFrame.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                super.windowGainedFocus(e);
+
+                Question[] questionArray = currentAssignment.getQuestionList().getQuestionList().toArray(new Question[0]);
+                questionList.setListData(questionArray);
+            }
+        });
     }
 
-    // This method will be called when the window is closing
-    private void onWindowClosing() {
-        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().setEnabled(true);
-        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().transferFocus();
-    }
 
-
+    private Assignment currentAssignment;
+    private boolean isValidAssignmentName;
     private JFrame assignmentFrame;
     private CourseworkMgmtController courseworkMgmtCntrl;
     private JPanel newAssignmentPanel;
@@ -66,6 +131,7 @@ public class AssignmentInterface extends JFrame{
     private JPanel listPanel;
     private JPanel assignmentNamePanel;
     private JLabel questionListLabel;
+    private JButton submitButton;
 
     public JPanel getNewAssignmentPanel() {
         return newAssignmentPanel;

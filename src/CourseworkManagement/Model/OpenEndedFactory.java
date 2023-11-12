@@ -1,13 +1,13 @@
 package CourseworkManagement.Model;
 
-public class OpenEndedFactory implements AssignmentFactory{
+public class OpenEndedFactory extends AbstractFactory {
     @Override
-    public AbstractQuestion createQuestion() {
-        return new OpenEndedQuestion();
+    public Question createQuestion(String question, double pointValue) {
+        return new OpenEndedQuestion(question, pointValue);
     }
 
     @Override
-    public AbstractAnswer createAnswer() {
-        return new OpenEndedAnswer();
+    public Answer createAnswer(String answer) {
+        return new OpenEndedAnswer(answer);
     }
 }

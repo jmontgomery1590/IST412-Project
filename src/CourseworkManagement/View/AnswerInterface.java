@@ -1,15 +1,11 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.Answer;
+import CourseworkManagement.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Scanner;
+import java.awt.event.*;
 
 public class AnswerInterface  extends JFrame {
 
@@ -21,8 +17,15 @@ public class AnswerInterface  extends JFrame {
         answerFrame.setMinimumSize(new Dimension(700, 600));
         answerFrame.setContentPane(answerInterfacePanel);
         answerFrame.setLocationRelativeTo(null);
+        this.saveAnswerButton.setEnabled(false);
+        this.checkQuestionType();
         answerFrame.setVisible(true);
         answerFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.addALButtons();
+        this.AddFocusListeners();
+    }
+
+    private void AddFocusListeners(){
         answerFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -46,13 +49,65 @@ public class AnswerInterface  extends JFrame {
                 }
             }
         });
+
+
+    }
+
+    private void checkQuestionType(){
+        if (courseworkMgmtCntrl.getQuestion().getClass().equals(OpenEndedQuestion.class))
+        {
+            yesRadioButton.setSelected(true);
+            noRadioButton.setEnabled(false);
+            yesRadioButton.setEnabled(false);
+        }
     }
 
     private void onWindowClosing() {
-        courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().setEnabled(true);
-        courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().transferFocus();
+        courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().setEnabled(true);
+        courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().transferFocus();
     }
 
+    private void addALButtons() {
+        this.cancelButton.addActionListener(this.courseworkMgmtCntrl);
+        this.saveAnswerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String answerDescr = answerField.getText();
+                answer = courseworkMgmtCntrl.getQuestion().createAnswer(answerDescr);
+                courseworkMgmtCntrl.getQuestion().getAnswerList().addToList(answer);
+                courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().setEnabled(true);
+                answerFrame.dispose();
+            }
+        });
+        this.submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (verifyAnswer())
+                {
+                    saveAnswerButton.setEnabled(true);
+                    answerField.setEnabled(false);
+                    yesRadioButton.setEnabled(false);
+                    noRadioButton.setEnabled(false);
+                    submitButton.setEnabled(false);
+                }
+            }
+        });
+    }
+
+    private boolean verifyAnswer(){
+        String answer = this.answerField.getText();
+        if ((yesRadioButton.isSelected() || noRadioButton.isSelected()) && (!answer.isEmpty() && !answer.equals("Insert a potential answer here:")))
+        {
+            return true;
+        }
+        else
+        {
+            this.saveAnswerButton.setEnabled(false);
+            return false;
+        }
+    }
+
+    private Answer answer;
     private JFrame answerFrame;
     private JPanel answerInterfacePanel;
     private JPanel titlePanel;
@@ -68,6 +123,7 @@ public class AnswerInterface  extends JFrame {
     private JLabel questionLabel;
     private JLabel questionDescriptionLabel;
     private JPanel radioPanel;
+    private JButton submitButton;
     private CourseworkMgmtController courseworkMgmtCntrl;
 
     public JFrame getAnswerFrame() {

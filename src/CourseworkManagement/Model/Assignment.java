@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Assignment {
     private String assignmentTitle;
-    private ArrayList<Question> assignmentQuestions;
+    private QuestionList questionList = new QuestionList();
     private double possibleScore;
     private double earnedScore;
 
@@ -14,7 +14,6 @@ public class Assignment {
 
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
-        //this.setAssignmentQuestions(new ArrayList<>());
         this.setPossibleScore(0.0);
         this.setEarnedScore(0.0);
         this.setCompleted(false);
@@ -31,6 +30,15 @@ public class Assignment {
         this.setGrade(roundedGrade+ "%");
     }
 
+    public void updatePossibleScore()
+    {
+        this.possibleScore = 0;
+        for (Question question : questionList.getQuestionList())
+        {
+            this.possibleScore += question.getQuestionPointWorth();
+        }
+    }
+
     public String getAssignmentTitle() {
         return assignmentTitle;
     }
@@ -39,13 +47,7 @@ public class Assignment {
         this.assignmentTitle = assignmentTitle;
     }
 
-    public ArrayList<Question> getAssignmentQuestions() {
-        return assignmentQuestions;
-    }
 
-    public void setAssignmentQuestions(ArrayList<Question> assignmentQuestions) {
-        this.assignmentQuestions = assignmentQuestions;
-    }
 
     /**
      * Returns the total possible score for this assignment
@@ -93,5 +95,13 @@ public class Assignment {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public QuestionList getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(QuestionList questionList) {
+        this.questionList = questionList;
     }
 }

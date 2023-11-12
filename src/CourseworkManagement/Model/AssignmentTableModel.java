@@ -1,6 +1,7 @@
 package CourseworkManagement.Model;
 
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class AssignmentTableModel extends AbstractTableModel {

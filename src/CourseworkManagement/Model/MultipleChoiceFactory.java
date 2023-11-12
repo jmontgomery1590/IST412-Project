@@ -1,13 +1,15 @@
 package CourseworkManagement.Model;
 
-public class MultipleChoiceFactory implements AssignmentFactory{
+public class MultipleChoiceFactory extends AbstractFactory {
     @Override
-    public AbstractQuestion createQuestion() {
-        return null;
+    public Question createQuestion(String question, double pointValue)
+    {
+        return new MultipleChoiceQuestion(question, pointValue);
     }
 
     @Override
-    public AbstractAnswer createAnswer() {
-        return null;
+    public Answer createAnswer(String answer)
+    {
+        return new MultipleChoiceAnswer(answer);
     }
 }
