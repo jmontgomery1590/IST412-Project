@@ -5,6 +5,7 @@ import CourseManagement.Model.AnnouncementList;
 import CourseManagement.Model.AnnouncementTableModel;
 import CourseManagement.Model.LessonList;
 import CourseManagement.Model.LessonTableModel;
+import CourseworkManagement.Controller.CourseworkMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
@@ -17,6 +18,9 @@ public class PageMgmtUI {
     private JButton lessonsButton;
     private JButton announcementsButton;
     private JButton assignmentsButton;
+    private JPanel buttonPanel;
+    private JPanel titlePanel;
+    private JLabel titleLabel;
     private LessonMgmtUI lessonMgmtUI;
     private AnnouncementMgmtUI announcementMgmtUI;
     private HomepageController homepageController;
@@ -38,7 +42,12 @@ public class PageMgmtUI {
     public void addALPageButtons() {
         this.getLessonsButton().addActionListener(this.courseMgmtCntrl);
         this.getAnnouncementsButton().addActionListener(this.courseMgmtCntrl);
-        this.getAssignmentsButton().addActionListener(this.courseMgmtCntrl);
+        this.getAssignmentsButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setCourseworkMgmtCntrl(new CourseworkMgmtController(courseMgmtCntrl));
+            }
+        });
     }
 
     /*@Override

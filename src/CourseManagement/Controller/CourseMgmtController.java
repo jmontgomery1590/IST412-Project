@@ -20,6 +20,7 @@ public class CourseMgmtController implements ActionListener {
     private CourseworkMgmtController courseworkMgmtCntrl;
     private StudentMgmtController studentMgmtController;
     private Course newCourse;
+    private Course selectedCourse;
     private CourseList courseList;
     private Page newPage;
     private Lesson newLesson;
@@ -98,6 +99,8 @@ public class CourseMgmtController implements ActionListener {
         {
             if (this.getPageMgmtUI() != null)
             {
+                int selectedRow = this.courseMgmtUI.getCourseTable().getSelectedRow();
+                selectedCourse = this.courseList.getCourses().get(selectedRow);
                 this.setPageMgmtUI(new PageMgmtUI(this));
                 this.pageMgmtUI.addALPageButtons();
                 verifyButtonAccess();
@@ -180,28 +183,6 @@ public class CourseMgmtController implements ActionListener {
      * Students will have different access to Courses than staff, so they
      * will utilize a different constructor
      */
-    public CourseMgmtController(StudentMgmtController studentMgmtController) {
-        String successful = "\n---Course Information Displayed Correctly---";
-        this.setStudentMgmtController(studentMgmtController);
-
-        // Creating an example course w/ pages/assignments/questions for student to access during integration test
-        Course studentsCourse = new Course("IST 412", "Complicated Stuff", "15");
-        Page studentsCoursePage = new Page("L01 Lesson Description");
-        Assignment studentsAssignment = new Assignment("L01: Your Assignment");
-        Question studentsQuestion = new Question("How many points is this question worth?", 9001);
-        Answer studentAnswer = new Answer("It's over 9000", true);
-        Answer studentAnswer2 = new Answer("It's not over 9000", false);
-        studentsQuestion.addPossibleAnswer(studentAnswer);
-        studentsQuestion.addPossibleAnswer(studentAnswer2);
-        studentsAssignment.getAssignmentQuestions().add(studentsQuestion);
-        studentsCourse.getCoursePages().add(studentsCoursePage);
-        this.getStudentMgmtController().getStudent().getEnrolledCourses().add(studentsCourse);
-        this.setNewCourse(studentsCourse);
-        this.setNewPage(studentsCourse.getCoursePages().get(0));
-
-        // initiates the courseworkMgmtController made for students
-        this.setCourseworkMgmtCntrl(new CourseworkMgmtController(this, this.getStudentMgmtController().getStudent()));
-    }
 
     public PageList getPageList() {
         return pageList;
@@ -277,5 +258,13 @@ public class CourseMgmtController implements ActionListener {
 
     public void setAnnouncementMgmtUI(AnnouncementMgmtUI announcementMgmtUI) {
         this.announcementMgmtUI = announcementMgmtUI;
+    }
+
+    public Course getSelectedCourse() {
+        return selectedCourse;
+    }
+
+    public void setSelectedCourse(Course selectedCourse) {
+        this.selectedCourse = selectedCourse;
     }
 }
