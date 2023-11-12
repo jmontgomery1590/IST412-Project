@@ -36,18 +36,10 @@
           </component>
           <component id="3bf1f" class="javax.swing.JLabel" binding="maxEnrolledLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Max Enrolled"/>
-            </properties>
-          </component>
-          <component id="13fc4" class="javax.swing.JLabel" binding="instructorLabel">
-            <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Instructor"/>
+              <text value="Max Enrolled"/>
             </properties>
           </component>
           <component id="b102a" class="javax.swing.JTextField" binding="courseIDTextField">
@@ -66,7 +58,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="4a77c" class="javax.swing.JTextField" binding="instructorTextField">
+          <component id="4697c" class="javax.swing.JTextField" binding="maxEnrolledTextField">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -74,13 +66,21 @@
             </constraints>
             <properties/>
           </component>
-          <component id="4697c" class="javax.swing.JTextField" binding="maxEnrolledTextField">
+          <component id="4a77c" class="javax.swing.JTextField" binding="instructorTextField">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties/>
+          </component>
+          <component id="13fc4" class="javax.swing.JLabel" binding="instructorLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Instructor"/>
+            </properties>
           </component>
         </children>
       </grid>

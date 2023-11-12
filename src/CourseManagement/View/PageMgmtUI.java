@@ -1,41 +1,107 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.Page;
+import CourseManagement.Model.AnnouncementList;
+import CourseManagement.Model.AnnouncementTableModel;
+import CourseManagement.Model.LessonList;
+import CourseManagement.Model.LessonTableModel;
+import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PageMgmtUI {
-    private JFrame viewPageMgmtUI;
+    private JFrame viewPageMgmtFrame;
     private JPanel pageMgmtPanel;
-    private JPanel crudPanel;
-    private JButton addPageButton;
-    private JButton editPageButton;
-    private JButton viewPageButton;
-    private JButton deletePageButton;
-    private JTable pageTable;
+    private JButton lessonsButton;
+    private JButton announcementsButton;
+    private JButton assignmentsButton;
+    private LessonMgmtUI lessonMgmtUI;
+    private AnnouncementMgmtUI announcementMgmtUI;
+    private HomepageController homepageController;
     private CourseMgmtController courseMgmtCntrl;
+    private LessonTableModel lessonTable;
+    private AnnouncementTableModel announcementTable;
+    private LessonList lessonList;
+    private AnnouncementList announcementList;
 
     public PageMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        pageTable.setModel(courseMgmtCntrl.getPageTable());
+
+        this.lessonMgmtUI = new LessonMgmtUI(this.courseMgmtCntrl);
+        this.announcementMgmtUI = new AnnouncementMgmtUI(this.courseMgmtCntrl);
+        viewPageMgmtFrame = new JFrame("Page Selection");
+        this.addALPageButtons();
     }
 
     public void addALPageButtons() {
-        this.getViewPageButton().addActionListener(this.courseMgmtCntrl);
-        this.getAddPageButton().addActionListener(this.courseMgmtCntrl);
-        this.getEditPageButton().addActionListener(this.courseMgmtCntrl);
-        this.getDeletePageButton().addActionListener(this.courseMgmtCntrl);
+        this.getLessonsButton().addActionListener(this.courseMgmtCntrl);
+        this.getAnnouncementsButton().addActionListener(this.courseMgmtCntrl);
+        this.getAssignmentsButton().addActionListener(this.courseMgmtCntrl);
     }
 
+    /*@Override
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+
+        if (obj == this.getLessonsButton())
+        {
+            if (this.getLessonMgmtUI() != null)
+            {
+                this.setLessonMgmtUI(new LessonMgmtUI(this.courseMgmtCntrl));
+                this.lessonMgmtUI.addALLessonButtons();
+                this.homepageController.getHomepageUI().getViewPanel().add(this.lessonMgmtUI.getLessonMgmtPanel(), "View Lesson");
+            }
+            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Course");
+            this.homepageController.getHomepageUI().getViewPanel().revalidate();
+            this.homepageController.getHomepageUI().getViewPanel().repaint();
+        }
+
+        if (obj == this.getAnnouncementsButton())
+        {
+            if (this.getAnnouncementMgmtUI() != null)
+            {
+                this.setLessonMgmtUI(new LessonMgmtUI(this.courseMgmtCntrl));
+                this.announcementMgmtUI.addALAnnouncementButtons();
+                this.homepageController.getHomepageUI().getViewPanel().add(this.announcementMgmtUI.getAnnouncementMgmtPanel(), "View Lesson");
+            }
+            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Course");
+            this.homepageController.getHomepageUI().getViewPanel().revalidate();
+            this.homepageController.getHomepageUI().getViewPanel().repaint();
+        }
+    }*/
 
     public JFrame getViewPageMgmtUI() {
-        return viewPageMgmtUI;
+        return viewPageMgmtFrame;
     }
 
     public void setViewPageMgmtUI(JFrame viewPageMgmtUI) {
-        this.viewPageMgmtUI = viewPageMgmtUI;
+        this.viewPageMgmtFrame = viewPageMgmtUI;
+    }
+
+    public JButton getLessonsButton() {
+        return lessonsButton;
+    }
+
+    public void setLessonsButton(JButton lessonsButton) {
+        this.lessonsButton = lessonsButton;
+    }
+
+    public JButton getAnnouncementsButton() {
+        return announcementsButton;
+    }
+
+    public void setAnnouncementsButton(JButton announcementsButton) {
+        this.announcementsButton = announcementsButton;
+    }
+
+    public JButton getAssignmentsButton() {
+        return assignmentsButton;
+    }
+
+    public void setAssignmentsButton(JButton assignmentsButton) {
+        this.assignmentsButton = assignmentsButton;
     }
 
     public JPanel getPageMgmtPanel() {
@@ -46,59 +112,67 @@ public class PageMgmtUI {
         this.pageMgmtPanel = pageMgmtPanel;
     }
 
-    public JPanel getCrudPanel() {
-        return crudPanel;
-    }
-
-    public void setCrudPanel(JPanel crudPanel) {
-        this.crudPanel = crudPanel;
-    }
-
-    public JButton getAddPageButton() {
-        return addPageButton;
-    }
-
-    public void setAddPageButton(JButton addPageButton) {
-        this.addPageButton = addPageButton;
-    }
-
-    public JButton getEditPageButton() {
-        return editPageButton;
-    }
-
-    public void setEditPageButton(JButton editPageButton) {
-        this.editPageButton = editPageButton;
-    }
-
-    public JButton getViewPageButton() {
-        return viewPageButton;
-    }
-
-    public void setViewPageButton(JButton viewPageButton) {
-        this.viewPageButton = viewPageButton;
-    }
-
-    public JButton getDeletePageButton() {
-        return deletePageButton;
-    }
-
-    public void setDeletePageButton(JButton deletePageButton) {
-        this.deletePageButton = deletePageButton;
-    }
-
-    public JTable getPageTable() {
-        return pageTable;
-    }
-
-    public void setPageTable(JTable pageTable) {
-        this.pageTable = pageTable;
-    }
-
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
     }
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
+    }
+
+    public LessonMgmtUI getLessonMgmtUI() {
+        return lessonMgmtUI;
+    }
+
+    public void setLessonMgmtUI(LessonMgmtUI lessonMgmtUI) {
+        this.lessonMgmtUI = lessonMgmtUI;
+    }
+
+    public AnnouncementMgmtUI getAnnouncementMgmtUI() {
+        return announcementMgmtUI;
+    }
+
+    public void setAnnouncementMgmtUI(AnnouncementMgmtUI announcementMgmtUI) {
+        this.announcementMgmtUI = announcementMgmtUI;
+    }
+
+    public HomepageController getHomepageController() {
+        return homepageController;
+    }
+
+    public void setHomepageController(HomepageController homepageController) {
+        this.homepageController = homepageController;
+    }
+
+    public LessonTableModel getLessonTable() {
+        return lessonTable;
+    }
+
+    public void setLessonTable(LessonTableModel lessonTable) {
+        this.lessonTable = lessonTable;
+    }
+
+    public AnnouncementTableModel getAnnouncementTable() {
+        return announcementTable;
+    }
+
+    public void setAnnouncementTable(AnnouncementTableModel announcementTable) {
+        this.announcementTable = announcementTable;
+    }
+
+    public LessonList getLessonList() {
+        return lessonList;
+    }
+
+    public void setLessonList(LessonList lessonList) {
+        this.lessonList = lessonList;
+    }
+
+    public AnnouncementList getAnnouncementList() {
+        return announcementList;
+    }
+
+    public void setAnnouncementList(AnnouncementList announcementList) {
+        this.announcementList = announcementList;
     }
 }
