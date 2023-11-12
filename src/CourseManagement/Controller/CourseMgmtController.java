@@ -20,6 +20,7 @@ public class CourseMgmtController implements ActionListener {
     private CourseworkMgmtController courseworkMgmtCntrl;
     private StudentMgmtController studentMgmtController;
     private Course newCourse;
+    private Course selectedCourse;
     private CourseList courseList;
     private Page newPage;
     private Lesson newLesson;
@@ -43,6 +44,7 @@ public class CourseMgmtController implements ActionListener {
      */
     public CourseMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
+        newCourse = new Course("", "", "");
         this.courseList = new CourseList();
         this.courseTable = new CourseTableModel(this.getCourseList().getCourses());
         this.courseMgmtUI = new CourseMgmtUI(this);
@@ -97,6 +99,8 @@ public class CourseMgmtController implements ActionListener {
         {
             if (this.getPageMgmtUI() != null)
             {
+                int selectedRow = this.courseMgmtUI.getCourseTable().getSelectedRow();
+                selectedCourse = this.courseList.getCourses().get(selectedRow);
                 this.setPageMgmtUI(new PageMgmtUI(this));
                 this.pageMgmtUI.addALPageButtons();
                 verifyButtonAccess();
@@ -206,24 +210,8 @@ public class CourseMgmtController implements ActionListener {
         return pageList;
     }
 
-    public void setPageList(PageList pageList) {
-        this.pageList = pageList;
-    }
-
-    public LessonList getLessonList() {
-        return lessonList;
-    }
-
-    public void setLessonList(LessonList lessonList) {
-        this.lessonList = lessonList;
-    }
-
     public AnnouncementList getAnnouncementList() {
         return announcementList;
-    }
-
-    public void setAnnouncementList(AnnouncementList announcementList) {
-        this.announcementList = announcementList;
     }
 
     public CourseMgmtUI getCourseMgmtUI() {
@@ -246,16 +234,8 @@ public class CourseMgmtController implements ActionListener {
         this.pageMgmtUI = pageMgmtUI;
     }
 
-    public void setCourseMgmtUI(CourseMgmtUI courseMgmtUI) {
-        this.courseMgmtUI = courseMgmtUI;
-    }
-
     public AddCourseUI getAddCourseUI() {
         return addCourseUI;
-    }
-
-    public void setAddCourseUI(AddCourseUI addCourseUI) {
-        this.addCourseUI = addCourseUI;
     }
 
     public Page getNewPage() {
@@ -264,10 +244,6 @@ public class CourseMgmtController implements ActionListener {
 
     public void setNewPage(Page newPage) {
         this.newPage = newPage;
-    }
-
-    public CourseworkMgmtController getCourseworkMgmtCntrl() {
-        return courseworkMgmtCntrl;
     }
 
     public void setCourseworkMgmtCntrl(CourseworkMgmtController courseworkMgmtCntrl) {
@@ -286,80 +262,8 @@ public class CourseMgmtController implements ActionListener {
         return courseList;
     }
 
-    public void setCourseList(CourseList courseList) {
-        this.courseList = courseList;
-    }
-
-    public HomepageController getHomepageController() {
-        return homepageController;
-    }
-
-    public void setHomepageController(HomepageController homepageController) {
-        this.homepageController = homepageController;
-    }
-
     public CourseTableModel getCourseTable() {
         return courseTable;
-    }
-
-    public void setCourseTable(CourseTableModel courseTable) {
-        this.courseTable = courseTable;
-    }
-
-    public LessonTableModel getLessonTable() {
-        return lessonTable;
-    }
-
-    public void setLessonTable(LessonTableModel lessonTable) {
-        this.lessonTable = lessonTable;
-    }
-
-    public AnnouncementTableModel getAnnouncementTable() {
-        return announcementTable;
-    }
-
-    public void setAnnouncementTable(AnnouncementTableModel announcementTable) {
-        this.announcementTable = announcementTable;
-    }
-
-    public PageTableModel getPageTable() {
-        return pageTable;
-    }
-
-    public void setPageTable(PageTableModel pageTable) {
-        this.pageTable = pageTable;
-    }
-
-    public AddLessonUI getAddLessonUI() {
-        return addLessonUI;
-    }
-
-    public void setAddLessonUI(AddLessonUI addLessonUI) {
-        this.addLessonUI = addLessonUI;
-    }
-
-    public AddAnnouncementUI getAddAnnouncementUI() {
-        return addAnnouncementUI;
-    }
-
-    public void setAddAnnouncementUI(AddAnnouncementUI addAnnouncementUI) {
-        this.addAnnouncementUI = addAnnouncementUI;
-    }
-
-    public Lesson getNewLesson() {
-        return newLesson;
-    }
-
-    public void setNewLesson(Lesson newLesson) {
-        this.newLesson = newLesson;
-    }
-
-    public Announcement getNewAnnouncement() {
-        return newAnnouncement;
-    }
-
-    public void setNewAnnouncement(Announcement newAnnouncement) {
-        this.newAnnouncement = newAnnouncement;
     }
 
     public LessonMgmtUI getLessonMgmtUI() {
@@ -376,5 +280,13 @@ public class CourseMgmtController implements ActionListener {
 
     public void setAnnouncementMgmtUI(AnnouncementMgmtUI announcementMgmtUI) {
         this.announcementMgmtUI = announcementMgmtUI;
+    }
+
+    public Course getSelectedCourse() {
+        return selectedCourse;
+    }
+
+    public void setSelectedCourse(Course selectedCourse) {
+        this.selectedCourse = selectedCourse;
     }
 }

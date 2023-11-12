@@ -106,112 +106,24 @@ public class AddCourseUI implements ActionListener {
         return addCourseFrame;
     }
 
-    public void setAddCourseFrame(JFrame addCourseFrame) {
-        this.addCourseFrame = addCourseFrame;
-    }
-
     public JTextField getCourseNameTextField() {
         return courseNameTextField;
-    }
-
-    public void setCourseNameTextField(JTextField courseNameTextField) {
-        this.courseNameTextField = courseNameTextField;
     }
 
     public JTextField getCourseIDTextField() {
         return courseIDTextField;
     }
 
-    public void setCourseIDTextField(JTextField courseIDTextField) {
-        this.courseIDTextField = courseIDTextField;
-    }
-
     public JTextField getMaxEnrolledTextField() {
         return maxEnrolledTextField;
-    }
-
-    public void setMaxEnrolledTextField(JTextField maxEnrolledTextField) {
-        this.maxEnrolledTextField = maxEnrolledTextField;
-    }
-
-    public JTextField getInstructorTextField() {
-        return instructorTextField;
-    }
-
-    public void setInstructorTextField(JTextField instructorTextField) {
-        this.instructorTextField = instructorTextField;
-    }
-
-    public JPanel getAddCoursePanel() {
-        return addCoursePanel;
-    }
-
-    public void setAddCoursePanel(JPanel addCoursePanel) {
-        this.addCoursePanel = addCoursePanel;
-    }
-
-    public JPanel getCourseInformationPanel() {
-        return courseInformationPanel;
-    }
-
-    public void setCourseInformationPanel(JPanel courseInformationPanel) {
-        this.courseInformationPanel = courseInformationPanel;
     }
 
     public JButton getSaveButton() {
         return saveButton;
     }
 
-    public void setSaveButton(JButton saveButton) {
-        this.saveButton = saveButton;
-    }
-
     public JButton getCancelButton() {
         return cancelButton;
-    }
-
-    public void setCancelButton(JButton cancelButton) {
-        this.cancelButton = cancelButton;
-    }
-
-    public JLabel getInstructorLabel() {
-        return instructorLabel;
-    }
-
-    public void setInstructorLabel(JLabel instructorLabel) {
-        this.instructorLabel = instructorLabel;
-    }
-
-    public JLabel getMaxEnrolledLabel() {
-        return maxEnrolledLabel;
-    }
-
-    public void setMaxEnrolledLabel(JLabel maxEnrolledLabel) {
-        this.maxEnrolledLabel = maxEnrolledLabel;
-    }
-
-    public JLabel getCourseNameLabel() {
-        return courseNameLabel;
-    }
-
-    public void setCourseNameLabel(JLabel courseNameLabel) {
-        this.courseNameLabel = courseNameLabel;
-    }
-
-    public JLabel getCourseIDLabel() {
-        return courseIDLabel;
-    }
-
-    public void setCourseIDLabel(JLabel courseIDLabel) {
-        this.courseIDLabel = courseIDLabel;
-    }
-
-    public JPanel getButtonPanel() {
-        return buttonPanel;
-    }
-
-    public void setButtonPanel(JPanel buttonPanel) {
-        this.buttonPanel = buttonPanel;
     }
 
     public CourseMgmtController getCourseMgmtCntrl() {

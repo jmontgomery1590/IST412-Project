@@ -78,44 +78,20 @@ public class AnnouncementMgmtUI implements ActionListener {
         this.announcementMgmtPanel = announcementMgmtPanel;
     }
 
-    public JPanel getCrudPanel() {
-        return crudPanel;
-    }
-
-    public void setCrudPanel(JPanel crudPanel) {
-        this.crudPanel = crudPanel;
-    }
-
     public JButton getAddAnnouncementButton() {
         return addAnnouncementButton;
-    }
-
-    public void setAddAnnouncementButton(JButton addAnnouncementButton) {
-        this.addAnnouncementButton = addAnnouncementButton;
     }
 
     public JButton getEditAnnouncementButton() {
         return editAnnouncementButton;
     }
 
-    public void setEditAnnouncementButton(JButton editAnnouncementButton) {
-        this.editAnnouncementButton = editAnnouncementButton;
-    }
-
     public JButton getViewAnnouncementButton() {
         return viewAnnouncementButton;
     }
 
-    public void setViewAnnouncementButton(JButton viewAnnouncementButton) {
-        this.viewAnnouncementButton = viewAnnouncementButton;
-    }
-
     public JButton getDeleteAnnouncementButton() {
         return deleteAnnouncementButton;
-    }
-
-    public void setDeleteAnnouncementButton(JButton deleteAnnouncementButton) {
-        this.deleteAnnouncementButton = deleteAnnouncementButton;
     }
 
     public JTable getAnnouncementTable() {

@@ -27,7 +27,7 @@ public class HomepageUI extends JFrame{
 		homeFrame.getContentPane().add(HomePage);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		homeFrame.setUndecorated(true);
+		//homeFrame.setUndecorated(true);
 		//homeFrame.pack();
 		homeFrame.setVisible(true);
 	}

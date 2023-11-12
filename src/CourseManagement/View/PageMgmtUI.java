@@ -5,6 +5,7 @@ import CourseManagement.Model.AnnouncementList;
 import CourseManagement.Model.AnnouncementTableModel;
 import CourseManagement.Model.LessonList;
 import CourseManagement.Model.LessonTableModel;
+import CourseworkManagement.Controller.CourseworkMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
@@ -17,6 +18,9 @@ public class PageMgmtUI {
     private JButton lessonsButton;
     private JButton announcementsButton;
     private JButton assignmentsButton;
+    private JPanel buttonPanel;
+    private JPanel titlePanel;
+    private JLabel titleLabel;
     private LessonMgmtUI lessonMgmtUI;
     private AnnouncementMgmtUI announcementMgmtUI;
     private HomepageController homepageController;
@@ -38,7 +42,12 @@ public class PageMgmtUI {
     public void addALPageButtons() {
         this.getLessonsButton().addActionListener(this.courseMgmtCntrl);
         this.getAnnouncementsButton().addActionListener(this.courseMgmtCntrl);
-        this.getAssignmentsButton().addActionListener(this.courseMgmtCntrl);
+        this.getAssignmentsButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setCourseworkMgmtCntrl(new CourseworkMgmtController(courseMgmtCntrl));
+            }
+        });
     }
 
     /*@Override
@@ -76,40 +85,21 @@ public class PageMgmtUI {
         return viewPageMgmtFrame;
     }
 
-    public void setViewPageMgmtUI(JFrame viewPageMgmtUI) {
-        this.viewPageMgmtFrame = viewPageMgmtUI;
-    }
-
     public JButton getLessonsButton() {
         return lessonsButton;
     }
 
-    public void setLessonsButton(JButton lessonsButton) {
-        this.lessonsButton = lessonsButton;
-    }
 
     public JButton getAnnouncementsButton() {
         return announcementsButton;
-    }
-
-    public void setAnnouncementsButton(JButton announcementsButton) {
-        this.announcementsButton = announcementsButton;
     }
 
     public JButton getAssignmentsButton() {
         return assignmentsButton;
     }
 
-    public void setAssignmentsButton(JButton assignmentsButton) {
-        this.assignmentsButton = assignmentsButton;
-    }
-
     public JPanel getPageMgmtPanel() {
         return pageMgmtPanel;
-    }
-
-    public void setPageMgmtPanel(JPanel pageMgmtPanel) {
-        this.pageMgmtPanel = pageMgmtPanel;
     }
 
     public CourseMgmtController getCourseMgmtCntrl() {

@@ -72,15 +72,7 @@ public class AddLessonUI extends JFrame{
         return saveButton;
     }
 
-    public void setSaveButton(JButton saveButton) {
-        this.saveButton = saveButton;
-    }
-
     public JButton getCancelButton() {
         return cancelButton;
-    }
-
-    public void setCancelButton(JButton cancelButton) {
-        this.cancelButton = cancelButton;
     }
 }
