@@ -31,6 +31,11 @@ public class AddLessonUI extends JFrame{
         addLessonFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public void addALNewLessonButtons() {
+        this.getSaveButton().addActionListener(this.courseMgmtCntrl);
+        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
+    }
+
     public JFrame getAddLessonFrame() {
         return addLessonFrame;
     }

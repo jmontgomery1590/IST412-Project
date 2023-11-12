@@ -19,7 +19,7 @@ public class CourseList {
      */
     public void createCoursesList(){
         for (int i = 0; i <= 5; i++){
-            this.setCourse(new Course("IST 41" + i, "Course Name #" + i, 20));
+            this.setCourse(new Course("IST 41" + i, "Course Name #" + i, "1" + (i * 2)));
             this.getCourse().setInstructor(new Instructor("Instructor " + i, "password", "Instructor"));
             this.getCourses().add(this.getCourse());
         }

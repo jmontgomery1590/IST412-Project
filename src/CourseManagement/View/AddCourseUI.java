@@ -35,6 +35,26 @@ public class AddCourseUI extends JFrame {
         addCourseFrame.setLocationRelativeTo(null);
         addCourseFrame.setVisible(true);
         addCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addFocusListeners();
+    }
+
+    public void addALNewCourseButtons() {
+        this.getSaveButton().addActionListener(this.courseMgmtCntrl);
+        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
+    }
+
+    private void addFocusListeners() {
+        addCourseFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                onWindowClosing();
+            }
+        });
+    }
+
+    private void onWindowClosing() {
+        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().setEnabled(true);
+        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().transferFocus();
     }
 
     public JFrame getAddCourseFrame() {
@@ -45,11 +65,11 @@ public class AddCourseUI extends JFrame {
         this.addCourseFrame = addCourseFrame;
     }
 
-    private JTextField getCourseNameTextField() {
+    public JTextField getCourseNameTextField() {
         return courseNameTextField;
     }
 
-    private void setCourseNameTextField(JTextField courseNameTextField) {
+    public void setCourseNameTextField(JTextField courseNameTextField) {
         this.courseNameTextField = courseNameTextField;
     }
 

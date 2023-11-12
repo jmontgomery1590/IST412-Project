@@ -22,15 +22,13 @@ public class PageMgmtUI {
         pageTable.setModel(courseMgmtCntrl.getPageTable());
     }
 
-    public Page createPage(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nCourse Page Title:");
-        String pageTitle = scanner.nextLine();
-        System.out.println("Course Page Content:");
-        String pageBody = scanner.nextLine();
-        System.out.println("\n---Page Created Successfully---\n");
-        return new Page(pageTitle);
+    public void addALPageButtons() {
+        this.getViewPageButton().addActionListener(this.courseMgmtCntrl);
+        this.getAddPageButton().addActionListener(this.courseMgmtCntrl);
+        this.getEditPageButton().addActionListener(this.courseMgmtCntrl);
+        this.getDeletePageButton().addActionListener(this.courseMgmtCntrl);
     }
+
 
     public JFrame getViewPageMgmtUI() {
         return viewPageMgmtUI;

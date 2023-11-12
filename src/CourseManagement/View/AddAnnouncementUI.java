@@ -28,6 +28,11 @@ public class AddAnnouncementUI extends JFrame{
         addAnnouncementFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public void addALNewAnnouncementButtons() {
+        this.getSaveButton().addActionListener(this.courseMgmtCntrl);
+        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
+    }
+
     public JFrame getAddAnnouncementFrame() {
         return addAnnouncementFrame;
     }

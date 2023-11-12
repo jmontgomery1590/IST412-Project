@@ -5,6 +5,8 @@ import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Course;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Scanner;
 
 public class CourseMgmtUI {
@@ -24,38 +26,39 @@ public class CourseMgmtUI {
         // load the table data (pulled from CourseList, put into CourseTableModel, then
         // loaded into this forms table
         courseTable.setModel(courseMgmtCntrl.getCourseTable());
+        initComponents();
+        this.addALCourseButtons();
+        this.addFocusListeners();
     }
 
-    /**
-     * Displays the chosen course interface
-     */
-    public Course createCourse() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nCourse ID#:");
-        String courseID = scanner.nextLine();
-        System.out.println("Course Name:");
-        String courseName = scanner.nextLine();
-        System.out.println("Max Enrolled:");
-        int max = 0;
-        while (scanner.hasNext()){
-            if (!scanner.hasNextInt()){
-                System.out.println("Please input a valid integer.");
-                scanner.next();
-            } else {
-                max = scanner.nextInt();
-                break;
+    public void addALCourseButtons() {
+        this.getViewCourseButton().addActionListener(this.courseMgmtCntrl);
+        this.getAddCourseButton().addActionListener(this.courseMgmtCntrl);
+        this.getEditCourseButton().addActionListener(this.courseMgmtCntrl);
+        this.getDeleteCourseButton().addActionListener(this.courseMgmtCntrl);
+    }
+
+    public void initComponents() {
+        courseFrame = new JFrame("Create Course");
+    }
+
+    private void addFocusListeners() {
+        courseFrame.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                super.windowGainedFocus(e);
+
+                courseMgmtCntrl.getCourseTable().fireTableDataChanged();
             }
-        }
-        System.out.println("\n---Course Created Successfully---\n");
-        return new Course(courseID, courseName, max);
-    }
-
-    public CourseTableModel getTableModel() {
-        return tableModel;
+        });
     }
 
     public JFrame getCourseFrame() {
         return courseFrame;
+    }
+
+    public CourseTableModel getTableModel() {
+        return tableModel;
     }
 
     public JPanel getNavigationPanel() {

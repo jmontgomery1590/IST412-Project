@@ -4,6 +4,8 @@ import CourseManagement.Controller.CourseMgmtController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -29,6 +31,11 @@ public class AddPageUI extends JFrame{
         addPageFrame.setLocationRelativeTo(null);
         addPageFrame.setVisible(true);
         addPageFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    public void addALNewPageButtons() {
+        this.getSelectButton().addActionListener(this.courseMgmtCntrl);
+        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
     }
 
     public JFrame getAddPageFrame() {

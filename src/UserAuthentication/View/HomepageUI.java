@@ -17,7 +17,7 @@ public class HomepageUI extends JFrame{
 
 	public HomepageUI (HomepageController homepageController) {
 		homepageCntrl = homepageController;
-		JFrame homeFrame = new JFrame();
+		homeFrame = new JFrame("Slate LMS");
 
 		// CardSwapper creates an easy-to-use way to swap
 		// between our different UI's without reloading a

@@ -30,11 +30,11 @@ public class CourseworkMgmtController {
 
         // initiates the interface
         this.setAssignmentInterface(new AssignmentInterface());
-        this.setCurrentCourse(this.getCourseMgmtController().getCurrentCourse());
+        this.setCurrentCourse(this.getCourseMgmtController().getNewCourse());
 
         // creates new assignment for the course page
         this.setAssignment(this.getAssignmentInterface().createNewAssignment());
-        this.getCourseMgmtController().getCurrentPage().getLessonAssignments().add(this.getAssignment());
+        this.getCourseMgmtController().getNewPage().getLessonAssignments().add(this.getAssignment());
 
         // creating questions for the assignment
         this.setQuestionInterface(new QuestionInterface());
