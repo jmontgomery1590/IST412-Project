@@ -33,18 +33,11 @@ public class User {
         } else if (loginID.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
             System.out.println(successful);
             return true;
-        } else if (loginID.equalsIgnoreCase("ta") && password.equals("TA123")) {
+        } else if (loginID.equalsIgnoreCase("TA") && password.equals("TA123")) {
             System.out.println(successful);
             return true;
         } else return false;
     }
-
-    /**
-     * Change password linked to User profile
-     * @param loginName Given username to change password on
-     * @param userPassword New password to set to user account.
-     */
-    public void changePassword(String loginName, String userPassword) {}
 
     public String getLoginID() {
         return loginID;

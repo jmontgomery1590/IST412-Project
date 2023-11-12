@@ -48,14 +48,15 @@ public class HomepageController implements ActionListener {
         // traverse different if statements to find what to do
 
         // If Courses Navigation button is clicked
-        if (obj == this.getHomepageUI().getCoursesButton()){
-
+        if (obj == this.getHomepageUI().getCoursesButton())
+        {
             // Check for first time clicking to build the UI & build controller
-            if (this.getCourseMgmtCntrl() == null) {
+            if (this.getCourseMgmtCntrl() == null)
+            {
                 this.setCourseMgmtCntrl(new CourseMgmtController(this));
 
                 // Add the UI to the homepage view panel
-                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCi().getCourseMgmtPanel(), "Courses");
+                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
             }
 
             // Choose to show the courses UI in the view panel
@@ -65,10 +66,11 @@ public class HomepageController implements ActionListener {
             this.getHomepageUI().getViewPanel().repaint();
         }
         // If Home Navigation button is clicked
-        if (obj == this.getHomepageUI().getHomeButton()){
-
+        if (obj == this.getHomepageUI().getHomeButton())
+        {
             // Check for first time clicking to build the UI & build controller
-            if (this.getHomeViewUI() == null){
+            if (this.getHomeViewUI() == null)
+            {
                 this.setHomeViewUI(new HomeViewUI());
 
                 // Add the UI to the homepage view panel

@@ -1,12 +1,9 @@
 package UserAuthentication.View;
 
-import CourseManagement.View.CourseMgmtInterface;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
@@ -20,7 +17,7 @@ public class HomepageUI extends JFrame{
 
 	public HomepageUI (HomepageController homepageController) {
 		homepageCntrl = homepageController;
-		JFrame homeFrame = new JFrame();
+		homeFrame = new JFrame("Slate LMS");
 
 		// CardSwapper creates an easy-to-use way to swap
 		// between our different UI's without reloading a
@@ -30,7 +27,7 @@ public class HomepageUI extends JFrame{
 		homeFrame.getContentPane().add(HomePage);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		homeFrame.setUndecorated(true);
+		//homeFrame.setUndecorated(true);
 		//homeFrame.pack();
 		homeFrame.setVisible(true);
 	}

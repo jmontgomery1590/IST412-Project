@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-// test update
 public class LoginController implements ActionListener {
     private User u1;
     private LoginInterface loginInt;
@@ -76,26 +75,6 @@ public class LoginController implements ActionListener {
             System.exit(0);
         }
     }
-
-    /** public void loginTestMethod(){
-        this.getU1().setRoleID(this.getU1().verifyUser());
-
-        switch (this.getU1().getRoleID()){
-            case "STUDENT":
-                this.studentCntrl = new StudentMgmtController(this.getU1());
-                this.setHomepageUI(new HomepageUI());
-                this.getLoginInt().dispose();
-                break;
-            case "INSTRUCTOR", "ADMIN", "TA":
-                this.staffMgmtCntrl = new StaffMgmtController(this.getU1());
-                this.setHomepageUI(new HomepageUI());
-                this.getLoginInt().dispose();
-                break;
-            default:
-                break;
-        }
-    }
-     **/
 
     public LoginInterface getLoginInt() {
         return loginInt;
