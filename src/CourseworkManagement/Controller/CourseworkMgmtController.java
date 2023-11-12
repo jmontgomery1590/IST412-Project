@@ -33,7 +33,7 @@ public class CourseworkMgmtController implements ActionListener {
      */
     public CourseworkMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
-        this.currentUser = this.courseMgmtController.getCourseworkMgmtCntrl().getCurrentUser();
+        //this.currentUser = this.courseMgmtController.getCourseworkMgmtCntrl().getCurrentUser();
         this.assignmentList = new AssignmentList();
         this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         this.courseworkMgmtInterface = new CourseworkMgmtInterface(this);
