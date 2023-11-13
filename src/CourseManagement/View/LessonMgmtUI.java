@@ -1,13 +1,14 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.LessonTableModel;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LessonMgmtUI implements ActionListener {
+public class LessonMgmtUI {
     private JFrame lessonMgmtFrame = new JFrame("Lessons");
     private JPanel crudPanel;
     private JButton addLessonButton;
@@ -23,41 +24,45 @@ public class LessonMgmtUI implements ActionListener {
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        //lessonTable.setModel(courseMgmtCntrl.getLessonTable());
+        courseMgmtCntrl.setLessonList(courseMgmtController.getSelectedCourse().getLessonList());
+        courseMgmtCntrl.setLessonTable(new LessonTableModel(courseMgmtCntrl.getLessonList().getLessons()));
+
+        this.lessonTable.setModel(courseMgmtCntrl.getLessonTable());
         lessonMgmtFrame = new JFrame("Lessons");
+        this.addALLessonButtons();
     }
 
     public void addALLessonButtons() {
-        this.getViewLessonButton().addActionListener(this);
-        this.getAddLessonButton().addActionListener(this);
-        this.getEditLessonButton().addActionListener(this);
-        this.getDeleteLessonButton().addActionListener(this);
-    }
+        this.getViewLessonButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setViewLessonUI(new ViewLessonUI());
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getLessonViewPanel(), "View Lesson");
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-
-        if (obj == this.getViewLessonButton())
-        {
-            if(this.getViewLessonUI() != null)
-            {
-                this.setViewLessonUI(new ViewLessonUI());
-                this.homepageController.getHomepageUI().getViewPanel().add(this.viewLessonUI.getLessonPanel(), "View Lesson");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Lesson");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
-            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Lesson");
-            this.homepageController.getHomepageUI().getViewPanel().revalidate();
-            this.homepageController.getHomepageUI().getViewPanel().repaint();
-        }
+        });
+        this.getAddLessonButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setAddLessonUI(new AddLessonUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
+            }
+        });
+        this.getEditLessonButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        if (obj == this.getAddLessonButton())
-        {
-            this.addLessonUI = new AddLessonUI(this.courseMgmtCntrl);
-            this.addLessonUI.addALNewLessonButtons();
-            this.homepageController.getHomepageUI().getHomeFrame().setEnabled(false);
-        }
+            }
+        });
+        this.getDeleteLessonButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-
+            }
+        });
     }
 
     public JFrame getLessonMgmtFrame() {

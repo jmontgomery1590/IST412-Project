@@ -19,22 +19,13 @@ import java.awt.event.WindowEvent;
 public class CourseworkMgmtController implements ActionListener {
 
     /**
-     * Test Coursework w/out being integrated
-     */
-    public CourseworkMgmtController(User user){
-        this.setCurrentUser(user);
-        this.setAssignmentList(new AssignmentList());
-        this.setAssignmentTable(new AssignmentTableModel(this.getAssignmentList().getAssignments()));
-        this.setCourseworkMgmtInterface(new CourseworkMgmtInterface(this));
-    }
-    /**
      * Constructor for the coursework management interface
      * version to use when integrated into project
      */
     public CourseworkMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
-        //this.currentUser = this.courseMgmtController.getCourseworkMgmtCntrl().getCurrentUser();
-        this.assignmentList = new AssignmentList();
+        this.currentCourse = this.courseMgmtController.getSelectedCourse();
+        this.assignmentList = this.currentCourse.getAssignmentList();
         this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         this.courseworkMgmtInterface = new CourseworkMgmtInterface(this);
     }
@@ -45,14 +36,14 @@ public class CourseworkMgmtController implements ActionListener {
         if (obj == this.courseworkMgmtInterface.getNewAssignmentButton())
         {
             this.assignmentInterface = new AssignmentInterface(this);
-            this.courseworkMgmtInterface.getView().setEnabled(false);
+            this.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
         }
 
         if (this.assignmentInterface != null)
         {
             if (obj == this.assignmentInterface.getCancelButton())
             {
-                this.getCourseworkMgmtInterface().getView().setEnabled(true);
+                this.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 this.getAssignmentInterface().getAssignmentFrame().dispose();
                 this.setAssignmentInterface(null);
             }
@@ -165,5 +156,33 @@ public class CourseworkMgmtController implements ActionListener {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public CourseMgmtController getCourseMgmtController() {
+        return courseMgmtController;
+    }
+
+    public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
+        this.courseMgmtController = courseMgmtController;
+    }
+
+    public QuestionList getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(QuestionList questionList) {
+        this.questionList = questionList;
+    }
+
+    public AnswerInterface getAnswerInterface() {
+        return answerInterface;
+    }
+
+    public Course getCurrentCourse() {
+        return currentCourse;
+    }
+
+    public void setCurrentCourse(Course currentCourse) {
+        this.currentCourse = currentCourse;
     }
 }

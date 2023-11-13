@@ -1,13 +1,14 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.AnnouncementTableModel;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AnnouncementMgmtUI implements ActionListener {
+public class AnnouncementMgmtUI {
     private JFrame announcementFrame = new JFrame("Announcements");
     private JPanel announcementMgmtPanel;
     private JPanel crudPanel;
@@ -23,43 +24,44 @@ public class AnnouncementMgmtUI implements ActionListener {
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-
-        //announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
+        courseMgmtCntrl.setAnnouncementList(courseMgmtCntrl.getSelectedCourse().getAnnouncementList());
+        courseMgmtCntrl.setAnnouncementTable(new AnnouncementTableModel(courseMgmtCntrl.getAnnouncementList().getAnnouncements()));
+        announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
         announcementFrame = new JFrame("Announcements");
         this.addALAnnouncementButtons();
     }
 
     public void addALAnnouncementButtons() {
-        this.getViewAnnouncementButton().addActionListener(this);
-        this.getAddAnnouncementButton().addActionListener(this);
-        this.getEditAnnouncementButton().addActionListener(this);
-        this.getDeleteAnnouncementButton().addActionListener(this);
-    }
+        this.getViewAnnouncementButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI());
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementViewPanel(), "Announcement View");
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-
-        if (obj == this.getViewAnnouncementButton())
-        {
-            if(this.getViewAnnouncementUI() != null)
-            {
-                this.setViewAnnouncementUI(new ViewAnnouncementUI());
-                this.homepageController.getHomepageUI().getViewPanel().add(this.viewAnnouncementUI.getAnnouncementPanel(), "View Lesson");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "Announcement View");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
-            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Lesson");
-            this.homepageController.getHomepageUI().getViewPanel().revalidate();
-            this.homepageController.getHomepageUI().getViewPanel().repaint();
-        }
+        });
+        this.getAddAnnouncementButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setAddAnnouncementUI(new AddAnnouncementUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
+            }
+        });
+        this.getEditAnnouncementButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        if (obj == this.getAddAnnouncementButton())
-        {
-            this.addAnnouncementUI = new AddAnnouncementUI(this.courseMgmtCntrl);
-            this.addAnnouncementUI.addALNewAnnouncementButtons();
-            this.homepageController.getHomepageUI().getHomeFrame().setEnabled(false);
-        }
+            }
+        });
+        this.getDeleteAnnouncementButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-
+            }
+        });
     }
 
     public JFrame getAnnouncementFrame() {

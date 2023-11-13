@@ -36,34 +36,38 @@ public class CourseMgmtUI {
     }
 
     public void addALCourseButtons() {
-        this.getViewCourseButton().addActionListener(this.courseMgmtCntrl);
-        this.getAddCourseButton().addActionListener(this.courseMgmtCntrl);
-        this.getEditCourseButton().addActionListener(this.courseMgmtCntrl);
-        this.getDeleteCourseButton().addActionListener(this.courseMgmtCntrl);
-    }
-
-    /*@Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-
-        if (obj == this.getViewCourseButton()) {
-            if (this.getPageMgmtUI() != null) {
-                this.setPageMgmtUI(new PageMgmtUI(this.courseMgmtCntrl));
-                this.pageMgmtUI.addALPageButtons();
-                this.homepageController.getHomepageUI().getViewPanel().add(this.pageMgmtUI.getPageMgmtPanel(), "View Course");
+        this.getViewCourseButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = courseTable.getSelectedRow();
+                courseMgmtCntrl.setSelectedCourse(courseMgmtCntrl.getCourseList().getCourses().get(selectedRow));
+                courseMgmtCntrl.setPageMgmtUI(new PageMgmtUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getPageMgmtUI().getPageMgmtPanel(), "View Course");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Course");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
-            this.homepageController.getHomepageUI().getCardSwapper().show(this.homepageController.getHomepageUI().getViewPanel(), "View Course");
-            this.homepageController.getHomepageUI().getViewPanel().revalidate();
-            this.homepageController.getHomepageUI().getViewPanel().repaint();
-        }
+        });
+        this.getAddCourseButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.setAddCourseUI(new AddCourseUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
+            }
+        });
+        this.getEditCourseButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        if (obj == this.getAddCourseButton()) {
-            AddCourseUI addCourseUI = new AddCourseUI(this.courseMgmtCntrl);
-            addCourseUI.addALNewCourseButtons();
-            this.homepageController.getHomepageUI().getHomeFrame().setEnabled(false);
-        }
-    }*/
+            }
+        });
+        this.getDeleteCourseButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+    }
 
     public JFrame getCourseFrame() {
         return courseFrame;

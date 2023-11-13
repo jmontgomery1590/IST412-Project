@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class AddCourseUI implements ActionListener {
+public class AddCourseUI {
     private JFrame addCourseFrame;
     private JTextField courseIDTextField;
     private JTextField courseNameTextField;
@@ -40,14 +40,38 @@ public class AddCourseUI implements ActionListener {
         addCourseFrame.setMinimumSize(new Dimension(800, 600));
         addCourseFrame.setContentPane(addCoursePanel);
         addCourseFrame.setLocationRelativeTo(null);
+        addALNewCourseButtons();
         addCourseFrame.setVisible(true);
         addCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addFocusListeners();
     }
 
     public void addALNewCourseButtons() {
-        this.getSaveButton().addActionListener(this.courseMgmtCntrl);
-        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
+        this.getSaveButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.getNewCourse().setCourseID(courseIDTextField.getText());
+                courseMgmtCntrl.getNewCourse().setCourseName(courseNameTextField.getText());
+                courseMgmtCntrl.getNewCourse().setMaxEnrolled(maxEnrolledTextField.getText());
+                /**
+                 * Instructor for test purposes only
+                 */
+                courseMgmtCntrl.getNewCourse().setInstructor(testInstructor());
+
+                courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseMgmtCntrl.getCourseTable().fireTableDataChanged();
+                addCourseFrame.dispose();
+            }
+        });
+        this.getCancelButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                addCourseFrame.dispose();
+                courseMgmtCntrl.setAddCourseUI(null);
+            }
+        });
     }
 
     private Instructor testInstructor() {
@@ -59,34 +83,6 @@ public class AddCourseUI implements ActionListener {
 
         return testInst;
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-
-
-        // Add Course Buttons
-        if (obj == this.getCancelButton())
-        {
-            this.homepageController.getHomepageUI().getHomeFrame().setEnabled(true);
-            this.getAddCourseFrame().dispose();
-        }
-        else if (obj == this.getSaveButton())
-        {
-            newCourse.setCourseID(getCourseIDTextField().getText());
-            newCourse.setCourseName(getCourseNameTextField().getText());
-            newCourse.setMaxEnrolled(getMaxEnrolledTextField().getText());
-            /**
-             * Instructor for test purposes only
-             */
-            newCourse.setInstructor(testInstructor());
-
-            this.courseList.getCourses().add(newCourse);
-            this.homepageController.getHomepageUI().getHomeFrame().setEnabled(true);
-            this.getAddCourseFrame().dispose();
-        }
-    }
-
 
     private void addFocusListeners() {
         addCourseFrame.addWindowListener(new WindowAdapter() {

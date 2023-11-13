@@ -27,13 +27,11 @@ public class CourseworkMgmtInterface extends JFrame{
     public CourseworkMgmtInterface(CourseworkMgmtController courseworkMgmtCntrl) {
         view = new JFrame();
         this.setCourseworkMgmtCntrl(courseworkMgmtCntrl);
+        this.courseAssignmentLabel.setText(courseworkMgmtCntrl.getCurrentCourse().getCourseID() + " " + courseworkMgmtCntrl.getCurrentCourse().getCourseName());
         assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
         view.add(courseworkPanel);
-        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setExtendedState(MAXIMIZED_BOTH);
         this.addALButtons();
         this.addFocusListeners();
-        view.setVisible(true);
     }
 
     private void addFocusListeners(){

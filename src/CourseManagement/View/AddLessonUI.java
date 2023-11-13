@@ -4,6 +4,8 @@ import CourseManagement.Controller.CourseMgmtController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -29,11 +31,26 @@ public class AddLessonUI extends JFrame{
         addLessonFrame.setLocationRelativeTo(null);
         addLessonFrame.setVisible(true);
         addLessonFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addALAddLessonButtons();
     }
 
-    public void addALNewLessonButtons() {
-        this.getSaveButton().addActionListener(this.courseMgmtCntrl);
-        this.getCancelButton().addActionListener(this.courseMgmtCntrl);
+    public void addALAddLessonButtons()
+    {
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                addLessonFrame.dispose();
+                courseMgmtCntrl.setAddLessonUI(null);
+            }
+        });
     }
 
     public JFrame getAddLessonFrame() {

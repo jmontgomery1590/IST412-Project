@@ -1,5 +1,7 @@
 package CourseManagement.Model;
 
+import CourseworkManagement.Model.Assignment;
+import CourseworkManagement.Model.AssignmentList;
 import StaffManagement.Model.Instructor;
 
 import java.util.ArrayList;
@@ -10,12 +12,18 @@ public class Course {
     private String maxEnrolled;
     private ArrayList<Page> coursePages;
     private Instructor instructor;
+    private LessonList lessonList;
+    private AssignmentList assignmentList;
+    private AnnouncementList announcementList;
 
     public Course(String id, String courseName, String maxEnrolled) {
         this.courseID = id;
         this.courseName = courseName;
         this.maxEnrolled = maxEnrolled;
         this.setCoursePages(new ArrayList<>());
+        this.lessonList = new LessonList();
+        this.assignmentList = new AssignmentList();
+        this.announcementList = new AnnouncementList();
     }
 
     public String getCourseName() {
@@ -56,5 +64,29 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public LessonList getLessonList() {
+        return lessonList;
+    }
+
+    public void setLessonList(LessonList lessonList) {
+        this.lessonList = lessonList;
+    }
+
+    public AssignmentList getAssignmentList() {
+        return assignmentList;
+    }
+
+    public void setAssignmentList(AssignmentList assignmentList) {
+        this.assignmentList = assignmentList;
+    }
+
+    public AnnouncementList getAnnouncementList() {
+        return announcementList;
+    }
+
+    public void setAnnouncementList(AnnouncementList announcementList) {
+        this.announcementList = announcementList;
     }
 }
