@@ -2,9 +2,9 @@ package CourseworkManagement.View;
 
 import javax.swing.*;
 
-public class AssignmentReadInterface {
+public class AssignmentReadUI {
 
-    public AssignmentReadInterface(){
+    public AssignmentReadUI(){
 
     }
 

@@ -2,8 +2,8 @@ package StudentManagement;
 
 import UserAuthentication.Model.User;
 
-public class StudentMgmtInterface {
-    public StudentMgmtInterface() {}
+public class StudentMgmtUI {
+    public StudentMgmtUI() {}
 
     /**
      * Displays the chosen user interface

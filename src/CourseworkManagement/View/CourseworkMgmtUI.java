@@ -1,16 +1,12 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.Assignment;
-import CourseworkManagement.Model.Question;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
-public class CourseworkMgmtInterface extends JFrame{
-    public CourseworkMgmtInterface(CourseworkMgmtController courseworkMgmtCntrl) {
+public class CourseworkMgmtUI extends JFrame{
+    public CourseworkMgmtUI(CourseworkMgmtController courseworkMgmtCntrl) {
         view = new JFrame();
         this.setCourseworkMgmtCntrl(courseworkMgmtCntrl);
         this.courseAssignmentLabel.setText(courseworkMgmtCntrl.getCurrentCourse().getCourseID() + " " + courseworkMgmtCntrl.getCurrentCourse().getCourseName());

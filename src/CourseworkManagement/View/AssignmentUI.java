@@ -3,15 +3,14 @@ package CourseworkManagement.View;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Assignment;
 import CourseworkManagement.Model.Question;
-import CourseworkManagement.Model.QuestionList;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 
-public class AssignmentInterface extends JFrame {
-    public AssignmentInterface (CourseworkMgmtController courseworkMgmtCntrl) {
+public class AssignmentUI extends JFrame {
+    public AssignmentUI(CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
         this.currentAssignment = new Assignment("");
         initComponents();
@@ -43,7 +42,7 @@ public class AssignmentInterface extends JFrame {
         this.addQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseworkMgmtCntrl.setQuestionInterface(new QuestionInterface(courseworkMgmtCntrl));
+                courseworkMgmtCntrl.setQuestionInterface(new QuestionUI(courseworkMgmtCntrl));
                 assignmentFrame.setEnabled(false);
             }
         });

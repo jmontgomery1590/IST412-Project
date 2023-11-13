@@ -1,14 +1,11 @@
 package UserAuthentication.View;
 
 import UserAuthentication.Controller.LoginController;
-import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
 
-public class LoginInterface extends JFrame {
+public class LoginUI extends JFrame {
     private JFrame loginFrame;
     private JPanel loginPanel, buttonPanel, passwordPanel, userNamePanel;
     private JPanel titlePanel;
@@ -18,7 +15,7 @@ public class LoginInterface extends JFrame {
     private JLabel loginTextLabel, userNameLabel, passwordLabel, loginRequestLabel;
     private LoginController loginController;
 
-    public LoginInterface(LoginController loginController) {
+    public LoginUI(LoginController loginController) {
         this.setLoginController(loginController);
         this.setLoginFrame(new JFrame("LMS Login"));
         this.getLoginFrame().add(this.getLoginPanel());

@@ -3,18 +3,16 @@ package UserAuthentication.Controller;
 import StaffManagement.Controller.StaffMgmtController;
 import StudentManagement.StudentMgmtController;
 import UserAuthentication.View.HomepageUI;
-import UserAuthentication.View.LoginInterface;
+import UserAuthentication.View.LoginUI;
 import UserAuthentication.Model.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LoginController implements ActionListener {
     private User u1;
-    private LoginInterface loginInt;
+    private LoginUI loginInt;
     private HomepageUI homepageUI;
     private String username;
     private String password;
@@ -24,7 +22,7 @@ public class LoginController implements ActionListener {
 
 
     public LoginController() {
-        this.setLoginInt(new LoginInterface(this));
+        this.setLoginInt(new LoginUI(this));
         addALButtons();
         //this.setU1(this.getLoginInt().Login());
     }
@@ -76,11 +74,11 @@ public class LoginController implements ActionListener {
         }
     }
 
-    public LoginInterface getLoginInt() {
+    public LoginUI getLoginInt() {
         return loginInt;
     }
 
-    public void setLoginInt(LoginInterface loginInt) {
+    public void setLoginInt(LoginUI loginInt) {
         this.loginInt = loginInt;
     }
 

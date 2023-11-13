@@ -3,18 +3,14 @@ package CourseworkManagement.Controller;
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
 import CourseworkManagement.Model.*;
-import CourseworkManagement.View.AnswerInterface;
-import CourseworkManagement.View.AssignmentInterface;
-import CourseworkManagement.View.CourseworkMgmtInterface;
-import CourseworkManagement.View.QuestionInterface;
-import StudentManagement.Student;
+import CourseworkManagement.View.AnswerUI;
+import CourseworkManagement.View.AssignmentUI;
+import CourseworkManagement.View.CourseworkMgmtUI;
+import CourseworkManagement.View.QuestionUI;
 import UserAuthentication.Model.User;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class CourseworkMgmtController implements ActionListener {
 
@@ -27,21 +23,21 @@ public class CourseworkMgmtController implements ActionListener {
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
         this.assignmentList = this.currentCourse.getAssignmentList();
         this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
-        this.courseworkMgmtInterface = new CourseworkMgmtInterface(this);
+        this.courseworkMgmtUI = new CourseworkMgmtUI(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
         Object obj = e.getSource();
-        if (obj == this.courseworkMgmtInterface.getNewAssignmentButton())
+        if (obj == this.courseworkMgmtUI.getNewAssignmentButton())
         {
-            this.assignmentInterface = new AssignmentInterface(this);
+            this.assignmentUI = new AssignmentUI(this);
             this.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
         }
 
-        if (this.assignmentInterface != null)
+        if (this.assignmentUI != null)
         {
-            if (obj == this.assignmentInterface.getCancelButton())
+            if (obj == this.assignmentUI.getCancelButton())
             {
                 this.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 this.getAssignmentInterface().getAssignmentFrame().dispose();
@@ -49,50 +45,50 @@ public class CourseworkMgmtController implements ActionListener {
             }
         }
 
-        if (this.questionInterface != null)
+        if (this.questionUI != null)
         {
-            if (obj == this.questionInterface.getCancelButton())
+            if (obj == this.questionUI.getCancelButton())
             {
-                this.assignmentInterface.getAssignmentFrame().setEnabled(true);
-                this.questionInterface.getQuestionFrame().dispose();
-                this.questionInterface = null;
+                this.assignmentUI.getAssignmentFrame().setEnabled(true);
+                this.questionUI.getQuestionFrame().dispose();
+                this.questionUI = null;
             }
 
-            else if (obj == this.questionInterface.getSaveQuestionButton())
+            else if (obj == this.questionUI.getSaveQuestionButton())
             {
                 this.assignment.getQuestionList().addToList(this.question);
             }
         }
-        if (this.answerInterface != null)
+        if (this.answerUI != null)
         {
-            if (obj == this.answerInterface.getCancelButton())
+            if (obj == this.answerUI.getCancelButton())
             {
-                this.questionInterface.getQuestionFrame().setEnabled(true);
-                this.answerInterface.getAnswerFrame().dispose();
-                this.answerInterface = null;
+                this.questionUI.getQuestionFrame().setEnabled(true);
+                this.answerUI.getAnswerFrame().dispose();
+                this.answerUI = null;
             }
         }
     }
 
     private Question question;
     private QuestionList questionList;
-    private CourseworkMgmtInterface courseworkMgmtInterface;
+    private CourseworkMgmtUI courseworkMgmtUI;
     private CourseMgmtController courseMgmtController;
-    private QuestionInterface questionInterface;
-    private AnswerInterface answerInterface;
+    private QuestionUI questionUI;
+    private AnswerUI answerUI;
     private Course currentCourse;
     private Assignment assignment;
     private User currentUser;
     private AssignmentTableModel assignmentTable;
     private AssignmentList assignmentList;
-    private AssignmentInterface assignmentInterface;
+    private AssignmentUI assignmentUI;
 
-    public QuestionInterface getQuestionInterface() {
-        return questionInterface;
+    public QuestionUI getQuestionInterface() {
+        return questionUI;
     }
 
-    public void setQuestionInterface(QuestionInterface questionInterface) {
-        this.questionInterface = questionInterface;
+    public void setQuestionInterface(QuestionUI questionUI) {
+        this.questionUI = questionUI;
     }
 
     public Assignment getAssignment() {
@@ -103,8 +99,8 @@ public class CourseworkMgmtController implements ActionListener {
         this.assignment = assignment;
     }
 
-    public CourseworkMgmtInterface getCourseworkMgmtInterface() {
-        return courseworkMgmtInterface;
+    public CourseworkMgmtUI getCourseworkMgmtInterface() {
+        return courseworkMgmtUI;
     }
 
     public AssignmentTableModel getAssignmentTable() {
@@ -115,16 +111,16 @@ public class CourseworkMgmtController implements ActionListener {
         return assignmentList;
     }
 
-    public AssignmentInterface getAssignmentInterface() {
-        return assignmentInterface;
+    public AssignmentUI getAssignmentInterface() {
+        return assignmentUI;
     }
 
-    public void setAssignmentInterface(AssignmentInterface assignmentInterface) {
-        this.assignmentInterface = assignmentInterface;
+    public void setAssignmentInterface(AssignmentUI assignmentUI) {
+        this.assignmentUI = assignmentUI;
     }
 
-    public void setAnswerInterface(AnswerInterface answerInterface) {
-        this.answerInterface = answerInterface;
+    public void setAnswerInterface(AnswerUI answerUI) {
+        this.answerUI = answerUI;
     }
 
     public Question getQuestion() {

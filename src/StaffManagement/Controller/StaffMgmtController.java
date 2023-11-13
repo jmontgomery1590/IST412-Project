@@ -4,11 +4,11 @@ import CourseManagement.Controller.CourseMgmtController;
 import StaffManagement.Model.Admin;
 import StaffManagement.Model.Instructor;
 import StaffManagement.Model.TA;
-import StaffManagement.View.StaffMgmtInterface;
+import StaffManagement.View.StaffMgmtUI;
 import UserAuthentication.Model.User;
 
 public class StaffMgmtController {
-    private StaffMgmtInterface staffInterface;
+    private StaffMgmtUI staffInterface;
     private CourseMgmtController courseMgmtCntrl;
     private Instructor instructor;
     private Admin admin;
@@ -20,7 +20,7 @@ public class StaffMgmtController {
      * @param u1 Staff user profile to be managed through interface
      */
     public StaffMgmtController(User u1) {
-        this.setStaffInterface(new StaffMgmtInterface());
+        this.setStaffInterface(new StaffMgmtUI());
         this.setAccessLevel(this.checkFacultyLevel(u1));
         this.getStaffInterface().displayProfile(u1,this.getAccessLevel());
         //this.setCourseMgmtCntrl(new CourseMgmtController());
@@ -52,11 +52,11 @@ public class StaffMgmtController {
         return roleLevel;
     }
 
-    public StaffMgmtInterface getStaffInterface() {
+    public StaffMgmtUI getStaffInterface() {
         return staffInterface;
     }
 
-    public void setStaffInterface(StaffMgmtInterface staffInterface) {
+    public void setStaffInterface(StaffMgmtUI staffInterface) {
         this.staffInterface = staffInterface;
     }
 

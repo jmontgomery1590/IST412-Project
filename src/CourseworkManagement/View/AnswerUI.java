@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AnswerInterface  extends JFrame {
+public class AnswerUI extends JFrame {
 
-    public AnswerInterface(CourseworkMgmtController courseworkMgmtController){
+    public AnswerUI(CourseworkMgmtController courseworkMgmtController){
         courseworkMgmtCntrl = courseworkMgmtController;
         answerFrame = new JFrame("Answer Builder");
         questionDescriptionLabel.setText(courseworkMgmtCntrl.getQuestionInterface().getQuestionTextField().getText());
