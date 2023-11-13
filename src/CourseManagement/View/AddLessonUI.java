@@ -32,6 +32,7 @@ public class AddLessonUI extends JFrame{
         addLessonFrame.setVisible(true);
         addLessonFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addALAddLessonButtons();
+        addFocusListeners();
     }
 
     public void addALAddLessonButtons()
@@ -49,6 +50,21 @@ public class AddLessonUI extends JFrame{
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 addLessonFrame.dispose();
                 courseMgmtCntrl.setAddLessonUI(null);
+            }
+        });
+    }
+
+    private void onWindowClosing() {
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+        courseMgmtCntrl.getHomepageController().getHomepageUI().transferFocus();
+    }
+
+    private void addFocusListeners()
+    {
+        addLessonFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                onWindowClosing();
             }
         });
     }

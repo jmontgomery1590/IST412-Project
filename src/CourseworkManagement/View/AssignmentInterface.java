@@ -35,8 +35,8 @@ public class AssignmentInterface extends JFrame {
 
     // This method will be called when the window is closing
     private void onWindowClosing() {
-        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().setEnabled(true);
-        courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().transferFocus();
+        courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+        courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().transferFocus();
     }
 
     private void addALButtons(){
