@@ -53,7 +53,8 @@ public class AssignmentInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 currentAssignment.updatePossibleScore();
                 courseworkMgmtCntrl.getAssignmentList().getAssignments().add(currentAssignment);
-                courseworkMgmtCntrl.getCourseworkMgmtInterface().getView().setEnabled(true);
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseworkMgmtCntrl.getAssignmentTable().fireTableDataChanged();
                 assignmentFrame.dispose();
             }
         });
