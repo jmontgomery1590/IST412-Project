@@ -29,6 +29,7 @@ public class AddAnnouncementUI extends JFrame{
         addAnnouncementFrame.setVisible(true);
         addAnnouncementFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addALAddAnnouncementButtons();
+        addFocusListeners();
     }
 
     public void addALAddAnnouncementButtons()
@@ -46,6 +47,21 @@ public class AddAnnouncementUI extends JFrame{
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 addAnnouncementFrame.dispose();
                 courseMgmtCntrl.setAddAnnouncementUI(null);
+            }
+        });
+    }
+
+    private void onWindowClosing() {
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+        courseMgmtCntrl.getHomepageController().getHomepageUI().transferFocus();
+    }
+
+    private void addFocusListeners()
+    {
+        addAnnouncementFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                onWindowClosing();
             }
         });
     }
