@@ -17,6 +17,8 @@ public class LessonMgmtUI {
     private JButton deleteLessonButton;
     private JPanel lessonMgmtPanel;
     private JTable lessonTable;
+    private JLabel lessonLabel;
+    private JPanel lessonTablePanel;
     private ViewLessonUI viewLessonUI;
     private CourseMgmtController courseMgmtCntrl;
     private AddLessonUI addLessonUI;
@@ -26,10 +28,10 @@ public class LessonMgmtUI {
         courseMgmtCntrl = courseMgmtController;
         courseMgmtCntrl.setLessonList(courseMgmtController.getSelectedCourse().getLessonList());
         courseMgmtCntrl.setLessonTable(new LessonTableModel(courseMgmtCntrl.getLessonList().getLessons()));
-
-        this.lessonTable.setModel(courseMgmtCntrl.getLessonTable());
+        lessonLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
+        lessonTable.setModel(courseMgmtCntrl.getLessonTable());
         lessonMgmtFrame = new JFrame("Lessons");
-        this.addALLessonButtons();
+        addALLessonButtons();
     }
 
     public void addALLessonButtons() {

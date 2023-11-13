@@ -17,6 +17,8 @@ public class AnnouncementMgmtUI {
     private JButton viewAnnouncementButton;
     private JButton deleteAnnouncementButton;
     private JTable announcementTable;
+    private JLabel announcementLabel;
+    private JPanel announcementTablePanel;
     private CourseMgmtController courseMgmtCntrl;
     private AddAnnouncementUI addAnnouncementUI;
     private HomepageController homepageController;
@@ -26,9 +28,10 @@ public class AnnouncementMgmtUI {
         courseMgmtCntrl = courseMgmtController;
         courseMgmtCntrl.setAnnouncementList(courseMgmtCntrl.getSelectedCourse().getAnnouncementList());
         courseMgmtCntrl.setAnnouncementTable(new AnnouncementTableModel(courseMgmtCntrl.getAnnouncementList().getAnnouncements()));
+        announcementLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
         announcementFrame = new JFrame("Announcements");
-        this.addALAnnouncementButtons();
+        addALAnnouncementButtons();
     }
 
     public void addALAnnouncementButtons() {
