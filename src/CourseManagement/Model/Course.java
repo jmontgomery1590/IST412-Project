@@ -50,10 +50,6 @@ public class Course {
         this.maxEnrolled = maxEnrolled;
     }
 
-    public ArrayList<Page> getCoursePages() {
-        return coursePages;
-    }
-
     public void setCoursePages(ArrayList<Page> coursePages) {
         this.coursePages = coursePages;
     }
@@ -70,23 +66,11 @@ public class Course {
         return lessonList;
     }
 
-    public void setLessonList(LessonList lessonList) {
-        this.lessonList = lessonList;
-    }
-
     public AssignmentList getAssignmentList() {
         return assignmentList;
     }
 
-    public void setAssignmentList(AssignmentList assignmentList) {
-        this.assignmentList = assignmentList;
-    }
-
     public AnnouncementList getAnnouncementList() {
         return announcementList;
-    }
-
-    public void setAnnouncementList(AnnouncementList announcementList) {
-        this.announcementList = announcementList;
     }
 }

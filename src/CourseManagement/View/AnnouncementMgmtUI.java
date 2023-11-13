@@ -9,20 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AnnouncementMgmtUI {
-    private JFrame announcementFrame = new JFrame("Announcements");
-    private JPanel announcementMgmtPanel;
+    private JFrame announcementFrame;
     private JPanel crudPanel;
-    private JButton addAnnouncementButton;
-    private JButton editAnnouncementButton;
-    private JButton viewAnnouncementButton;
-    private JButton deleteAnnouncementButton;
+    private JPanel announcementTablePanel, announcementMgmtPanel;
+    private JButton addAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
     private JTable announcementTable;
     private JLabel announcementLabel;
-    private JPanel announcementTablePanel;
     private CourseMgmtController courseMgmtCntrl;
-    private AddAnnouncementUI addAnnouncementUI;
-    private HomepageController homepageController;
-    private ViewAnnouncementUI viewAnnouncementUI;
+
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
@@ -67,20 +61,8 @@ public class AnnouncementMgmtUI {
         });
     }
 
-    public JFrame getAnnouncementFrame() {
-        return announcementFrame;
-    }
-
-    public void setAnnouncementFrame(JFrame announcementFrame) {
-        this.announcementFrame = announcementFrame;
-    }
-
     public JPanel getAnnouncementMgmtPanel() {
         return announcementMgmtPanel;
-    }
-
-    public void setAnnouncementMgmtPanel(JPanel announcementMgmtPanel) {
-        this.announcementMgmtPanel = announcementMgmtPanel;
     }
 
     public JButton getAddAnnouncementButton() {
@@ -99,43 +81,11 @@ public class AnnouncementMgmtUI {
         return deleteAnnouncementButton;
     }
 
-    public JTable getAnnouncementTable() {
-        return announcementTable;
-    }
-
-    public void setAnnouncementTable(JTable announcementTable) {
-        this.announcementTable = announcementTable;
-    }
-
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
     }
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
-    public AddAnnouncementUI getAddAnnouncementUI() {
-        return addAnnouncementUI;
-    }
-
-    public void setAddAnnouncementUI(AddAnnouncementUI addAnnouncementUI) {
-        this.addAnnouncementUI = addAnnouncementUI;
-    }
-
-    public HomepageController getHomepageController() {
-        return homepageController;
-    }
-
-    public void setHomepageController(HomepageController homepageController) {
-        this.homepageController = homepageController;
-    }
-
-    public ViewAnnouncementUI getViewAnnouncementUI() {
-        return viewAnnouncementUI;
-    }
-
-    public void setViewAnnouncementUI(ViewAnnouncementUI viewAnnouncementUI) {
-        this.viewAnnouncementUI = viewAnnouncementUI;
     }
 }

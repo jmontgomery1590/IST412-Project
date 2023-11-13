@@ -106,14 +106,6 @@ public class HomepageController implements ActionListener {
         this.homepageUI = homepageUI;
     }
 
-    public LoginController getLoginController() {
-        return loginController;
-    }
-
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
-    }
-
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
     }

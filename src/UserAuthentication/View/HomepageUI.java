@@ -32,65 +32,24 @@ public class HomepageUI extends JFrame{
 		homeFrame.setVisible(true);
 	}
 
-	public void loadNewView(JPanel newViewPanel){
-		this.setViewPanel(newViewPanel);
-	}
-
-
 	public JFrame getHomeFrame() {
 		return homeFrame;
-	}
-
-	public void setHomeFrame(JFrame homeFrame) {
-		this.homeFrame = homeFrame;
 	}
 
 	public JButton getHomeButton() {
 		return homeButton;
 	}
 
-	public void setHomeButton(JButton homeButton) {
-		this.homeButton = homeButton;
-	}
-
 	public JButton getCoursesButton() {
 		return coursesButton;
-	}
-
-	public void setCoursesButton(JButton coursesButton) {
-		this.coursesButton = coursesButton;
 	}
 
 	public JButton getProfileButton() {
 		return profileButton;
 	}
 
-	public void setProfileButton(JButton profileButton) {
-		this.profileButton = profileButton;
-	}
-
 	public JButton getExitButton() {
 		return exitButton;
-	}
-
-	public void setExitButton(JButton exitButton) {
-		this.exitButton = exitButton;
-	}
-
-	public JPanel getNavigationPanel() {
-		return navigationPanel;
-	}
-
-	public void setNavigationPanel(JPanel navigationPanel) {
-		this.navigationPanel = navigationPanel;
-	}
-
-	public JPanel getHomePage() {
-		return HomePage;
-	}
-
-	public void setHomePage(JPanel homePage) {
-		HomePage = homePage;
 	}
 
 	public JPanel getViewPanel() {
@@ -101,35 +60,7 @@ public class HomepageUI extends JFrame{
 		this.viewPanel = viewPanel;
 	}
 
-	public HomepageController getHomepageCntrl() {
-		return homepageCntrl;
-	}
-
-	public void setHomepageCntrl(HomepageController homepageCntrl) {
-		this.homepageCntrl = homepageCntrl;
-	}
-
-	public JPanel getHomePanel() {
-		return homePanel;
-	}
-
-	public void setHomePanel(JPanel homePanel) {
-		this.homePanel = homePanel;
-	}
-
-	public JLabel getHomeWelcomeLabel() {
-		return homeWelcomeLabel;
-	}
-
-	public void setHomeWelcomeLabel(JLabel homeWelcomeLabel) {
-		this.homeWelcomeLabel = homeWelcomeLabel;
-	}
-
 	public CardLayout getCardSwapper() {
 		return cardSwapper;
-	}
-
-	public void setCardSwapper(CardLayout cardSwapper) {
-		this.cardSwapper = cardSwapper;
 	}
 }

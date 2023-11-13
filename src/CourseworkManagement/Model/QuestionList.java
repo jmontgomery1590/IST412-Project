@@ -21,8 +21,4 @@ public class QuestionList {
     public ArrayList<Question> getQuestionList() {
         return questionList;
     }
-
-    public void setQuestionList(ArrayList<Question> questionList) {
-        this.questionList = questionList;
-    }
 }

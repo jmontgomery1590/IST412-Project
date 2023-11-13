@@ -130,18 +130,6 @@ public class AnswerInterface  extends JFrame {
         return answerFrame;
     }
 
-    public void setAnswerFrame(JFrame answerFrame) {
-        this.answerFrame = answerFrame;
-    }
-
-    public JButton getSaveAnswerButton() {
-        return saveAnswerButton;
-    }
-
-    public void setSaveAnswerButton(JButton saveAnswerButton) {
-        this.saveAnswerButton = saveAnswerButton;
-    }
-
     public JButton getCancelButton() {
         return cancelButton;
     }

@@ -77,7 +77,6 @@ public class CourseworkMgmtController implements ActionListener {
     private Question question;
     private QuestionList questionList;
     private CourseworkMgmtInterface courseworkMgmtInterface;
-
     private CourseMgmtController courseMgmtController;
     private QuestionInterface questionInterface;
     private AnswerInterface answerInterface;
@@ -86,9 +85,7 @@ public class CourseworkMgmtController implements ActionListener {
     private User currentUser;
     private AssignmentTableModel assignmentTable;
     private AssignmentList assignmentList;
-
     private AssignmentInterface assignmentInterface;
-
 
     public QuestionInterface getQuestionInterface() {
         return questionInterface;
@@ -110,32 +107,12 @@ public class CourseworkMgmtController implements ActionListener {
         return courseworkMgmtInterface;
     }
 
-    public void setCourseworkMgmtInterface(CourseworkMgmtInterface courseworkMgmtInterface) {
-        this.courseworkMgmtInterface = courseworkMgmtInterface;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
     public AssignmentTableModel getAssignmentTable() {
         return assignmentTable;
     }
 
-    public void setAssignmentTable(AssignmentTableModel assignmentTable) {
-        this.assignmentTable = assignmentTable;
-    }
-
     public AssignmentList getAssignmentList() {
         return assignmentList;
-    }
-
-    public void setAssignmentList(AssignmentList assignmentList) {
-        this.assignmentList = assignmentList;
     }
 
     public AssignmentInterface getAssignmentInterface() {
@@ -162,27 +139,7 @@ public class CourseworkMgmtController implements ActionListener {
         return courseMgmtController;
     }
 
-    public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
-        this.courseMgmtController = courseMgmtController;
-    }
-
-    public QuestionList getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(QuestionList questionList) {
-        this.questionList = questionList;
-    }
-
-    public AnswerInterface getAnswerInterface() {
-        return answerInterface;
-    }
-
     public Course getCurrentCourse() {
         return currentCourse;
-    }
-
-    public void setCurrentCourse(Course currentCourse) {
-        this.currentCourse = currentCourse;
     }
 }

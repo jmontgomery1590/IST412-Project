@@ -11,12 +11,9 @@ import java.awt.event.ActionListener;
 
 public class PageMgmtUI {
     private JFrame viewPageMgmtFrame;
-    private JPanel pageMgmtPanel;
-    private JButton lessonsButton;
-    private JButton announcementsButton;
-    private JButton assignmentsButton;
+    private JPanel pageMgmtPanel, titlePanel;
     private JPanel buttonPanel;
-    private JPanel titlePanel;
+    private JButton lessonsButton, announcementsButton, assignmentsButton;
     private JLabel titleLabel;
     private LessonMgmtUI lessonMgmtUI;
     private AnnouncementMgmtUI announcementMgmtUI;
@@ -73,14 +70,9 @@ public class PageMgmtUI {
         });
     }
 
-    public JFrame getViewPageMgmtUI() {
-        return viewPageMgmtFrame;
-    }
-
     public JButton getLessonsButton() {
         return lessonsButton;
     }
-
 
     public JButton getAnnouncementsButton() {
         return announcementsButton;
@@ -100,61 +92,5 @@ public class PageMgmtUI {
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
-    public LessonMgmtUI getLessonMgmtUI() {
-        return lessonMgmtUI;
-    }
-
-    public void setLessonMgmtUI(LessonMgmtUI lessonMgmtUI) {
-        this.lessonMgmtUI = lessonMgmtUI;
-    }
-
-    public AnnouncementMgmtUI getAnnouncementMgmtUI() {
-        return announcementMgmtUI;
-    }
-
-    public void setAnnouncementMgmtUI(AnnouncementMgmtUI announcementMgmtUI) {
-        this.announcementMgmtUI = announcementMgmtUI;
-    }
-
-    public HomepageController getHomepageController() {
-        return homepageController;
-    }
-
-    public void setHomepageController(HomepageController homepageController) {
-        this.homepageController = homepageController;
-    }
-
-    public LessonTableModel getLessonTable() {
-        return lessonTable;
-    }
-
-    public void setLessonTable(LessonTableModel lessonTable) {
-        this.lessonTable = lessonTable;
-    }
-
-    public AnnouncementTableModel getAnnouncementTable() {
-        return announcementTable;
-    }
-
-    public void setAnnouncementTable(AnnouncementTableModel announcementTable) {
-        this.announcementTable = announcementTable;
-    }
-
-    public LessonList getLessonList() {
-        return lessonList;
-    }
-
-    public void setLessonList(LessonList lessonList) {
-        this.lessonList = lessonList;
-    }
-
-    public AnnouncementList getAnnouncementList() {
-        return announcementList;
-    }
-
-    public void setAnnouncementList(AnnouncementList announcementList) {
-        this.announcementList = announcementList;
     }
 }

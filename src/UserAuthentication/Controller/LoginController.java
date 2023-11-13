@@ -108,32 +108,8 @@ public class LoginController implements ActionListener {
         this.password = password;
     }
 
-    public StudentMgmtController getStudentCntrl() {
-        return studentCntrl;
-    }
-
-    public void setStudentCntrl(StudentMgmtController studentCntrl) {
-        this.studentCntrl = studentCntrl;
-    }
-
-    public StaffMgmtController getStaffMgmtCntrl() {
-        return staffMgmtCntrl;
-    }
-
-    public void setStaffMgmtCntrl(StaffMgmtController staffMgmtCntrl) {
-        this.staffMgmtCntrl = staffMgmtCntrl;
-    }
-
     public HomepageUI getHomepageUI() {
         return homepageUI;
-    }
-
-    public void setHomepageUI(HomepageUI homepageUI) {
-        this.homepageUI = homepageUI;
-    }
-
-    public HomepageController getHomepageCntrl() {
-        return homepageCntrl;
     }
 
     public void setHomepageCntrl(HomepageController homepageCntrl) {
