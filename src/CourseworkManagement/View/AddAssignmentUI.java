@@ -3,15 +3,14 @@ package CourseworkManagement.View;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Assignment;
 import CourseworkManagement.Model.Question;
-import CourseworkManagement.Model.QuestionList;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 
-public class AssignmentInterface extends JFrame {
-    public AssignmentInterface (CourseworkMgmtController courseworkMgmtCntrl) {
+public class AddAssignmentUI extends JFrame {
+    public AddAssignmentUI(CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
         this.currentAssignment = new Assignment("");
         initComponents();
@@ -43,11 +42,18 @@ public class AssignmentInterface extends JFrame {
         this.addQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseworkMgmtCntrl.setQuestionInterface(new QuestionInterface(courseworkMgmtCntrl));
+                courseworkMgmtCntrl.setQuestionInterface(new AddQuestionUI(courseworkMgmtCntrl));
                 assignmentFrame.setEnabled(false);
             }
         });
-        this.cancelButton.addActionListener(this.courseworkMgmtCntrl);
+        this.cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                assignmentFrame.dispose();
+                courseworkMgmtCntrl.setAssignmentInterface(null);
+            }
+        });
         this.createAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

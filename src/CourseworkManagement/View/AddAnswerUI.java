@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AnswerInterface  extends JFrame {
+public class AddAnswerUI extends JFrame {
 
-    public AnswerInterface(CourseworkMgmtController courseworkMgmtController){
+    public AddAnswerUI(CourseworkMgmtController courseworkMgmtController){
         courseworkMgmtCntrl = courseworkMgmtController;
         answerFrame = new JFrame("Answer Builder");
         questionDescriptionLabel.setText(courseworkMgmtCntrl.getQuestionInterface().getQuestionTextField().getText());
@@ -68,7 +68,14 @@ public class AnswerInterface  extends JFrame {
     }
 
     private void addALButtons() {
-        this.cancelButton.addActionListener(this.courseworkMgmtCntrl);
+        this.cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().setEnabled(true);
+                answerFrame.dispose();
+                courseworkMgmtCntrl.setAnswerInterface(null);
+            }
+        });
         this.saveAnswerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

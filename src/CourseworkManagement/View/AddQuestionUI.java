@@ -6,11 +6,10 @@ import CourseworkManagement.Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
-public class QuestionInterface extends JFrame {
+public class AddQuestionUI extends JFrame {
 
-    public QuestionInterface(CourseworkMgmtController courseworkMgmtController){
+    public AddQuestionUI(CourseworkMgmtController courseworkMgmtController){
         courseworkMgmtCntrl = courseworkMgmtController;
         questionFrame = new JFrame("Question Builder");
         questionComboBox.addItem("Multiple Choice");
@@ -140,11 +139,18 @@ public class QuestionInterface extends JFrame {
         this.addAnswerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseworkMgmtCntrl.setAnswerInterface(new AnswerInterface(courseworkMgmtCntrl));
+                courseworkMgmtCntrl.setAnswerInterface(new AddAnswerUI(courseworkMgmtCntrl));
                 questionFrame.setEnabled(false);
             }
         });
-        this.cancelButton.addActionListener(this.courseworkMgmtCntrl);
+        this.cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.getAssignmentInterface().setEnabled(true);
+                questionFrame.dispose();
+                courseworkMgmtCntrl.setQuestionInterface(null);
+            }
+        });
         this.saveQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

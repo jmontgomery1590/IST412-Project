@@ -1,15 +1,11 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.Assignment;
-import CourseworkManagement.Model.Question;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
-public class CourseworkMgmtInterface extends JFrame{
+public class CourseworkMgmtUI extends JFrame{
     private JPanel courseworkPanel;
     private JLabel courseAssignmentLabel;
     private JPanel buttonPanel;
@@ -24,7 +20,7 @@ public class CourseworkMgmtInterface extends JFrame{
     private CourseworkMgmtController courseworkMgmtCntrl;
     private JFrame view;
 
-    public CourseworkMgmtInterface(CourseworkMgmtController courseworkMgmtCntrl) {
+    public CourseworkMgmtUI(CourseworkMgmtController courseworkMgmtCntrl) {
         view = new JFrame();
         this.setCourseworkMgmtCntrl(courseworkMgmtCntrl);
         this.courseAssignmentLabel.setText(courseworkMgmtCntrl.getCurrentCourse().getCourseID() + " " + courseworkMgmtCntrl.getCurrentCourse().getCourseName());
@@ -46,10 +42,39 @@ public class CourseworkMgmtInterface extends JFrame{
     }
 
     private void addALButtons(){
-        this.viewAssignmentButton.addActionListener(this.courseworkMgmtCntrl);
-        this.editAssignmentButton.addActionListener(this.courseworkMgmtCntrl);
-        this.newAssignmentButton.addActionListener(this.courseworkMgmtCntrl);
-        this.deleteAssignmentButton.addActionListener(this.courseworkMgmtCntrl);
+        this.viewAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = assignmentTable.getSelectedRow();
+                courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
+                courseworkMgmtCntrl.setQuestion(courseworkMgmtCntrl.getAssignment().getQuestionList().getQuestionList().get(0));
+                courseworkMgmtCntrl.setAssignmentReadInterface(new ViewAssignmentUI(courseworkMgmtCntrl));
+
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().add(courseworkMgmtCntrl.getAssignmentReadInterface().getReadPanel(), "Load Assignment");
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getCardSwapper().show(courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel(), "Load Assignment");
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().repaint();
+            }
+        });
+        this.editAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        this.newAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.setAssignmentInterface(new AddAssignmentUI(courseworkMgmtCntrl));
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
+            }
+        });
+        this.deleteAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public CourseworkMgmtController getCourseworkMgmtCntrl() {
