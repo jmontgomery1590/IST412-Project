@@ -7,7 +7,6 @@ public class User {
     private String userName;
     public String roleID;
     private String successful = "\n---Login Successful---\n";
-    private String unsuccessful = "\n---Login Unsuccessful---\n";
 
     /**
      * Constructor for User class
@@ -43,36 +42,12 @@ public class User {
         return loginID;
     }
 
-    public void setLoginID(String loginID) {
-        this.loginID = loginID;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUserNum() {
-        return userNum;
-    }
-
-    public void setUserNum(String userNum) {
-        this.userNum = userNum;
-    }
-
-    /**
-     * Returns username for this User
-     * @return String representing the username for the user
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getRoleID() {

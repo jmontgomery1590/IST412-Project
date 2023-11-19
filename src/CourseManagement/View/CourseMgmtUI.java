@@ -15,14 +15,13 @@ import java.util.Scanner;
 public class CourseMgmtUI {
     public CourseTableModel tableModel;
     public JFrame courseFrame;
-    public JPanel navigationPanel, controlPanel;
+    public JPanel navigationPanel;
+    public JPanel controlPanel;
     public JTable courseTable;
     private JPanel courseMgmtPanel;
-    public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
     private JPanel crudPanel;
+    public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
     private CourseMgmtController courseMgmtCntrl;
-    private PageMgmtUI pageMgmtUI;
-    private HomepageController homepageController;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {
@@ -73,22 +72,6 @@ public class CourseMgmtUI {
         return courseFrame;
     }
 
-    public CourseTableModel getTableModel() {
-        return tableModel;
-    }
-
-    public JPanel getNavigationPanel() {
-        return navigationPanel;
-    }
-
-    public JPanel getControlPanel() {
-        return controlPanel;
-    }
-
-    public JTable getCourseTable() {
-        return courseTable;
-    }
-
     public JPanel getCourseMgmtPanel() {
         return courseMgmtPanel;
     }
@@ -111,13 +94,5 @@ public class CourseMgmtUI {
 
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
-    }
-
-    public PageMgmtUI getPageMgmtUI() {
-        return pageMgmtUI;
-    }
-
-    public void setPageMgmtUI(PageMgmtUI pageMgmtUI) {
-        this.pageMgmtUI = pageMgmtUI;
     }
 }

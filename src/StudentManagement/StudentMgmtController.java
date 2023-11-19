@@ -4,7 +4,7 @@ import CourseManagement.Controller.CourseMgmtController;
 import UserAuthentication.Model.User;
 
 public class StudentMgmtController {
-    private StudentMgmtInterface si;
+    private StudentMgmtUI si;
     private CourseMgmtController courseMgmtController;
     private Student student;
 
@@ -13,7 +13,7 @@ public class StudentMgmtController {
      * @param u1 Student user profile to be managed through interface
      */
     public StudentMgmtController (User u1) {
-        this.setSi(new StudentMgmtInterface());
+        this.setSi(new StudentMgmtUI());
         this.setStudent(new Student(u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
         this.getSi().displayProfile(this.getStudent());
 
@@ -21,11 +21,11 @@ public class StudentMgmtController {
         //this.setCourseMgmtController(new CourseMgmtController(this));
     }
 
-    public StudentMgmtInterface getSi() {
+    public StudentMgmtUI getSi() {
         return si;
     }
 
-    public void setSi(StudentMgmtInterface si) {
+    public void setSi(StudentMgmtUI si) {
         this.si = si;
     }
 

@@ -89,19 +89,11 @@ public class Assignment {
         this.grade = grade;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
     public QuestionList getQuestionList() {
         return questionList;
-    }
-
-    public void setQuestionList(QuestionList questionList) {
-        this.questionList = questionList;
     }
 }

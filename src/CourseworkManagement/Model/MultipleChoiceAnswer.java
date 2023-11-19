@@ -26,17 +26,4 @@ public class MultipleChoiceAnswer extends Answer {
     public String toString() {
         return this.answer;
     }
-
-    public void markCorrect()
-    {
-        this.isCorrect = true;
-    }
-
-    public void markIncorrect()
-    {
-        this.isCorrect = false;
-    }
-
-    public void markSelected() { this.isSelected = true; }
-    public void markUnselected() { this.isSelected = false; }
 }

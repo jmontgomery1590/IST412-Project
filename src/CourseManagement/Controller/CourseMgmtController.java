@@ -15,28 +15,23 @@ import java.awt.event.ActionListener;
 
 public class CourseMgmtController {
     private CourseMgmtUI courseMgmtUI;
-    private AddCourseUI addCourseUI;
     private PageMgmtUI pageMgmtUI;
+    private LessonMgmtUI lessonMgmtUI;
+    private AnnouncementMgmtUI announcementMgmtUI;
+    private AddCourseUI addCourseUI;
+    private AddLessonUI addLessonUI;
+    private AddAnnouncementUI addAnnouncementUI;
     private CourseworkMgmtController courseworkMgmtCntrl;
-    private StudentMgmtController studentMgmtController;
-    private Course newCourse;
-    private Course selectedCourse;
-    private CourseList courseList;
-    private Page newPage;
-    private Lesson newLesson;
-    private Announcement newAnnouncement;
     private HomepageController homepageController;
+    private Course newCourse, selectedCourse;
+    private CourseList courseList;
+    private LessonList lessonList;
+    private PageList pageList;
+    private AnnouncementList announcementList;
     private CourseTableModel courseTable;
     private PageTableModel pageTable;
     private LessonTableModel lessonTable;
     private AnnouncementTableModel announcementTable;
-    private PageList pageList;
-    private LessonList lessonList;
-    private AnnouncementList announcementList;
-    private AddLessonUI addLessonUI;
-    private AddAnnouncementUI addAnnouncementUI;
-    private LessonMgmtUI lessonMgmtUI;
-    private AnnouncementMgmtUI announcementMgmtUI;
     private ViewAnnouncementUI viewAnnouncementUI;
     private ViewLessonUI viewLessonUI;
 
@@ -52,6 +47,7 @@ public class CourseMgmtController {
         this.courseMgmtUI = new CourseMgmtUI(this);
         this.pageList = new PageList();
         this.pageTable = new PageTableModel(this.getPageList().getPages());
+        verifyButtonAccess();
     }
 
     private void verifyButtonAccess() {
@@ -60,12 +56,6 @@ public class CourseMgmtController {
             courseMgmtUI.getAddCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
             courseMgmtUI.getEditCourseButton().setVisible(false);
-            if (lessonMgmtUI != null)
-            {
-                lessonMgmtUI.getAddLessonButton().setVisible(false);
-                lessonMgmtUI.getDeleteLessonButton().setVisible(false);
-                lessonMgmtUI.getEditLessonButton().setVisible(false);
-            }
         }
         else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
         {
@@ -73,11 +63,6 @@ public class CourseMgmtController {
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
         }
     }
-
-    /**
-     * Students will have different access to Courses than staff, so they
-     * will utilize a different constructor
-     */
 
     public PageList getPageList() {
         return pageList;
@@ -95,10 +80,6 @@ public class CourseMgmtController {
         return newCourse;
     }
 
-    public void setNewCourse(Course newCourse) {
-        this.newCourse = newCourse;
-    }
-
     public PageMgmtUI getPageMgmtUI() {
         return pageMgmtUI;
     }
@@ -107,28 +88,8 @@ public class CourseMgmtController {
         this.pageMgmtUI = pageMgmtUI;
     }
 
-    public AddCourseUI getAddCourseUI() {
-        return addCourseUI;
-    }
-
-    public Page getNewPage() {
-        return newPage;
-    }
-
-    public void setNewPage(Page newPage) {
-        this.newPage = newPage;
-    }
-
     public void setCourseworkMgmtCntrl(CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
-    }
-
-    public StudentMgmtController getStudentMgmtController() {
-        return studentMgmtController;
-    }
-
-    public void setStudentMgmtController(StudentMgmtController studentMgmtController) {
-        this.studentMgmtController = studentMgmtController;
     }
 
     public CourseList getCourseList() {
@@ -167,52 +128,12 @@ public class CourseMgmtController {
         return homepageController;
     }
 
-    public void setHomepageController(HomepageController homepageController) {
-        this.homepageController = homepageController;
-    }
-
     public CourseworkMgmtController getCourseworkMgmtCntrl() {
         return courseworkMgmtCntrl;
     }
 
     public void setAddCourseUI(AddCourseUI addCourseUI) {
         this.addCourseUI = addCourseUI;
-    }
-
-    public void setCourseMgmtUI(CourseMgmtUI courseMgmtUI) {
-        this.courseMgmtUI = courseMgmtUI;
-    }
-
-    public void setCourseList(CourseList courseList) {
-        this.courseList = courseList;
-    }
-
-    public Lesson getNewLesson() {
-        return newLesson;
-    }
-
-    public void setNewLesson(Lesson newLesson) {
-        this.newLesson = newLesson;
-    }
-
-    public Announcement getNewAnnouncement() {
-        return newAnnouncement;
-    }
-
-    public void setNewAnnouncement(Announcement newAnnouncement) {
-        this.newAnnouncement = newAnnouncement;
-    }
-
-    public void setCourseTable(CourseTableModel courseTable) {
-        this.courseTable = courseTable;
-    }
-
-    public PageTableModel getPageTable() {
-        return pageTable;
-    }
-
-    public void setPageTable(PageTableModel pageTable) {
-        this.pageTable = pageTable;
     }
 
     public LessonTableModel getLessonTable() {
@@ -231,10 +152,6 @@ public class CourseMgmtController {
         this.announcementTable = announcementTable;
     }
 
-    public void setPageList(PageList pageList) {
-        this.pageList = pageList;
-    }
-
     public LessonList getLessonList() {
         return lessonList;
     }
@@ -247,16 +164,8 @@ public class CourseMgmtController {
         this.announcementList = announcementList;
     }
 
-    public AddLessonUI getAddLessonUI() {
-        return addLessonUI;
-    }
-
     public void setAddLessonUI(AddLessonUI addLessonUI) {
         this.addLessonUI = addLessonUI;
-    }
-
-    public AddAnnouncementUI getAddAnnouncementUI() {
-        return addAnnouncementUI;
     }
 
     public void setAddAnnouncementUI(AddAnnouncementUI addAnnouncementUI) {

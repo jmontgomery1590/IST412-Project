@@ -37,8 +37,4 @@ public class AnswerList {
     public ArrayList<Answer> getAnswerList() {
         return answerList;
     }
-
-    public void setAnswerList(ArrayList<Answer> answerList) {
-        this.answerList = answerList;
-    }
 }

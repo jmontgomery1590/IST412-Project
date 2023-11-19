@@ -23,12 +23,4 @@ public class Page {
     public void setPageTitle(String pageTitle) {
         this.pageTitle = pageTitle;
     }
-
-    public ArrayList<Assignment> getLessonAssignments() {
-        return lessonAssignments;
-    }
-
-    public void setLessonAssignments(ArrayList<Assignment> lessonAssignments) {
-        this.lessonAssignments = lessonAssignments;
-    }
 }

@@ -9,27 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LessonMgmtUI {
-    private JFrame lessonMgmtFrame = new JFrame("Lessons");
+    private JFrame lessonMgmtFrame;
     private JPanel crudPanel;
-    private JButton addLessonButton;
-    private JButton editLessonButton;
-    private JButton viewLessonButton;
-    private JButton deleteLessonButton;
-    private JPanel lessonMgmtPanel;
+    private JPanel lessonMgmtPanel, lessonTablePanel;
+    private JButton addLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
     private JTable lessonTable;
-    private ViewLessonUI viewLessonUI;
+    private JLabel lessonLabel;
     private CourseMgmtController courseMgmtCntrl;
-    private AddLessonUI addLessonUI;
-    private HomepageController homepageController;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
         courseMgmtCntrl.setLessonList(courseMgmtController.getSelectedCourse().getLessonList());
         courseMgmtCntrl.setLessonTable(new LessonTableModel(courseMgmtCntrl.getLessonList().getLessons()));
-
-        this.lessonTable.setModel(courseMgmtCntrl.getLessonTable());
+        lessonLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
+        lessonTable.setModel(courseMgmtCntrl.getLessonTable());
         lessonMgmtFrame = new JFrame("Lessons");
-        this.addALLessonButtons();
+        addALLessonButtons();
     }
 
     public void addALLessonButtons() {
@@ -65,75 +60,23 @@ public class LessonMgmtUI {
         });
     }
 
-    public JFrame getLessonMgmtFrame() {
-        return lessonMgmtFrame;
-    }
-
-    public void setLessonMgmtFrame(JFrame lessonMgmtFrame) {
-        this.lessonMgmtFrame = lessonMgmtFrame;
-    }
-
-    public JPanel getCrudPanel() {
-        return crudPanel;
-    }
-
-    public void setCrudPanel(JPanel crudPanel) {
-        this.crudPanel = crudPanel;
-    }
-
     public JButton getAddLessonButton() {
         return addLessonButton;
-    }
-
-    public void setAddLessonButton(JButton addLessonButton) {
-        this.addLessonButton = addLessonButton;
     }
 
     public JButton getEditLessonButton() {
         return editLessonButton;
     }
 
-    public void setEditLessonButton(JButton editLessonButton) {
-        this.editLessonButton = editLessonButton;
-    }
-
     public JButton getViewLessonButton() {
         return viewLessonButton;
-    }
-
-    public void setViewLessonButton(JButton viewLessonButton) {
-        this.viewLessonButton = viewLessonButton;
     }
 
     public JButton getDeleteLessonButton() {
         return deleteLessonButton;
     }
 
-    public void setDeleteLessonButton(JButton deleteLessonButton) {
-        this.deleteLessonButton = deleteLessonButton;
-    }
-
     public JPanel getLessonMgmtPanel() {
         return lessonMgmtPanel;
-    }
-
-    public void setLessonMgmtPanel(JPanel lessonMgmtPanel) {
-        this.lessonMgmtPanel = lessonMgmtPanel;
-    }
-
-    public JTable getLessonTable() {
-        return lessonTable;
-    }
-
-    public void setLessonTable(JTable lessonTable) {
-        this.lessonTable = lessonTable;
-    }
-
-    public ViewLessonUI getViewLessonUI() {
-        return viewLessonUI;
-    }
-
-    public void setViewLessonUI(ViewLessonUI viewLessonUI) {
-        this.viewLessonUI = viewLessonUI;
     }
 }

@@ -11,15 +11,11 @@ import java.awt.event.WindowEvent;
 
 public class AddLessonUI extends JFrame{
     private JFrame addLessonFrame;
-    private JTextField titleTextField;
-    private JTextArea contentTextArea;
-    private JTextArea readingTextArea;
-    private JButton saveButton;
-    private JButton cancelButton;
-    private JPanel addLessonPanel;
-    private JPanel readingPanel;
-    private JPanel titlePanel;
+    private JPanel addLessonPanel, readingPanel, titlePanel;
     private JPanel contentPanel;
+    private JTextField titleTextField;
+    private JTextArea contentTextArea, readingTextArea;
+    private JButton saveButton, cancelButton;
     CourseMgmtController courseMgmtCntrl;
 
     public AddLessonUI(CourseMgmtController courseMgmtController) {
@@ -67,42 +63,6 @@ public class AddLessonUI extends JFrame{
                 onWindowClosing();
             }
         });
-    }
-
-    public JFrame getAddLessonFrame() {
-        return addLessonFrame;
-    }
-
-    public void setAddLessonUI(JFrame addLessonFrame) {
-        this.addLessonFrame = addLessonFrame;
-    }
-
-    public JTextField getTitleTextField() {
-        return titleTextField;
-    }
-
-    public void setTitleTextField(JTextField titleTextField) {
-        this.titleTextField = titleTextField;
-    }
-
-    public JTextArea getContentTextArea() {
-        return contentTextArea;
-    }
-
-    public void setContentTextArea(JTextArea contentTextArea) {
-        this.contentTextArea = contentTextArea;
-    }
-
-    public JTextArea getReadingTextArea() {
-        return readingTextArea;
-    }
-
-    public void setReadingTextArea(JTextArea readingTextArea) {
-        this.readingTextArea = readingTextArea;
-    }
-
-    public JButton getSaveButton() {
-        return saveButton;
     }
 
     public JButton getCancelButton() {
