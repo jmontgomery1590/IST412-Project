@@ -64,11 +64,6 @@ public class CourseMgmtController {
         }
     }
 
-    /**
-     * Students will have different access to Courses than staff, so they
-     * will utilize a different constructor
-     */
-
     public PageList getPageList() {
         return pageList;
     }
