@@ -30,8 +30,4 @@ public class AnnouncementList {
     public ArrayList<Announcement> getAnnouncements() {
         return announcements;
     }
-
-    public void setAnnouncements(ArrayList<Announcement> announcements) {
-        this.announcements = announcements;
-    }
 }

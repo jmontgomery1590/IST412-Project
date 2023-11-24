@@ -15,23 +15,13 @@ import java.awt.event.WindowEvent;
 
 public class AddCourseUI {
     private JFrame addCourseFrame;
-    private JTextField courseIDTextField;
-    private JTextField courseNameTextField;
-    private JTextField maxEnrolledTextField;
-    private JTextField instructorTextField;
     private JPanel addCoursePanel;
-    private JPanel courseInformationPanel;
-    private JButton saveButton;
-    private JButton cancelButton;
-    private JLabel instructorLabel;
-    private JLabel maxEnrolledLabel;
-    private JLabel courseNameLabel;
-    private JLabel courseIDLabel;
     private JPanel buttonPanel;
-    private HomepageController homepageController;
-    private Course newCourse;
+    private JPanel courseInformationPanel;
+    private JTextField courseIDTextField, courseNameTextField, maxEnrolledTextField, instructorTextField;
+    private JButton saveButton, cancelButton;
+    private JLabel instructorLabel, maxEnrolledLabel, courseNameLabel, courseIDLabel;
     private CourseMgmtController courseMgmtCntrl;
-    private CourseList courseList;
 
     public AddCourseUI(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
@@ -75,11 +65,12 @@ public class AddCourseUI {
     }
 
     private Instructor testInstructor() {
+        String testName = "Urjaswala Vora";
         String testLogin = "Instructor1";
         String testPassword = "Password1";
         String testRoleID = "ID1";
 
-        Instructor testInst = new Instructor(testLogin, testPassword, testRoleID);
+        Instructor testInst = new Instructor(testName, testLogin, testPassword, testRoleID);
 
         return testInst;
     }
@@ -96,22 +87,6 @@ public class AddCourseUI {
     private void onWindowClosing() {
         courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().setEnabled(true);
         courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().transferFocus();
-    }
-
-    public JFrame getAddCourseFrame() {
-        return addCourseFrame;
-    }
-
-    public JTextField getCourseNameTextField() {
-        return courseNameTextField;
-    }
-
-    public JTextField getCourseIDTextField() {
-        return courseIDTextField;
-    }
-
-    public JTextField getMaxEnrolledTextField() {
-        return maxEnrolledTextField;
     }
 
     public JButton getSaveButton() {

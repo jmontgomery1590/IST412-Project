@@ -15,9 +15,8 @@ public class TA extends User {
      * @param userPassword Given login password for authentication
      * @param roleID Given user role for user
      */
-    public TA(String userLogin, String userPassword, String roleID) {
-        super(userLogin, userPassword);
-        this.setRoleID(roleID);
+    public TA(String userName, String userLogin, String userPassword, String roleID) {
+        super(userName, userLogin, userPassword, roleID);
     }
 
     /**
@@ -27,15 +26,8 @@ public class TA extends User {
      * @param roleID Given user role for user
      * @param tutoring Courses actively tutoring students in
      */
-    public TA(String userLogin, String userPassword, String roleID, ArrayList<Course> tutoring) {
-        super(userLogin, userPassword);
-        this.setRoleID(roleID);
+    public TA(String userName, String userLogin, String userPassword, String roleID, ArrayList<Course> tutoring) {
+        super(userName, userLogin, userPassword, roleID);
         this.coursesTutored = tutoring;
     }
-
-    /**
-     * Grade uploaded assignment.
-     * @param a1 Assignment to be graded
-     */
-    public void gradeAssignment(Assignment a1) {}
 }

@@ -11,16 +11,4 @@ public class HomeViewUI {
     public JPanel getHomePanel() {
         return homePanel;
     }
-
-    public void setHomePanel(JPanel homePanel) {
-        this.homePanel = homePanel;
-    }
-
-    public JLabel getHomePageLabel() {
-        return homePageLabel;
-    }
-
-    public void setHomePageLabel(JLabel homePageLabel) {
-        this.homePageLabel = homePageLabel;
-    }
 }

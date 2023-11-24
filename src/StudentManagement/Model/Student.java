@@ -1,4 +1,4 @@
-package StudentManagement;
+package StudentManagement.Model;
 
 import CourseManagement.Model.Course;
 import UserAuthentication.Model.User;
@@ -13,9 +13,8 @@ public class Student extends User {
      * @param userLogin Given login username for authentication
      * @param password Given login password for authentication
      */
-    public Student(String userLogin, String password, String roleID) {
-        super(userLogin, password);
-        this.setRoleID(roleID);
+    public Student(String userName, String userLogin, String password, String roleID) {
+        super(userName, userLogin, password, roleID);
         this.major = "Undecided";
         this.enrolledCourses = new ArrayList<>();
     }

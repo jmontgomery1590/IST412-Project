@@ -9,35 +9,53 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AnnouncementMgmtUI {
-    private JFrame announcementFrame = new JFrame("Announcements");
-    private JPanel announcementMgmtPanel;
-    private JPanel crudPanel;
-    private JButton addAnnouncementButton;
-    private JButton editAnnouncementButton;
-    private JButton viewAnnouncementButton;
-    private JButton deleteAnnouncementButton;
-    private JTable announcementTable;
-    private CourseMgmtController courseMgmtCntrl;
-    private AddAnnouncementUI addAnnouncementUI;
     private HomepageController homepageController;
-    private ViewAnnouncementUI viewAnnouncementUI;
+    private AnnouncementMgmtUI announcementMgmtUI;
+    private JFrame announcementFrame;
+    private JPanel buttonPanel;
+    private JPanel announcementTablePanel, announcementMgmtPanel;
+    private JButton addAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
+    private JTable announcementTable;
+    private JLabel announcementLabel;
+    private JPanel announcementTitlePanel;
+    private JScrollPane tableScrollPane;
+    private CourseMgmtController courseMgmtCntrl;
+
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
         courseMgmtCntrl.setAnnouncementList(courseMgmtCntrl.getSelectedCourse().getAnnouncementList());
         courseMgmtCntrl.setAnnouncementTable(new AnnouncementTableModel(courseMgmtCntrl.getAnnouncementList().getAnnouncements()));
+        announcementLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
         announcementFrame = new JFrame("Announcements");
-        this.addALAnnouncementButtons();
+        addALAnnouncementButtons();
+        //verifyButtonAccess();
     }
 
+    /*private void verifyButtonAccess() {
+        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+        {
+            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getEditAnnouncementButton().setVisible(false);
+        }
+        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
+        {
+            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
+        }
+    }*/
+
     public void addALAnnouncementButtons() {
-        this.getViewAnnouncementButton().addActionListener(new ActionListener() {
+        this.viewAnnouncementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI());
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementViewPanel(), "Announcement View");
+                int selectedRow = announcementTable.getSelectedRow();
+                courseMgmtCntrl.setAnnouncement(courseMgmtCntrl.getAnnouncementList().getAnnouncements().get(selectedRow));
+                courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI(courseMgmtCntrl));
 
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementPanel(), "View Announcement");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "Announcement View");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
@@ -59,25 +77,15 @@ public class AnnouncementMgmtUI {
         this.getDeleteAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int selectedRow = announcementTable.getSelectedRow();
+                courseMgmtCntrl.getAnnouncementList().getAnnouncements().remove(selectedRow);
+                courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
             }
         });
     }
 
-    public JFrame getAnnouncementFrame() {
-        return announcementFrame;
-    }
-
-    public void setAnnouncementFrame(JFrame announcementFrame) {
-        this.announcementFrame = announcementFrame;
-    }
-
     public JPanel getAnnouncementMgmtPanel() {
         return announcementMgmtPanel;
-    }
-
-    public void setAnnouncementMgmtPanel(JPanel announcementMgmtPanel) {
-        this.announcementMgmtPanel = announcementMgmtPanel;
     }
 
     public JButton getAddAnnouncementButton() {
@@ -96,43 +104,11 @@ public class AnnouncementMgmtUI {
         return deleteAnnouncementButton;
     }
 
-    public JTable getAnnouncementTable() {
-        return announcementTable;
-    }
-
-    public void setAnnouncementTable(JTable announcementTable) {
-        this.announcementTable = announcementTable;
-    }
-
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
     }
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
-    public AddAnnouncementUI getAddAnnouncementUI() {
-        return addAnnouncementUI;
-    }
-
-    public void setAddAnnouncementUI(AddAnnouncementUI addAnnouncementUI) {
-        this.addAnnouncementUI = addAnnouncementUI;
-    }
-
-    public HomepageController getHomepageController() {
-        return homepageController;
-    }
-
-    public void setHomepageController(HomepageController homepageController) {
-        this.homepageController = homepageController;
-    }
-
-    public ViewAnnouncementUI getViewAnnouncementUI() {
-        return viewAnnouncementUI;
-    }
-
-    public void setViewAnnouncementUI(ViewAnnouncementUI viewAnnouncementUI) {
-        this.viewAnnouncementUI = viewAnnouncementUI;
     }
 }

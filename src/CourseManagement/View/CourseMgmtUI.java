@@ -2,27 +2,23 @@ package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.CourseTableModel;
-import CourseManagement.Model.Course;
-import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Scanner;
 
 public class CourseMgmtUI {
     public CourseTableModel tableModel;
     public JFrame courseFrame;
-    public JPanel navigationPanel, controlPanel;
+    public JPanel navigationPanel;
+    public JPanel controlPanel;
     public JTable courseTable;
     private JPanel courseMgmtPanel;
-    public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
-    private JPanel crudPanel;
+    private JPanel buttonPanel;
+    public JButton newCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
+    private JPanel tablePanel;
+    private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
-    private PageMgmtUI pageMgmtUI;
-    private HomepageController homepageController;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {
@@ -73,28 +69,12 @@ public class CourseMgmtUI {
         return courseFrame;
     }
 
-    public CourseTableModel getTableModel() {
-        return tableModel;
-    }
-
-    public JPanel getNavigationPanel() {
-        return navigationPanel;
-    }
-
-    public JPanel getControlPanel() {
-        return controlPanel;
-    }
-
-    public JTable getCourseTable() {
-        return courseTable;
-    }
-
     public JPanel getCourseMgmtPanel() {
         return courseMgmtPanel;
     }
 
     public JButton getAddCourseButton() {
-        return addCourseButton;
+        return newCourseButton;
     }
 
     public JButton getEditCourseButton() {
@@ -111,13 +91,5 @@ public class CourseMgmtUI {
 
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
-    }
-
-    public PageMgmtUI getPageMgmtUI() {
-        return pageMgmtUI;
-    }
-
-    public void setPageMgmtUI(PageMgmtUI pageMgmtUI) {
-        this.pageMgmtUI = pageMgmtUI;
     }
 }

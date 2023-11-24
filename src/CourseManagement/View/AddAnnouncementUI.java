@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Announcement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,16 +13,23 @@ import java.awt.event.WindowEvent;
 public class AddAnnouncementUI extends JFrame{
     private JFrame addAnnouncementFrame;
     private JPanel addAnnouncementPanel;
-    private JButton saveButton;
-    private JButton cancelButton;
+    private JButton saveButton, cancelButton;
     private JPanel announcementInfoPanel;
     private JTextField titleTextField;
     private JTextArea announcementTextArea;
+    private JPanel buttonPanel;
     private CourseMgmtController courseMgmtCntrl;
+    private Announcement currentAnnouncement;
+
 
     public AddAnnouncementUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        addAnnouncementFrame = new JFrame("Add New Lesson");
+        currentAnnouncement = new Announcement("", "");
+        initComponents();
+    }
+
+    private void initComponents() {
+        addAnnouncementFrame = new JFrame("Add New Announcement");
         addAnnouncementFrame.setResizable(false);
         addAnnouncementFrame.setMinimumSize(new Dimension(800, 600));
         addAnnouncementFrame.setContentPane(addAnnouncementPanel);
@@ -32,12 +40,17 @@ public class AddAnnouncementUI extends JFrame{
         addFocusListeners();
     }
 
-    public void addALAddAnnouncementButtons()
+    private void addALAddAnnouncementButtons()
     {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentAnnouncement.setPageTitle(titleTextField.getText());
+                currentAnnouncement.setAnnouncementBody(announcementTextArea.getText());
+                courseMgmtCntrl.getAnnouncementList().getAnnouncements().add(currentAnnouncement);
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
+                addAnnouncementFrame.dispose();
             }
         });
 
@@ -66,59 +79,11 @@ public class AddAnnouncementUI extends JFrame{
         });
     }
 
-    public JFrame getAddAnnouncementFrame() {
-        return addAnnouncementFrame;
-    }
-
-    public void setAddAnnouncementFrame(JFrame addAnnouncementFrame) {
-        this.addAnnouncementFrame = addAnnouncementFrame;
-    }
-
-    public JPanel getAddAnnouncementPanel() {
-        return addAnnouncementPanel;
-    }
-
-    public void setAddAnnouncementPanel(JPanel addAnnouncementPanel) {
-        this.addAnnouncementPanel = addAnnouncementPanel;
-    }
-
-    public JButton getSaveButton() {
-        return saveButton;
-    }
-
-    public void setSaveButton(JButton saveButton) {
-        this.saveButton = saveButton;
-    }
-
     public JButton getCancelButton() {
         return cancelButton;
     }
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
-    }
-
-    public JPanel getAnnouncementInfoPanel() {
-        return announcementInfoPanel;
-    }
-
-    public void setAnnouncementInfoPanel(JPanel announcementInfoPanel) {
-        this.announcementInfoPanel = announcementInfoPanel;
-    }
-
-    public JTextField getTitleTextField() {
-        return titleTextField;
-    }
-
-    public void setTitleTextField(JTextField titleTextField) {
-        this.titleTextField = titleTextField;
-    }
-
-    public JTextArea getAnnouncementTextArea() {
-        return announcementTextArea;
-    }
-
-    public void setAnnouncementTextArea(JTextArea announcementTextArea) {
-        this.announcementTextArea = announcementTextArea;
     }
 }

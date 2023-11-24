@@ -30,8 +30,4 @@ public class PageList {
     public ArrayList<Page> getPages() {
         return pages;
     }
-
-    public void setPages(ArrayList<Page> pages) {
-        this.pages = pages;
-    }
 }
