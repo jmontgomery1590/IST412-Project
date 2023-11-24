@@ -8,4 +8,6 @@ public abstract class Question {
     public abstract AnswerList getAnswerList();
 
     public abstract double getQuestionPointWorth();
+
+    public abstract void compareSubmittedAnswer(String selectedAnswer);
 }

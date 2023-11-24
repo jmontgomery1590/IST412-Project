@@ -27,11 +27,13 @@ public class MultipleChoiceAnswer extends Answer {
         return this.answer;
     }
 
+    @Override
     public void markCorrect()
     {
         this.isCorrect = true;
     }
 
+    @Override
     public void markIncorrect()
     {
         this.isCorrect = false;
@@ -39,4 +41,9 @@ public class MultipleChoiceAnswer extends Answer {
 
     public void markSelected() { this.isSelected = true; }
     public void markUnselected() { this.isSelected = false; }
+    @Override
+    public boolean getIsCorrect()
+    {
+        return this.isCorrect;
+    }
 }
