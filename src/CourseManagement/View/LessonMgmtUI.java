@@ -9,12 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LessonMgmtUI {
+    private HomepageController homepageController;
+    private LessonMgmtUI lessonMgmtUI;
     private JFrame lessonMgmtFrame;
     private JPanel crudPanel;
     private JPanel lessonMgmtPanel, lessonTablePanel;
     private JButton addLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
     private JTable lessonTable;
     private JLabel lessonLabel;
+    private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
@@ -25,14 +28,29 @@ public class LessonMgmtUI {
         lessonTable.setModel(courseMgmtCntrl.getLessonTable());
         lessonMgmtFrame = new JFrame("Lessons");
         addALLessonButtons();
+        //verifyButtonAccess();
     }
+
+    /*private void verifyButtonAccess() {
+        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+        {
+            lessonMgmtUI.getAddLessonButton().setVisible(false);
+            lessonMgmtUI.getDeleteLessonButton().setVisible(false);
+            lessonMgmtUI.getEditLessonButton().setVisible(false);
+        }
+        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
+        {
+            lessonMgmtUI.getAddLessonButton().setVisible(false);
+            lessonMgmtUI.getDeleteLessonButton().setVisible(false);
+        }
+    }*/
 
     public void addALLessonButtons() {
         this.getViewLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseMgmtCntrl.setViewLessonUI(new ViewLessonUI());
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getLessonViewPanel(), "View Lesson");
+                courseMgmtCntrl.setViewLessonUI(new ViewLessonUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getViewLessonPanel(), "View Lesson");
 
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Lesson");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
@@ -55,7 +73,9 @@ public class LessonMgmtUI {
         this.getDeleteLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int selectedRow = lessonTable.getSelectedRow();
+                courseMgmtCntrl.getLessonList().getLessons().remove(selectedRow);
+                courseMgmtCntrl.getLessonTable().fireTableDataChanged();
             }
         });
     }

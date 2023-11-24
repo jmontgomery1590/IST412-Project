@@ -17,4 +17,20 @@ public class Lesson extends Page{
         this.lessonContent = content;
         this.assignedReading = reading;
     }
+
+    public String getLessonContent() {
+        return lessonContent;
+    }
+
+    public void setLessonContent(String lessonContent) {
+        this.lessonContent = lessonContent;
+    }
+
+    public String getAssignedReading() {
+        return assignedReading;
+    }
+
+    public void setAssignedReading(String assignedReading) {
+        this.assignedReading = assignedReading;
+    }
 }

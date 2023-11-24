@@ -16,4 +16,12 @@ public class Announcement extends Page{
         super (title);
         this.announcementBody = body;
     }
+
+    public String getAnnouncementBody() {
+        return announcementBody;
+    }
+
+    public void setAnnouncementBody(String announcementBody) {
+        this.announcementBody = announcementBody;
+    }
 }

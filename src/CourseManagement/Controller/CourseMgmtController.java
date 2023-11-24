@@ -3,15 +3,7 @@ package CourseManagement.Controller;
 import CourseManagement.Model.*;
 import CourseManagement.View.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.Assignment;
-import CourseworkManagement.Model.Question;
-import StaffManagement.Model.Instructor;
-import StudentManagement.StudentMgmtController;
 import UserAuthentication.Controller.HomepageController;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CourseMgmtController {
     private CourseMgmtUI courseMgmtUI;
@@ -34,6 +26,8 @@ public class CourseMgmtController {
     private AnnouncementTableModel announcementTable;
     private ViewAnnouncementUI viewAnnouncementUI;
     private ViewLessonUI viewLessonUI;
+    private Announcement announcement;
+    private Lesson lesson;
 
 
     /**
@@ -186,5 +180,21 @@ public class CourseMgmtController {
 
     public void setViewLessonUI(ViewLessonUI viewLessonUI) {
         this.viewLessonUI = viewLessonUI;
+    }
+
+    public Announcement getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(Announcement announcement) {
+        this.announcement = announcement;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 }

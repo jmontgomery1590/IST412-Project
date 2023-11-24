@@ -2,6 +2,7 @@ package UserAuthentication.Controller;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import StudentManagement.Controller.StudentMgmtController;
 import UserAuthentication.Model.User;
 import UserAuthentication.View.HomeViewUI;
 import UserAuthentication.View.HomepageUI;
@@ -14,6 +15,7 @@ public class HomepageController implements ActionListener {
     private HomepageUI homepageUI;
     private LoginController loginController;
     private CourseMgmtController courseMgmtCntrl;
+    private StudentMgmtController studentMgmtCntrl;
     private HomeViewUI homeViewUI;
 
 
@@ -47,24 +49,6 @@ public class HomepageController implements ActionListener {
 
         // traverse different if statements to find what to do
 
-        // If Courses Navigation button is clicked
-        if (obj == this.getHomepageUI().getCoursesButton())
-        {
-            // Check for first time clicking to build the UI & build controller
-            if (this.getCourseMgmtCntrl() == null)
-            {
-                this.setCourseMgmtCntrl(new CourseMgmtController(this));
-
-                // Add the UI to the homepage view panel
-                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
-            }
-
-            // Choose to show the courses UI in the view panel
-            // Revalidate & Repaint refresh the view window w/ the new content
-            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "Courses");
-            this.getHomepageUI().getViewPanel().revalidate();
-            this.getHomepageUI().getViewPanel().repaint();
-        }
         // If Home Navigation button is clicked
         if (obj == this.getHomepageUI().getHomeButton())
         {
@@ -76,10 +60,40 @@ public class HomepageController implements ActionListener {
                 // Add the UI to the homepage view panel
                 this.getHomepageUI().getViewPanel().add(this.getHomeViewUI().getHomePanel(), "Home");
             }
-
             // Choose to show the courses UI in the view panel
             // Revalidate & Repaint refresh the view window w/ the new content
             this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "Home");
+            this.getHomepageUI().getViewPanel().revalidate();
+            this.getHomepageUI().getViewPanel().repaint();
+        }
+        // If Courses Navigation button is clicked
+        if (obj == this.getHomepageUI().getCoursesButton())
+        {
+            // Check for first time clicking to build the UI & build controller
+            if (this.getCourseMgmtCntrl() == null)
+            {
+                this.setCourseMgmtCntrl(new CourseMgmtController(this));
+
+                // Add the UI to the homepage view panel
+                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
+            }
+            // Choose to show the courses UI in the view panel
+            // Revalidate & Repaint refresh the view window w/ the new content
+            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "Courses");
+            this.getHomepageUI().getViewPanel().revalidate();
+            this.getHomepageUI().getViewPanel().repaint();
+        }
+
+        if (obj == this.getHomepageUI().getProfileButton())
+        {
+            if (this.getStudentMgmtCntrl() == null)
+            {
+                this.setStudentMgmtCntrl(new StudentMgmtController(this));
+
+                this.getHomepageUI().getViewPanel().add(this.getStudentMgmtCntrl().getStudentMgmtUI().getStudentMgmtPanel(), "User Profile");
+            }
+
+            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "User Profile");
             this.getHomepageUI().getViewPanel().revalidate();
             this.getHomepageUI().getViewPanel().repaint();
         }
@@ -120,5 +134,13 @@ public class HomepageController implements ActionListener {
 
     public void setHomeViewUI(HomeViewUI homeViewUI) {
         this.homeViewUI = homeViewUI;
+    }
+
+    public StudentMgmtController getStudentMgmtCntrl() {
+        return studentMgmtCntrl;
+    }
+
+    public void setStudentMgmtCntrl(StudentMgmtController studentMgmtCntrl) {
+        this.studentMgmtCntrl = studentMgmtCntrl;
     }
 }

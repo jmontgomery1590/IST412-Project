@@ -48,9 +48,9 @@ public class CourseworkMgmtUI extends JFrame{
                 int selectedRow = assignmentTable.getSelectedRow();
                 courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
                 courseworkMgmtCntrl.setQuestion(courseworkMgmtCntrl.getAssignment().getQuestionList().getQuestionList().get(0));
-                courseworkMgmtCntrl.setAssignmentReadInterface(new ViewAssignmentUI(courseworkMgmtCntrl));
+                courseworkMgmtCntrl.setViewAssignmentUI(new ViewAssignmentUI(courseworkMgmtCntrl));
 
-                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().add(courseworkMgmtCntrl.getAssignmentReadInterface().getReadPanel(), "Load Assignment");
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().add(courseworkMgmtCntrl.getViewAssignmentUI().getReadPanel(), "Load Assignment");
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getCardSwapper().show(courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel(), "Load Assignment");
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().repaint();

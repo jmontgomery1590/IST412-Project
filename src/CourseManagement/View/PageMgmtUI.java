@@ -6,6 +6,7 @@ import CourseworkManagement.Controller.CourseworkMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,6 +32,7 @@ public class PageMgmtUI {
         this.announcementMgmtUI = new AnnouncementMgmtUI(this.courseMgmtCntrl);
         viewPageMgmtFrame = new JFrame("Page Selection");
         this.titleLabel.setText(this.courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + this.courseMgmtCntrl.getSelectedCourse().getCourseName());
+        this.titleLabel.setForeground(Color.WHITE);
         this.addALPageButtons();
     }
 

@@ -3,7 +3,6 @@ package UserAuthentication.Model;
 public class User {
     private String loginID;
     private String password;
-    private String userNum;
     private String userName;
     public String roleID;
     private String successful = "\n---Login Successful---\n";
@@ -13,10 +12,11 @@ public class User {
      * @param userLogin given username for User
      * @param userPassword given password for User
      */
-    public User(String userLogin, String userPassword) {
-        this.loginID = userLogin;
-        this.password = userPassword;
-        this.roleID = "";
+    public User(String userName, String userLogin, String userPassword, String userRole) {
+        this.userName = userName;
+        loginID = userLogin;
+        password = userPassword;
+        roleID = userRole;
     }
 
     /**
@@ -36,6 +36,10 @@ public class User {
             System.out.println(successful);
             return true;
         } else return false;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getLoginID() {

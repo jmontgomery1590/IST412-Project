@@ -2,15 +2,10 @@ package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.CourseTableModel;
-import CourseManagement.Model.Course;
-import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Scanner;
 
 public class CourseMgmtUI {
     public CourseTableModel tableModel;
@@ -19,8 +14,10 @@ public class CourseMgmtUI {
     public JPanel controlPanel;
     public JTable courseTable;
     private JPanel courseMgmtPanel;
-    private JPanel crudPanel;
-    public JButton addCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
+    private JPanel buttonPanel;
+    public JButton newCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
+    private JPanel tablePanel;
+    private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
 
 
@@ -77,7 +74,7 @@ public class CourseMgmtUI {
     }
 
     public JButton getAddCourseButton() {
-        return addCourseButton;
+        return newCourseButton;
     }
 
     public JButton getEditCourseButton() {

@@ -9,12 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AnnouncementMgmtUI {
+    private HomepageController homepageController;
+    private AnnouncementMgmtUI announcementMgmtUI;
     private JFrame announcementFrame;
-    private JPanel crudPanel;
+    private JPanel buttonPanel;
     private JPanel announcementTablePanel, announcementMgmtPanel;
     private JButton addAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
     private JTable announcementTable;
     private JLabel announcementLabel;
+    private JPanel announcementTitlePanel;
+    private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
 
 
@@ -26,15 +30,32 @@ public class AnnouncementMgmtUI {
         announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
         announcementFrame = new JFrame("Announcements");
         addALAnnouncementButtons();
+        //verifyButtonAccess();
     }
 
+    /*private void verifyButtonAccess() {
+        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+        {
+            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getEditAnnouncementButton().setVisible(false);
+        }
+        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
+        {
+            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
+            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
+        }
+    }*/
+
     public void addALAnnouncementButtons() {
-        this.getViewAnnouncementButton().addActionListener(new ActionListener() {
+        this.viewAnnouncementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI());
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementViewPanel(), "Announcement View");
+                int selectedRow = announcementTable.getSelectedRow();
+                courseMgmtCntrl.setAnnouncement(courseMgmtCntrl.getAnnouncementList().getAnnouncements().get(selectedRow));
+                courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI(courseMgmtCntrl));
 
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementPanel(), "View Announcement");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "Announcement View");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
@@ -56,7 +77,9 @@ public class AnnouncementMgmtUI {
         this.getDeleteAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int selectedRow = announcementTable.getSelectedRow();
+                courseMgmtCntrl.getAnnouncementList().getAnnouncements().remove(selectedRow);
+                courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
             }
         });
     }

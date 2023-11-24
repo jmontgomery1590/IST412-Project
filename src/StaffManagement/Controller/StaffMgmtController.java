@@ -35,15 +35,15 @@ public class StaffMgmtController {
         int roleLevel = 0;
         switch (u1.getRoleID()){
             case "TA":
-                this.setTa(new TA(u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
+                this.setTa(new TA(u1.getUserName(), u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
                 roleLevel = 1;
                 break;
             case "INSTRUCTOR":
-                this.setInstructor(new Instructor(u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
+                this.setInstructor(new Instructor(u1.getUserName(), u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
                 roleLevel = 2;
                 break;
             case "ADMIN":
-                this.setAdmin(new Admin(u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
+                this.setAdmin(new Admin(u1.getUserName(), u1.getLoginID(), u1.getPassword(), u1.getRoleID()));
                 roleLevel = 3;
                 break;
             default:

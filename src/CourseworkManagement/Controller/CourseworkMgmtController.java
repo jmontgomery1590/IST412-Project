@@ -133,11 +133,11 @@ public class CourseworkMgmtController {
         this.currentCourse = currentCourse;
     }
 
-    public ViewAssignmentUI getAssignmentReadInterface() {
+    public ViewAssignmentUI getViewAssignmentUI() {
         return viewAssignmentUI;
     }
 
-    public void setAssignmentReadInterface(ViewAssignmentUI viewAssignmentUI) {
+    public void setViewAssignmentUI(ViewAssignmentUI viewAssignmentUI) {
         this.viewAssignmentUI = viewAssignmentUI;
     }
 }

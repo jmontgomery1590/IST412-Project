@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Lesson;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +15,18 @@ public class AddLessonUI extends JFrame{
     private JPanel addLessonPanel, readingPanel, titlePanel;
     private JPanel contentPanel;
     private JTextField titleTextField;
-    private JTextArea contentTextArea, readingTextArea;
+    private JTextArea lessonContentArea, lessonReadingArea;
     private JButton saveButton, cancelButton;
     CourseMgmtController courseMgmtCntrl;
+    private Lesson currentLesson;
 
     public AddLessonUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
+        currentLesson = new Lesson("", "", "");
+        initComponents();
+    }
+    
+    private void initComponents() {
         addLessonFrame = new JFrame("Add New Lesson");
         addLessonFrame.setResizable(false);
         addLessonFrame.setMinimumSize(new Dimension(800, 600));
@@ -36,7 +43,13 @@ public class AddLessonUI extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentLesson.setPageTitle(titleTextField.getText());
+                currentLesson.setLessonContent(lessonContentArea.getText());
+                currentLesson.setAssignedReading(lessonReadingArea.getText());
+                courseMgmtCntrl.getLessonList().getLessons().add(currentLesson);
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseMgmtCntrl.getLessonTable().fireTableDataChanged();
+                addLessonFrame.dispose();
             }
         });
 

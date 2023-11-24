@@ -65,11 +65,12 @@ public class AddCourseUI {
     }
 
     private Instructor testInstructor() {
+        String testName = "Urjaswala Vora";
         String testLogin = "Instructor1";
         String testPassword = "Password1";
         String testRoleID = "ID1";
 
-        Instructor testInst = new Instructor(testLogin, testPassword, testRoleID);
+        Instructor testInst = new Instructor(testName, testLogin, testPassword, testRoleID);
 
         return testInst;
     }
