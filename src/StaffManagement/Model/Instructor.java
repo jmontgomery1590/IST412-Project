@@ -29,17 +29,6 @@ public class Instructor extends User {
         this.lastName = lastName;
         this.roleID = roleID;
     }
-    /**
-     * Constructor for Instructor class
-     * @param userLogin Given login username for authentication
-     * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
-     * @param teaching courses actively teaching
-     */
-    public Instructor(String userName, String userLogin, String userPassword, String roleID, ArrayList<Course> teaching) {
-        super(userLogin, userPassword);
-        this.coursesTeaching = teaching;
-    }
 
     @Override
     public int getUserIDNumber() {

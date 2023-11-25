@@ -2,11 +2,8 @@ package DatabaseMgmt;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
-import CourseworkManagement.Model.Assignment;
 import StaffManagement.Model.Instructor;
-import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Controller.LoginController;
-import UserAuthentication.Model.User;
 
 import java.sql.*;
 
@@ -109,7 +106,68 @@ public class DatabaseConnection {
         return null;
     }
 
-    public void getCourseList(CourseMgmtController courseMgmtController)
+    public void getInstructorCourseList(CourseMgmtController courseMgmtController)
+    {
+        openConnection();
+        int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
+        try
+        {
+            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+                    + "FROM CourseTable "
+                    + "WHERE CourseTable.instructorid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                String id = rs.getString("courseid");
+                String name = rs.getString("coursename");
+                int enrolled = rs.getInt("maxenrolled");
+                int instructorID = rs.getInt("instructorid");
+                String enrolledConverted = String.valueOf(enrolled);
+                Instructor instructor = getInstructorForCourse(instructorID);
+                Course course = new Course(id, name, enrolledConverted, instructor);
+                courseMgmtController.getCourseList().getCourses().add(course);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void getAdminCourseList(CourseMgmtController courseMgmtController)
+    {
+        openConnection();
+        try
+        {
+            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+                    + "FROM CourseTable ";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next())
+            {
+                String id = rs.getString("courseid");
+                String name = rs.getString("coursename");
+                int enrolled = rs.getInt("maxenrolled");
+                int instructorID = rs.getInt("instructorid");
+                String enrolledConverted = String.valueOf(enrolled);
+                Instructor instructor = getInstructorForCourse(instructorID);
+                Course course = new Course(id, name, enrolledConverted, instructor);
+                courseMgmtController.getCourseList().getCourses().add(course);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void getStudentCourseList(CourseMgmtController courseMgmtController)
     {
         openConnection();
         int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
