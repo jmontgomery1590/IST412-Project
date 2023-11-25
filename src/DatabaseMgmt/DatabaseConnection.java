@@ -9,6 +9,7 @@ import java.sql.*;
 
 public class DatabaseConnection {
     private Connection connection;
+    private String pcUserName = System.getenv("USERNAME");
 
     public DatabaseConnection(){}
 
@@ -17,7 +18,7 @@ public class DatabaseConnection {
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
         }
         catch (Exception ee)
         {
