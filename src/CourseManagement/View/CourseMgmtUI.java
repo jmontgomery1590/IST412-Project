@@ -2,6 +2,7 @@ package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.CourseTableModel;
+import CourseManagement.Model.Lesson;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ public class CourseMgmtUI {
     private JPanel tablePanel;
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
+    private Lesson selectedLesson;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {
@@ -91,5 +93,13 @@ public class CourseMgmtUI {
 
     public CourseMgmtController getCourseMgmtCntrl() {
         return courseMgmtCntrl;
+    }
+
+    public Lesson getSelectedLesson() {
+        return selectedLesson;
+    }
+
+    public void setSelectedLesson(Lesson selectedLesson) {
+        this.selectedLesson = selectedLesson;
     }
 }

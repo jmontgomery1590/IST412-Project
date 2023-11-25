@@ -19,10 +19,11 @@ public class LessonMgmtUI {
     private JLabel lessonLabel;
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
+    private int lessonListPosition;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        courseMgmtCntrl.setLessonList(courseMgmtController.getSelectedCourse().getLessonList());
+        courseMgmtCntrl.loadLessonList();
         courseMgmtCntrl.setLessonTable(new LessonTableModel(courseMgmtCntrl.getLessonList().getLessons()));
         lessonLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         lessonTable.setModel(courseMgmtCntrl.getLessonTable());
@@ -49,8 +50,10 @@ public class LessonMgmtUI {
         this.getViewLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                lessonListPosition = lessonTable.getSelectedRow();
+                //courseMgmtCntrl.getCourseMgmtUI().setSelectedLesson(courseMgmtCntrl.getLessonList().getLessons().get(lessonTable.getSelectedRow() + 1));
                 courseMgmtCntrl.setViewLessonUI(new ViewLessonUI(courseMgmtCntrl));
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getViewLessonPanel(), "View Lesson");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getLessonPanel(), "View Lesson");
 
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Lesson");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
@@ -98,5 +101,13 @@ public class LessonMgmtUI {
 
     public JPanel getLessonMgmtPanel() {
         return lessonMgmtPanel;
+    }
+
+    public int getLessonListPosition() {
+        return lessonListPosition;
+    }
+
+    public void setLessonListPosition(int lessonListPosition) {
+        this.lessonListPosition = lessonListPosition;
     }
 }

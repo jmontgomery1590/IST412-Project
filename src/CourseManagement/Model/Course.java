@@ -9,14 +9,16 @@ public class Course {
     private String courseID;
     private String courseName;
     private String maxEnrolled;
+    private int courseTableID;
     private ArrayList<Page> coursePages;
     private Instructor instructor;
     private LessonList lessonList;
     private AssignmentList assignmentList;
     private AnnouncementList announcementList;
 
-    public Course(String id, String courseName, String maxEnrolled, Instructor instructor) {
-        this.courseID = id;
+    public Course(int tableID, String id, String courseName, String maxEnrolled, Instructor instructor) {
+        courseTableID = tableID;
+        courseID = id;
         this.courseName = courseName;
         this.maxEnrolled = maxEnrolled;
         this.setCoursePages(new ArrayList<>());
@@ -24,6 +26,14 @@ public class Course {
         this.assignmentList = new AssignmentList();
         this.announcementList = new AnnouncementList();
         this.instructor = instructor;
+    }
+
+    public int getCourseTableID() {
+        return courseTableID;
+    }
+
+    public void setCourseTableID(int courseTableID) {
+        this.courseTableID = courseTableID;
     }
 
     public String getCourseName() {

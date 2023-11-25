@@ -28,8 +28,8 @@ public class PageMgmtUI {
     public PageMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
 
-        this.lessonMgmtUI = new LessonMgmtUI(this.courseMgmtCntrl);
-        this.announcementMgmtUI = new AnnouncementMgmtUI(this.courseMgmtCntrl);
+        //this.lessonMgmtUI = new LessonMgmtUI(this.courseMgmtCntrl);
+        //this.announcementMgmtUI = new AnnouncementMgmtUI(this.courseMgmtCntrl);
         viewPageMgmtFrame = new JFrame("Page Selection");
         this.titleLabel.setText(this.courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + this.courseMgmtCntrl.getSelectedCourse().getCourseName());
         this.titleLabel.setForeground(Color.WHITE);
