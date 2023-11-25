@@ -18,7 +18,7 @@ public class StudentMgmtController {
      */
     public StudentMgmtController (HomepageController homepageController) {
         this.homepageController = homepageController;
-        newUser = new User("", "", "", "");
+        newUser = new User("", "");
         this.studentMgmtUI = new StudentMgmtUI(this);
     }
 

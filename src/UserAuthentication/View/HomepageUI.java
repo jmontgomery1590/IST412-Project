@@ -1,9 +1,13 @@
 package UserAuthentication.View;
 
+import CourseManagement.Controller.CourseMgmtController;
+import StudentManagement.Controller.StudentMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
@@ -30,6 +34,52 @@ public class HomepageUI extends JFrame{
 		//homeFrame.setUndecorated(true);
 		//homeFrame.pack();
 		homeFrame.setVisible(true);
+		addALButtons();
+	}
+
+	private void addALButtons(){
+		homeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepageCntrl.setHomeViewUI(new HomeViewUI());
+
+				viewPanel.add(homepageCntrl.getHomeViewUI().getHomePanel(), "Home");
+				cardSwapper.show(viewPanel, "Home");
+				viewPanel.revalidate();
+				viewPanel.repaint();
+			}
+		});
+
+		coursesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepageCntrl.setCourseMgmtCntrl(new CourseMgmtController(homepageCntrl));
+				viewPanel.add(homepageCntrl.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
+
+				cardSwapper.show(viewPanel, "Courses");
+				viewPanel.revalidate();
+				viewPanel.repaint();
+			}
+		});
+
+		profileButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepageCntrl.setStudentMgmtCntrl(new StudentMgmtController(homepageCntrl));
+				viewPanel.add(homepageCntrl.getStudentMgmtCntrl().getStudentMgmtUI().getStudentMgmtPanel(), "User Profile");
+
+				cardSwapper.show(viewPanel, "User Profile");
+				viewPanel.revalidate();
+				viewPanel.repaint();
+			}
+		});
+
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 
 	public JFrame getHomeFrame() {

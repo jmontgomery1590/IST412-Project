@@ -14,7 +14,7 @@ public class Student extends User {
      * @param password Given login password for authentication
      */
     public Student(String userName, String userLogin, String password, String roleID) {
-        super(userName, userLogin, password, roleID);
+        super(userLogin, password);
         this.major = "Undecided";
         this.enrolledCourses = new ArrayList<>();
     }

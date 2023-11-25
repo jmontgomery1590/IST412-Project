@@ -16,7 +16,7 @@ public class TA extends User {
      * @param roleID Given user role for user
      */
     public TA(String userName, String userLogin, String userPassword, String roleID) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
     }
 
     /**
@@ -27,7 +27,7 @@ public class TA extends User {
      * @param tutoring Courses actively tutoring students in
      */
     public TA(String userName, String userLogin, String userPassword, String roleID, ArrayList<Course> tutoring) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
         this.coursesTutored = tutoring;
     }
 }

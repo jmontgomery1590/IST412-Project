@@ -10,7 +10,7 @@ import UserAuthentication.View.HomepageUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomepageController implements ActionListener {
+public class HomepageController {
     private User user;
     private HomepageUI homepageUI;
     private LoginController loginController;
@@ -20,89 +20,11 @@ public class HomepageController implements ActionListener {
 
 
     public HomepageController(LoginController loginController){
+        this.loginController = loginController;
         this.setUser(loginController.getU1());
         this.setHomepageUI(new HomepageUI(this));
-
-        // set up the ActionListeners for buttons
-        addALButtons();
     }
 
-    /**
-     * Assigns ActionListener to buttons
-     */
-    public void addALButtons(){
-        this.getHomepageUI().getHomeButton().addActionListener(this);
-        this.getHomepageUI().getCoursesButton().addActionListener(this);
-        this.getHomepageUI().getProfileButton().addActionListener(this);
-        this.getHomepageUI().getExitButton().addActionListener(this);
-    }
-
-    /**
-     * Listener for user interaction. Performs action
-     * based on what was clicked/done.
-     * @param e the event to be processed
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      // Assign e to a generic object
-        Object obj = e.getSource();
-
-        // traverse different if statements to find what to do
-
-        // If Home Navigation button is clicked
-        if (obj == this.getHomepageUI().getHomeButton())
-        {
-            // Check for first time clicking to build the UI & build controller
-            if (this.getHomeViewUI() == null)
-            {
-                this.setHomeViewUI(new HomeViewUI());
-
-                // Add the UI to the homepage view panel
-                this.getHomepageUI().getViewPanel().add(this.getHomeViewUI().getHomePanel(), "Home");
-            }
-            // Choose to show the courses UI in the view panel
-            // Revalidate & Repaint refresh the view window w/ the new content
-            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "Home");
-            this.getHomepageUI().getViewPanel().revalidate();
-            this.getHomepageUI().getViewPanel().repaint();
-        }
-        // If Courses Navigation button is clicked
-        if (obj == this.getHomepageUI().getCoursesButton())
-        {
-            // Check for first time clicking to build the UI & build controller
-            if (this.getCourseMgmtCntrl() == null)
-            {
-                this.setCourseMgmtCntrl(new CourseMgmtController(this));
-
-                // Add the UI to the homepage view panel
-                this.getHomepageUI().getViewPanel().add(this.getCourseMgmtCntrl().getCourseMgmtUI().getCourseMgmtPanel(), "Courses");
-            }
-            // Choose to show the courses UI in the view panel
-            // Revalidate & Repaint refresh the view window w/ the new content
-            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "Courses");
-            this.getHomepageUI().getViewPanel().revalidate();
-            this.getHomepageUI().getViewPanel().repaint();
-        }
-
-        if (obj == this.getHomepageUI().getProfileButton())
-        {
-            if (this.getStudentMgmtCntrl() == null)
-            {
-                this.setStudentMgmtCntrl(new StudentMgmtController(this));
-
-                this.getHomepageUI().getViewPanel().add(this.getStudentMgmtCntrl().getStudentMgmtUI().getStudentMgmtPanel(), "User Profile");
-            }
-
-            this.getHomepageUI().getCardSwapper().show(this.getHomepageUI().getViewPanel(), "User Profile");
-            this.getHomepageUI().getViewPanel().revalidate();
-            this.getHomepageUI().getViewPanel().repaint();
-        }
-
-        // Close the application if Exit is pressed
-        if (obj == this.getHomepageUI().getExitButton()){
-            System.exit(0);
-        }
-    }
 
     public User getUser() {
         return user;

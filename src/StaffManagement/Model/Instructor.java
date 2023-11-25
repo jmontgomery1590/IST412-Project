@@ -16,7 +16,7 @@ public class Instructor extends User {
      * @param roleID Given user role for user
      */
     public Instructor(String userName, String userLogin, String userPassword, String roleID) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
     }
     /**
      * Constructor for Instructor class
@@ -26,7 +26,7 @@ public class Instructor extends User {
      * @param teaching courses actively teaching
      */
     public Instructor(String userName, String userLogin, String userPassword, String roleID, ArrayList<Course> teaching) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
         this.coursesTeaching = teaching;
     }
 }

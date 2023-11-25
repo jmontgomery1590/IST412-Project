@@ -85,8 +85,8 @@ public class AddCourseUI {
     }
 
     private void onWindowClosing() {
-        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().setEnabled(true);
-        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().transferFocus();
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().transferFocus();
     }
 
     public JButton getSaveButton() {
