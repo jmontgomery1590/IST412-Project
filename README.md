@@ -21,6 +21,7 @@ Database paths depending on current machine:
 
     Joe: "jdbc:ucanaccess://C://Users//archo//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb"
     Joe (laptop): "jdbc:ucanaccess://C://Users//Joe//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb" 
+    Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
     Justin: 
     Ethan:
 
