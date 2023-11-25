@@ -9,14 +9,7 @@ public class LessonList {
     public LessonList() {
         if (this.getLessons().isEmpty())
         {
-            createLessonList();
-        }
-    }
-
-    public void createLessonList() {
-        for (int i = 0; i <= 5; i++) {
-            this.setLesson(new Lesson("Lesson " + i, "Test Content " + i, "Additional Reading " + i));
-            this.getLessons().add(this.getLesson());
+            //createLessonList();
         }
     }
 

@@ -2,6 +2,7 @@ package DatabaseMgmt;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
+import CourseManagement.Model.Lesson;
 import UserManagement.Model.Instructor;
 import UserAuthentication.Controller.LoginController;
 
@@ -14,35 +15,11 @@ public class DatabaseConnection {
 
     public DatabaseConnection(){}
 
-
     public void openConnection()
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
-        }
-        catch (Exception ee)
-        {
-            System.out.println(ee);
-        }
-    }
-
-    public void executeQuery(String query, int columnNumber)
-    {
-        try {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while (rs.next())
-            {
-                for (int i = 1; i <= columnNumber; i++) {
-                    String column = rs.getString(i);
-                    stringBuilder.append(column).append(" ");
-                }
-            }
-            System.out.println(stringBuilder);
-            connection.commit();
         }
         catch (Exception ee)
         {
@@ -141,7 +118,7 @@ public class DatabaseConnection {
         int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
         try
         {
-            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+            String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
                     + "FROM CourseTable "
                     + "WHERE CourseTable.instructorid = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -150,13 +127,14 @@ public class DatabaseConnection {
 
             while (rs.next())
             {
+                int tableID = rs.getInt("ID");
                 String id = rs.getString("courseid");
                 String name = rs.getString("coursename");
                 int enrolled = rs.getInt("maxenrolled");
                 int instructorID = rs.getInt("instructorid");
                 String enrolledConverted = String.valueOf(enrolled);
                 Instructor instructor = getInstructorForCourse(instructorID);
-                Course course = new Course(name, id, enrolledConverted, instructor);
+                Course course = new Course(tableID, name, id, enrolledConverted, instructor);
                 courseMgmtController.getCourseList().getCourses().add(course);
             }
         }
@@ -171,20 +149,21 @@ public class DatabaseConnection {
         openConnection();
         try
         {
-            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+            String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
                     + "FROM CourseTable ";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next())
             {
+                int tableID = rs.getInt("ID");
                 String id = rs.getString("courseid");
                 String name = rs.getString("coursename");
                 int enrolled = rs.getInt("maxenrolled");
                 int instructorID = rs.getInt("instructorid");
                 String enrolledConverted = String.valueOf(enrolled);
                 Instructor instructor = getInstructorForCourse(instructorID);
-                Course course = new Course(id, name, enrolledConverted, instructor);
+                Course course = new Course(tableID, id, name, enrolledConverted, instructor);
                 courseMgmtController.getCourseList().getCourses().add(course);
             }
         }
@@ -201,7 +180,7 @@ public class DatabaseConnection {
         int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
         try
         {
-            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+            String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
                     + "FROM CourseTable "
                     + "JOIN StudentEnrolledTable ON CourseTable.ID = StudentEnrolledTable.courseid "
                     + "WHERE StudentEnrolledTable.userid = ?";
@@ -211,13 +190,14 @@ public class DatabaseConnection {
 
             while (rs.next())
             {
+                int tableID = rs.getInt("ID");
                 String id = rs.getString("courseid");
                 String name = rs.getString("coursename");
                 int enrolled = rs.getInt("maxenrolled");
                 int instructorID = rs.getInt("instructorid");
                 String enrolledConverted = String.valueOf(enrolled);
                 Instructor instructor = getInstructorForCourse(instructorID);
-                Course course = new Course(id, name, enrolledConverted, instructor);
+                Course course = new Course(tableID, id, name, enrolledConverted, instructor);
                 courseMgmtController.getCourseList().getCourses().add(course);
             }
         }
@@ -229,7 +209,34 @@ public class DatabaseConnection {
         closeConnection();
     }
 
-    public void getCourseLessonList(CourseMgmtController courseMgmtController) {}
+    public void getCourseLessonList(CourseMgmtController courseMgmtController) {
+        openConnection();
+        try {
+            int courseID = courseMgmtController.getSelectedCourse().getCourseTableID();
+
+            String query = "SELECT LessonTable.lessontitle, LessonTable.lessoncontent, LessonTable.assignedreading "
+                    + "FROM LessonTable "
+                    + "WHERE LessonTable.courseid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                String lessonTitle = rs.getString("lessontitle");
+                String lessonContent = rs.getString("lessoncontent");
+                String assignedReading = rs.getString("assignedreading");
+
+                Lesson lesson = new Lesson(lessonTitle, lessonContent, assignedReading);
+                courseMgmtController.getLessonList().getLessons().add(lesson);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
 
     public void closeConnection()
     {

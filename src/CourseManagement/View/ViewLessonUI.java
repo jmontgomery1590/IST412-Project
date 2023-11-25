@@ -5,6 +5,7 @@ import CourseManagement.Model.Lesson;
 import CourseManagement.Model.LessonList;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,7 @@ public class ViewLessonUI {
     private JTextField titleTextField;
     private JTextArea lessonContentArea;
     private JButton previousLessonButton, nextLessonButton;
+    private JScrollPane lessonContentScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Lesson prevLesson;
     private Lesson nextLesson;
@@ -23,13 +25,21 @@ public class ViewLessonUI {
 
     public ViewLessonUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-
+        lessonNumber = courseMgmtCntrl.getLessonMgmtUI().getLessonListPosition();
+        setLessons(lessonNumber);
+        setLessonText();
+        lessonContentArea.setCaretPosition(0);
         addALViewLessonButtons();
-
         checkNextAndPrevButtons();
     }
 
-    public void setLessons (int lessonListNumber) {
+    public void setLessonText() {
+        titleTextField.setText(currentLesson.getPageTitle());
+        lessonContentArea.setText(currentLesson.getLessonContent());
+        lessonReadingArea.setText(currentLesson.getAssignedReading());
+    }
+
+    public void setLessons(int lessonListNumber) {
         lessonNumber = lessonListNumber;
         lessonList = courseMgmtCntrl.getLessonList();
         currentLesson = lessonList.getLessons().get(lessonNumber);
@@ -51,9 +61,6 @@ public class ViewLessonUI {
         {
             nextLesson = null;
         }
-        //fillLessonTitle();
-        //fillLessonContent();
-        //fillLessonReading();
     }
 
     public void checkNextAndPrevButtons() {
@@ -68,6 +75,7 @@ public class ViewLessonUI {
                 if (nextLesson != null)
                 {
                     setLessons(lessonNumber + 1);
+                    setLessonText();
                     checkNextAndPrevButtons();
                 }
             }
@@ -79,6 +87,7 @@ public class ViewLessonUI {
                 if (prevLesson != null)
                 {
                     setLessons(lessonNumber - 1);
+                    setLessonText();
                     checkNextAndPrevButtons();
                 }
             }
@@ -219,5 +228,13 @@ public class ViewLessonUI {
 
     public void setLessonNumber(int lessonNumber) {
         this.lessonNumber = lessonNumber;
+    }
+
+    public JScrollPane getLessonContentScrollPane() {
+        return lessonContentScrollPane;
+    }
+
+    public void setLessonContentScrollPane(JScrollPane lessonContentScrollPane) {
+        this.lessonContentScrollPane = lessonContentScrollPane;
     }
 }
