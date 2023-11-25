@@ -21,7 +21,7 @@ public class CourseMgmtController {
     private HomepageController homepageController;
     private Course newCourse, selectedCourse;
     private CourseList courseList;
-    private LessonList lessonList;
+    private LessonList lessonList = new LessonList();
     private AnnouncementList announcementList;
     private CourseTableModel courseTable;
     private LessonTableModel lessonTable;
@@ -30,7 +30,7 @@ public class CourseMgmtController {
     private ViewLessonUI viewLessonUI;
     private Announcement announcement;
     private Lesson lesson;
-    DatabaseConnection database;
+    DatabaseConnection database = new DatabaseConnection();
 
 
     /**
@@ -62,7 +62,6 @@ public class CourseMgmtController {
 
     private void loadCourseList() {
         User user = homepageController.getUser();
-        database = new DatabaseConnection();
         if (user.getRoleID().equals("2"))
         {
             database.getInstructorCourseList(this);
@@ -77,6 +76,12 @@ public class CourseMgmtController {
         }
     }
 
+    public void loadLessonList() {
+        Course course = selectedCourse;
+        database = new DatabaseConnection();
+        database.getCourseLessonList(this);
+    }
+
     public AnnouncementList getAnnouncementList() {
         return announcementList;
     }
@@ -87,6 +92,10 @@ public class CourseMgmtController {
 
     public Course getNewCourse() {
         return newCourse;
+    }
+
+    public void setNewCourse(Course newCourse) {
+        this.newCourse = newCourse;
     }
 
     public PageMgmtUI getPageMgmtUI() {
@@ -212,4 +221,14 @@ public class CourseMgmtController {
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
+
+    public DatabaseConnection getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(DatabaseConnection database) {
+        this.database = database;
+    }
+
+
 }

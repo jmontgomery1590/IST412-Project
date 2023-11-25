@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Course;
 import UserManagement.Model.Instructor;
 
 import javax.swing.*;
@@ -9,16 +10,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class AddCourseUI {
     private JFrame addCourseFrame;
     private JPanel addCoursePanel;
     private JPanel buttonPanel;
     private JPanel courseInformationPanel;
-    private JTextField courseIDTextField, courseNameTextField, maxEnrolledTextField, instructorTextField;
+    private JTextField courseIDTextField, courseNameTextField, maxEnrolledTextField;
     private JButton saveButton, cancelButton;
     private JLabel instructorLabel, maxEnrolledLabel, courseNameLabel, courseIDLabel;
+    private JComboBox instructorComboBox;
     private CourseMgmtController courseMgmtCntrl;
+
+    private ArrayList<Instructor> instructorList;
 
     public AddCourseUI(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
@@ -26,6 +32,7 @@ public class AddCourseUI {
         addCourseFrame.setResizable(false);
         addCourseFrame.setMinimumSize(new Dimension(800, 600));
         addCourseFrame.setContentPane(addCoursePanel);
+        loadInstructorComboBox(this.courseMgmtCntrl.getDatabase().getAllInstructorsForSelection());
         addCourseFrame.setLocationRelativeTo(null);
         addALNewCourseButtons();
         addCourseFrame.setVisible(true);
@@ -37,13 +44,15 @@ public class AddCourseUI {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseMgmtCntrl.getNewCourse().setCourseID(courseIDTextField.getText());
-                courseMgmtCntrl.getNewCourse().setCourseName(courseNameTextField.getText());
-                courseMgmtCntrl.getNewCourse().setMaxEnrolled(maxEnrolledTextField.getText());
+                String courseID = courseIDTextField.getText();
+                String courseName = courseNameTextField.getText();
+                String maxEnrolled = maxEnrolledTextField.getText();
+                Instructor instructor = selectInstructorFromList();
+
+                courseMgmtCntrl.setNewCourse(new Course(courseID, courseName, maxEnrolled, instructor));
                 /**
                  * Instructor for test purposes only
                  */
-                courseMgmtCntrl.getNewCourse().setInstructor(testInstructor());
 
                 courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
@@ -59,6 +68,19 @@ public class AddCourseUI {
                 courseMgmtCntrl.setAddCourseUI(null);
             }
         });
+    }
+
+    private void loadInstructorComboBox(ArrayList<Instructor> instructorList){
+        this.instructorList = instructorList;
+        for (Instructor instructor : this.instructorList)
+        {
+            instructorComboBox.addItem(instructor.getFirstName() + " " + instructor.getLastName());
+        }
+    }
+
+    private Instructor selectInstructorFromList()
+    {
+        return instructorList.get(instructorComboBox.getSelectedIndex());
     }
 
     private Instructor testInstructor() {
@@ -102,5 +124,13 @@ public class AddCourseUI {
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
+    }
+
+    public JComboBox getInstructorComboBox() {
+        return instructorComboBox;
+    }
+
+    public void setInstructorComboBox(JComboBox instructorComboBox) {
+        this.instructorComboBox = instructorComboBox;
     }
 }
