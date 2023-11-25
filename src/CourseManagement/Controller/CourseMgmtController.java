@@ -3,6 +3,7 @@ package CourseManagement.Controller;
 import CourseManagement.Model.*;
 import CourseManagement.View.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import DatabaseMgmt.DatabaseConnection;
 import UserAuthentication.Controller.HomepageController;
 
 public class CourseMgmtController {
@@ -35,8 +36,10 @@ public class CourseMgmtController {
      */
     public CourseMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
-        newCourse = new Course("", "", "");
+        //newCourse = new Course("", "", "",);
         this.courseList = new CourseList();
+        DatabaseConnection db = new DatabaseConnection();
+        db.getCourseList(this);
         this.courseTable = new CourseTableModel(this.getCourseList().getCourses());
         this.courseMgmtUI = new CourseMgmtUI(this);
         this.pageList = new PageList();
@@ -45,13 +48,13 @@ public class CourseMgmtController {
     }
 
     private void verifyButtonAccess() {
-        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+        if (homepageController.getUser().getUserName().equalsIgnoreCase("Student") || homepageController.getUser().getUserName().equalsIgnoreCase("TA"))
         {
             courseMgmtUI.getAddCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
             courseMgmtUI.getEditCourseButton().setVisible(false);
         }
-        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
+        else if (homepageController.getUser().getUserName().equalsIgnoreCase("Instructor"))
         {
             courseMgmtUI.getAddCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);

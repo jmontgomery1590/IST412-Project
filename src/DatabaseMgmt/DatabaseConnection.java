@@ -1,5 +1,10 @@
 package DatabaseMgmt;
 
+import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Course;
+import CourseworkManagement.Model.Assignment;
+import StaffManagement.Model.Instructor;
+import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.User;
 
@@ -15,7 +20,7 @@ public class DatabaseConnection {
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//archo//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//Joe//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb");
         }
         catch (Exception ee)
         {
@@ -46,12 +51,11 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean getUserInfo(LoginController loginController){
+    public boolean getUserLoginInfo(LoginController loginController){
         openConnection();
-        String userName = loginController.getU1().getLoginID().toLowerCase();
+        String userName = loginController.getU1().getUserName().toLowerCase();
         try
         {
-            Statement st = connection.createStatement();
             String query = "SELECT * FROM UserTable WHERE username = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, userName);
@@ -62,6 +66,7 @@ public class DatabaseConnection {
             {
                 if (rs.getString(column).equals(loginController.getU1().getPassword()))
                 {
+                    loginController.getU1().setUserIDNumber(rs.getInt("id"));
                     loginController.getU1().setFirstName(rs.getString("firstname"));
                     loginController.getU1().setLastName(rs.getString("lastname"));
                     loginController.getU1().setRoleID(rs.getString("roleID"));
@@ -75,6 +80,67 @@ public class DatabaseConnection {
         }
         closeConnection();
         return false;
+    }
+
+    public Instructor getInstructorForCourse(int instructorID)
+    {
+        try
+        {
+            String query = "SELECT * FROM UserTable WHERE ID = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, instructorID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next())
+            {
+                int idNumber = rs.getInt("ID");
+                String userName = rs.getString("username");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String password = rs.getString("password");
+                String roleID = String.valueOf(rs.getInt("roleid"));
+                return new Instructor(idNumber, userName, firstName, lastName, password, roleID);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void getCourseList(CourseMgmtController courseMgmtController)
+    {
+        openConnection();
+        int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
+        try
+        {
+            String query = "SELECT CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
+                    + "FROM CourseTable "
+                    + "JOIN StudentEnrolledTable ON CourseTable.ID = StudentEnrolledTable.courseid "
+                    + "WHERE StudentEnrolledTable.userid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                String id = rs.getString("courseid");
+                String name = rs.getString("coursename");
+                int enrolled = rs.getInt("maxenrolled");
+                int instructorID = rs.getInt("instructorid");
+                String enrolledConverted = String.valueOf(enrolled);
+                Instructor instructor = getInstructorForCourse(instructorID);
+                Course course = new Course(id, name, enrolledConverted, instructor);
+                courseMgmtController.getCourseList().getCourses().add(course);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        closeConnection();
     }
 
     public void closeConnection()

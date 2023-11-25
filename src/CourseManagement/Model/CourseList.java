@@ -9,9 +9,6 @@ public class CourseList {
     private ArrayList<Course> courses = new ArrayList<>();
 
     public CourseList(){
-        if (this.getCourses().isEmpty()){
-            createCoursesList();
-        }
     }
 
     /**
@@ -19,8 +16,8 @@ public class CourseList {
      */
     public void createCoursesList(){
         for (int i = 0; i <= 5; i++) {
-            this.setCourse(new Course("IST 41" + i, "Course Name #" + i, "1" + (i * 2)));
-            this.getCourse().setInstructor(new Instructor("Name" + i, "Instructor " + i, "password", "Instructor"));
+            //this.setCourse(new Course("IST 41" + i, "Course Name #" + i, "1" + (i * 2)));
+            //this.getCourse().setInstructor(new Instructor("Name" + i, "Instructor " + i, "password", "Instructor"));
             this.getCourses().add(this.getCourse());
         }
     }

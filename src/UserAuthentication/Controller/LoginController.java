@@ -7,12 +7,6 @@ import UserAuthentication.View.HomepageUI;
 import UserAuthentication.View.LoginUI;
 import UserAuthentication.Model.User;
 
-import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 public class LoginController {
     private User u1;
     private LoginUI loginUI;
@@ -33,7 +27,7 @@ public class LoginController {
     }
 
     public boolean verifyUser(){
-        return database.getUserInfo(this);
+        return database.getUserLoginInfo(this);
     }
     public LoginUI getLoginUI() {
         return loginUI;

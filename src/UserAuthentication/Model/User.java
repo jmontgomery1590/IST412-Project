@@ -1,6 +1,7 @@
 package UserAuthentication.Model;
 
 public class User {
+    private int userIDNumber;
     private String userName;
     private String password;
     private String firstName;
@@ -38,10 +39,6 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
-    }
-
-    public String getLoginID() {
         return userName;
     }
 
@@ -87,5 +84,13 @@ public class User {
 
     public void setSuccessful(String successful) {
         this.successful = successful;
+    }
+
+    public int getUserIDNumber() {
+        return userIDNumber;
+    }
+
+    public void setUserIDNumber(int userIDNumber) {
+        this.userIDNumber = userIDNumber;
     }
 }
