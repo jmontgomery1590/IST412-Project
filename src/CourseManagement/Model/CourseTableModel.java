@@ -32,7 +32,7 @@ public class CourseTableModel extends AbstractTableModel {
         return switch (columnIndex) {
             case 0 -> courseList.get(rowIndex).getCourseID();
             case 1 -> courseList.get(rowIndex).getCourseName();
-            case 2 -> courseList.get(rowIndex).getInstructor().getLoginID();
+            case 2 -> courseList.get(rowIndex).getInstructor().getFirstName() + " " + courseList.get(rowIndex).getInstructor().getLastName();
             case 3 -> courseList.get(rowIndex).getMaxEnrolled();
             default -> null;
         };

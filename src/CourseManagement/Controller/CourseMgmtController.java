@@ -3,7 +3,11 @@ package CourseManagement.Controller;
 import CourseManagement.Model.*;
 import CourseManagement.View.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import DatabaseMgmt.DatabaseConnection;
 import UserAuthentication.Controller.HomepageController;
+import UserAuthentication.Model.User;
+
+import javax.xml.crypto.Data;
 
 public class CourseMgmtController {
     private CourseMgmtUI courseMgmtUI;
@@ -28,6 +32,7 @@ public class CourseMgmtController {
     private ViewLessonUI viewLessonUI;
     private Announcement announcement;
     private Lesson lesson;
+    DatabaseConnection database;
 
 
     /**
@@ -35,8 +40,9 @@ public class CourseMgmtController {
      */
     public CourseMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
-        newCourse = new Course("", "", "");
+        //newCourse = new Course("", "", "",);
         this.courseList = new CourseList();
+        loadCourseList();
         this.courseTable = new CourseTableModel(this.getCourseList().getCourses());
         this.courseMgmtUI = new CourseMgmtUI(this);
         this.pageList = new PageList();
@@ -45,16 +51,33 @@ public class CourseMgmtController {
     }
 
     private void verifyButtonAccess() {
-        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+        if (homepageController.getUser().getRoleID().equals("3") || homepageController.getUser().getRoleID().equals("4"))
         {
             courseMgmtUI.getAddCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
             courseMgmtUI.getEditCourseButton().setVisible(false);
         }
-        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
+        else if (homepageController.getUser().getRoleID().equals("2"))
         {
             courseMgmtUI.getAddCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
+        }
+    }
+
+    private void loadCourseList() {
+        User user = homepageController.getUser();
+        database = new DatabaseConnection();
+        if (user.getRoleID().equals("2"))
+        {
+            database.getInstructorCourseList(this);
+        }
+        else if (user.getRoleID().equals("4"))
+        {
+            database.getStudentCourseList(this);
+        }
+        else if (user.getRoleID().equals("1") || user.getRoleID().equals("5"))
+        {
+            database.getAdminCourseList(this);
         }
     }
 

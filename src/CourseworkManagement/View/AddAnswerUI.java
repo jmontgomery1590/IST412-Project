@@ -81,8 +81,10 @@ public class AddAnswerUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String answerDescr = answerField.getText();
                 answer = courseworkMgmtCntrl.getQuestion().createAnswer(answerDescr);
+                markAsCorrect(answer);
                 courseworkMgmtCntrl.getQuestion().getAnswerList().addToList(answer);
                 courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().setEnabled(true);
+                courseworkMgmtCntrl.getQuestionInterface().disableButtonAfterAddingOpenEndedAnswer();
                 answerFrame.dispose();
             }
         });
@@ -111,6 +113,17 @@ public class AddAnswerUI extends JFrame {
         {
             this.saveAnswerButton.setEnabled(false);
             return false;
+        }
+    }
+
+    private void markAsCorrect(Answer answer){
+        if (yesRadioButton.isSelected())
+        {
+            answer.markCorrect();
+        }
+        else
+        {
+            answer.markIncorrect();
         }
     }
 

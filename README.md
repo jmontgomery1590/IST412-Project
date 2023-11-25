@@ -17,6 +17,13 @@ Test profiles have the following login info for various user functionalities:
           Username: admin
           Password: Admin123
 
+Database paths depending on current machine:
+
+    Joe: "jdbc:ucanaccess://C://Users//archo//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb"
+    Joe (laptop): "jdbc:ucanaccess://C://Users//Joe//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb" 
+    Justin: 
+    Ethan:
+
 As of current, TestHarness application flow for these profiles are:
 
 	All Users: Upon successful login, LMS homepage is displayed with navigation bar at the top of the page.

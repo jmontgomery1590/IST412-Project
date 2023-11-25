@@ -65,12 +65,14 @@ public class AddCourseUI {
     }
 
     private Instructor testInstructor() {
-        String testName = "Urjaswala Vora";
+        int testUserID = 1001;
+        String testFirstName = "Urjaswala";
+        String testLastName = "Vora";
         String testLogin = "Instructor1";
         String testPassword = "Password1";
         String testRoleID = "ID1";
 
-        Instructor testInst = new Instructor(testName, testLogin, testPassword, testRoleID);
+        Instructor testInst = new Instructor(testUserID, testLogin, testFirstName, testLastName, testPassword, testRoleID);
 
         return testInst;
     }
@@ -85,8 +87,8 @@ public class AddCourseUI {
     }
 
     private void onWindowClosing() {
-        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().setEnabled(true);
-        courseMgmtCntrl.getCourseMgmtUI().getCourseFrame().transferFocus();
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+        courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().transferFocus();
     }
 
     public JButton getSaveButton() {

@@ -2,6 +2,7 @@ package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Answer;
+import CourseworkManagement.Model.MultipleChoiceQuestion;
 import CourseworkManagement.Model.Question;
 import CourseworkManagement.Model.QuestionList;
 
@@ -21,7 +22,7 @@ public class ViewAssignmentUI {
         checkNextAndPrevButtons();
     }
 
-    public void fillAnswerPanel(Question question){
+    public void fillMultiChoiceAnswerPanel(Question question){
         answerPanel.removeAll();
         answerPanel.setLayout(new GridBagLayout());
 
@@ -38,6 +39,27 @@ public class ViewAssignmentUI {
             group.add(answerOption);
             answerPanel.add(answerOption, gbc);
         }
+        answerPanel.revalidate();
+        answerPanel.repaint();
+    }
+
+    public void fillOpenEndedAnswerPanel()
+    {
+        answerPanel.removeAll();
+        answerPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JTextField textField = new JTextField();
+        JLabel answerLabel = new JLabel();
+        answerLabel.setText("Your Answer: ");
+        answerLabel.setFont(new Font("Arial",Font.BOLD, 20));
+        textField.setSize(100, 10);
+        answerLabel.setLabelFor(textField);
+        answerPanel.add(answerLabel, gbc);
+        answerPanel.add(textField, gbc);
+
         answerPanel.revalidate();
         answerPanel.repaint();
     }
@@ -77,7 +99,14 @@ public class ViewAssignmentUI {
         }
 
         updateQuestionLabel();
-        fillAnswerPanel(currentQuestion);
+        if (currentQuestion.getClass().equals(MultipleChoiceQuestion.class))
+        {
+            fillMultiChoiceAnswerPanel(currentQuestion);
+        }
+        else
+        {
+            fillOpenEndedAnswerPanel();
+        }
     }
 
     public void checkNextAndPrevButtons(){

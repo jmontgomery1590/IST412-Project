@@ -1,9 +1,13 @@
 package UserAuthentication.View;
 
+import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Controller.LoginController;
+import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginUI extends JFrame {
     private JFrame loginFrame;
@@ -25,8 +29,59 @@ public class LoginUI extends JFrame {
         this.getPasswordLabel().setForeground(Color.WHITE);
         this.getLoginFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getLoginFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.getLoginFrame().setUndecorated(true);
+        //this.getLoginFrame().setUndecorated(true);
         this.getLoginFrame().setVisible(true);
+        addALButtons();
+    }
+
+    public void addALButtons(){
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (passCredentialsForVerification())
+                {
+                    loginController.setHomepageCntrl(new HomepageController(loginController));
+                    loginFrame.dispose();
+                }
+                else
+                {
+                    usernameField.setText("");
+                    passwordField.setText("");
+                    usernameField.setBackground(Color.red);
+                    passwordField.setBackground(Color.red);
+                }
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
+    public boolean passCredentialsForVerification()
+    {
+        loginController.setLoginID(usernameField.getText());
+        loginController.setPassword("");
+
+        for (char character : getPasswordField().getPassword())
+        {
+            if (loginController.getPassword().isEmpty())
+            {
+                loginController.setPassword(Character.toString(character));
+            }
+            else
+            {
+                loginController.setPassword(loginController.getPassword() + character);
+            }
+        }
+
+        loginController.setU1(new User(loginController.getLoginID(), loginController.getPassword()));
+        return loginController.verifyUser();
+
+        //return loginController.getU1().verifyUser();
     }
 
     public JPanel getLoginPanel() {

@@ -4,28 +4,18 @@ public class OpenEndedQuestion extends Question{
     private String question;
     private String submittedAnswer;
     private double pointValue;
-    private OpenEndedAnswer answer;
     private AnswerList answerList;
+    private Boolean isCorrect;
     public OpenEndedQuestion(String question, double pointValue){
         this.question = question;
         this.pointValue = pointValue;
         this.answerList = new AnswerList();
-    }
-    public void addAnswer(OpenEndedAnswer correctAnswer)
-    {
-        this.answer = correctAnswer;
+        this.isCorrect = false;
     }
 
-    public void checkAnswer(String submittedAnswer)
-    {
-        if (this.answer.getAnswer().equalsIgnoreCase(submittedAnswer))
-        {
-            this.answer.setCorrect(true);
-        }
-    }
     @Override
     public String getQuestion() {
-        return null;
+        return this.question;
     }
 
     @Override
@@ -41,6 +31,12 @@ public class OpenEndedQuestion extends Question{
     @Override
     public double getQuestionPointWorth() {
         return pointValue;
+    }
+
+    @Override
+    public void compareSubmittedAnswer(String submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+        isCorrect = this.submittedAnswer.equalsIgnoreCase(answerList.getAnswerList().get(0).toString());
     }
 
 

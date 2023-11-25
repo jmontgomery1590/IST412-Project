@@ -16,7 +16,7 @@ public class Course {
     private AssignmentList assignmentList;
     private AnnouncementList announcementList;
 
-    public Course(String id, String courseName, String maxEnrolled) {
+    public Course(String id, String courseName, String maxEnrolled, Instructor instructor) {
         this.courseID = id;
         this.courseName = courseName;
         this.maxEnrolled = maxEnrolled;
@@ -24,6 +24,7 @@ public class Course {
         this.lessonList = new LessonList();
         this.assignmentList = new AssignmentList();
         this.announcementList = new AnnouncementList();
+        this.instructor = instructor;
     }
 
     public String getCourseName() {

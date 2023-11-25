@@ -1,16 +1,13 @@
 package UserAuthentication.Controller;
 
+import DatabaseMgmt.DatabaseConnection;
 import StaffManagement.Controller.StaffMgmtController;
 import StudentManagement.Controller.StudentMgmtController;
 import UserAuthentication.View.HomepageUI;
 import UserAuthentication.View.LoginUI;
 import UserAuthentication.Model.User;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class LoginController implements ActionListener {
+public class LoginController {
     private User u1;
     private LoginUI loginUI;
     private HomepageUI homepageUI;
@@ -21,61 +18,17 @@ public class LoginController implements ActionListener {
     private StudentMgmtController studentCntrl;
     private StaffMgmtController staffMgmtCntrl;
     private HomepageController homepageCntrl;
+    private DatabaseConnection database;
 
 
     public LoginController() {
         this.setLoginUI(new LoginUI(this));
-        addALButtons();
-        //this.setU1(this.getLoginInt().Login());
+        database = new DatabaseConnection();
     }
 
-    /**
-     * Helps point the buttons using actionlistener
-     */
-    public void addALButtons(){
-        this.getLoginUI().getLoginButton().addActionListener(this);
-        this.getLoginUI().getExitButton().addActionListener(this);
+    public boolean verifyUser(){
+        return database.getUserLoginInfo(this);
     }
-
-    /**
-     * Recognizes user's button click and checks for which button
-     * was clicked and acts accordingly
-     * @param e the event to be processed
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-
-        // gathers the user's input and passes to User Model class to verify password
-        if (obj == this.getLoginUI().getLoginButton()){
-            this.setLoginID(this.getLoginUI().getUsernameField().getText());
-            this.setPassword("");
-            for (char character : this.getLoginUI().getPasswordField().getPassword()) {
-                if (this.getPassword().isEmpty()){
-                    this.setPassword(Character.toString(character));
-                } else {
-                    this.setPassword(this.getPassword() + character);
-                }
-            }
-            this.setU1(new User(this.getUserName(), this.getLoginID(), this.getPassword(), this.getRoleID()));
-
-            // if successful, initiate homepage and close the login window
-            if (this.getU1().verifyUser()){
-                this.setHomepageCntrl(new HomepageController(this));
-                this.getLoginUI().getLoginFrame().dispose();
-
-                // if unsuccessful, alert user and reset the text entry/password fields
-            } else {
-                this.getLoginUI().getUsernameField().setText("");
-                this.getLoginUI().getPasswordField().setText("");
-                this.getLoginUI().getUsernameField().setBackground(Color.red);
-                this.getLoginUI().getPasswordField().setBackground(Color.red);
-            }
-        } else if (obj == this.getLoginUI().getExitButton()){
-            System.exit(0);
-        }
-    }
-
     public LoginUI getLoginUI() {
         return loginUI;
     }

@@ -25,7 +25,20 @@ public class OpenEndedAnswer extends Answer {
         return this.answer;
     }
 
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
+    @Override
+    public void markCorrect()
+    {
+        this.isCorrect = true;
+    }
+
+    @Override
+    public void markIncorrect()
+    {
+        this.isCorrect = false;
+    }
+
+    @Override
+    public boolean getIsCorrect() {
+        return this.isCorrect;
     }
 }

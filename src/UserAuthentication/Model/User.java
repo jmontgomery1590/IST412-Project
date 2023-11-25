@@ -1,10 +1,12 @@
 package UserAuthentication.Model;
 
 public class User {
-    private String loginID;
-    private String password;
+    private int userIDNumber;
     private String userName;
-    public String roleID;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String roleID;
     private String successful = "\n---Login Successful---\n";
 
     /**
@@ -12,27 +14,25 @@ public class User {
      * @param userLogin given username for User
      * @param userPassword given password for User
      */
-    public User(String userName, String userLogin, String userPassword, String userRole) {
-        this.userName = userName;
-        loginID = userLogin;
+    public User(String userLogin, String userPassword) {
+        userName = userLogin;
         password = userPassword;
-        roleID = userRole;
     }
 
     /**
      * Verify a user profile exists
      */
     public Boolean verifyUser() {
-        if (loginID.equalsIgnoreCase("Student") && password.equals("Student123")) {
+        if (userName.equalsIgnoreCase("Student") && password.equals("Student123")) {
             System.out.println(successful);
             return true;
-        } else if (loginID.equalsIgnoreCase("Instructor") && password.equals("Instructor123")) {
+        } else if (userName.equalsIgnoreCase("Instructor") && password.equals("Instructor123")) {
             System.out.println(successful);
             return true;
-        } else if (loginID.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
+        } else if (userName.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
             System.out.println(successful);
             return true;
-        } else if (loginID.equalsIgnoreCase("TA") && password.equals("TA123")) {
+        } else if (userName.equalsIgnoreCase("TA") && password.equals("TA123")) {
             System.out.println(successful);
             return true;
         } else return false;
@@ -40,10 +40,6 @@ public class User {
 
     public String getUserName() {
         return userName;
-    }
-
-    public String getLoginID() {
-        return loginID;
     }
 
     public String getPassword() {
@@ -60,5 +56,41 @@ public class User {
 
     public void setRoleID(String roleID) {
         this.roleID = roleID;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getSuccessful() {
+        return successful;
+    }
+
+    public void setSuccessful(String successful) {
+        this.successful = successful;
+    }
+
+    public int getUserIDNumber() {
+        return userIDNumber;
+    }
+
+    public void setUserIDNumber(int userIDNumber) {
+        this.userIDNumber = userIDNumber;
     }
 }

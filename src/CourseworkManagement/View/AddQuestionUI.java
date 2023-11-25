@@ -135,6 +135,14 @@ public class AddQuestionUI extends JFrame {
         }
     }
 
+    public void disableButtonAfterAddingOpenEndedAnswer()
+    {
+        if (currentQuestion.getClass().equals(OpenEndedQuestion.class))
+        {
+            addAnswerButton.setEnabled(false);
+        }
+    }
+
     private void addALButtons(){
         this.addAnswerButton.addActionListener(new ActionListener() {
             @Override
@@ -146,7 +154,7 @@ public class AddQuestionUI extends JFrame {
         this.cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                courseworkMgmtCntrl.getAssignmentInterface().setEnabled(true);
+                courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().setEnabled(true);
                 questionFrame.dispose();
                 courseworkMgmtCntrl.setQuestionInterface(null);
             }

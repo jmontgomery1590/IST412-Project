@@ -15,7 +15,7 @@ public class Admin extends User {
      * @param userPassword Given login password for authentication
      */
     public Admin(String userName, String userLogin, String userPassword, String roleID) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Admin extends User {
      * @param overseen List of instructors overseen
      */
     public Admin(String userName, String userLogin, String userPassword, String roleID, ArrayList<Instructor> overseen) {
-        super(userName, userLogin, userPassword, roleID);
+        super(userLogin, userPassword);
         this.instructorsOverseen = overseen;
     }
 }
