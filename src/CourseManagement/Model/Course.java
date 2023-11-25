@@ -1,8 +1,7 @@
 package CourseManagement.Model;
 
-import CourseworkManagement.Model.Assignment;
 import CourseworkManagement.Model.AssignmentList;
-import StaffManagement.Model.Instructor;
+import UserManagement.Model.Instructor;
 
 import java.util.ArrayList;
 

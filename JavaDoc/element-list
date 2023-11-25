@@ -4,8 +4,8 @@ CourseManagement.View
 CourseworkManagement.Controller
 CourseworkManagement.Model
 CourseworkManagement.View
-StaffManagement.Controller
-StaffManagement.Model
-StaffManagement.View
-StudentManagement
+UserManagement.Controller
+UserManagement.Model
+UserManagement.View
+ProfileManagement
 UserAuthentication

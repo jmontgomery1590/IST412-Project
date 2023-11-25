@@ -1,7 +1,7 @@
 package UserAuthentication.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import StudentManagement.Controller.StudentMgmtController;
+import ProfileManagement.Controller.ProfileMgmtController;
 import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
@@ -65,7 +65,7 @@ public class HomepageUI extends JFrame{
 		profileButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				homepageCntrl.setStudentMgmtCntrl(new StudentMgmtController(homepageCntrl));
+				homepageCntrl.setStudentMgmtCntrl(new ProfileMgmtController(homepageCntrl));
 				viewPanel.add(homepageCntrl.getStudentMgmtCntrl().getStudentMgmtUI().getStudentMgmtPanel(), "User Profile");
 
 				cardSwapper.show(viewPanel, "User Profile");

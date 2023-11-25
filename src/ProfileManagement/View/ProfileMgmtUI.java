@@ -1,14 +1,12 @@
-package StudentManagement.View;
+package ProfileManagement.View;
 
-import CourseManagement.Controller.CourseMgmtController;
-import StudentManagement.Controller.StudentMgmtController;
-import UserAuthentication.Model.User;
+import ProfileManagement.Controller.ProfileMgmtController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class StudentMgmtUI {
-    private JPanel studentMgmtPanel;
+public class ProfileMgmtUI {
+    private JPanel profileMgmtPanel;
     private JTextField loginTextField;
     private JTextField passwordTextField;
     private JTextField roleTextField;
@@ -19,10 +17,10 @@ public class StudentMgmtUI {
     private JLabel passwordLabel;
     private JLabel roleLabel;
     private JLabel usernameLabel;
-    private StudentMgmtController studentMgmtCntrl;
+    private ProfileMgmtController profileMgmtCntrl;
 
-    public StudentMgmtUI(StudentMgmtController studentMgmtController) {
-        studentMgmtCntrl = studentMgmtController;
+    public ProfileMgmtUI(ProfileMgmtController profileMgmtController) {
+        profileMgmtCntrl = profileMgmtController;
         loginIDLabel.setForeground(Color.WHITE);
         passwordLabel.setForeground(Color.WHITE);
         roleLabel.setForeground(Color.WHITE);
@@ -32,11 +30,11 @@ public class StudentMgmtUI {
     }
 
     public JPanel getStudentMgmtPanel() {
-        return studentMgmtPanel;
+        return profileMgmtPanel;
     }
 
     public void setStudentMgmtPanel(JPanel studentMgmtPanel) {
-        this.studentMgmtPanel = studentMgmtPanel;
+        this.profileMgmtPanel = studentMgmtPanel;
     }
 
     public JTextField getLoginTextField() {
@@ -87,11 +85,11 @@ public class StudentMgmtUI {
         this.usernameTextField = usernameTextField;
     }
 
-    public StudentMgmtController getStudentMgmtCntrl() {
-        return studentMgmtCntrl;
+    public ProfileMgmtController getStudentMgmtCntrl() {
+        return profileMgmtCntrl;
     }
 
-    public void setStudentMgmtCntrl(StudentMgmtController studentMgmtCntrl) {
-        this.studentMgmtCntrl = studentMgmtCntrl;
+    public void setStudentMgmtCntrl(ProfileMgmtController studentMgmtCntrl) {
+        this.profileMgmtCntrl = studentMgmtCntrl;
     }
 }

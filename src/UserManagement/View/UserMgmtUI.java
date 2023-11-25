@@ -1,9 +1,9 @@
-package StaffManagement.View;
+package UserManagement.View;
 
 import UserAuthentication.Model.User;
 
-public class StaffMgmtUI {
-    public StaffMgmtUI() {}
+public class UserMgmtUI {
+    public UserMgmtUI() {}
 
     /**
      * Displays the chosen user interface

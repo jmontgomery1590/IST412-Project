@@ -1,10 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.Course;
-import CourseManagement.Model.CourseList;
-import StaffManagement.Model.Instructor;
-import UserAuthentication.Controller.HomepageController;
+import UserManagement.Model.Instructor;
 
 import javax.swing.*;
 import java.awt.*;

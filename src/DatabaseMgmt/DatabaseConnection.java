@@ -2,7 +2,7 @@ package DatabaseMgmt;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
-import StaffManagement.Model.Instructor;
+import UserManagement.Model.Instructor;
 import UserAuthentication.Controller.LoginController;
 
 import java.sql.*;
@@ -17,7 +17,7 @@ public class DatabaseConnection {
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
         }
         catch (Exception ee)
         {
@@ -127,7 +127,7 @@ public class DatabaseConnection {
                 int instructorID = rs.getInt("instructorid");
                 String enrolledConverted = String.valueOf(enrolled);
                 Instructor instructor = getInstructorForCourse(instructorID);
-                Course course = new Course(id, name, enrolledConverted, instructor);
+                Course course = new Course(name, id, enrolledConverted, instructor);
                 courseMgmtController.getCourseList().getCourses().add(course);
             }
         }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Page {
     private String pageTitle;
-    private ArrayList<Assignment> lessonAssignments;
 
     /**
      * Constructor for the Page class

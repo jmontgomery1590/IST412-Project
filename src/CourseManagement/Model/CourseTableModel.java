@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class CourseTableModel extends AbstractTableModel {
-    String columnNames[] = {"Course Name", "Course Number", "Instructor", "Max Enrolled"};
+    String columnNames[] = {"Course ID", "Course Name", "Instructor", "Max Enrolled"};
     private ArrayList<Course> courseList;
 
     public CourseTableModel(ArrayList<Course> newCourseList){

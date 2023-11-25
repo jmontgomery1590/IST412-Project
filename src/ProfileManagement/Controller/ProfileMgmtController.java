@@ -1,13 +1,12 @@
-package StudentManagement.Controller;
+package ProfileManagement.Controller;
 
-import CourseManagement.Controller.CourseMgmtController;
-import StudentManagement.Model.Student;
-import StudentManagement.View.StudentMgmtUI;
+import ProfileManagement.Model.Student;
+import ProfileManagement.View.ProfileMgmtUI;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
 
-public class StudentMgmtController {
-    private StudentMgmtUI studentMgmtUI;
+public class ProfileMgmtController {
+    private ProfileMgmtUI profileMgmtUI;
     private HomepageController homepageController;
     private User newUser;
     private Student student;
@@ -16,14 +15,14 @@ public class StudentMgmtController {
      * Constructor for the user management interface
      * @param u1 Student user profile to be managed through interface
      */
-    public StudentMgmtController (HomepageController homepageController) {
+    public ProfileMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
         newUser = new User("", "");
-        this.studentMgmtUI = new StudentMgmtUI(this);
+        this.profileMgmtUI = new ProfileMgmtUI(this);
     }
 
-    public void setStudentMgmtUI(StudentMgmtUI studentMgmtUI) {
-        this.studentMgmtUI = studentMgmtUI;
+    public void setStudentMgmtUI(ProfileMgmtUI profileMgmtUI) {
+        this.profileMgmtUI = profileMgmtUI;
     }
 
     public Student getStudent() {
@@ -34,7 +33,7 @@ public class StudentMgmtController {
         this.student = student;
     }
 
-    public StudentMgmtUI getStudentMgmtUI() {
-        return studentMgmtUI;
+    public ProfileMgmtUI getStudentMgmtUI() {
+        return profileMgmtUI;
     }
 }

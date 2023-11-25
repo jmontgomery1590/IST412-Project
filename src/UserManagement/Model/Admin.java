@@ -1,4 +1,4 @@
-package StaffManagement.Model;
+package UserManagement.Model;
 
 import CourseManagement.Model.Course;
 import UserAuthentication.Model.User;

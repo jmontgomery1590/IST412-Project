@@ -1,7 +1,5 @@
 package CourseManagement.Model;
 
-import StaffManagement.Model.Instructor;
-
 import java.util.ArrayList;
 
 public class CourseList {

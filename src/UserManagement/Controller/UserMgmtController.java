@@ -1,14 +1,14 @@
-package StaffManagement.Controller;
+package UserManagement.Controller;
 
 import CourseManagement.Controller.CourseMgmtController;
-import StaffManagement.Model.Admin;
-import StaffManagement.Model.Instructor;
-import StaffManagement.Model.TA;
-import StaffManagement.View.StaffMgmtUI;
+import UserManagement.Model.Admin;
+import UserManagement.Model.Instructor;
+import UserManagement.Model.TA;
+import UserManagement.View.UserMgmtUI;
 import UserAuthentication.Model.User;
 
-public class StaffMgmtController {
-    private StaffMgmtUI staffInterface;
+public class UserMgmtController {
+    private UserMgmtUI staffInterface;
     private CourseMgmtController courseMgmtCntrl;
     private Instructor instructor;
     private Admin admin;
@@ -19,8 +19,8 @@ public class StaffMgmtController {
      * Constructor for the staff management interface
      * @param u1 Staff user profile to be managed through interface
      */
-    public StaffMgmtController(User u1) {
-        this.setStaffInterface(new StaffMgmtUI());
+    public UserMgmtController(User u1) {
+        this.setStaffInterface(new UserMgmtUI());
         this.setAccessLevel(this.checkFacultyLevel(u1));
         this.getStaffInterface().displayProfile(u1,this.getAccessLevel());
         //this.setCourseMgmtCntrl(new CourseMgmtController());
@@ -52,11 +52,11 @@ public class StaffMgmtController {
         return roleLevel;
     }
 
-    public StaffMgmtUI getStaffInterface() {
+    public UserMgmtUI getStaffInterface() {
         return staffInterface;
     }
 
-    public void setStaffInterface(StaffMgmtUI staffInterface) {
+    public void setStaffInterface(UserMgmtUI staffInterface) {
         this.staffInterface = staffInterface;
     }
 

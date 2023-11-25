@@ -4,25 +4,32 @@ Test profiles have the following login info for various user functionalities:
 	***Usernames are not case sensitive
 	***Passwords are case sensitive
       
-      Student:
+      Student 1:
           Username: student
           Password: Student123
+      Student 2:
+          Username: student2
+          Password: Student321
       TA:
-          Username: ta
+          Username: TA
           Password: TA123
-      Instructor:
+      Instructor 1:
           Username: instructor
           Password: Instructor123
-      Admin:
+      Instructor 2:
+          Username: instra
+          Password: Instructor321
+      Admin 1:
           Username: admin
           Password: Admin123
+      Admin 1:
+          Username: admina
+          Password: Admin321
 
 Database paths depending on current machine:
-
-    Joe: "jdbc:ucanaccess://C://Users//archo//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb"
-    Joe (laptop): "jdbc:ucanaccess://C://Users//Joe//OneDrive//Documents//IntelliJProjects//IST412-Project//LMSDB.accdb" 
+ 
     Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
-    Justin: 
+    Justin: (Cloud): "jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
     Ethan:
 
 As of current, TestHarness application flow for these profiles are:
@@ -39,11 +46,4 @@ As of current, TestHarness application flow for these profiles are:
     ***Student and TA will only have the "View Course" button on the option menu for courses (will be implemented for 
        various page types in final deliverable). Admins and Instructors will have additional "Add", "Edit", and "Delete"
        buttons (Edit and Delete not yet fully functional): Admins for both Course and Page, Instructors will only have
-       these functions for various Page types. 
-
-Refactoring was a combination of work from all members of the group. Within our CourseMgmtController Class, we initially
-had all of our UI button logic within it. Joe and Justin worked on refactoring these within the respective View classes
-in the CourseManagement package. This also addressed unnecessarily large classes that we had, and helped decrease our 
-coupling between our classes. Justin and Ethan worked on renaming various view classes, methods and variables within
-various classes, and formatting of if/else if statements to adhere to Java code styling to assist in readability and 
-consistency throughout the program. Justin went through and removed dead code throughout every class in every package.
+       these functions for various Page types.

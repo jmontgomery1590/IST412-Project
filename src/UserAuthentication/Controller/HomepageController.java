@@ -1,21 +1,17 @@
 package UserAuthentication.Controller;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseworkManagement.Controller.CourseworkMgmtController;
-import StudentManagement.Controller.StudentMgmtController;
+import ProfileManagement.Controller.ProfileMgmtController;
 import UserAuthentication.Model.User;
 import UserAuthentication.View.HomeViewUI;
 import UserAuthentication.View.HomepageUI;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomepageController {
     private User user;
     private HomepageUI homepageUI;
     private LoginController loginController;
     private CourseMgmtController courseMgmtCntrl;
-    private StudentMgmtController studentMgmtCntrl;
+    private ProfileMgmtController studentMgmtCntrl;
     private HomeViewUI homeViewUI;
 
 
@@ -58,11 +54,11 @@ public class HomepageController {
         this.homeViewUI = homeViewUI;
     }
 
-    public StudentMgmtController getStudentMgmtCntrl() {
+    public ProfileMgmtController getStudentMgmtCntrl() {
         return studentMgmtCntrl;
     }
 
-    public void setStudentMgmtCntrl(StudentMgmtController studentMgmtCntrl) {
+    public void setStudentMgmtCntrl(ProfileMgmtController studentMgmtCntrl) {
         this.studentMgmtCntrl = studentMgmtCntrl;
     }
 }

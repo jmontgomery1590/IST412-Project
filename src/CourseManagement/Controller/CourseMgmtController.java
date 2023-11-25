@@ -22,10 +22,8 @@ public class CourseMgmtController {
     private Course newCourse, selectedCourse;
     private CourseList courseList;
     private LessonList lessonList;
-    private PageList pageList;
     private AnnouncementList announcementList;
     private CourseTableModel courseTable;
-    private PageTableModel pageTable;
     private LessonTableModel lessonTable;
     private AnnouncementTableModel announcementTable;
     private ViewAnnouncementUI viewAnnouncementUI;
@@ -45,8 +43,6 @@ public class CourseMgmtController {
         loadCourseList();
         this.courseTable = new CourseTableModel(this.getCourseList().getCourses());
         this.courseMgmtUI = new CourseMgmtUI(this);
-        this.pageList = new PageList();
-        this.pageTable = new PageTableModel(this.getPageList().getPages());
         verifyButtonAccess();
     }
 
@@ -79,10 +75,6 @@ public class CourseMgmtController {
         {
             database.getAdminCourseList(this);
         }
-    }
-
-    public PageList getPageList() {
-        return pageList;
     }
 
     public AnnouncementList getAnnouncementList() {
