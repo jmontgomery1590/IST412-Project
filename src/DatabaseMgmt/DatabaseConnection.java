@@ -80,8 +80,7 @@ public class DatabaseConnection {
         return false;
     }
 
-    public Instructor getInstructorForCourse(int instructorID)
-    {
+    public Instructor getInstructorForCourse(int instructorID) {
         try
         {
             String query = "SELECT * FROM UserTable WHERE ID = ?";
@@ -107,8 +106,7 @@ public class DatabaseConnection {
         return null;
     }
 
-    public void getInstructorCourseList(CourseMgmtController courseMgmtController)
-    {
+    public void getInstructorCourseList(CourseMgmtController courseMgmtController) {
         openConnection();
         int userID = courseMgmtController.getHomepageController().getUser().getUserIDNumber();
         try
@@ -139,8 +137,7 @@ public class DatabaseConnection {
         closeConnection();
     }
 
-    public void getAdminCourseList(CourseMgmtController courseMgmtController)
-    {
+    public void getAdminCourseList(CourseMgmtController courseMgmtController) {
         openConnection();
         try
         {
@@ -201,6 +198,8 @@ public class DatabaseConnection {
 
         closeConnection();
     }
+
+    public void getCourseLessonList(CourseMgmtController courseMgmtController) {}
 
     public void closeConnection()
     {

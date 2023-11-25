@@ -27,6 +27,12 @@ Test profiles have the following login info for various user functionalities:
           Password: Admin321
 
 Database paths depending on current machine:
+
+    We will provide access to our database within PSU OneDrive with our Final Project Implementation. This can be saved
+    to your personal PSU OneDrive, and after you add the shortcut to the database to your personal OneDrive in your file
+    explorer, our project should run without needing to change the path in our program. 
+
+    Instructions to complete this process: 
  
     Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
     Justin: (Cloud): "jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
