@@ -12,7 +12,7 @@ public class LessonMgmtUI {
     private HomepageController homepageController;
     private LessonMgmtUI lessonMgmtUI;
     private JFrame lessonMgmtFrame;
-    private JPanel crudPanel;
+    private JPanel buttonPanel;
     private JPanel lessonMgmtPanel, lessonTablePanel;
     private JButton addLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
     private JTable lessonTable;
@@ -51,7 +51,6 @@ public class LessonMgmtUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 lessonListPosition = lessonTable.getSelectedRow();
-                //courseMgmtCntrl.getCourseMgmtUI().setSelectedLesson(courseMgmtCntrl.getLessonList().getLessons().get(lessonTable.getSelectedRow() + 1));
                 courseMgmtCntrl.setViewLessonUI(new ViewLessonUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewLessonUI().getLessonPanel(), "View Lesson");
 

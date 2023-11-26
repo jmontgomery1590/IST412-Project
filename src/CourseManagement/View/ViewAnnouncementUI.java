@@ -15,6 +15,9 @@ public class ViewAnnouncementUI {
     private JTextArea announcementTextArea;
     private JButton previousAnnouncementButton, nextAnnouncementButton;
     private JLabel titleTextLabel;
+    private JPanel announcementTextPanel;
+    private JPanel buttonPanel;
+    private JScrollPane announcementScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Announcement prevAnnouncement;
     private Announcement nextAnnouncement;
@@ -24,46 +27,41 @@ public class ViewAnnouncementUI {
 
     public ViewAnnouncementUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        announcementNumber = 0;
-        setAnnouncements(0);
+        announcementNumber = courseMgmtCntrl.getAnnouncementMgmtUI().getAnnouncementListPosition();
+        setAnnouncements(announcementNumber);
+        setAnnouncementText();
         addALViewAnnouncementButtons();
-        fillAnnouncementTitle();
-        fillAnnouncementBody();
         checkNextAndPrevButtons();
     }
 
-    public void fillAnnouncementTitle() {
-        titleTextLabel.setText(courseMgmtCntrl.getAnnouncement().getPageTitle());
+    public void setAnnouncementText() {
+        titleTextLabel.setText(currentAnnouncement.getPageTitle());
+        announcementTextArea.setText(currentAnnouncement.getAnnouncementBody());
+        announcementTextArea.setCaretPosition(0);
     }
 
-    public void fillAnnouncementBody() {
-        announcementTextArea.setText(courseMgmtCntrl.getAnnouncement().getAnnouncementBody());
-    }
-
-    public void setAnnouncements (int announcementListnumber) {
-        announcementNumber = announcementListnumber;
+    public void setAnnouncements (int announcementListNumber) {
+        announcementNumber = announcementListNumber;
         announcementList = courseMgmtCntrl.getAnnouncementList();
         currentAnnouncement = announcementList.getAnnouncements().get(announcementNumber);
 
         if (announcementNumber > 0)
         {
-            prevAnnouncement = announcementList.getAnnouncements().get(announcementListnumber - 1);
+            prevAnnouncement = announcementList.getAnnouncements().get(announcementListNumber - 1);
         }
         else
         {
             prevAnnouncement = null;
         }
 
-        if (announcementListnumber + 1 < announcementList.getAnnouncements().size())
+        if (announcementListNumber + 1 < announcementList.getAnnouncements().size())
         {
-            nextAnnouncement = announcementList.getAnnouncements().get(announcementListnumber + 1);
+            nextAnnouncement = announcementList.getAnnouncements().get(announcementListNumber + 1);
         }
         else
         {
             nextAnnouncement = null;
         }
-        fillAnnouncementTitle();
-        fillAnnouncementBody();
     }
 
     public void checkNextAndPrevButtons() {
@@ -78,6 +76,7 @@ public class ViewAnnouncementUI {
                 if (nextAnnouncement != null)
                 {
                     setAnnouncements(announcementNumber + 1);
+                    setAnnouncementText();
                     checkNextAndPrevButtons();
                 }
             }
@@ -89,6 +88,7 @@ public class ViewAnnouncementUI {
                 if (prevAnnouncement != null)
                 {
                     setAnnouncements(announcementNumber - 1);
+                    setAnnouncementText();
                     checkNextAndPrevButtons();
                 }
             }

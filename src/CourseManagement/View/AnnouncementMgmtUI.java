@@ -20,11 +20,11 @@ public class AnnouncementMgmtUI {
     private JPanel announcementTitlePanel;
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
-
+    private int announcementListPosition;
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        courseMgmtCntrl.setAnnouncementList(courseMgmtCntrl.getSelectedCourse().getAnnouncementList());
+        courseMgmtCntrl.loadAnnouncementList();
         courseMgmtCntrl.setAnnouncementTable(new AnnouncementTableModel(courseMgmtCntrl.getAnnouncementList().getAnnouncements()));
         announcementLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
@@ -51,11 +51,10 @@ public class AnnouncementMgmtUI {
         this.viewAnnouncementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = announcementTable.getSelectedRow();
-                courseMgmtCntrl.setAnnouncement(courseMgmtCntrl.getAnnouncementList().getAnnouncements().get(selectedRow));
+                announcementListPosition = announcementTable.getSelectedRow();
                 courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI(courseMgmtCntrl));
-
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementPanel(), "View Announcement");
+
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "Announcement View");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
@@ -110,5 +109,13 @@ public class AnnouncementMgmtUI {
 
     public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
         this.courseMgmtCntrl = courseMgmtCntrl;
+    }
+
+    public int getAnnouncementListPosition() {
+        return announcementListPosition;
+    }
+
+    public void setAnnouncementListPosition(int announcementListPosition) {
+        this.announcementListPosition = announcementListPosition;
     }
 }
