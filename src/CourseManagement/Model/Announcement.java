@@ -1,27 +1,26 @@
 package CourseManagement.Model;
 
 public class Announcement extends Page{
-    private String announcementBody;
+    private String announcementContent;
 
     /**
      * Constructor for the Page class
-     *
      * @param title Title for the page
      */
     public Announcement(String title) {
         super(title);
     }
 
-    public Announcement(String title, String body) {
+    public Announcement(String title, String content) {
         super (title);
-        this.announcementBody = body;
+        this.announcementContent = content;
     }
 
-    public String getAnnouncementBody() {
-        return announcementBody;
+    public String getAnnouncementContent() {
+        return announcementContent;
     }
 
-    public void setAnnouncementBody(String announcementBody) {
-        this.announcementBody = announcementBody;
+    public void setAnnouncementContent(String announcementContent) {
+        this.announcementContent = announcementContent;
     }
 }

@@ -5,7 +5,6 @@ public class Lesson extends Page{
     private String assignedReading;
     /**
      * Constructor for the Page class
-     *
      * @param title Title for the page
      */
     public Lesson(String title) {

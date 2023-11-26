@@ -48,7 +48,7 @@ public class AnnouncementMgmtUI {
     }*/
 
     public void addALAnnouncementButtons() {
-        this.viewAnnouncementButton.addActionListener(new ActionListener() {
+        this.getViewAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 announcementListPosition = announcementTable.getSelectedRow();
@@ -118,4 +118,6 @@ public class AnnouncementMgmtUI {
     public void setAnnouncementListPosition(int announcementListPosition) {
         this.announcementListPosition = announcementListPosition;
     }
+
+
 }

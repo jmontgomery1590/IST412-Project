@@ -46,7 +46,7 @@ public class AddAnnouncementUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentAnnouncement.setPageTitle(titleTextField.getText());
-                currentAnnouncement.setAnnouncementBody(announcementTextArea.getText());
+                currentAnnouncement.setAnnouncementContent(announcementTextArea.getText());
                 courseMgmtCntrl.getAnnouncementList().getAnnouncements().add(currentAnnouncement);
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
