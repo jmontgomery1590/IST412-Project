@@ -6,6 +6,9 @@ public class MultipleChoiceQuestion extends Question{
     private AnswerList answerList;
     private Boolean isCorrect;
     private String submittedAnswer;
+    private int questionID;
+    private int assignmentID;
+    private int questionType;
 
     public MultipleChoiceQuestion(String question, double pointValue)
     {
@@ -50,5 +53,61 @@ public class MultipleChoiceQuestion extends Question{
                 isCorrect = true;
             }
         }
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public double getPointValue() {
+        return pointValue;
+    }
+
+    public void setPointValue(double pointValue) {
+        this.pointValue = pointValue;
+    }
+
+    public void setAnswerList(AnswerList answerList) {
+        this.answerList = answerList;
+    }
+
+    public Boolean getCorrect() {
+        return isCorrect;
+    }
+
+    public void setCorrect(Boolean correct) {
+        isCorrect = correct;
+    }
+
+    public String getSubmittedAnswer() {
+        return submittedAnswer;
+    }
+
+    public void setSubmittedAnswer(String submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+    }
+
+    public int getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(int questionID) {
+        this.questionID = questionID;
+    }
+
+    public int getAssignmentID() {
+        return assignmentID;
+    }
+
+    public void setAssignmentID(int assignmentID) {
+        this.assignmentID = assignmentID;
+    }
+
+    public int getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(int questionType) {
+        this.questionType = questionType;
     }
 }

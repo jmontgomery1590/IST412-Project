@@ -4,6 +4,7 @@ import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
 import CourseworkManagement.Model.*;
 import CourseworkManagement.View.*;
+import DatabaseMgmt.DatabaseConnection;
 import UserAuthentication.Model.User;
 
 public class CourseworkMgmtController {
@@ -15,6 +16,7 @@ public class CourseworkMgmtController {
     public CourseworkMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
+        this.currentCourse.setAssignmentList(database.getAssignmentsByCourse(this));
         this.assignmentList = this.currentCourse.getAssignmentList();
         this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         this.courseworkMgmtUI = new CourseworkMgmtUI(this);
@@ -35,6 +37,7 @@ public class CourseworkMgmtController {
 
     private AddAssignmentUI addAssignmentUI;
     private ViewAssignmentUI viewAssignmentUI;
+    private DatabaseConnection database = new DatabaseConnection();
 
 
     public AddQuestionUI getQuestionInterface() {
@@ -139,5 +142,13 @@ public class CourseworkMgmtController {
 
     public void setViewAssignmentUI(ViewAssignmentUI viewAssignmentUI) {
         this.viewAssignmentUI = viewAssignmentUI;
+    }
+
+    public DatabaseConnection getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(DatabaseConnection database) {
+        this.database = database;
     }
 }

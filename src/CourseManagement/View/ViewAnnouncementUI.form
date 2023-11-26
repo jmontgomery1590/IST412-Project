@@ -75,6 +75,7 @@
                         </constraints>
                         <properties>
                           <background color="-5525062"/>
+                          <font size="14"/>
                           <lineWrap value="true"/>
                           <text value=""/>
                           <wrapStyleWord value="true"/>

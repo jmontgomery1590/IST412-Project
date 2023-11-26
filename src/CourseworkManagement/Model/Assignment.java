@@ -8,6 +8,7 @@ public class Assignment {
     private QuestionList questionList = new QuestionList();
     private double possibleScore;
     private double earnedScore;
+    private int assignmentID;
 
     private String grade;
     private boolean completed;
@@ -95,5 +96,21 @@ public class Assignment {
 
     public QuestionList getQuestionList() {
         return questionList;
+    }
+
+    public int getAssignmentID() {
+        return assignmentID;
+    }
+
+    public void setAssignmentID(int assignmentID) {
+        this.assignmentID = assignmentID;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setQuestionList(QuestionList questionList) {
+        this.questionList = questionList;
     }
 }
