@@ -4,8 +4,10 @@ import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
-import UserAuthentication.Model.Instructor;
+import CourseworkManagement.Controller.CourseworkMgmtController;
+import CourseworkManagement.Model.*;
 import UserAuthentication.Controller.LoginController;
+import UserAuthentication.Model.Instructor;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -290,6 +292,89 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         closeConnection();
+    }
+
+    public AssignmentList getAssignmentsByCourse(CourseworkMgmtController courseworkMgmtController) {
+        openConnection();
+        int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
+        AssignmentList assignmentList = new AssignmentList();
+        try
+        {
+            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName "
+                    + "FROM AssignmentTable "
+                    + "WHERE AssignmentTable.CourseID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, courseTableID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int assignmentID = rs.getInt("ID");
+                String assignmentTitle = rs.getString("AssignmentName");
+
+                Assignment assignment = new Assignment(assignmentTitle);
+                assignment.setAssignmentID(assignmentID);
+                assignment.setQuestionList(getQuestionsByAssignment(assignment));
+                assignmentList.getAssignments().add(assignment);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+        return assignmentList;
+    }
+
+    public QuestionList getQuestionsByAssignment(Assignment assignment){
+        int assignmentID = assignment.getAssignmentID();
+        QuestionList questionList = new QuestionList();
+        try
+        {
+            String query = "SELECT QuestionTable.ID, QuestionTable.Question, QuestionTable.PointValue, QuestionTable.IsCorrect, QuestionTable.assignmentid, QuestionTable.questiontype "
+                    + "FROM QuestionTable "
+                    + "WHERE QuestionTable.assignmentid = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, assignmentID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int questionID = rs.getInt("ID");
+                String question = rs.getString("Question");
+                int pointValue = rs.getInt("PointValue");
+                boolean isCorrect = rs.getBoolean("IsCorrect");
+                int questionType = rs.getInt("questiontype");
+
+                if (questionType == 1)
+                {
+                    MultipleChoiceQuestion multiQuestion = new MultipleChoiceQuestion(question, pointValue);
+                    multiQuestion.setQuestionID(questionID);
+                    multiQuestion.setCorrect(isCorrect);
+                    multiQuestion.setAssignmentID(assignmentID);
+                    multiQuestion.setQuestionType(questionType);
+
+                    questionList.addToList(multiQuestion);
+                }
+                else if (questionType == 2)
+                {
+                    OpenEndedQuestion openEndedQuestion = new OpenEndedQuestion(question, pointValue);
+                    openEndedQuestion.setQuestionID(questionID);
+                    openEndedQuestion.setCorrect(isCorrect);
+                    openEndedQuestion.setAssignmentID(assignmentID);
+                    openEndedQuestion.setQuestionType(questionType);
+
+                    questionList.addToList(openEndedQuestion);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return questionList;
     }
 
     public void closeConnection()

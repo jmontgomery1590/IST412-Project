@@ -10,7 +10,7 @@ public class AssignmentList {
 
     public AssignmentList(){
         if (this.getAssignments().isEmpty()){
-            createAssignmentsList();
+            //createAssignmentsList();
         }
     }
 

@@ -83,4 +83,8 @@ public class Course {
     public AnnouncementList getAnnouncementList() {
         return announcementList;
     }
+
+    public void setAssignmentList(AssignmentList assignmentList) {
+        this.assignmentList = assignmentList;
+    }
 }
