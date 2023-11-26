@@ -12,9 +12,8 @@ public class TA extends User {
      * Super constructor for TA User class
      * @param userLogin Given login username for authentication
      * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
      */
-    public TA(String userName, String userLogin, String userPassword, String roleID) {
+    public TA(String userLogin, String userPassword) {
         super(userLogin, userPassword);
     }
 
@@ -22,10 +21,9 @@ public class TA extends User {
      * Constructor for TA class
      * @param userLogin Given login username for authentication
      * @param userPassword Given login password for authentication
-     * @param roleID Given user role for user
      * @param tutoring Courses actively tutoring students in
      */
-    public TA(String userName, String userLogin, String userPassword, String roleID, ArrayList<Course> tutoring) {
+    public TA(String userLogin, String userPassword, ArrayList<Course> tutoring) {
         super(userLogin, userPassword);
         this.coursesTutored = tutoring;
     }

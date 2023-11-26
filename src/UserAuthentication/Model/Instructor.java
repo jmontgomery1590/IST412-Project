@@ -17,7 +17,7 @@ public class Instructor extends User {
 
     /**
      * Super constructor for Instructor User class
-     * @param userLogin Given login username for authentication
+     * @param userName Given login username for authentication
      * @param userPassword Given login password for authentication
      * @param roleID Given user role for user
      */

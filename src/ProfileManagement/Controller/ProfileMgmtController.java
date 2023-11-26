@@ -1,6 +1,6 @@
 package ProfileManagement.Controller;
 
-import ProfileManagement.Model.Student;
+import UserAuthentication.Model.Student;
 import ProfileManagement.View.ProfileMgmtUI;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
