@@ -1,7 +1,7 @@
 package CourseManagement.Model;
 
 import CourseworkManagement.Model.AssignmentList;
-import UserManagement.Model.Instructor;
+import UserAuthentication.Model.Instructor;
 
 import java.util.ArrayList;
 

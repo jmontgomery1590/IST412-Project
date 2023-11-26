@@ -1,6 +1,8 @@
 package ProfileManagement.View;
 
 import ProfileManagement.Controller.ProfileMgmtController;
+import UserAuthentication.Controller.HomepageController;
+import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,15 +20,24 @@ public class ProfileMgmtUI {
     private JLabel roleLabel;
     private JLabel usernameLabel;
     private ProfileMgmtController profileMgmtCntrl;
+    private HomepageController homepageController;
+    private User user;
 
     public ProfileMgmtUI(ProfileMgmtController profileMgmtController) {
         profileMgmtCntrl = profileMgmtController;
-        loginIDLabel.setForeground(Color.WHITE);
-        passwordLabel.setForeground(Color.WHITE);
-        roleLabel.setForeground(Color.WHITE);
-        usernameLabel.setForeground(Color.WHITE);
+        user = profileMgmtController.getUser();
+        setProfileText();
+    }
 
-        //usernameTextField.setText();
+    public void setProfileText() {
+        usernameTextField.setText(user.getFirstName() + " " + user.getLastName());
+        usernameTextField.setEditable(false);
+        loginTextField.setText(user.getUserName());
+        loginTextField.setEditable(false);
+        passwordTextField.setText(user.getPassword());
+        passwordTextField.setEditable(false);
+        roleTextField.setText(user.getRoleID());
+        roleTextField.setEditable(false);
     }
 
     public JPanel getStudentMgmtPanel() {

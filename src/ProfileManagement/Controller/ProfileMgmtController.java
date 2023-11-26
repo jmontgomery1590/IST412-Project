@@ -8,8 +8,9 @@ import UserAuthentication.Model.User;
 public class ProfileMgmtController {
     private ProfileMgmtUI profileMgmtUI;
     private HomepageController homepageController;
-    private User newUser;
+    private User user;
     private Student student;
+
 
     /**
      * Constructor for the user management interface
@@ -17,7 +18,7 @@ public class ProfileMgmtController {
      */
     public ProfileMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
-        newUser = new User("", "");
+        user = homepageController.getUser();
         this.profileMgmtUI = new ProfileMgmtUI(this);
     }
 
@@ -35,5 +36,13 @@ public class ProfileMgmtController {
 
     public ProfileMgmtUI getStudentMgmtUI() {
         return profileMgmtUI;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

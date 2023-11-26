@@ -74,6 +74,7 @@
             <properties>
               <background color="-394241"/>
               <font size="16"/>
+              <foreground color="-394241"/>
               <text value="Login ID"/>
             </properties>
           </component>
@@ -84,6 +85,7 @@
             <properties>
               <background color="-394241"/>
               <font size="16"/>
+              <foreground color="-394241"/>
               <text value="Password"/>
             </properties>
           </component>
@@ -94,7 +96,8 @@
             <properties>
               <background color="-394241"/>
               <font size="16"/>
-              <text value="Role"/>
+              <foreground color="-394241"/>
+              <text value="Role ID"/>
             </properties>
           </component>
           <component id="f8d0e" class="javax.swing.JLabel" binding="usernameLabel">
@@ -104,6 +107,7 @@
             <properties>
               <background color="-394241"/>
               <font size="16"/>
+              <foreground color="-394241"/>
               <text value="User Name"/>
             </properties>
           </component>

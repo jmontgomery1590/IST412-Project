@@ -4,7 +4,7 @@ import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
-import UserManagement.Model.Instructor;
+import UserAuthentication.Model.Instructor;
 import UserAuthentication.Controller.LoginController;
 
 import java.sql.*;

@@ -1,7 +1,6 @@
 package UserAuthentication.Controller;
 
 import DatabaseMgmt.DatabaseConnection;
-import UserManagement.Controller.UserMgmtController;
 import ProfileManagement.Controller.ProfileMgmtController;
 import UserAuthentication.View.HomepageUI;
 import UserAuthentication.View.LoginUI;
@@ -16,7 +15,6 @@ public class LoginController {
     private String password;
     private String roleID;
     private ProfileMgmtController studentCntrl;
-    private UserMgmtController staffMgmtCntrl;
     private HomepageController homepageCntrl;
     private DatabaseConnection database;
 
