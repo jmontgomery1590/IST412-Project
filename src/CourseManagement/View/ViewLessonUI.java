@@ -5,7 +5,6 @@ import CourseManagement.Model.Lesson;
 import CourseManagement.Model.LessonList;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +15,8 @@ public class ViewLessonUI {
     private JTextArea lessonContentArea;
     private JButton previousLessonButton, nextLessonButton;
     private JScrollPane lessonContentScrollPane;
+    private JLabel lessonTitleLabel;
+    private JScrollPane lessonReadingScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Lesson prevLesson;
     private Lesson nextLesson;
@@ -33,10 +34,12 @@ public class ViewLessonUI {
     }
 
     public void setLessonText() {
-        titleTextField.setText(currentLesson.getPageTitle());
+        lessonTitleLabel.setText(currentLesson.getPageTitle());
         lessonContentArea.setText(currentLesson.getLessonContent());
-        lessonReadingArea.setText(currentLesson.getAssignedReading());
+        lessonContentArea.setEditable(false);
         lessonContentArea.setCaretPosition(0);
+        lessonReadingArea.setText(currentLesson.getAssignedReading());
+        lessonReadingArea.setEditable(false);
     }
 
     public void setLessons(int lessonListNumber) {

@@ -3,6 +3,7 @@ package CourseManagement.View;
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.LessonTableModel;
 import UserAuthentication.Controller.HomepageController;
+import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,31 +21,28 @@ public class LessonMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int lessonListPosition;
+    private User user;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
+        user = courseMgmtController.getHomepageController().getUser();
         courseMgmtCntrl.loadLessonList();
         courseMgmtCntrl.setLessonTable(new LessonTableModel(courseMgmtCntrl.getLessonList().getLessons()));
         lessonLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         lessonTable.setModel(courseMgmtCntrl.getLessonTable());
         lessonMgmtFrame = new JFrame("Lessons");
         addALLessonButtons();
-        //verifyButtonAccess();
+        verifyButtonAccess();
     }
 
-    /*private void verifyButtonAccess() {
-        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+    private void verifyButtonAccess() {
+        if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
         {
-            lessonMgmtUI.getAddLessonButton().setVisible(false);
-            lessonMgmtUI.getDeleteLessonButton().setVisible(false);
-            lessonMgmtUI.getEditLessonButton().setVisible(false);
+            addLessonButton.setVisible(false);
+            deleteLessonButton.setVisible(false);
+            editLessonButton.setVisible(false);
         }
-        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
-        {
-            lessonMgmtUI.getAddLessonButton().setVisible(false);
-            lessonMgmtUI.getDeleteLessonButton().setVisible(false);
-        }
-    }*/
+    }
 
     public void addALLessonButtons() {
         this.getViewLessonButton().addActionListener(new ActionListener() {

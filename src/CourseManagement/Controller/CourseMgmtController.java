@@ -33,12 +33,12 @@ public class CourseMgmtController {
     DatabaseConnection database = new DatabaseConnection();
 
 
+
     /**
      * Constructor for Course Management Interface
      */
     public CourseMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;
-        //newCourse = new Course("", "", "",);
         this.courseList = new CourseList();
         loadCourseList();
         this.courseTable = new CourseTableModel(this.getCourseList().getCourses());

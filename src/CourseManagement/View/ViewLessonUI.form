@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="lessonPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="520" height="400"/>
+      <xy x="20" y="20" width="559" height="400"/>
     </constraints>
     <properties>
       <background color="-13546140"/>
@@ -50,30 +50,8 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="c66fe" binding="readingPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="10"/>
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-13546140"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="15089" class="javax.swing.JTextArea" binding="lessonReadingArea">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <lineWrap value="true"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
           <grid id="12c1f" binding="titlePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="10"/>
+            <margin top="10" left="0" bottom="10" right="10"/>
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -82,34 +60,26 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="9f429" class="javax.swing.JTextField" binding="titleTextField">
+              <component id="32acc" class="javax.swing.JLabel" binding="lessonTitleLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value=""/>
+                  <font size="18" style="1"/>
+                  <foreground color="-394241"/>
+                  <text value="Label"/>
                 </properties>
               </component>
             </children>
           </grid>
-          <component id="c547c" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-394241"/>
-              <text value="Lesson Title"/>
-            </properties>
-          </component>
           <component id="4a631" class="javax.swing.JLabel">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <foreground color="-394241"/>
-              <text value="Lesson Content"/>
+              <text value="Lesson Content:"/>
             </properties>
           </component>
           <component id="2a865" class="javax.swing.JLabel">
@@ -117,32 +87,39 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <foreground color="-394241"/>
-              <text value="Assigned Reading"/>
+              <text value="Assigned Reading:"/>
             </properties>
           </component>
           <scrollpane id="11502" binding="lessonContentScrollPane">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="600"/>
+              </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <horizontalScrollBarPolicy value="31"/>
+            </properties>
             <border type="none"/>
             <children>
               <grid id="e22a" binding="contentPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="10"/>
+                <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints/>
                 <properties>
-                  <background color="-13546140"/>
+                  <background color="-5525062"/>
                 </properties>
                 <border type="none"/>
                 <children>
                   <component id="25487" class="javax.swing.JTextArea" binding="lessonContentArea">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="600"/>
                       </grid>
                     </constraints>
                     <properties>
+                      <background color="-5525062"/>
+                      <font size="14"/>
                       <lineWrap value="true"/>
                       <text value=""/>
                       <wrapStyleWord value="true"/>
@@ -152,6 +129,53 @@
               </grid>
             </children>
           </scrollpane>
+          <scrollpane id="f02aa" binding="lessonReadingScrollPane">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <maximum-size width="-1" height="150"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-5525062"/>
+              <horizontalScrollBarPolicy value="31"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="c66fe" binding="readingPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="0" right="10"/>
+                <constraints/>
+                <properties>
+                  <background color="-5525062"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="15089" class="javax.swing.JTextArea" binding="lessonReadingArea">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <maximum-size width="-1" height="200"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-5525062"/>
+                      <font size="14"/>
+                      <lineWrap value="true"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </scrollpane>
+          <component id="c547c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <foreground color="-394241"/>
+              <text value="Lesson Title:"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>

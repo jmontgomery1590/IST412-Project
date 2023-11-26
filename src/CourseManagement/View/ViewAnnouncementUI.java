@@ -37,6 +37,7 @@ public class ViewAnnouncementUI {
     public void setAnnouncementText() {
         titleTextLabel.setText(currentAnnouncement.getPageTitle());
         announcementTextArea.setText(currentAnnouncement.getAnnouncementContent());
+        announcementTextArea.setEditable(false);
         announcementTextArea.setCaretPosition(0);
     }
 

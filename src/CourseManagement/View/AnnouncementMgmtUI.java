@@ -3,6 +3,7 @@ package CourseManagement.View;
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.AnnouncementTableModel;
 import UserAuthentication.Controller.HomepageController;
+import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,31 +22,28 @@ public class AnnouncementMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int announcementListPosition;
+    private User user;
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
+        user = courseMgmtController.getHomepageController().getUser();
         courseMgmtCntrl.loadAnnouncementList();
         courseMgmtCntrl.setAnnouncementTable(new AnnouncementTableModel(courseMgmtCntrl.getAnnouncementList().getAnnouncements()));
         announcementLabel.setText(courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + courseMgmtCntrl.getSelectedCourse().getCourseName());
         announcementTable.setModel(courseMgmtCntrl.getAnnouncementTable());
         announcementFrame = new JFrame("Announcements");
         addALAnnouncementButtons();
-        //verifyButtonAccess();
+        verifyButtonAccess();
     }
 
-    /*private void verifyButtonAccess() {
-        if (homepageController.getUser().getLoginID().equalsIgnoreCase("Student") || homepageController.getUser().getLoginID().equalsIgnoreCase("TA"))
+    private void verifyButtonAccess() {
+        if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
         {
-            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
-            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
-            announcementMgmtUI.getEditAnnouncementButton().setVisible(false);
+            addAnnouncementButton.setVisible(false);
+            deleteAnnouncementButton.setVisible(false);
+            editAnnouncementButton.setVisible(false);
         }
-        else if (homepageController.getUser().getLoginID().equalsIgnoreCase("Instructor"))
-        {
-            announcementMgmtUI.getAddAnnouncementButton().setVisible(false);
-            announcementMgmtUI.getDeleteAnnouncementButton().setVisible(false);
-        }
-    }*/
+    }
 
     public void addALAnnouncementButtons() {
         this.getViewAnnouncementButton().addActionListener(new ActionListener() {
