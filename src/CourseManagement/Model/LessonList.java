@@ -6,12 +6,7 @@ public class LessonList {
     public Lesson lesson;
     private ArrayList<Lesson> lessons = new ArrayList<>();
 
-    public LessonList() {
-        if (this.getLessons().isEmpty())
-        {
-            //createLessonList();
-        }
-    }
+    public LessonList() {}
 
     public Lesson getLesson() {
         return lesson;

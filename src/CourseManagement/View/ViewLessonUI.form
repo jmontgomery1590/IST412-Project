@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="lessonPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="520" height="400"/>
     </constraints>
     <properties>
       <background color="-13546140"/>
@@ -39,7 +39,7 @@
         </children>
       </grid>
       <grid id="52ba9" binding="viewLessonPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="20" left="0" bottom="20" right="20"/>
+        <margin top="20" left="20" bottom="20" right="20"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <maximum-size width="-1" height="1000"/>
@@ -123,9 +123,7 @@
           </component>
           <scrollpane id="11502" binding="lessonContentScrollPane">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <maximum-size width="-1" height="700"/>
-              </grid>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>

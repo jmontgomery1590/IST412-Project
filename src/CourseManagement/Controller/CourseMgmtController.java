@@ -22,7 +22,7 @@ public class CourseMgmtController {
     private Course newCourse, selectedCourse;
     private CourseList courseList;
     private LessonList lessonList = new LessonList();
-    private AnnouncementList announcementList;
+    private AnnouncementList announcementList = new AnnouncementList();
     private CourseTableModel courseTable;
     private LessonTableModel lessonTable;
     private AnnouncementTableModel announcementTable;
@@ -81,6 +81,12 @@ public class CourseMgmtController {
         Course course = selectedCourse;
         database = new DatabaseConnection();
         database.getCourseLessonList(this);
+    }
+
+    public void loadAnnouncementList() {
+        Course course = selectedCourse;
+        database = new DatabaseConnection();
+        database.getCourseAnnouncementList(this);
     }
 
     public AnnouncementList getAnnouncementList() {

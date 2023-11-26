@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Announcement;
 import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Lesson;
 
@@ -21,6 +22,7 @@ public class CourseMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Lesson selectedLesson;
+    private Announcement selectedAnnouncement;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {

@@ -1,6 +1,7 @@
 package DatabaseMgmt;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
 import UserManagement.Model.Instructor;
@@ -18,7 +19,7 @@ public class DatabaseConnection {
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB" + pcUserName + ".accdb");
         }
         catch (Exception ee)
         {
@@ -199,6 +200,34 @@ public class DatabaseConnection {
 
                 Lesson lesson = new Lesson(lessonTitle, lessonContent, assignedReading);
                 courseMgmtController.getLessonList().getLessons().add(lesson);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void getCourseAnnouncementList(CourseMgmtController courseMgmtController) {
+        openConnection();
+        try {
+            int courseID = courseMgmtController.getSelectedCourse().getCourseTableID();
+
+            String query = "SELECT AnnouncementTable.announcementtitle, AnnouncementTable.announcementbody "
+                    + "FROM AnnouncementTable "
+                    + "WHERE AnnouncementTable.courseid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                String announcementTitle = rs.getString("announcementtitle");
+                String announcementBody = rs.getString("announcementbody");
+
+                Announcement announcement = new Announcement(announcementTitle, announcementBody);
+                courseMgmtController.getAnnouncementList().getAnnouncements().add(announcement);
             }
         }
         catch (Exception e)

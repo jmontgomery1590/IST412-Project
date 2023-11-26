@@ -28,7 +28,6 @@ public class ViewLessonUI {
         lessonNumber = courseMgmtCntrl.getLessonMgmtUI().getLessonListPosition();
         setLessons(lessonNumber);
         setLessonText();
-        lessonContentArea.setCaretPosition(0);
         addALViewLessonButtons();
         checkNextAndPrevButtons();
     }
@@ -37,6 +36,7 @@ public class ViewLessonUI {
         titleTextField.setText(currentLesson.getPageTitle());
         lessonContentArea.setText(currentLesson.getLessonContent());
         lessonReadingArea.setText(currentLesson.getAssignedReading());
+        lessonContentArea.setCaretPosition(0);
     }
 
     public void setLessons(int lessonListNumber) {
