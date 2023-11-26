@@ -8,6 +8,7 @@ import UserManagement.Model.Instructor;
 import UserAuthentication.Controller.LoginController;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
     private Connection connection;
@@ -82,6 +83,35 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return null;
+    }
+
+    public ArrayList<Instructor> getAllInstructorsForSelection(){
+        ArrayList<Instructor> instructorList = new ArrayList<>();
+        openConnection();
+        try
+        {
+            String query = "SELECT * FROM UserTable WHERE roleid= ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, 2);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int idNumber = rs.getInt("ID");
+                String userName = rs.getString("username");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String password = rs.getString("password");
+                String roleID = String.valueOf(rs.getInt("roleid"));
+                instructorList.add(new Instructor(idNumber, userName, firstName, lastName, password, roleID));
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+        return instructorList;
     }
 
     public void getInstructorCourseList(CourseMgmtController courseMgmtController) {
@@ -177,6 +207,31 @@ public class DatabaseConnection {
             System.out.println(e);
         }
 
+        closeConnection();
+    }
+
+    public void addCourseToDatabase(CourseMgmtController courseMgmtController) {
+        openConnection();
+        Course courseToAdd = courseMgmtController.getNewCourse();
+        int maxEnrolled = Integer.parseInt(courseToAdd.getMaxEnrolled());
+        int instructorID = courseToAdd.getInstructor().getUserIDNumber();
+
+        try {
+            String query = "INSERT INTO CourseTable (courseid, coursename, maxenrolled, instructorid) "
+                    + "VALUES (?, ?, ?,?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, courseToAdd.getCourseID());
+            pstmt.setString(2, courseToAdd.getCourseName());
+            pstmt.setInt(3, maxEnrolled);
+            pstmt.setInt(4, instructorID);
+
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
         closeConnection();
     }
 

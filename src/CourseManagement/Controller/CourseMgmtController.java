@@ -30,7 +30,7 @@ public class CourseMgmtController {
     private ViewLessonUI viewLessonUI;
     private Announcement announcement;
     private Lesson lesson;
-    DatabaseConnection database;
+    DatabaseConnection database = new DatabaseConnection();
 
 
     /**
@@ -62,7 +62,6 @@ public class CourseMgmtController {
 
     private void loadCourseList() {
         User user = homepageController.getUser();
-        database = new DatabaseConnection();
         if (user.getRoleID().equals("2"))
         {
             database.getInstructorCourseList(this);
@@ -99,6 +98,10 @@ public class CourseMgmtController {
 
     public Course getNewCourse() {
         return newCourse;
+    }
+
+    public void setNewCourse(Course newCourse) {
+        this.newCourse = newCourse;
     }
 
     public PageMgmtUI getPageMgmtUI() {
@@ -224,4 +227,14 @@ public class CourseMgmtController {
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
+
+    public DatabaseConnection getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(DatabaseConnection database) {
+        this.database = database;
+    }
+
+
 }
