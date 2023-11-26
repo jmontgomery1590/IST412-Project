@@ -356,6 +356,8 @@ public class DatabaseConnection {
                     multiQuestion.setAssignmentID(assignmentID);
                     multiQuestion.setQuestionType(questionType);
 
+                    multiQuestion.setAnswerList(getAnswersByQuestion(multiQuestion));
+
                     questionList.addToList(multiQuestion);
                 }
                 else if (questionType == 2)
@@ -366,6 +368,8 @@ public class DatabaseConnection {
                     openEndedQuestion.setAssignmentID(assignmentID);
                     openEndedQuestion.setQuestionType(questionType);
 
+                    openEndedQuestion.setAnswerList(getAnswersByQuestion(openEndedQuestion));
+
                     questionList.addToList(openEndedQuestion);
                 }
             }
@@ -375,6 +379,59 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return questionList;
+    }
+
+    public AnswerList getAnswersByQuestion(Question question){
+        AnswerList answerList = new AnswerList();
+        int questionID = question.getQuestionID();
+
+        try
+        {
+            String query = "SELECT AnswerTable.ID, AnswerTable.Answer, AnswerTable.isCorrect "
+                    + "FROM AnswerTable "
+                    + "WHERE AnswerTable.questionid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, questionID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt("ID");
+                String answer = rs.getString("Answer");
+                Boolean isCorrect = rs.getBoolean("isCorrect");
+
+                if (question.getClass().equals(MultipleChoiceQuestion.class))
+                {
+                    MultipleChoiceAnswer multiAnswer = new MultipleChoiceAnswer(answer);
+                    multiAnswer.setAnswerID(id);
+
+                    if (isCorrect)
+                    {
+                        multiAnswer.markCorrect();
+                    }
+                    else
+                    {
+                        multiAnswer.markIncorrect();
+                    }
+
+                    answerList.addToList(multiAnswer);
+                }
+                else if (question.getClass().equals(OpenEndedQuestion.class))
+                {
+                    OpenEndedAnswer openEndedAnswer = new OpenEndedAnswer(answer);
+                    openEndedAnswer.setAnswerID(id);
+                    openEndedAnswer.markCorrect();
+
+                    answerList.addToList(openEndedAnswer);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return answerList;
     }
 
     public void closeConnection()
