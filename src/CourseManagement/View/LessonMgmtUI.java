@@ -15,7 +15,7 @@ public class LessonMgmtUI {
     private JFrame lessonMgmtFrame;
     private JPanel buttonPanel;
     private JPanel lessonMgmtPanel, lessonTablePanel;
-    private JButton addLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
+    private JButton newLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
     private JTable lessonTable;
     private JLabel lessonLabel;
     private JScrollPane tableScrollPane;
@@ -38,7 +38,7 @@ public class LessonMgmtUI {
     private void verifyButtonAccess() {
         if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
         {
-            addLessonButton.setVisible(false);
+            newLessonButton.setVisible(false);
             deleteLessonButton.setVisible(false);
             editLessonButton.setVisible(false);
         }
@@ -57,7 +57,7 @@ public class LessonMgmtUI {
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
         });
-        this.getAddLessonButton().addActionListener(new ActionListener() {
+        this.getNewLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 courseMgmtCntrl.setAddLessonUI(new AddLessonUI(courseMgmtCntrl));
@@ -80,8 +80,8 @@ public class LessonMgmtUI {
         });
     }
 
-    public JButton getAddLessonButton() {
-        return addLessonButton;
+    public JButton getNewLessonButton() {
+        return newLessonButton;
     }
 
     public JButton getEditLessonButton() {

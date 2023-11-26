@@ -7,8 +7,6 @@ import DatabaseMgmt.DatabaseConnection;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
 
-import javax.xml.crypto.Data;
-
 public class CourseMgmtController {
     private CourseMgmtUI courseMgmtUI;
     private PageMgmtUI pageMgmtUI;
@@ -49,13 +47,13 @@ public class CourseMgmtController {
     private void verifyButtonAccess() {
         if (homepageController.getUser().getRoleID().equals("3") || homepageController.getUser().getRoleID().equals("4"))
         {
-            courseMgmtUI.getAddCourseButton().setVisible(false);
+            courseMgmtUI.getNewCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
             courseMgmtUI.getEditCourseButton().setVisible(false);
         }
         else if (homepageController.getUser().getRoleID().equals("2"))
         {
-            courseMgmtUI.getAddCourseButton().setVisible(false);
+            courseMgmtUI.getNewCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
         }
     }

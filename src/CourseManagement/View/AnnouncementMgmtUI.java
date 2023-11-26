@@ -15,7 +15,7 @@ public class AnnouncementMgmtUI {
     private JFrame announcementFrame;
     private JPanel buttonPanel;
     private JPanel announcementTablePanel, announcementMgmtPanel;
-    private JButton addAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
+    private JButton newAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
     private JTable announcementTable;
     private JLabel announcementLabel;
     private JPanel announcementTitlePanel;
@@ -39,7 +39,7 @@ public class AnnouncementMgmtUI {
     private void verifyButtonAccess() {
         if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
         {
-            addAnnouncementButton.setVisible(false);
+            newAnnouncementButton.setVisible(false);
             deleteAnnouncementButton.setVisible(false);
             editAnnouncementButton.setVisible(false);
         }
@@ -58,7 +58,7 @@ public class AnnouncementMgmtUI {
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
         });
-        this.getAddAnnouncementButton().addActionListener(new ActionListener() {
+        this.getNewAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 courseMgmtCntrl.setAddAnnouncementUI(new AddAnnouncementUI(courseMgmtCntrl));
@@ -85,8 +85,8 @@ public class AnnouncementMgmtUI {
         return announcementMgmtPanel;
     }
 
-    public JButton getAddAnnouncementButton() {
-        return addAnnouncementButton;
+    public JButton getNewAnnouncementButton() {
+        return newAnnouncementButton;
     }
 
     public JButton getEditAnnouncementButton() {

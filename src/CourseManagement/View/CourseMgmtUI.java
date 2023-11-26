@@ -48,7 +48,7 @@ public class CourseMgmtUI {
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
         });
-        this.getAddCourseButton().addActionListener(new ActionListener() {
+        this.getNewCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 courseMgmtCntrl.setAddCourseUI(new AddCourseUI(courseMgmtCntrl));
@@ -77,7 +77,7 @@ public class CourseMgmtUI {
         return courseMgmtPanel;
     }
 
-    public JButton getAddCourseButton() {
+    public JButton getNewCourseButton() {
         return newCourseButton;
     }
 

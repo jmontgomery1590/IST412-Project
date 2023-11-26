@@ -21,12 +21,12 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="3b035" class="javax.swing.JButton" binding="addLessonButton">
+          <component id="3b035" class="javax.swing.JButton" binding="newLessonButton">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Add Lesson"/>
+              <text value="New Lesson"/>
             </properties>
           </component>
           <component id="1c07f" class="javax.swing.JButton" binding="editLessonButton">
