@@ -19,7 +19,7 @@ public class DatabaseConnection {
     {
         try{
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://C://Users//" + pcUserName + "//OneDrive - The Pennsylvania State University//Database//LMSDB" + pcUserName +".accdb");
         }
         catch (Exception ee)
         {
@@ -206,6 +206,31 @@ public class DatabaseConnection {
             System.out.println(e);
         }
 
+        closeConnection();
+    }
+
+    public void addCourseToDatabase(CourseMgmtController courseMgmtController) {
+        openConnection();
+        Course courseToAdd = courseMgmtController.getNewCourse();
+        int maxEnrolled = Integer.parseInt(courseToAdd.getMaxEnrolled());
+        int instructorID = courseToAdd.getInstructor().getUserIDNumber();
+
+        try {
+            String query = "INSERT INTO CourseTable (courseid, coursename, maxenrolled, instructorid) "
+                    + "VALUES (?, ?, ?,?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, courseToAdd.getCourseID());
+            pstmt.setString(2, courseToAdd.getCourseName());
+            pstmt.setInt(3, maxEnrolled);
+            pstmt.setInt(4, instructorID);
+
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
         closeConnection();
     }
 

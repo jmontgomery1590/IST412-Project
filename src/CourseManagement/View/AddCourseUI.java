@@ -44,20 +44,21 @@ public class AddCourseUI {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String courseID = courseIDTextField.getText();
-                String courseName = courseNameTextField.getText();
-                String maxEnrolled = maxEnrolledTextField.getText();
-                Instructor instructor = selectInstructorFromList();
+                if (checkStringToInt())
+                {
+                    String courseID = courseIDTextField.getText();
+                    String courseName = courseNameTextField.getText();
+                    String maxEnrolled = maxEnrolledTextField.getText();
+                    Instructor instructor = selectInstructorFromList();
 
-                courseMgmtCntrl.setNewCourse(new Course(courseID, courseName, maxEnrolled, instructor));
-                /**
-                 * Instructor for test purposes only
-                 */
+                    courseMgmtCntrl.setNewCourse(new Course(0, courseID, courseName, maxEnrolled, instructor));
 
-                courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
-                courseMgmtCntrl.getCourseTable().fireTableDataChanged();
-                addCourseFrame.dispose();
+                    courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
+                    courseMgmtCntrl.getDatabase().addCourseToDatabase(courseMgmtCntrl);
+                    courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                    courseMgmtCntrl.getCourseTable().fireTableDataChanged();
+                    addCourseFrame.dispose();
+                }
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -76,6 +77,21 @@ public class AddCourseUI {
         {
             instructorComboBox.addItem(instructor.getFirstName() + " " + instructor.getLastName());
         }
+    }
+
+    private boolean checkStringToInt(){
+        String maxEnrolled = maxEnrolledTextField.getText();
+        int maxEnrolledConverted = 0;
+        try
+        {
+            maxEnrolledConverted = Integer.parseInt(maxEnrolled);
+        } catch (Exception e)
+        {
+            maxEnrolledTextField.setText("Please enter a valid number!");
+            maxEnrolledLabel.setForeground(Color.red);
+            return false;
+        }
+        return true;
     }
 
     private Instructor selectInstructorFromList()
