@@ -40,6 +40,7 @@ public class ViewLessonUI {
         lessonContentArea.setCaretPosition(0);
         lessonReadingArea.setText(currentLesson.getAssignedReading());
         lessonReadingArea.setEditable(false);
+        lessonReadingArea.setCaretPosition(0);
     }
 
     public void setLessons(int lessonListNumber) {
