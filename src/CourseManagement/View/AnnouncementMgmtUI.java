@@ -55,7 +55,7 @@ public class AnnouncementMgmtUI {
                 courseMgmtCntrl.setViewAnnouncementUI(new ViewAnnouncementUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getViewAnnouncementUI().getAnnouncementPanel(), "View Announcement");
 
-                courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "Announcement View");
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Announcement");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
