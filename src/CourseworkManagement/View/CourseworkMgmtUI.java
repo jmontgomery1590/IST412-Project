@@ -47,7 +47,7 @@ public class CourseworkMgmtUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = assignmentTable.getSelectedRow();
                 courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
-                courseworkMgmtCntrl.setQuestion(courseworkMgmtCntrl.getAssignment().getQuestionList().getQuestionList().get(0));
+                //courseworkMgmtCntrl.setQuestion(courseworkMgmtCntrl.getAssignment().getQuestionList().getQuestionList().get(0));
                 courseworkMgmtCntrl.setViewAssignmentUI(new ViewAssignmentUI(courseworkMgmtCntrl));
 
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().add(courseworkMgmtCntrl.getViewAssignmentUI().getReadPanel(), "Load Assignment");
