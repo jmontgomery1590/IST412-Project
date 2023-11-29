@@ -28,6 +28,8 @@ public class EditCourseUI {
     public EditCourseUI(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
         //selectedCourse = courseMgmtController.getSelectedCourse();
+        // use same .getSelectedRow function as in Lesson/AnnouncementMgmtUI and ViewUI classes
+
         editCourseFrame = new JFrame("Edit Course");
         editCourseFrame.setResizable(false);
         editCourseFrame.setMinimumSize(new Dimension(800, 600));
@@ -235,7 +237,7 @@ public class EditCourseUI {
         return courseMgmtController;
     }
 
-    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtController) {
+    public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
     }
 
