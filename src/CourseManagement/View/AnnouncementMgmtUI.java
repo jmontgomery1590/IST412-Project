@@ -68,7 +68,9 @@ public class AnnouncementMgmtUI {
         this.getEditAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                announcementListPosition = announcementTable.getSelectedRow();
+                courseMgmtCntrl.setEditAnnouncementUI(new EditAnnouncementUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.getDeleteAnnouncementButton().addActionListener(new ActionListener() {

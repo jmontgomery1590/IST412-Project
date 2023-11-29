@@ -18,6 +18,9 @@ public class AddAnnouncementUI extends JFrame{
     private JTextField titleTextField;
     private JTextArea announcementTextArea;
     private JPanel buttonPanel;
+    private JPanel titlePanel;
+    private JPanel announcementPanel;
+    private JScrollPane announcementScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Announcement currentAnnouncement;
 

@@ -17,6 +17,8 @@ public class AddLessonUI extends JFrame{
     private JTextField titleTextField;
     private JTextArea lessonContentArea, lessonReadingArea;
     private JButton saveButton, cancelButton;
+    private JScrollPane lessonContentScrollPane;
+    private JScrollPane readingScrollPane;
     CourseMgmtController courseMgmtCntrl;
     private Lesson currentLesson;
 

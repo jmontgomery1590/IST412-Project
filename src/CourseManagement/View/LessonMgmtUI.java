@@ -67,7 +67,9 @@ public class LessonMgmtUI {
         this.getEditLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                lessonListPosition = lessonTable.getSelectedRow();
+                courseMgmtCntrl.setEditLessonUI(new EditLessonUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.getDeleteLessonButton().addActionListener(new ActionListener() {

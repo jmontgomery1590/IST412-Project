@@ -22,7 +22,6 @@ public class AddCourseUI {
     private JLabel instructorLabel, maxEnrolledLabel, courseNameLabel, courseIDLabel;
     private JComboBox instructorComboBox;
     private CourseMgmtController courseMgmtCntrl;
-
     private ArrayList<Instructor> instructorList;
 
     public AddCourseUI(CourseMgmtController courseMgmtCntrl) {
@@ -96,19 +95,6 @@ public class AddCourseUI {
     private Instructor selectInstructorFromList()
     {
         return instructorList.get(instructorComboBox.getSelectedIndex());
-    }
-
-    private Instructor testInstructor() {
-        int testUserID = 1001;
-        String testFirstName = "Urjaswala";
-        String testLastName = "Vora";
-        String testLogin = "Instructor1";
-        String testPassword = "Password1";
-        String testRoleID = "ID1";
-
-        Instructor testInst = new Instructor(testUserID, testLogin, testFirstName, testLastName, testPassword, testRoleID);
-
-        return testInst;
     }
 
     private void addFocusListeners() {
