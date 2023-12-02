@@ -24,7 +24,8 @@ public class CourseworkMgmtUI extends JFrame{
         view = new JFrame();
         this.setCourseworkMgmtCntrl(courseworkMgmtCntrl);
         this.courseAssignmentLabel.setText(courseworkMgmtCntrl.getCurrentCourse().getCourseID() + " " + courseworkMgmtCntrl.getCurrentCourse().getCourseName());
-        assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
+        loadAssignmentTable();
+        //assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
         view.add(courseworkPanel);
         this.addALButtons();
         this.addFocusListeners();
@@ -39,6 +40,18 @@ public class CourseworkMgmtUI extends JFrame{
                 courseworkMgmtCntrl.getAssignmentTable().fireTableDataChanged();
             }
         });
+    }
+
+    private void loadAssignmentTable()
+    {
+        if (courseworkMgmtCntrl.getCurrentUser().getRoleID().equals("4"))
+        {
+            assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
+        }
+        else
+        {
+            assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
+        }
     }
 
     private void addALButtons(){

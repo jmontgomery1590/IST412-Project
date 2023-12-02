@@ -22,8 +22,8 @@ public class CourseworkMgmtController {
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
         //this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
         this.loadAssignmentByRole();
-        this.assignmentList = this.currentCourse.getAssignmentList();
-        this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
+        //this.assignmentList = this.currentCourse.getAssignmentList();
+        //this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         this.courseworkMgmtUI = new CourseworkMgmtUI(this);
     }
 
@@ -32,11 +32,15 @@ public class CourseworkMgmtController {
         if (Objects.equals(currentUser.getRoleID(), "4"))
         {
             this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
+            this.assignmentList = this.currentCourse.getAssignmentList();
+            this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         }
         else
         {
             this.database.getStudentListForCourse(currentCourse);
             this.currentCourse.setAssignmentList(database.getAllStudentAssignmentByCourse(this, currentCourse.getStudentsEnrolled()));
+            this.assignmentList = this.currentCourse.getAssignmentList();
+            this.assignmentByStudentTablemodel = new AssignmentByStudentTablemodel(this.getAssignmentList().getAssignments());
         }
     }
 
@@ -51,6 +55,7 @@ public class CourseworkMgmtController {
     private Assignment assignment;
     private User currentUser;
     private AssignmentTableModel assignmentTable;
+    private AssignmentByStudentTablemodel assignmentByStudentTablemodel;
     private AssignmentList assignmentList = new AssignmentList();
 
     private AddAssignmentUI addAssignmentUI;
@@ -168,5 +173,13 @@ public class CourseworkMgmtController {
 
     public void setDatabase(DatabaseConnection database) {
         this.database = database;
+    }
+
+    public AssignmentByStudentTablemodel getAssignmentByStudentTablemodel() {
+        return assignmentByStudentTablemodel;
+    }
+
+    public void setAssignmentByStudentTablemodel(AssignmentByStudentTablemodel assignmentByStudentTablemodel) {
+        this.assignmentByStudentTablemodel = assignmentByStudentTablemodel;
     }
 }
