@@ -79,6 +79,8 @@ public class AnnouncementMgmtUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = announcementTable.getSelectedRow();
+                selectedAnnouncement = courseMgmtCntrl.getAnnouncementList().getAnnouncements().get(selectedRow);
+                courseMgmtCntrl.getDatabase().deleteAnnouncementFromDatabase(selectedAnnouncement);
                 courseMgmtCntrl.getAnnouncementList().getAnnouncements().remove(selectedRow);
                 courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
             }
