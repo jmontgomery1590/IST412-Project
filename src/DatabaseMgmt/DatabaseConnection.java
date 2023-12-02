@@ -4,6 +4,8 @@ import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
+import CourseManagement.View.AnnouncementMgmtUI;
+import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
 import UserAuthentication.Controller.LoginController;
@@ -266,6 +268,29 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void addLessonToDatabase(LessonMgmtUI lessonMgmtUI) {
+        openConnection();
+        Lesson lessonToAdd = lessonMgmtUI.getNewLesson();
+
+        try {
+            String query = "INSERT INTO LessonTable (courseid, lessontitle, lessoncontent, assignedreading) "
+                    + "VALUES (?, ?, ?,?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, lessonToAdd.getCourseTableID());
+            pstmt.setString(2, lessonToAdd.getPageTitle());
+            pstmt.setString(3, lessonToAdd.getLessonContent());
+            pstmt.setString(4, lessonToAdd.getAssignedReading());
+
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void getCourseAnnouncementList(CourseMgmtController courseMgmtController) {
         openConnection();
         try {
@@ -330,6 +355,28 @@ public class DatabaseConnection {
         }
         closeConnection();
         return assignmentList;
+    }
+
+    public void addAnnouncementToDatabase(AnnouncementMgmtUI announcementMgmtUI) {
+        openConnection();
+        Announcement announcementToAdd = announcementMgmtUI.getNewAnnouncement();
+
+        try {
+            String query = "INSERT INTO AnnouncementTable (courseid, announcementtitle, announcementbody) "
+                    + "VALUES (?, ?, ?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, announcementToAdd.getCourseTableID());
+            pstmt.setString(2, announcementToAdd.getPageTitle());
+            pstmt.setString(3, announcementToAdd.getAnnouncementContent());
+
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
     }
 
     public QuestionList getQuestionsByAssignment(Assignment assignment){

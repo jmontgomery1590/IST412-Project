@@ -1,6 +1,6 @@
 package ProfileManagement.Controller;
 
-import ProfileManagement.Model.Student;
+import UserAuthentication.Model.Student;
 import ProfileManagement.View.ProfileMgmtUI;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
@@ -14,7 +14,7 @@ public class ProfileMgmtController {
 
     /**
      * Constructor for the user management interface
-     * @param u1 Student user profile to be managed through interface
+     * @param user Student user profile to be managed through interface
      */
     public ProfileMgmtController(HomepageController homepageController) {
         this.homepageController = homepageController;

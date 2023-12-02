@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Lesson;
 import CourseManagement.Model.LessonTableModel;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
@@ -21,6 +22,7 @@ public class LessonMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int lessonListPosition;
+    private Lesson newLesson;
     private User user;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
@@ -67,7 +69,9 @@ public class LessonMgmtUI {
         this.getEditLessonButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                lessonListPosition = lessonTable.getSelectedRow();
+                courseMgmtCntrl.setEditLessonUI(new EditLessonUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.getDeleteLessonButton().addActionListener(new ActionListener() {
@@ -106,5 +110,13 @@ public class LessonMgmtUI {
 
     public void setLessonListPosition(int lessonListPosition) {
         this.lessonListPosition = lessonListPosition;
+    }
+
+    public Lesson getNewLesson() {
+        return newLesson;
+    }
+
+    public void setNewLesson(Lesson newLesson) {
+        this.newLesson = newLesson;
     }
 }

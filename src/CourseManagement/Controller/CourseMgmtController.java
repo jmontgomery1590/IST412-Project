@@ -26,10 +26,12 @@ public class CourseMgmtController {
     private AnnouncementTableModel announcementTable;
     private ViewAnnouncementUI viewAnnouncementUI;
     private ViewLessonUI viewLessonUI;
+    private EditAnnouncementUI editAnnouncementUI;
+    private EditCourseUI editCourseUI;
+    private EditLessonUI editLessonUI;
     private Announcement announcement;
     private Lesson lesson;
     DatabaseConnection database = new DatabaseConnection();
-
 
 
     /**
@@ -234,5 +236,27 @@ public class CourseMgmtController {
         this.database = database;
     }
 
+    public EditAnnouncementUI getEditAnnouncementUI() {
+        return editAnnouncementUI;
+    }
 
+    public void setEditAnnouncementUI(EditAnnouncementUI editAnnouncementUI) {
+        this.editAnnouncementUI = editAnnouncementUI;
+    }
+
+    public EditCourseUI getEditCourseUI() {
+        return editCourseUI;
+    }
+
+    public void setEditCourseUI(EditCourseUI editCourseUI) {
+        this.editCourseUI = editCourseUI;
+    }
+
+    public EditLessonUI getEditLessonUI() {
+        return editLessonUI;
+    }
+
+    public void setEditLessonUI(EditLessonUI editLessonUI) {
+        this.editLessonUI = editLessonUI;
+    }
 }

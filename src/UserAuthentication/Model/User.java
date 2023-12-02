@@ -7,7 +7,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String roleID;
-    private String successful = "\n---Login Successful---\n";
 
     /**
      * Constructor for User class
@@ -18,26 +17,6 @@ public class User {
         userName = userLogin;
         password = userPassword;
     }
-
-    /**
-     * Verify a user profile exists
-     */
-    public Boolean verifyUser() {
-        if (userName.equalsIgnoreCase("Student") && password.equals("Student123")) {
-            System.out.println(successful);
-            return true;
-        } else if (userName.equalsIgnoreCase("Instructor") && password.equals("Instructor123")) {
-            System.out.println(successful);
-            return true;
-        } else if (userName.equalsIgnoreCase("Admin") && password.equals("Admin123")) {
-            System.out.println(successful);
-            return true;
-        } else if (userName.equalsIgnoreCase("TA") && password.equals("TA123")) {
-            System.out.println(successful);
-            return true;
-        } else return false;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -76,14 +55,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getSuccessful() {
-        return successful;
-    }
-
-    public void setSuccessful(String successful) {
-        this.successful = successful;
     }
 
     public int getUserIDNumber() {

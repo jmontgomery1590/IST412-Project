@@ -22,7 +22,6 @@ public class AddCourseUI {
     private JLabel instructorLabel, maxEnrolledLabel, courseNameLabel, courseIDLabel;
     private JComboBox instructorComboBox;
     private CourseMgmtController courseMgmtCntrl;
-
     private ArrayList<Instructor> instructorList;
 
     public AddCourseUI(CourseMgmtController courseMgmtCntrl) {
@@ -31,11 +30,12 @@ public class AddCourseUI {
         addCourseFrame.setResizable(false);
         addCourseFrame.setMinimumSize(new Dimension(800, 600));
         addCourseFrame.setContentPane(addCoursePanel);
-        loadInstructorComboBox(this.courseMgmtCntrl.getDatabase().getAllInstructorsForSelection());
         addCourseFrame.setLocationRelativeTo(null);
-        addALNewCourseButtons();
         addCourseFrame.setVisible(true);
         addCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        loadInstructorComboBox(this.courseMgmtCntrl.getDatabase().getAllInstructorsForSelection());
+        addALNewCourseButtons();
         addFocusListeners();
     }
 
@@ -49,11 +49,11 @@ public class AddCourseUI {
                     String courseName = courseNameTextField.getText();
                     String maxEnrolled = maxEnrolledTextField.getText();
                     Instructor instructor = selectInstructorFromList();
-
                     courseMgmtCntrl.setNewCourse(new Course(0, courseID, courseName, maxEnrolled, instructor));
 
                     courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
                     courseMgmtCntrl.getDatabase().addCourseToDatabase(courseMgmtCntrl);
+
                     courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                     courseMgmtCntrl.getCourseTable().fireTableDataChanged();
                     addCourseFrame.dispose();
@@ -96,19 +96,6 @@ public class AddCourseUI {
     private Instructor selectInstructorFromList()
     {
         return instructorList.get(instructorComboBox.getSelectedIndex());
-    }
-
-    private Instructor testInstructor() {
-        int testUserID = 1001;
-        String testFirstName = "Urjaswala";
-        String testLastName = "Vora";
-        String testLogin = "Instructor1";
-        String testPassword = "Password1";
-        String testRoleID = "ID1";
-
-        Instructor testInst = new Instructor(testUserID, testLogin, testFirstName, testLastName, testPassword, testRoleID);
-
-        return testInst;
     }
 
     private void addFocusListeners() {

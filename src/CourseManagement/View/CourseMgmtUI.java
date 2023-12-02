@@ -2,6 +2,7 @@ package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Announcement;
+import CourseManagement.Model.Course;
 import CourseManagement.Model.CourseTableModel;
 import CourseManagement.Model.Lesson;
 
@@ -23,6 +24,7 @@ public class CourseMgmtUI {
     private CourseMgmtController courseMgmtCntrl;
     private Lesson selectedLesson;
     private Announcement selectedAnnouncement;
+    private Course selectedCourse;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {
@@ -58,7 +60,8 @@ public class CourseMgmtUI {
         this.getEditCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                courseMgmtCntrl.setEditCourseUI(new EditCourseUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.getDeleteCourseButton().addActionListener(new ActionListener() {
@@ -67,6 +70,14 @@ public class CourseMgmtUI {
 
             }
         });
+    }
+
+    public Course getSelectedCourse() {
+        return selectedCourse;
+    }
+
+    public void setSelectedCourse(Course selectedCourse) {
+        this.selectedCourse = selectedCourse;
     }
 
     public JFrame getCourseFrame() {

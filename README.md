@@ -34,8 +34,8 @@ Database paths depending on current machine:
 
     Instructions to complete this process: 
  
-    Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
-    Justin: (Cloud): "jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDB.accdb"
+    Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDBJoe.accdb"
+    Justin: (Cloud): "jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDBjmont.accdb"
     Ethan:
 
 As of current, TestHarness application flow for these profiles are:

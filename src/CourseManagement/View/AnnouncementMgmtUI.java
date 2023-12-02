@@ -1,6 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Announcement;
 import CourseManagement.Model.AnnouncementTableModel;
 import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
@@ -22,6 +23,7 @@ public class AnnouncementMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int announcementListPosition;
+    private Announcement newAnnouncement;
     private User user;
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
@@ -68,7 +70,9 @@ public class AnnouncementMgmtUI {
         this.getEditAnnouncementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                announcementListPosition = announcementTable.getSelectedRow();
+                courseMgmtCntrl.setEditAnnouncementUI(new EditAnnouncementUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.getDeleteAnnouncementButton().addActionListener(new ActionListener() {
@@ -117,5 +121,11 @@ public class AnnouncementMgmtUI {
         this.announcementListPosition = announcementListPosition;
     }
 
+    public Announcement getNewAnnouncement() {
+        return newAnnouncement;
+    }
 
+    public void setNewAnnouncement(Announcement newAnnouncement) {
+        this.newAnnouncement = newAnnouncement;
+    }
 }
