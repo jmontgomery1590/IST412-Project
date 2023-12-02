@@ -1,6 +1,8 @@
 package CourseworkManagement.View;
 
+import CourseManagement.Controller.CourseMgmtController;
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -27,7 +29,17 @@ public class CourseworkMgmtUI extends JFrame{
         assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
         view.add(courseworkPanel);
         this.addALButtons();
+        this.verifyButtonAccess();
         this.addFocusListeners();
+    }
+
+    private void verifyButtonAccess() {
+        if (courseworkMgmtCntrl.getCurrentUser().getRoleID().equals("4"))
+        {
+            newAssignmentButton.setVisible(false);
+            deleteAssignmentButton.setVisible(false);
+            editAssignmentButton.setVisible(false);
+        }
     }
 
     private void addFocusListeners(){

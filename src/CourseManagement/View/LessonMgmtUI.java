@@ -38,11 +38,16 @@ public class LessonMgmtUI {
     }
 
     private void verifyButtonAccess() {
-        if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
+        if (user.getRoleID().equals("4"))
         {
             newLessonButton.setVisible(false);
             deleteLessonButton.setVisible(false);
             editLessonButton.setVisible(false);
+        }
+        else if (user.getRoleID().equals("3"))
+        {
+            newLessonButton.setVisible(false);
+            deleteLessonButton.setVisible(false);
         }
     }
 
