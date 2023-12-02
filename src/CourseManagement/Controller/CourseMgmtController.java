@@ -47,16 +47,11 @@ public class CourseMgmtController {
     }
 
     private void verifyButtonAccess() {
-        if (homepageController.getUser().getRoleID().equals("3") || homepageController.getUser().getRoleID().equals("4"))
+        if (homepageController.getUser().getRoleID().equals("3") || homepageController.getUser().getRoleID().equals("4") || homepageController.getUser().getRoleID().equals("2"))
         {
             courseMgmtUI.getNewCourseButton().setVisible(false);
             courseMgmtUI.getDeleteCourseButton().setVisible(false);
             courseMgmtUI.getEditCourseButton().setVisible(false);
-        }
-        else if (homepageController.getUser().getRoleID().equals("2"))
-        {
-            courseMgmtUI.getNewCourseButton().setVisible(false);
-            courseMgmtUI.getDeleteCourseButton().setVisible(false);
         }
     }
 

@@ -33,7 +33,6 @@ public class AddAnnouncementUI extends JFrame{
 
     private void initComponents() {
         addAnnouncementFrame = new JFrame("Add New Announcement");
-        addAnnouncementFrame.setResizable(false);
         addAnnouncementFrame.setMinimumSize(new Dimension(800, 600));
         addAnnouncementFrame.setContentPane(addAnnouncementPanel);
         addAnnouncementFrame.setLocationRelativeTo(null);

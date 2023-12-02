@@ -5,6 +5,7 @@ import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
 import CourseManagement.View.AnnouncementMgmtUI;
+import CourseManagement.View.EditAnnouncementUI;
 import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
@@ -240,12 +241,39 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void editCourseInDatabase(Course course){
+        openConnection();
+        String courseID = course.getCourseID();
+        String courseName = course.getCourseName();
+        String maxEnrolled = course.getMaxEnrolled();
+        int instructorID = course.getInstructor().getUserIDNumber();
+        int tableID = course.getCourseTableID();
+        try{
+            String query = "UPDATE CourseTable "
+                    + "SET CourseTable.courseid = ?, CourseTable.coursename = ?, CourseTable.maxenrolled = ?, CourseTable.instructorid = ? "
+                    + "WHERE CourseTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, courseID);
+            pstmt.setString(2, courseName);
+            pstmt.setString(3, maxEnrolled);
+            pstmt.setInt(4, instructorID);
+            pstmt.setInt(5, tableID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void getCourseLessonList(CourseMgmtController courseMgmtController) {
         openConnection();
         try {
             int courseID = courseMgmtController.getSelectedCourse().getCourseTableID();
 
-            String query = "SELECT LessonTable.lessontitle, LessonTable.lessoncontent, LessonTable.assignedreading "
+            String query = "SELECT LessonTable.ID, LessonTable.lessontitle, LessonTable.lessoncontent, LessonTable.assignedreading "
                     + "FROM LessonTable "
                     + "WHERE LessonTable.courseid = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -254,11 +282,14 @@ public class DatabaseConnection {
 
             while (rs.next())
             {
+                int lessonID = rs.getInt("ID");
                 String lessonTitle = rs.getString("lessontitle");
                 String lessonContent = rs.getString("lessoncontent");
                 String assignedReading = rs.getString("assignedreading");
 
                 Lesson lesson = new Lesson(lessonTitle, lessonContent, assignedReading);
+                lesson.setLessonID(lessonID);
+                lesson.setCourseTableID(courseID);
                 courseMgmtController.getLessonList().getLessons().add(lesson);
             }
         }
@@ -292,6 +323,51 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void editLessonInDatabase(Lesson lesson){
+        openConnection();
+        int lessonID = lesson.getLessonID();
+        String lessonTitle = lesson.getPageTitle();
+        String lessonContent = lesson.getLessonContent();
+        String lessonReading = lesson.getAssignedReading();
+        try{
+            String query = "UPDATE LessonTable "
+                    + "SET LessonTable.lessontitle = ?, LessonTable.lessoncontent = ?, LessonTable.assignedreading = ? "
+                    + "WHERE LessonTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, lessonTitle);
+            pstmt.setString(2, lessonContent);
+            pstmt.setString(3, lessonReading);
+            pstmt.setInt(4, lessonID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void deleteLessonFromDatabase(Lesson lesson){
+        openConnection();
+        int lessonID = lesson.getLessonID();
+
+        try{
+            String query = "DELETE FROM LessonTable "
+                    + "WHERE ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, lessonID);
+            pstmt.executeUpdate();
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void getCourseAnnouncementList(CourseMgmtController courseMgmtController) {
         openConnection();
         try {
@@ -300,6 +376,7 @@ public class DatabaseConnection {
             String query = "SELECT AnnouncementTable.ID, AnnouncementTable.announcementtitle, AnnouncementTable.announcementbody "
                     + "FROM AnnouncementTable "
                     + "WHERE AnnouncementTable.courseid = ?";
+
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, courseID);
             ResultSet rs = pstmt.executeQuery();
@@ -460,6 +537,29 @@ public class DatabaseConnection {
             pstmt.executeUpdate();
         }
         catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void editAnnouncementInDatabase(Announcement announcement){
+        openConnection();
+        int announcementID = announcement.getAnnouncementID();
+        String announcementTitle = announcement.getPageTitle();
+        String announcementBody = announcement.getAnnouncementContent();
+        try{
+            String query = "UPDATE AnnouncementTable "
+                    + "SET AnnouncementTable.announcementtitle = ?, AnnouncementTable.announcementbody = ? "
+                    + "WHERE AnnouncementTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, announcementTitle);
+            pstmt.setString(2, announcementBody);
+            pstmt.setInt(3, announcementID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
         {
             System.out.println(e);
         }

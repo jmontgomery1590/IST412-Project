@@ -22,7 +22,7 @@ public class LessonMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int lessonListPosition;
-    private Lesson newLesson;
+    private Lesson newLesson, selectedLesson;
     private User user;
 
     public LessonMgmtUI(CourseMgmtController courseMgmtController) {
@@ -38,11 +38,16 @@ public class LessonMgmtUI {
     }
 
     private void verifyButtonAccess() {
-        if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
+        if (user.getRoleID().equals("4"))
         {
             newLessonButton.setVisible(false);
             deleteLessonButton.setVisible(false);
             editLessonButton.setVisible(false);
+        }
+        else if (user.getRoleID().equals("3"))
+        {
+            newLessonButton.setVisible(false);
+            deleteLessonButton.setVisible(false);
         }
     }
 
@@ -78,6 +83,8 @@ public class LessonMgmtUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = lessonTable.getSelectedRow();
+                selectedLesson = courseMgmtCntrl.getLessonList().getLessons().get(selectedRow);
+                courseMgmtCntrl.getDatabase().deleteLessonFromDatabase(selectedLesson);
                 courseMgmtCntrl.getLessonList().getLessons().remove(selectedRow);
                 courseMgmtCntrl.getLessonTable().fireTableDataChanged();
             }

@@ -38,6 +38,12 @@ public class EditLessonUI {
         addALEditAnnouncementButtons();
     }
 
+    public void setLessons (int lessonListNumber) {
+        lessonNumber = lessonListNumber;
+        lessonList = courseMgmtController.getLessonList();
+        currentLesson = lessonList.getLessons().get(lessonNumber);
+    }
+
     public void setLessonText() {
         titleTextField.setText(currentLesson.getPageTitle());
         lessonContentArea.setText(currentLesson.getLessonContent());
@@ -46,21 +52,20 @@ public class EditLessonUI {
         lessonReadingArea.setCaretPosition(0);
     }
 
-    public void setLessons (int lessonListNumber) {
-        lessonNumber = lessonListNumber;
-        lessonList = courseMgmtController.getLessonList();
-        currentLesson = lessonList.getLessons().get(lessonNumber);
-    }
-
     public void addALEditAnnouncementButtons() {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String lessonTitle = titleTextField.getText();
-                String lessonText = lessonContentArea.getText();
-                String readingText = lessonReadingArea.getText();
+                currentLesson.setPageTitle(titleTextField.getText());
+                currentLesson.setLessonContent(lessonContentArea.getText());
+                currentLesson.setAssignedReading(lessonReadingArea.getText());
 
-                //Insert logic here
+                courseMgmtController.getDatabase().editLessonInDatabase(currentLesson);
+                courseMgmtController.getLessonTable().fireTableDataChanged();
+
+                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                editLessonFrame.dispose();
+                courseMgmtController.setEditLessonUI(null);
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -68,7 +73,7 @@ public class EditLessonUI {
             public void actionPerformed(ActionEvent e) {
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editLessonFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditLessonUI(null);
             }
         });
     }

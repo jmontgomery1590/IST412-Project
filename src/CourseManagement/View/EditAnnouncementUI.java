@@ -25,6 +25,8 @@ public class EditAnnouncementUI {
     private int announcementNumber;
 
     public EditAnnouncementUI(CourseMgmtController courseMgmtController) {
+        this.courseMgmtController = courseMgmtController;
+
         editAnnouncementFrame = new JFrame("Edit Announcement");
         editAnnouncementFrame.setMinimumSize(new Dimension(800, 600));
         editAnnouncementFrame.setContentPane(editAnnouncementPanel);
@@ -32,17 +34,10 @@ public class EditAnnouncementUI {
         editAnnouncementFrame.setVisible(true);
         editAnnouncementFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        this.courseMgmtController = courseMgmtController;
         announcementNumber = this.courseMgmtController.getAnnouncementMgmtUI().getAnnouncementListPosition();
         setAnnouncements(announcementNumber);
         setAnnouncementText();
         addALEditAnnouncementButtons();
-    }
-
-    public void setAnnouncementText() {
-        titleTextField.setText(currentAnnouncement.getPageTitle());
-        announcementTextArea.setText(currentAnnouncement.getAnnouncementContent());
-        announcementTextArea.setCaretPosition(0);
     }
 
     public void setAnnouncements (int announcementListNumber) {
@@ -51,14 +46,24 @@ public class EditAnnouncementUI {
         currentAnnouncement = announcementList.getAnnouncements().get(announcementNumber);
     }
 
+    public void setAnnouncementText() {
+        titleTextField.setText(currentAnnouncement.getPageTitle());
+        announcementTextArea.setText(currentAnnouncement.getAnnouncementContent());
+        announcementTextArea.setCaretPosition(0);
+    }
+
     public void addALEditAnnouncementButtons() {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String announcementTitle = titleTextField.getText();
-                String announcementText = announcementTextArea.getText();
+                currentAnnouncement.setPageTitle(titleTextField.getText());
+                currentAnnouncement.setAnnouncementContent(announcementTextArea.getText());
+                courseMgmtController.getDatabase().editAnnouncementInDatabase(currentAnnouncement);
+                courseMgmtController.getAnnouncementTable().fireTableDataChanged();
 
-                //Insert logic here
+                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                editAnnouncementFrame.dispose();
+                courseMgmtController.setEditAnnouncementUI(null);
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -66,7 +71,7 @@ public class EditAnnouncementUI {
             public void actionPerformed(ActionEvent e) {
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editAnnouncementFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditAnnouncementUI(null);
             }
         });
     }
@@ -85,5 +90,29 @@ public class EditAnnouncementUI {
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
+    }
+
+    public JTextField getTitleTextField() {
+        return titleTextField;
+    }
+
+    public void setTitleTextField(JTextField titleTextField) {
+        this.titleTextField = titleTextField;
+    }
+
+    public JTextArea getAnnouncementTextArea() {
+        return announcementTextArea;
+    }
+
+    public void setAnnouncementTextArea(JTextArea announcementTextArea) {
+        this.announcementTextArea = announcementTextArea;
+    }
+
+    public Announcement getCurrentAnnouncement() {
+        return currentAnnouncement;
+    }
+
+    public void setCurrentAnnouncement(Announcement currentAnnouncement) {
+        this.currentAnnouncement = currentAnnouncement;
     }
 }

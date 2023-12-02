@@ -2,6 +2,7 @@ package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Course;
+import CourseManagement.Model.CourseList;
 import UserAuthentication.Model.Instructor;
 
 import javax.swing.*;
@@ -23,12 +24,12 @@ public class EditCourseUI {
     private CourseMgmtController courseMgmtController;
     private CourseMgmtUI courseMgmtUI;
     private ArrayList<Instructor> instructorList;
-    private Course selectedCourse;
+    private Course currentCourse;
+    private CourseList courseList;
+    private int courseNumber;
 
     public EditCourseUI(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
-        //selectedCourse = courseMgmtController.getSelectedCourse();
-        // use same .getSelectedRow function as in Lesson/AnnouncementMgmtUI and ViewUI classes
 
         editCourseFrame = new JFrame("Edit Course");
         editCourseFrame.setResizable(false);
@@ -38,35 +39,42 @@ public class EditCourseUI {
         editCourseFrame.setVisible(true);
         editCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //setCourseText();
+        courseNumber = this.courseMgmtController.getCourseMgmtUI().getSelectedRow();
         loadInstructorComboBox(this.courseMgmtController.getDatabase().getAllInstructorsForSelection());
+        setCourse(courseNumber);
+        setCourseText();
         addALEditCourseButtons();
         addFocusListeners();
     }
 
+    public void setCourse (int courseListNumber) {
+        courseNumber = courseListNumber;
+        courseList = courseMgmtController.getCourseList();
+        currentCourse = courseList.getCourses().get(courseNumber);
+    }
+
     public void setCourseText() {
-        courseIDTextField.setText(selectedCourse.getCourseID());
-        courseNameTextField.setText(selectedCourse.getCourseName());
-        instructorComboBox.setSelectedItem(selectedCourse.getInstructor());
-        maxEnrolledTextField.setText(selectedCourse.getMaxEnrolled());
+        courseIDTextField.setText(currentCourse.getCourseID());
+        courseNameTextField.setText(currentCourse.getCourseName());
+        instructorComboBox.setSelectedItem(currentCourse.getInstructor().getFirstName() + " " + currentCourse.getInstructor().getLastName());
+        maxEnrolledTextField.setText(currentCourse.getMaxEnrolled());
     }
 
     public void addALEditCourseButtons() {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String courseID = courseIDTextField.getText();
-                String courseName = courseNameTextField.getText();
-                String maxEnrolled = maxEnrolledTextField.getText();
-                Instructor instructor = selectInstructorFromList();
+                currentCourse.setCourseID(courseIDTextField.getText());
+                currentCourse.setCourseName(courseNameTextField.getText());
+                currentCourse.setMaxEnrolled(maxEnrolledTextField.getText());
+                currentCourse.setInstructor(selectInstructorFromList());
 
-                /*courseMgmtController.setSelectedCourse(new Course(0, courseID, courseName, maxEnrolled, instructor));
-
-                courseMgmtController.getCourseList().getCourses().add(courseMgmtCntrl.getSelectedCourse());
-                courseMgmtController.getDatabase().addCourseToDatabase(courseMgmtCntrl);
-                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseMgmtController.getDatabase().editCourseInDatabase(currentCourse);
                 courseMgmtController.getCourseTable().fireTableDataChanged();
-                editCourseFrame.dispose();*/
+
+                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                editCourseFrame.dispose();
+                courseMgmtController.setEditCourseUI(null);
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {

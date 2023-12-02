@@ -39,7 +39,7 @@ public class AnnouncementMgmtUI {
     }
 
     private void verifyButtonAccess() {
-        if (user.getRoleID().equals("3") || user.getRoleID().equalsIgnoreCase("4"))
+        if (user.getRoleID().equals("4"))
         {
             newAnnouncementButton.setVisible(false);
             deleteAnnouncementButton.setVisible(false);
@@ -107,14 +107,6 @@ public class AnnouncementMgmtUI {
         return deleteAnnouncementButton;
     }
 
-    public CourseMgmtController getCourseMgmtCntrl() {
-        return courseMgmtCntrl;
-    }
-
-    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
-        this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
     public int getAnnouncementListPosition() {
         return announcementListPosition;
     }
@@ -125,9 +117,5 @@ public class AnnouncementMgmtUI {
 
     public void setNewAnnouncement(Announcement newAnnouncement) {
         this.newAnnouncement = newAnnouncement;
-    }
-
-    public Announcement getSelectedAnnouncement() {
-        return selectedAnnouncement;
     }
 }
