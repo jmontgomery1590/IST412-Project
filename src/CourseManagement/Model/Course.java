@@ -2,6 +2,7 @@ package CourseManagement.Model;
 
 import CourseworkManagement.Model.AssignmentList;
 import UserAuthentication.Model.Instructor;
+import UserAuthentication.Model.Student;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Course {
     private String maxEnrolled;
     private int courseTableID;
     private ArrayList<Page> coursePages;
+    private ArrayList<Student> studentsEnrolled = new ArrayList<>();
     private Instructor instructor;
     private LessonList lessonList;
     private AssignmentList assignmentList;
@@ -86,5 +88,13 @@ public class Course {
 
     public void setAssignmentList(AssignmentList assignmentList) {
         this.assignmentList = assignmentList;
+    }
+
+    public ArrayList<Student> getStudentsEnrolled() {
+        return studentsEnrolled;
+    }
+
+    public void setStudentsEnrolled(ArrayList<Student> studentsEnrolled) {
+        this.studentsEnrolled = studentsEnrolled;
     }
 }

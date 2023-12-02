@@ -5,7 +5,10 @@ import CourseManagement.Model.Course;
 import CourseworkManagement.Model.*;
 import CourseworkManagement.View.*;
 import DatabaseMgmt.DatabaseConnection;
+import UserAuthentication.Model.Student;
 import UserAuthentication.Model.User;
+
+import java.util.Objects;
 
 public class CourseworkMgmtController {
 
@@ -17,10 +20,24 @@ public class CourseworkMgmtController {
         this.courseMgmtController = courseMgmtController;
         this.currentUser = this.courseMgmtController.getHomepageController().getUser();
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
-        this.currentCourse.setAssignmentList(database.getAssignmentsByCourse(this));
+        //this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
+        this.loadAssignmentByRole();
         this.assignmentList = this.currentCourse.getAssignmentList();
         this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
         this.courseworkMgmtUI = new CourseworkMgmtUI(this);
+    }
+
+    public void loadAssignmentByRole()
+    {
+        if (Objects.equals(currentUser.getRoleID(), "4"))
+        {
+            this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
+        }
+        else
+        {
+            this.database.getStudentListForCourse(currentCourse);
+            this.currentCourse.setAssignmentList(database.getAllStudentAssignmentByCourse(this, currentCourse.getStudentsEnrolled()));
+        }
     }
 
     private Question question;
@@ -34,7 +51,7 @@ public class CourseworkMgmtController {
     private Assignment assignment;
     private User currentUser;
     private AssignmentTableModel assignmentTable;
-    private AssignmentList assignmentList;
+    private AssignmentList assignmentList = new AssignmentList();
 
     private AddAssignmentUI addAssignmentUI;
     private ViewAssignmentUI viewAssignmentUI;

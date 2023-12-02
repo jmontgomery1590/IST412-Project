@@ -1,5 +1,7 @@
 package CourseworkManagement.Model;
 
+import UserAuthentication.Model.Student;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -12,6 +14,7 @@ public class Assignment {
 
     private String grade;
     private boolean completed;
+    private Student assignedStudent;
 
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
@@ -112,5 +115,13 @@ public class Assignment {
     public void setQuestionList(QuestionList questionList) {
         this.questionList = questionList;
         updatePossibleScore();
+    }
+
+    public Student getAssignedStudent() {
+        return assignedStudent;
+    }
+
+    public void setAssignedStudent(Student assignedStudent) {
+        this.assignedStudent = assignedStudent;
     }
 }
