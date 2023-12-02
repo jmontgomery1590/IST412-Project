@@ -322,25 +322,30 @@ public class DatabaseConnection {
     public AssignmentList getAssignmentsByCourse(CourseworkMgmtController courseworkMgmtController) {
         openConnection();
         int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
+        int userID = courseworkMgmtController.getCurrentUser().getUserIDNumber();
         AssignmentList assignmentList = new AssignmentList();
         try
         {
-            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName "
+            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade  "
                     + "FROM AssignmentTable "
-                    + "WHERE AssignmentTable.CourseID = ?";
+                    + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
+                    + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, courseTableID);
+            pstmt.setInt(2, userID);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next())
             {
                 int assignmentID = rs.getInt("ID");
                 String assignmentTitle = rs.getString("AssignmentName");
+                boolean completed = rs.getBoolean("completed");
 
                 Assignment assignment = new Assignment(assignmentTitle);
                 assignment.setAssignmentID(assignmentID);
                 assignment.setQuestionList(getQuestionsByAssignment(assignment));
+                assignment.setCompleted(completed);
                 assignmentList.getAssignments().add(assignment);
             }
         }
@@ -379,7 +384,7 @@ public class DatabaseConnection {
         QuestionList questionList = new QuestionList();
         try
         {
-            String query = "SELECT QuestionTable.ID, QuestionTable.Question, QuestionTable.PointValue, QuestionTable.IsCorrect, QuestionTable.assignmentid, QuestionTable.questiontype "
+            String query = "SELECT QuestionTable.ID, QuestionTable.Question, QuestionTable.PointValue, QuestionTable.assignmentid, QuestionTable.questiontype "
                     + "FROM QuestionTable "
                     + "WHERE QuestionTable.assignmentid = ?";
 
@@ -392,16 +397,16 @@ public class DatabaseConnection {
                 int questionID = rs.getInt("ID");
                 String question = rs.getString("Question");
                 int pointValue = rs.getInt("PointValue");
-                boolean isCorrect = rs.getBoolean("IsCorrect");
                 int questionType = rs.getInt("questiontype");
 
                 if (questionType == 1)
                 {
                     MultipleChoiceQuestion multiQuestion = new MultipleChoiceQuestion(question, pointValue);
                     multiQuestion.setQuestionID(questionID);
-                    multiQuestion.setCorrect(isCorrect);
                     multiQuestion.setAssignmentID(assignmentID);
                     multiQuestion.setQuestionType(questionType);
+
+                    multiQuestion.setAnswerList(getAnswersByQuestion(multiQuestion));
 
                     questionList.addToList(multiQuestion);
                 }
@@ -409,9 +414,10 @@ public class DatabaseConnection {
                 {
                     OpenEndedQuestion openEndedQuestion = new OpenEndedQuestion(question, pointValue);
                     openEndedQuestion.setQuestionID(questionID);
-                    openEndedQuestion.setCorrect(isCorrect);
                     openEndedQuestion.setAssignmentID(assignmentID);
                     openEndedQuestion.setQuestionType(questionType);
+
+                    openEndedQuestion.setAnswerList(getAnswersByQuestion(openEndedQuestion));
 
                     questionList.addToList(openEndedQuestion);
                 }
@@ -422,6 +428,59 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return questionList;
+    }
+
+    public AnswerList getAnswersByQuestion(Question question){
+        AnswerList answerList = new AnswerList();
+        int questionID = question.getQuestionID();
+
+        try
+        {
+            String query = "SELECT AnswerTable.ID, AnswerTable.Answer, AnswerTable.isCorrect "
+                    + "FROM AnswerTable "
+                    + "WHERE AnswerTable.questionid = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, questionID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt("ID");
+                String answer = rs.getString("Answer");
+                Boolean isCorrect = rs.getBoolean("isCorrect");
+
+                if (question.getClass().equals(MultipleChoiceQuestion.class))
+                {
+                    MultipleChoiceAnswer multiAnswer = new MultipleChoiceAnswer(answer);
+                    multiAnswer.setAnswerID(id);
+
+                    if (isCorrect)
+                    {
+                        multiAnswer.markCorrect();
+                    }
+                    else
+                    {
+                        multiAnswer.markIncorrect();
+                    }
+
+                    answerList.addToList(multiAnswer);
+                }
+                else if (question.getClass().equals(OpenEndedQuestion.class))
+                {
+                    OpenEndedAnswer openEndedAnswer = new OpenEndedAnswer(answer);
+                    openEndedAnswer.setAnswerID(id);
+                    openEndedAnswer.markCorrect();
+
+                    answerList.addToList(openEndedAnswer);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return answerList;
     }
 
     public void closeConnection()

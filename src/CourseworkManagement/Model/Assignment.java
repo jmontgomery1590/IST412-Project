@@ -15,7 +15,6 @@ public class Assignment {
 
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
-        this.setPossibleScore(0.0);
         this.setEarnedScore(0.0);
         this.setCompleted(false);
         this.setGrade("--");
@@ -112,5 +111,6 @@ public class Assignment {
 
     public void setQuestionList(QuestionList questionList) {
         this.questionList = questionList;
+        updatePossibleScore();
     }
 }

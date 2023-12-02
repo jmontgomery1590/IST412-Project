@@ -4,6 +4,7 @@ public class MultipleChoiceAnswer extends Answer {
     private String answer;
     private Boolean isCorrect;
     private Boolean isSelected;
+    private int answerID;
     public MultipleChoiceAnswer(String answer)
     {
         this.answer = answer;
@@ -45,5 +46,13 @@ public class MultipleChoiceAnswer extends Answer {
     public boolean getIsCorrect()
     {
         return this.isCorrect;
+    }
+
+    public int getAnswerID() {
+        return answerID;
+    }
+
+    public void setAnswerID(int answerID) {
+        this.answerID = answerID;
     }
 }

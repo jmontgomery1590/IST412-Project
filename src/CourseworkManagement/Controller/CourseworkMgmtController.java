@@ -15,6 +15,7 @@ public class CourseworkMgmtController {
      */
     public CourseworkMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
+        this.currentUser = this.courseMgmtController.getHomepageController().getUser();
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
         this.currentCourse.setAssignmentList(database.getAssignmentsByCourse(this));
         this.assignmentList = this.currentCourse.getAssignmentList();

@@ -3,6 +3,8 @@ package CourseworkManagement.Model;
 public class OpenEndedAnswer extends Answer {
     private String answer;
     private Boolean isCorrect;
+
+    private int answerID;
     public OpenEndedAnswer(String answer)
     {
         this.answer = answer;
@@ -40,5 +42,13 @@ public class OpenEndedAnswer extends Answer {
     @Override
     public boolean getIsCorrect() {
         return this.isCorrect;
+    }
+
+    public int getAnswerID() {
+        return answerID;
+    }
+
+    public void setAnswerID(int answerID) {
+        this.answerID = answerID;
     }
 }

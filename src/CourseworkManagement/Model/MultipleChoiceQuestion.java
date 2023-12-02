@@ -86,7 +86,7 @@ public class MultipleChoiceQuestion extends Question{
     public void setSubmittedAnswer(String submittedAnswer) {
         this.submittedAnswer = submittedAnswer;
     }
-
+    @Override
     public int getQuestionID() {
         return questionID;
     }

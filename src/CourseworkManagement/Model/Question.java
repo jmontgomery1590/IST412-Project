@@ -10,4 +10,6 @@ public abstract class Question {
     public abstract double getQuestionPointWorth();
 
     public abstract void compareSubmittedAnswer(String selectedAnswer);
+
+    public abstract int getQuestionID();
 }

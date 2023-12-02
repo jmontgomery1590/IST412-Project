@@ -12,10 +12,7 @@ public class QuestionList {
 
     public void addToList(Question question)
     {
-        if (!this.questionList.contains(question))
-        {
-            this.questionList.add(question);
-        }
+        this.questionList.add(question);
     }
 
     public ArrayList<Question> getQuestionList() {
