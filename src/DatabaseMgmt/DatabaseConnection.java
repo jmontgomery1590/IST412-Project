@@ -240,6 +240,33 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void editCourseInDatabase(Course course){
+        openConnection();
+        String courseID = course.getCourseID();
+        String courseName = course.getCourseName();
+        String maxEnrolled = course.getMaxEnrolled();
+        int instructorID = course.getInstructor().getUserIDNumber();
+        int tableID = course.getCourseTableID();
+        try{
+            String query = "UPDATE CourseTable "
+                    + "SET CourseTable.courseid = ?, CourseTable.coursename = ?, CourseTable.maxenrolled = ?, CourseTable.instructorid = ? "
+                    + "WHERE CourseTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, courseID);
+            pstmt.setString(2, courseName);
+            pstmt.setString(3, maxEnrolled);
+            pstmt.setInt(4, instructorID);
+            pstmt.setInt(5, tableID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void getCourseLessonList(CourseMgmtController courseMgmtController) {
         openConnection();
         try {

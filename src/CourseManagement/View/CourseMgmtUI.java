@@ -25,6 +25,7 @@ public class CourseMgmtUI {
     private Lesson selectedLesson;
     private Announcement selectedAnnouncement;
     private Course selectedCourse;
+    private int selectedRow;
 
 
     public CourseMgmtUI(CourseMgmtController courseMgmtController) {
@@ -41,7 +42,7 @@ public class CourseMgmtUI {
         this.getViewCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = courseTable.getSelectedRow();
+                selectedRow = courseTable.getSelectedRow();
                 courseMgmtCntrl.setSelectedCourse(courseMgmtCntrl.getCourseList().getCourses().get(selectedRow));
                 courseMgmtCntrl.setPageMgmtUI(new PageMgmtUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getPageMgmtUI().getPageMgmtPanel(), "View Course");
@@ -61,6 +62,7 @@ public class CourseMgmtUI {
         this.getEditCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedRow = courseTable.getSelectedRow();
                 courseMgmtCntrl.setEditCourseUI(new EditCourseUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
@@ -109,11 +111,11 @@ public class CourseMgmtUI {
         return courseMgmtCntrl;
     }
 
-    public Lesson getSelectedLesson() {
-        return selectedLesson;
+    public int getSelectedRow() {
+        return selectedRow;
     }
 
-    public void setSelectedLesson(Lesson selectedLesson) {
-        this.selectedLesson = selectedLesson;
+    public void setSelectedRow(int selectedRow) {
+        this.selectedRow = selectedRow;
     }
 }

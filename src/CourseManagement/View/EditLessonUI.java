@@ -59,12 +59,13 @@ public class EditLessonUI {
                 currentLesson.setPageTitle(titleTextField.getText());
                 currentLesson.setLessonContent(lessonContentArea.getText());
                 currentLesson.setAssignedReading(lessonReadingArea.getText());
+
                 courseMgmtController.getDatabase().editLessonInDatabase(currentLesson);
                 courseMgmtController.getLessonTable().fireTableDataChanged();
 
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editLessonFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditLessonUI(null);
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -72,7 +73,7 @@ public class EditLessonUI {
             public void actionPerformed(ActionEvent e) {
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editLessonFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditLessonUI(null);
             }
         });
     }

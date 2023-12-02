@@ -63,7 +63,7 @@ public class EditAnnouncementUI {
 
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editAnnouncementFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditAnnouncementUI(null);
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -71,7 +71,7 @@ public class EditAnnouncementUI {
             public void actionPerformed(ActionEvent e) {
                 courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editAnnouncementFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                courseMgmtController.setEditAnnouncementUI(null);
             }
         });
     }
