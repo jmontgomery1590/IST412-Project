@@ -11,6 +11,7 @@ import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.Instructor;
+import UserAuthentication.Model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -399,7 +400,90 @@ public class DatabaseConnection {
         closeConnection();
     }
 
-    public AssignmentList getAssignmentsByCourse(CourseworkMgmtController courseworkMgmtController) {
+    public void getStudentListForCourse(Course course)
+    {
+        openConnection();
+        int courseID = course.getCourseTableID();
+        try
+        {
+            String query = "SELECT UserTable.* "
+                    + "FROM UserTable "
+                    + "JOIN StudentEnrolledTable ON UserTable.ID = StudentEnrolledTable.userid "
+                    + "WHERE StudentEnrolledTable.courseid = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next())
+            {
+                int studentID = rs.getInt("ID");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fName = rs.getString("firstname");
+                String lName = rs.getString("lastname");
+                String roleID = String.valueOf(rs.getInt("roleid"));
+
+                Student student = new Student(username, password);
+                student.setUserIDNumber(studentID);
+                student.setFirstName(fName);
+                student.setLastName(lName);
+                student.setRoleID(roleID);
+
+                course.getStudentsEnrolled().add(student);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public AssignmentList getAllStudentAssignmentByCourse(CourseworkMgmtController courseworkMgmtController, ArrayList<Student> students) {
+        openConnection();
+        int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
+        AssignmentList assignmentList = courseworkMgmtController.getAssignmentList();
+
+        for (Student student : students)
+        {
+            int userID = student.getUserIDNumber();
+            try
+            {
+                String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade  "
+                        + "FROM AssignmentTable "
+                        + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
+                        + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
+
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setInt(1, courseTableID);
+                pstmt.setInt(2, userID);
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next())
+                {
+                    int assignmentID = rs.getInt("ID");
+                    String assignmentTitle = rs.getString("AssignmentName");
+                    boolean completed = rs.getBoolean("completed");
+
+                    Assignment assignment = new Assignment(assignmentTitle);
+                    assignment.setAssignmentID(assignmentID);
+                    assignment.setQuestionList(getQuestionsByAssignment(assignment));
+                    assignment.setCompleted(completed);
+                    assignment.setAssignedStudent(student);
+                    assignmentList.getAssignments().add(assignment);
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+        closeConnection();
+        return assignmentList;
+    }
+
+    public AssignmentList getStudentAssignmentByCourse(CourseworkMgmtController courseworkMgmtController) {
         openConnection();
         int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
         int userID = courseworkMgmtController.getCurrentUser().getUserIDNumber();
