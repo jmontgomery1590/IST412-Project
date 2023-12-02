@@ -3,6 +3,7 @@ package CourseManagement.Model;
 public class Announcement extends Page{
     private String announcementContent;
     private int courseTableID;
+    private int announcementID;
 
     /**
      * Constructor for the Page class
@@ -17,9 +18,9 @@ public class Announcement extends Page{
         announcementContent = content;
     }
 
-    public Announcement(int tableID, String title, String content) {
+    public Announcement(int courseTableID, String title, String content) {
         super (title);
-        courseTableID = tableID;
+        this.courseTableID = courseTableID;
         announcementContent = content;
     }
 
@@ -37,6 +38,14 @@ public class Announcement extends Page{
 
     public void setCourseTableID(int courseTableID) {
         this.courseTableID = courseTableID;
+    }
+
+    public int getAnnouncementID() {
+        return announcementID;
+    }
+
+    public void setAnnouncementID(int announcementID) {
+        this.announcementID = announcementID;
     }
 }
 

@@ -139,7 +139,7 @@ public class DatabaseConnection {
                 int instructorID = rs.getInt("instructorid");
                 String enrolledConverted = String.valueOf(enrolled);
                 Instructor instructor = getInstructorForCourse(instructorID);
-                Course course = new Course(tableID, name, id, enrolledConverted, instructor);
+                Course course = new Course(tableID, id, name, enrolledConverted, instructor);
                 courseMgmtController.getCourseList().getCourses().add(course);
             }
         }
@@ -296,7 +296,7 @@ public class DatabaseConnection {
         try {
             int courseID = courseMgmtController.getSelectedCourse().getCourseTableID();
 
-            String query = "SELECT AnnouncementTable.announcementtitle, AnnouncementTable.announcementbody "
+            String query = "SELECT AnnouncementTable.ID, AnnouncementTable.announcementtitle, AnnouncementTable.announcementbody "
                     + "FROM AnnouncementTable "
                     + "WHERE AnnouncementTable.courseid = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -305,10 +305,12 @@ public class DatabaseConnection {
 
             while (rs.next())
             {
+                int announcementID = rs.getInt("ID");
                 String announcementTitle = rs.getString("announcementtitle");
                 String announcementBody = rs.getString("announcementbody");
 
                 Announcement announcement = new Announcement(announcementTitle, announcementBody);
+                announcement.setAnnouncementID(announcementID);
                 courseMgmtController.getAnnouncementList().getAnnouncements().add(announcement);
             }
         }
@@ -379,15 +381,18 @@ public class DatabaseConnection {
         closeConnection();
     }
 
-    public void deleteAnnouncementFromDatabase(AnnouncementMgmtUI announcementMgmtUI){
+    public void deleteAnnouncementFromDatabase(Announcement announcement){
         openConnection();
-        Announcement announcementToDelete = announcementMgmtUI.getSelectedAnnouncement();
+        int announcementID = announcement.getAnnouncementID();
 
         try{
-            String query = "DELETE FROM AnnouncementTable (courseid, announcementtitle, announcementbody) "
-                    + "VALUES (?, ?, ?)";
+            String query = "DELETE FROM AnnouncementTable "
+                    + "WHERE ID = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, announcementID);
+            pstmt.executeUpdate();
+
         }
         catch(Exception e)
         {
