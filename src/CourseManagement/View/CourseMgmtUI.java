@@ -45,6 +45,7 @@ public class CourseMgmtUI {
                 courseMgmtCntrl.setSelectedCourse(courseMgmtCntrl.getCourseList().getCourses().get(selectedRow));
                 courseMgmtCntrl.setPageMgmtUI(new PageMgmtUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().add(courseMgmtCntrl.getPageMgmtUI().getPageMgmtPanel(), "View Course");
+
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getCardSwapper().show(courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel(), "View Course");
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().revalidate();
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getViewPanel().repaint();

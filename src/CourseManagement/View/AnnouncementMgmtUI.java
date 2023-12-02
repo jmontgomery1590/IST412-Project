@@ -23,7 +23,7 @@ public class AnnouncementMgmtUI {
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int announcementListPosition;
-    private Announcement newAnnouncement;
+    private Announcement newAnnouncement, selectedAnnouncement;
     private User user;
 
     public AnnouncementMgmtUI(CourseMgmtController courseMgmtController) {
@@ -117,15 +117,15 @@ public class AnnouncementMgmtUI {
         return announcementListPosition;
     }
 
-    public void setAnnouncementListPosition(int announcementListPosition) {
-        this.announcementListPosition = announcementListPosition;
-    }
-
     public Announcement getNewAnnouncement() {
         return newAnnouncement;
     }
 
     public void setNewAnnouncement(Announcement newAnnouncement) {
         this.newAnnouncement = newAnnouncement;
+    }
+
+    public Announcement getSelectedAnnouncement() {
+        return selectedAnnouncement;
     }
 }

@@ -379,6 +379,23 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void deleteAnnouncementFromDatabase(AnnouncementMgmtUI announcementMgmtUI){
+        openConnection();
+        Announcement announcementToDelete = announcementMgmtUI.getSelectedAnnouncement();
+
+        try{
+            String query = "DELETE FROM AnnouncementTable (courseid, announcementtitle, announcementbody) "
+                    + "VALUES (?, ?, ?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public QuestionList getQuestionsByAssignment(Assignment assignment){
         int assignmentID = assignment.getAssignmentID();
         QuestionList questionList = new QuestionList();
