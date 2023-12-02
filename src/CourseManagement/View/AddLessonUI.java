@@ -30,7 +30,6 @@ public class AddLessonUI extends JFrame{
     
     private void initComponents() {
         addLessonFrame = new JFrame("Add New Lesson");
-        addLessonFrame.setResizable(false);
         addLessonFrame.setMinimumSize(new Dimension(800, 600));
         addLessonFrame.setContentPane(addLessonPanel);
         addLessonFrame.setLocationRelativeTo(null);

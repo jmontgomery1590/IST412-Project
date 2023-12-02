@@ -244,7 +244,7 @@ public class DatabaseConnection {
         try {
             int courseID = courseMgmtController.getSelectedCourse().getCourseTableID();
 
-            String query = "SELECT LessonTable.lessontitle, LessonTable.lessoncontent, LessonTable.assignedreading "
+            String query = "SELECT LessonTable.ID, LessonTable.lessontitle, LessonTable.lessoncontent, LessonTable.assignedreading "
                     + "FROM LessonTable "
                     + "WHERE LessonTable.courseid = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -253,11 +253,14 @@ public class DatabaseConnection {
 
             while (rs.next())
             {
+                int lessonID = rs.getInt("ID");
                 String lessonTitle = rs.getString("lessontitle");
                 String lessonContent = rs.getString("lessoncontent");
                 String assignedReading = rs.getString("assignedreading");
 
                 Lesson lesson = new Lesson(lessonTitle, lessonContent, assignedReading);
+                lesson.setLessonID(lessonID);
+                lesson.setCourseTableID(courseID);
                 courseMgmtController.getLessonList().getLessons().add(lesson);
             }
         }
@@ -291,6 +294,26 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void deleteLessonFromDatabase(Lesson lesson){
+        openConnection();
+        int lessonID = lesson.getLessonID();
+
+        try{
+            String query = "DELETE FROM LessonTable "
+                    + "WHERE ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, lessonID);
+            pstmt.executeUpdate();
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void getCourseAnnouncementList(CourseMgmtController courseMgmtController) {
         openConnection();
         try {
@@ -311,6 +334,7 @@ public class DatabaseConnection {
 
                 Announcement announcement = new Announcement(announcementTitle, announcementBody);
                 announcement.setAnnouncementID(announcementID);
+                announcement.setCourseTableID(courseID);
                 courseMgmtController.getAnnouncementList().getAnnouncements().add(announcement);
             }
         }
