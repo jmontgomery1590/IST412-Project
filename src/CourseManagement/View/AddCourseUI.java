@@ -30,11 +30,12 @@ public class AddCourseUI {
         addCourseFrame.setResizable(false);
         addCourseFrame.setMinimumSize(new Dimension(800, 600));
         addCourseFrame.setContentPane(addCoursePanel);
-        loadInstructorComboBox(this.courseMgmtCntrl.getDatabase().getAllInstructorsForSelection());
         addCourseFrame.setLocationRelativeTo(null);
-        addALNewCourseButtons();
         addCourseFrame.setVisible(true);
         addCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        loadInstructorComboBox(this.courseMgmtCntrl.getDatabase().getAllInstructorsForSelection());
+        addALNewCourseButtons();
         addFocusListeners();
     }
 
@@ -48,11 +49,11 @@ public class AddCourseUI {
                     String courseName = courseNameTextField.getText();
                     String maxEnrolled = maxEnrolledTextField.getText();
                     Instructor instructor = selectInstructorFromList();
-
                     courseMgmtCntrl.setNewCourse(new Course(0, courseID, courseName, maxEnrolled, instructor));
 
                     courseMgmtCntrl.getCourseList().getCourses().add(courseMgmtCntrl.getNewCourse());
                     courseMgmtCntrl.getDatabase().addCourseToDatabase(courseMgmtCntrl);
+
                     courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                     courseMgmtCntrl.getCourseTable().fireTableDataChanged();
                     addCourseFrame.dispose();

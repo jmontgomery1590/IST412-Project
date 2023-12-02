@@ -48,9 +48,14 @@ public class AddAnnouncementUI extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentAnnouncement.setPageTitle(titleTextField.getText());
-                currentAnnouncement.setAnnouncementContent(announcementTextArea.getText());
-                courseMgmtCntrl.getAnnouncementList().getAnnouncements().add(currentAnnouncement);
+                int courseTableID = courseMgmtCntrl.getSelectedCourse().getCourseTableID();
+                String pageTitle = titleTextField.getText();
+                String announcementContent = announcementTextArea.getText();
+                courseMgmtCntrl.getAnnouncementMgmtUI().setNewAnnouncement(new Announcement(courseTableID, pageTitle, announcementContent));
+
+                courseMgmtCntrl.getAnnouncementList().getAnnouncements().add(courseMgmtCntrl.getAnnouncementMgmtUI().getNewAnnouncement());
+                courseMgmtCntrl.getDatabase().addAnnouncementToDatabase(courseMgmtCntrl.getAnnouncementMgmtUI());
+
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 courseMgmtCntrl.getAnnouncementTable().fireTableDataChanged();
                 addAnnouncementFrame.dispose();

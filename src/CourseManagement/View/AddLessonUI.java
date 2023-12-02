@@ -24,7 +24,7 @@ public class AddLessonUI extends JFrame{
 
     public AddLessonUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-        currentLesson = new Lesson("", "", "");
+
         initComponents();
     }
     
@@ -45,10 +45,15 @@ public class AddLessonUI extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentLesson.setPageTitle(titleTextField.getText());
-                currentLesson.setLessonContent(lessonContentArea.getText());
-                currentLesson.setAssignedReading(lessonReadingArea.getText());
-                courseMgmtCntrl.getLessonList().getLessons().add(currentLesson);
+                int courseTableID = courseMgmtCntrl.getSelectedCourse().getCourseTableID();
+                String pageTitle = titleTextField.getText();
+                String lessonContent = lessonContentArea.getText();
+                String readingArea = lessonReadingArea.getText();
+                courseMgmtCntrl.getLessonMgmtUI().setNewLesson(new Lesson(courseTableID, pageTitle, lessonContent, readingArea));
+
+                courseMgmtCntrl.getLessonList().getLessons().add(courseMgmtCntrl.getLessonMgmtUI().getNewLesson());
+                courseMgmtCntrl.getDatabase().addLessonToDatabase(courseMgmtCntrl.getLessonMgmtUI());
+
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 courseMgmtCntrl.getLessonTable().fireTableDataChanged();
                 addLessonFrame.dispose();
