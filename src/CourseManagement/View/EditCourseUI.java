@@ -28,7 +28,6 @@ public class EditCourseUI {
     public EditCourseUI(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
         //selectedCourse = courseMgmtController.getSelectedCourse();
-        // use same .getSelectedRow function as in Lesson/AnnouncementMgmtUI and ViewUI classes
 
         editCourseFrame = new JFrame("Edit Course");
         editCourseFrame.setResizable(false);

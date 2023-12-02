@@ -5,6 +5,7 @@ import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
 import CourseManagement.View.AnnouncementMgmtUI;
+import CourseManagement.View.EditAnnouncementUI;
 import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
@@ -294,6 +295,31 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void editLessonInDatabase(Lesson lesson){
+        openConnection();
+        int lessonID = lesson.getLessonID();
+        String lessonTitle = lesson.getPageTitle();
+        String lessonContent = lesson.getLessonContent();
+        String lessonReading = lesson.getAssignedReading();
+        try{
+            String query = "UPDATE LessonTable "
+                    + "SET LessonTable.lessontitle = ?, LessonTable.lessoncontent = ?, LessonTable.assignedreading = ? "
+                    + "WHERE LessonTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, lessonTitle);
+            pstmt.setString(2, lessonContent);
+            pstmt.setString(3, lessonReading);
+            pstmt.setInt(4, lessonID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
     public void deleteLessonFromDatabase(Lesson lesson){
         openConnection();
         int lessonID = lesson.getLessonID();
@@ -322,6 +348,7 @@ public class DatabaseConnection {
             String query = "SELECT AnnouncementTable.ID, AnnouncementTable.announcementtitle, AnnouncementTable.announcementbody "
                     + "FROM AnnouncementTable "
                     + "WHERE AnnouncementTable.courseid = ?";
+
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, courseID);
             ResultSet rs = pstmt.executeQuery();
@@ -399,6 +426,29 @@ public class DatabaseConnection {
             pstmt.executeUpdate();
         }
         catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void editAnnouncementInDatabase(Announcement announcement){
+        openConnection();
+        int announcementID = announcement.getAnnouncementID();
+        String announcementTitle = announcement.getPageTitle();
+        String announcementBody = announcement.getAnnouncementContent();
+        try{
+            String query = "UPDATE AnnouncementTable "
+                    + "SET AnnouncementTable.announcementtitle = ?, AnnouncementTable.announcementbody = ? "
+                    + "WHERE AnnouncementTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, announcementTitle);
+            pstmt.setString(2, announcementBody);
+            pstmt.setInt(3, announcementID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
         {
             System.out.println(e);
         }
