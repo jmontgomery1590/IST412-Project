@@ -12,13 +12,11 @@ import java.awt.event.ActionListener;
 public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
 	private JButton homeButton, coursesButton, profileButton, exitButton;
-	private JPanel navigationPanel;
-	private JPanel HomePage, viewPanel, homePanel;
+	private JPanel navigationPanel, HomePage, viewPanel, homePanel;
 	private JLabel homeWelcomeLabel;
 	private HomepageController homepageCntrl;
 	private CardLayout cardSwapper;
 	private String pcUserName = System.getenv("USERNAME");
-	private String imagePath = "C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//PSU.png";
 
 	public HomepageUI (HomepageController homepageController) {
 		homepageCntrl = homepageController;

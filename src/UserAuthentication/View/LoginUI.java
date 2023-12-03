@@ -11,8 +11,7 @@ import java.awt.event.ActionListener;
 
 public class LoginUI extends JFrame {
     private JFrame loginFrame;
-    private JPanel loginPanel, buttonPanel, passwordPanel, userNamePanel;
-    private JPanel titlePanel;
+    private JPanel loginPanel, buttonPanel, passwordPanel, userNamePanel, titlePanel;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton, exitButton;
@@ -79,8 +78,6 @@ public class LoginUI extends JFrame {
 
         loginController.setU1(new User(loginController.getLoginID(), loginController.getPassword()));
         return loginController.verifyUser();
-
-        //return loginController.getU1().verifyUser();
     }
 
     public JPanel getLoginPanel() {

@@ -48,4 +48,3 @@ public class Announcement extends Page{
         this.announcementID = announcementID;
     }
 }
-
