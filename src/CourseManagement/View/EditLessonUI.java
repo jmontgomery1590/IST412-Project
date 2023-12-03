@@ -11,13 +11,11 @@ import java.awt.event.ActionListener;
 
 public class EditLessonUI {
     private JFrame editLessonFrame;
-    private JPanel editLessonPanel, readingPanel, buttonPanel;
+    private JPanel editLessonPanel, readingPanel, buttonPanel, titlePanel, contentPanel;
     private JTextField titleTextField;
     private JTextArea lessonReadingArea, lessonContentArea;
-    private JPanel titlePanel, contentPanel;
     private JButton saveButton, cancelButton;
-    private JScrollPane lessonContentScrollPane;
-    private JScrollPane lessonReadingScrollPane;
+    private JScrollPane lessonContentScrollPane, lessonReadingScrollPane;
     private CourseMgmtController courseMgmtController;
     private Lesson currentLesson;
     private LessonList lessonList;
@@ -29,7 +27,7 @@ public class EditLessonUI {
         editLessonFrame.setContentPane(editLessonPanel);
         editLessonFrame.setLocationRelativeTo(null);
         editLessonFrame.setVisible(true);
-        editLessonFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        editLessonFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         this.courseMgmtController = courseMgmtController;
         lessonNumber = this.courseMgmtController.getLessonMgmtUI().getLessonListPosition();
@@ -78,30 +76,6 @@ public class EditLessonUI {
         });
     }
 
-    public JFrame getEditLessonFrame() {
-        return editLessonFrame;
-    }
-
-    public void setEditLessonFrame(JFrame editLessonFrame) {
-        this.editLessonFrame = editLessonFrame;
-    }
-
-    public JPanel getEditLessonPanel() {
-        return editLessonPanel;
-    }
-
-    public void setEditLessonPanel(JPanel editLessonPanel) {
-        this.editLessonPanel = editLessonPanel;
-    }
-
-    public JPanel getReadingPanel() {
-        return readingPanel;
-    }
-
-    public void setReadingPanel(JPanel readingPanel) {
-        this.readingPanel = readingPanel;
-    }
-
     public JPanel getButtonPanel() {
         return buttonPanel;
     }
@@ -110,44 +84,12 @@ public class EditLessonUI {
         this.buttonPanel = buttonPanel;
     }
 
-    public JTextField getTitleTextField() {
-        return titleTextField;
-    }
-
-    public void setTitleTextField(JTextField titleTextField) {
-        this.titleTextField = titleTextField;
-    }
-
-    public JTextArea getLessonReadingArea() {
-        return lessonReadingArea;
-    }
-
-    public void setLessonReadingArea(JTextArea lessonReadingArea) {
-        this.lessonReadingArea = lessonReadingArea;
-    }
-
-    public JTextArea getLessonContentArea() {
-        return lessonContentArea;
-    }
-
-    public void setLessonContentArea(JTextArea lessonContentArea) {
-        this.lessonContentArea = lessonContentArea;
-    }
-
     public JPanel getTitlePanel() {
         return titlePanel;
     }
 
     public void setTitlePanel(JPanel titlePanel) {
         this.titlePanel = titlePanel;
-    }
-
-    public JPanel getContentPanel() {
-        return contentPanel;
-    }
-
-    public void setContentPanel(JPanel contentPanel) {
-        this.contentPanel = contentPanel;
     }
 
     public JButton getSaveButton() {
@@ -172,29 +114,5 @@ public class EditLessonUI {
 
     public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
-    }
-
-    public Lesson getCurrentLesson() {
-        return currentLesson;
-    }
-
-    public void setCurrentLesson(Lesson currentLesson) {
-        this.currentLesson = currentLesson;
-    }
-
-    public LessonList getLessonList() {
-        return lessonList;
-    }
-
-    public void setLessonList(LessonList lessonList) {
-        this.lessonList = lessonList;
-    }
-
-    public int getLessonNumber() {
-        return lessonNumber;
-    }
-
-    public void setLessonNumber(int lessonNumber) {
-        this.lessonNumber = lessonNumber;
     }
 }

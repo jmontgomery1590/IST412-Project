@@ -1,9 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,24 +10,13 @@ import java.awt.event.ActionListener;
 
 public class PageMgmtUI {
     private JFrame viewPageMgmtFrame;
-    private JPanel pageMgmtPanel, titlePanel;
-    private JPanel buttonPanel;
+    private JPanel pageMgmtPanel, titlePanel, buttonPanel;
     private JButton lessonsButton, announcementsButton, assignmentsButton;
     private JLabel titleLabel;
-    private LessonMgmtUI lessonMgmtUI;
-    private AnnouncementMgmtUI announcementMgmtUI;
-    private HomepageController homepageController;
     private CourseMgmtController courseMgmtCntrl;
-    private LessonTableModel lessonTable;
-    private AnnouncementTableModel announcementTable;
-    private LessonList lessonList;
-    private AnnouncementList announcementList;
 
     public PageMgmtUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
-
-        //this.lessonMgmtUI = new LessonMgmtUI(this.courseMgmtCntrl);
-        //this.announcementMgmtUI = new AnnouncementMgmtUI(this.courseMgmtCntrl);
         viewPageMgmtFrame = new JFrame("Page Selection");
         this.titleLabel.setText(this.courseMgmtCntrl.getSelectedCourse().getCourseID() + " " + this.courseMgmtCntrl.getSelectedCourse().getCourseName());
         this.titleLabel.setForeground(Color.WHITE);
@@ -86,13 +73,5 @@ public class PageMgmtUI {
 
     public JPanel getPageMgmtPanel() {
         return pageMgmtPanel;
-    }
-
-    public CourseMgmtController getCourseMgmtCntrl() {
-        return courseMgmtCntrl;
-    }
-
-    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
-        this.courseMgmtCntrl = courseMgmtCntrl;
     }
 }

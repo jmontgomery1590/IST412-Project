@@ -14,12 +14,10 @@ public class AnnouncementMgmtUI {
     private HomepageController homepageController;
     private AnnouncementMgmtUI announcementMgmtUI;
     private JFrame announcementFrame;
-    private JPanel buttonPanel;
-    private JPanel announcementTablePanel, announcementMgmtPanel;
+    private JPanel announcementTablePanel, announcementMgmtPanel, buttonPanel, announcementTitlePanel;
     private JButton newAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;
     private JTable announcementTable;
     private JLabel announcementLabel;
-    private JPanel announcementTitlePanel;
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private int announcementListPosition;

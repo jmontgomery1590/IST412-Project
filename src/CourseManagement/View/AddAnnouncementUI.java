@@ -12,14 +12,10 @@ import java.awt.event.WindowEvent;
 
 public class AddAnnouncementUI extends JFrame{
     private JFrame addAnnouncementFrame;
-    private JPanel addAnnouncementPanel;
+    private JPanel addAnnouncementPanel, announcementInfoPanel, buttonPanel, titlePanel, announcementPanel;
     private JButton saveButton, cancelButton;
-    private JPanel announcementInfoPanel;
     private JTextField titleTextField;
     private JTextArea announcementTextArea;
-    private JPanel buttonPanel;
-    private JPanel titlePanel;
-    private JPanel announcementPanel;
     private JScrollPane announcementScrollPane;
     private CourseMgmtController courseMgmtCntrl;
     private Announcement currentAnnouncement;

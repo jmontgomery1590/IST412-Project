@@ -14,9 +14,7 @@ import java.util.ArrayList;
 
 public class AddCourseUI {
     private JFrame addCourseFrame;
-    private JPanel addCoursePanel;
-    private JPanel buttonPanel;
-    private JPanel courseInformationPanel;
+    private JPanel addCoursePanel, buttonPanel, courseInformationPanel;
     private JTextField courseIDTextField, courseNameTextField, maxEnrolledTextField;
     private JButton saveButton, cancelButton;
     private JLabel instructorLabel, maxEnrolledLabel, courseNameLabel, courseIDLabel;
@@ -118,21 +116,5 @@ public class AddCourseUI {
 
     public JButton getCancelButton() {
         return cancelButton;
-    }
-
-    public CourseMgmtController getCourseMgmtCntrl() {
-        return courseMgmtCntrl;
-    }
-
-    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
-        this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
-    public JComboBox getInstructorComboBox() {
-        return instructorComboBox;
-    }
-
-    public void setInstructorComboBox(JComboBox instructorComboBox) {
-        this.instructorComboBox = instructorComboBox;
     }
 }

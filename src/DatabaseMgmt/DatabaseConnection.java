@@ -5,7 +5,6 @@ import CourseManagement.Model.Announcement;
 import CourseManagement.Model.Course;
 import CourseManagement.Model.Lesson;
 import CourseManagement.View.AnnouncementMgmtUI;
-import CourseManagement.View.EditAnnouncementUI;
 import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
@@ -128,7 +127,7 @@ public class DatabaseConnection {
         {
             String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
                     + "FROM CourseTable "
-                    + "WHERE CourseTable.instructorid = ?";
+                    + "WHERE CourseTable.instructorid = ? AND CourseTable.isactive = true";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
@@ -158,7 +157,8 @@ public class DatabaseConnection {
         try
         {
             String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
-                    + "FROM CourseTable ";
+                    + "FROM CourseTable "
+                    + "WHERE CourseTable.isactive = true";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
@@ -191,7 +191,7 @@ public class DatabaseConnection {
             String query = "SELECT CourseTable.ID, CourseTable.courseid, CourseTable.coursename, CourseTable.maxenrolled, CourseTable.instructorid  "
                     + "FROM CourseTable "
                     + "JOIN StudentEnrolledTable ON CourseTable.ID = StudentEnrolledTable.courseid "
-                    + "WHERE StudentEnrolledTable.userid = ?";
+                    + "WHERE StudentEnrolledTable.userid = ? AND CourseTable.isactive = true";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
@@ -224,14 +224,15 @@ public class DatabaseConnection {
         int instructorID = courseToAdd.getInstructor().getUserIDNumber();
 
         try {
-            String query = "INSERT INTO CourseTable (courseid, coursename, maxenrolled, instructorid) "
-                    + "VALUES (?, ?, ?,?)";
+            String query = "INSERT INTO CourseTable (courseid, coursename, maxenrolled, instructorid, isactive) "
+                    + "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, courseToAdd.getCourseID());
             pstmt.setString(2, courseToAdd.getCourseName());
             pstmt.setInt(3, maxEnrolled);
             pstmt.setInt(4, instructorID);
+            pstmt.setBoolean(5, true);
 
             pstmt.executeUpdate();
         }
@@ -260,6 +261,25 @@ public class DatabaseConnection {
             pstmt.setString(3, maxEnrolled);
             pstmt.setInt(4, instructorID);
             pstmt.setInt(5, tableID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void disableCourseInDatabase(Course course) {
+        openConnection();
+        try {
+            String query = "UPDATE CourseTable "
+                    + "SET CourseTable.isactive = ? "
+                    + "WHERE CourseTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setBoolean(1, false);
+            pstmt.setInt(2, course.getCourseTableID());
             pstmt.executeUpdate();
         }
         catch (Exception e)

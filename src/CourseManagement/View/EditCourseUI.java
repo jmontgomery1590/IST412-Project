@@ -15,11 +15,10 @@ import java.util.ArrayList;
 
 public class EditCourseUI {
     private JFrame editCourseFrame;
-    private JPanel editCoursePanel, courseInformationPanel;
+    private JPanel editCoursePanel, courseInformationPanel, buttonPanel;
     private JLabel courseIDLabel, courseNameLabel, maxEnrolledLabel, instructorLabel;
     private JTextField courseIDTextField, courseNameTextField, maxEnrolledTextField;
     private JComboBox instructorComboBox;
-    private JPanel buttonPanel;
     private JButton cancelButton, saveButton;
     private CourseMgmtController courseMgmtController;
     private CourseMgmtUI courseMgmtUI;
@@ -64,17 +63,21 @@ public class EditCourseUI {
         this.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentCourse.setCourseID(courseIDTextField.getText());
-                currentCourse.setCourseName(courseNameTextField.getText());
-                currentCourse.setMaxEnrolled(maxEnrolledTextField.getText());
-                currentCourse.setInstructor(selectInstructorFromList());
+                if (checkStringToInt())
+                {
+                    currentCourse.setCourseID(courseIDTextField.getText());
 
-                courseMgmtController.getDatabase().editCourseInDatabase(currentCourse);
-                courseMgmtController.getCourseTable().fireTableDataChanged();
+                    currentCourse.setCourseName(courseNameTextField.getText());
+                    currentCourse.setMaxEnrolled(maxEnrolledTextField.getText());
+                    currentCourse.setInstructor(selectInstructorFromList());
 
-                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
-                editCourseFrame.dispose();
-                courseMgmtController.setEditCourseUI(null);
+                    courseMgmtController.getDatabase().editCourseInDatabase(currentCourse);
+                    courseMgmtController.getCourseTable().fireTableDataChanged();
+
+                    courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                    editCourseFrame.dispose();
+                    courseMgmtController.setEditCourseUI(null);
+                }
             }
         });
         this.getCancelButton().addActionListener(new ActionListener() {
@@ -129,94 +132,6 @@ public class EditCourseUI {
         courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().transferFocus();
     }
 
-    public JFrame getEditCourseFrame() {
-        return editCourseFrame;
-    }
-
-    public void setEditCourseFrame(JFrame editCourseFrame) {
-        this.editCourseFrame = editCourseFrame;
-    }
-
-    public JPanel getEditCoursePanel() {
-        return editCoursePanel;
-    }
-
-    public void setEditCoursePanel(JPanel editCoursePanel) {
-        this.editCoursePanel = editCoursePanel;
-    }
-
-    public JPanel getCourseInformationPanel() {
-        return courseInformationPanel;
-    }
-
-    public void setCourseInformationPanel(JPanel courseInformationPanel) {
-        this.courseInformationPanel = courseInformationPanel;
-    }
-
-    public JLabel getCourseIDLabel() {
-        return courseIDLabel;
-    }
-
-    public void setCourseIDLabel(JLabel courseIDLabel) {
-        this.courseIDLabel = courseIDLabel;
-    }
-
-    public JLabel getCourseNameLabel() {
-        return courseNameLabel;
-    }
-
-    public void setCourseNameLabel(JLabel courseNameLabel) {
-        this.courseNameLabel = courseNameLabel;
-    }
-
-    public JLabel getMaxEnrolledLabel() {
-        return maxEnrolledLabel;
-    }
-
-    public void setMaxEnrolledLabel(JLabel maxEnrolledLabel) {
-        this.maxEnrolledLabel = maxEnrolledLabel;
-    }
-
-    public JLabel getInstructorLabel() {
-        return instructorLabel;
-    }
-
-    public void setInstructorLabel(JLabel instructorLabel) {
-        this.instructorLabel = instructorLabel;
-    }
-
-    public JTextField getCourseIDTextField() {
-        return courseIDTextField;
-    }
-
-    public void setCourseIDTextField(JTextField courseIDTextField) {
-        this.courseIDTextField = courseIDTextField;
-    }
-
-    public JTextField getCourseNameTextField() {
-        return courseNameTextField;
-    }
-
-    public void setCourseNameTextField(JTextField courseNameTextField) {
-        this.courseNameTextField = courseNameTextField;
-    }
-
-    public JTextField getMaxEnrolledTextField() {
-        return maxEnrolledTextField;
-    }
-
-    public void setMaxEnrolledTextField(JTextField maxEnrolledTextField) {
-        this.maxEnrolledTextField = maxEnrolledTextField;
-    }
-
-    public JComboBox getInstructorComboBox() {
-        return instructorComboBox;
-    }
-
-    public void setInstructorComboBox(JComboBox instructorComboBox) {
-        this.instructorComboBox = instructorComboBox;
-    }
-
     public JPanel getButtonPanel() {
         return buttonPanel;
     }
@@ -247,13 +162,5 @@ public class EditCourseUI {
 
     public void setCourseMgmtController(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
-    }
-
-    public ArrayList<Instructor> getInstructorList() {
-        return instructorList;
-    }
-
-    public void setInstructorList(ArrayList<Instructor> instructorList) {
-        this.instructorList = instructorList;
     }
 }

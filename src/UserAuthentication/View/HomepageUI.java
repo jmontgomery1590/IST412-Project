@@ -12,12 +12,11 @@ import java.awt.event.ActionListener;
 public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
 	private JButton homeButton, coursesButton, profileButton, exitButton;
-	private JPanel navigationPanel;
-	private JPanel HomePage, viewPanel, homePanel;
+	private JPanel navigationPanel, HomePage, viewPanel, homePanel;
 	private JLabel homeWelcomeLabel;
 	private HomepageController homepageCntrl;
 	private CardLayout cardSwapper;
-
+	private String pcUserName = System.getenv("USERNAME");
 
 	public HomepageUI (HomepageController homepageController) {
 		homepageCntrl = homepageController;
@@ -31,10 +30,34 @@ public class HomepageUI extends JFrame{
 		homeFrame.getContentPane().add(HomePage);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//homeFrame.setUndecorated(true);
-		//homeFrame.pack();
 		homeFrame.setVisible(true);
+		loadHomeImage();
 		addALButtons();
+	}
+
+	public void loadHomeImage(){
+		ImageIcon backgroundImage = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//PSU.png");
+		homePanel = new JPanel(new BorderLayout()) {
+			@Override
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+			}
+
+			@Override
+			public Dimension getPreferredSize() {
+				Dimension size = super.getPreferredSize();
+				size.width = Math.max(backgroundImage.getIconWidth(), size.width);
+				size.height = Math.max(backgroundImage.getIconHeight(), size.height);
+				return size;
+			}
+		};
+
+		viewPanel.add(homePanel, "Home");
+
+		cardSwapper.show(viewPanel, "Home");
+		viewPanel.revalidate();
+		viewPanel.repaint();
 	}
 
 	private void addALButtons(){
@@ -86,28 +109,8 @@ public class HomepageUI extends JFrame{
 		return homeFrame;
 	}
 
-	public JButton getHomeButton() {
-		return homeButton;
-	}
-
-	public JButton getCoursesButton() {
-		return coursesButton;
-	}
-
-	public JButton getProfileButton() {
-		return profileButton;
-	}
-
-	public JButton getExitButton() {
-		return exitButton;
-	}
-
 	public JPanel getViewPanel() {
 		return viewPanel;
-	}
-
-	public void setViewPanel(JPanel viewPanel) {
-		this.viewPanel = viewPanel;
 	}
 
 	public CardLayout getCardSwapper() {

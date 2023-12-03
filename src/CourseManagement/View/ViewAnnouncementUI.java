@@ -10,18 +10,14 @@ import java.awt.event.ActionListener;
 
 public class ViewAnnouncementUI {
     private JFrame viewAnnouncementFrame;
-    private JPanel announcementPanel, viewAnnouncementPanel, announcementInfoPanel;
+    private JPanel announcementPanel, viewAnnouncementPanel, announcementInfoPanel, announcementTextPanel, buttonPanel;
     private JTextField titleTextField;
     private JTextArea announcementTextArea;
     private JButton previousAnnouncementButton, nextAnnouncementButton;
     private JLabel titleTextLabel;
-    private JPanel announcementTextPanel;
-    private JPanel buttonPanel;
     private JScrollPane announcementScrollPane;
     private CourseMgmtController courseMgmtCntrl;
-    private Announcement prevAnnouncement;
-    private Announcement nextAnnouncement;
-    private Announcement currentAnnouncement;
+    private Announcement prevAnnouncement, nextAnnouncement, currentAnnouncement;
     private AnnouncementList announcementList;
     private int announcementNumber;
 
@@ -96,27 +92,7 @@ public class ViewAnnouncementUI {
         });
     }
 
-    public JPanel getViewAnnouncementPanel() {
-        return viewAnnouncementPanel;
-    }
-
-    public void setViewAnnouncementPanel(JPanel viewAnnouncementPanel) {
-        this.viewAnnouncementPanel = viewAnnouncementPanel;
-    }
-
-    public CourseMgmtController getCourseMgmtCntrl() {
-        return courseMgmtCntrl;
-    }
-
-    public void setCourseMgmtCntrl(CourseMgmtController courseMgmtCntrl) {
-        this.courseMgmtCntrl = courseMgmtCntrl;
-    }
-
     public JPanel getAnnouncementPanel() {
         return announcementPanel;
-    }
-
-    public void setAnnouncementPanel(JPanel announcementPanel) {
-        this.announcementPanel = announcementPanel;
     }
 }

@@ -14,8 +14,7 @@ public class LessonMgmtUI {
     private HomepageController homepageController;
     private LessonMgmtUI lessonMgmtUI;
     private JFrame lessonMgmtFrame;
-    private JPanel buttonPanel;
-    private JPanel lessonMgmtPanel, lessonTablePanel;
+    private JPanel buttonPanel, lessonMgmtPanel, lessonTablePanel;
     private JButton newLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
     private JTable lessonTable;
     private JLabel lessonLabel;
@@ -113,10 +112,6 @@ public class LessonMgmtUI {
 
     public int getLessonListPosition() {
         return lessonListPosition;
-    }
-
-    public void setLessonListPosition(int lessonListPosition) {
-        this.lessonListPosition = lessonListPosition;
     }
 
     public Lesson getNewLesson() {
