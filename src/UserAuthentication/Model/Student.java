@@ -1,8 +1,6 @@
 package UserAuthentication.Model;
 
 import CourseManagement.Model.Course;
-import CourseworkManagement.Model.AssignmentList;
-import UserAuthentication.Model.User;
 import java.util.ArrayList;
 
 public class Student extends User {

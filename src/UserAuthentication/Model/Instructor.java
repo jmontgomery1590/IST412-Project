@@ -1,10 +1,5 @@
 package UserAuthentication.Model;
 
-import CourseManagement.Model.Course;
-import UserAuthentication.Model.User;
-
-import java.util.ArrayList;
-
 public class Instructor extends User {
     private int userIDNumber;
     private String userName;

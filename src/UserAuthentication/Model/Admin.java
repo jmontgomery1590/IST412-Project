@@ -1,7 +1,5 @@
 package UserAuthentication.Model;
 
-import CourseManagement.Model.Course;
-
 import java.util.ArrayList;
 
 public class Admin extends User {

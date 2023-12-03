@@ -1,6 +1,8 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
+import CourseManagement.Model.Course;
+import CourseManagement.Model.CourseList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +19,9 @@ public class ConfirmationUI {
     private JLabel confirmationLabel2;
     private JLabel confirmationLabel3;
     private CourseMgmtController courseMgmtController;
+    private int courseNumber;
+    private CourseList courseList;
+    private Course selectedCourse;
 
     public ConfirmationUI(CourseMgmtController courseMgmtController) {
         this.courseMgmtController = courseMgmtController;
@@ -28,8 +33,8 @@ public class ConfirmationUI {
         confirmationFrame.setVisible(true);
         confirmationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         confirmationLabel1.setText("Caution:");
-        confirmationLabel2.setText("Deleting a course will delete all associated announcements, lessons,");
-        confirmationLabel3.setText("and assignments. Are you sure you wish to continue with this deletion?");
+        confirmationLabel2.setText("Deleting a course will disable all associated announcements, lessons,");
+        confirmationLabel3.setText("and assignments. Are you sure you wish to continue with this process?");
 
         addALConfirmationButtons();
         addFocusListeners();
@@ -39,7 +44,14 @@ public class ConfirmationUI {
         this.getYesButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int selectedRow = courseMgmtController.getCourseMgmtUI().getSelectedRow();
+                selectedCourse = courseMgmtController.getCourseList().getCourses().get(selectedRow);
+                courseMgmtController.getDatabase().disableCourseInDatabase(selectedCourse);
+                courseMgmtController.getCourseList().getCourses().remove(selectedRow);
+                courseMgmtController.getCourseTable().fireTableDataChanged();
 
+                courseMgmtController.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                confirmationFrame.dispose();
             }
         });
 

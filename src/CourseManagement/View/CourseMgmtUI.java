@@ -1,17 +1,12 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.Announcement;
-import CourseManagement.Model.Course;
-import CourseManagement.Model.CourseTableModel;
-import CourseManagement.Model.Lesson;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CourseMgmtUI {
-    public CourseTableModel tableModel;
     public JFrame courseFrame;
     public JPanel navigationPanel, controlPanel, courseMgmtPanel, buttonPanel, tablePanel;
     public JTable courseTable;
@@ -63,6 +58,7 @@ public class CourseMgmtUI {
         this.getDeleteCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectedRow = courseTable.getSelectedRow();
                 courseMgmtCntrl.setConfirmationUI(new ConfirmationUI(courseMgmtCntrl));
                 courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }

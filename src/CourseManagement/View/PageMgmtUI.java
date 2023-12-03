@@ -1,9 +1,7 @@
 package CourseManagement.View;
 
 import CourseManagement.Controller.CourseMgmtController;
-import CourseManagement.Model.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import UserAuthentication.Controller.HomepageController;
 
 import javax.swing.*;
 import java.awt.*;

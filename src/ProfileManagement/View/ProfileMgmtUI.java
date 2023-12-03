@@ -1,11 +1,9 @@
 package ProfileManagement.View;
 
 import ProfileManagement.Controller.ProfileMgmtController;
-import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ProfileMgmtUI {
     private JPanel profileMgmtPanel, labelPanel, informationPanel;

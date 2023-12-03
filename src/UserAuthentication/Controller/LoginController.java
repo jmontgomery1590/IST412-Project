@@ -1,7 +1,6 @@
 package UserAuthentication.Controller;
 
 import DatabaseMgmt.DatabaseConnection;
-import ProfileManagement.Controller.ProfileMgmtController;
 import UserAuthentication.View.HomepageUI;
 import UserAuthentication.View.LoginUI;
 import UserAuthentication.Model.User;

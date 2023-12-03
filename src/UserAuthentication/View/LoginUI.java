@@ -29,7 +29,6 @@ public class LoginUI extends JFrame {
         this.getPasswordLabel().setForeground(Color.WHITE);
         this.getLoginFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getLoginFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.getLoginFrame().setUndecorated(true);
         this.getLoginFrame().setVisible(true);
         addALButtons();
     }
