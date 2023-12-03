@@ -12,6 +12,7 @@ import CourseworkManagement.Model.*;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.Instructor;
 import UserAuthentication.Model.Student;
+import UserAuthentication.Model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -450,7 +451,7 @@ public class DatabaseConnection {
             int userID = student.getUserIDNumber();
             try
             {
-                String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade  "
+                String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade, StudentAssignmentTable.earnedscore "
                         + "FROM AssignmentTable "
                         + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
                         + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
@@ -465,12 +466,16 @@ public class DatabaseConnection {
                     int assignmentID = rs.getInt("ID");
                     String assignmentTitle = rs.getString("AssignmentName");
                     boolean completed = rs.getBoolean("completed");
+                    double earnedScore = rs.getDouble("earnedscore");
+                    double grade = rs.getDouble("grade");
 
                     Assignment assignment = new Assignment(assignmentTitle);
                     assignment.setAssignmentID(assignmentID);
+                    assignment.setAssignedStudent(student);
                     assignment.setQuestionList(getQuestionsByAssignment(assignment));
                     assignment.setCompleted(completed);
-                    assignment.setAssignedStudent(student);
+                    assignment.setEarnedScore(earnedScore);
+                    assignment.setGrade(String.valueOf(grade));
                     assignmentList.getAssignments().add(assignment);
                 }
             }
@@ -486,11 +491,11 @@ public class DatabaseConnection {
     public AssignmentList getStudentAssignmentByCourse(CourseworkMgmtController courseworkMgmtController) {
         openConnection();
         int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
-        int userID = courseworkMgmtController.getCurrentUser().getUserIDNumber();
+        int userID = courseworkMgmtController.getCurrentStudent().getUserIDNumber();
         AssignmentList assignmentList = new AssignmentList();
         try
         {
-            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade  "
+            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade, StudentAssignmentTable.earnedscore  "
                     + "FROM AssignmentTable "
                     + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
                     + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
@@ -505,11 +510,17 @@ public class DatabaseConnection {
                 int assignmentID = rs.getInt("ID");
                 String assignmentTitle = rs.getString("AssignmentName");
                 boolean completed = rs.getBoolean("completed");
+                double earnedScore = rs.getDouble("earnedscore");
+                double grade = rs.getDouble("grade");
 
                 Assignment assignment = new Assignment(assignmentTitle);
                 assignment.setAssignmentID(assignmentID);
+                assignment.setAssignedStudent(courseworkMgmtController.getCurrentStudent());
                 assignment.setQuestionList(getQuestionsByAssignment(assignment));
                 assignment.setCompleted(completed);
+                assignment.setAssignedStudent(courseworkMgmtController.getCurrentStudent());
+                assignment.setEarnedScore(earnedScore);
+                assignment.setGrade(String.valueOf(grade));
                 assignmentList.getAssignments().add(assignment);
             }
         }
@@ -586,6 +597,31 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void getSubmittedAnswer(Assignment assignment, Question question){
+        try
+        {
+            String query = "SELECT StudentQuestionTable.submittedanswer "
+                    + "FROM StudentQuestionTable "
+                    + "WHERE StudentQuestionTable.questionid = ? AND StudentQuestionTable.userid = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, question.getQuestionID());
+            pstmt.setInt(2, assignment.getAssignedStudent().getUserIDNumber());
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                String submittedAnswer = rs.getString("submittedanswer");
+
+                question.saveAnswer(submittedAnswer);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
     public QuestionList getQuestionsByAssignment(Assignment assignment){
         int assignmentID = assignment.getAssignmentID();
         QuestionList questionList = new QuestionList();
@@ -612,8 +648,8 @@ public class DatabaseConnection {
                     multiQuestion.setQuestionID(questionID);
                     multiQuestion.setAssignmentID(assignmentID);
                     multiQuestion.setQuestionType(questionType);
-
                     multiQuestion.setAnswerList(getAnswersByQuestion(multiQuestion));
+                    getSubmittedAnswer(assignment, multiQuestion);
 
                     questionList.addToList(multiQuestion);
                 }
@@ -623,8 +659,8 @@ public class DatabaseConnection {
                     openEndedQuestion.setQuestionID(questionID);
                     openEndedQuestion.setAssignmentID(assignmentID);
                     openEndedQuestion.setQuestionType(questionType);
-
                     openEndedQuestion.setAnswerList(getAnswersByQuestion(openEndedQuestion));
+                    getSubmittedAnswer(assignment, openEndedQuestion);
 
                     questionList.addToList(openEndedQuestion);
                 }
@@ -688,6 +724,62 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return answerList;
+    }
+
+    public void submitStudentAnswersToAssignmentQuestions(Assignment assignment){
+        openConnection();
+        for (Question question : assignment.getQuestionList().getQuestionList())
+        {
+            question.compareSubmittedAnswer();
+
+            try
+            {
+                String query = "INSERT INTO StudentQuestionTable (questionid, userid, iscorrect, submittedanswer) "
+                        + "VALUES (?, ?, ?,?)";
+
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setInt(1, question.getQuestionID());
+                pstmt.setInt(2, assignment.getAssignedStudent().getUserIDNumber());
+                pstmt.setBoolean(3, question.getIsCorrect());
+                pstmt.setString(4, question.showSubmittedAnswer());
+
+                pstmt.executeUpdate();
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+        markAssignmentCompleteAndGrade(assignment);
+        closeConnection();
+    }
+
+    public void markAssignmentCompleteAndGrade(Assignment assignment){
+        assignment.gradeAssignment();
+        int assignmentID = assignment.getAssignmentID();
+        int studentID = assignment.getAssignedStudent().getUserIDNumber();
+        boolean completed = true;
+        double grade = Double.parseDouble(assignment.getGrade());
+        double earnedScore = assignment.getEarnedScore();
+        try
+        {
+            String query = "UPDATE StudentAssignmentTable "
+                    + "SET completed = ?, grade = ?, earnedscore = ? "
+                    + "WHERE StudentAssignmentTable.assignmentid = ? AND StudentAssignmentTable.userid = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setBoolean(1, completed);
+            pstmt.setDouble(2, grade);
+            pstmt.setDouble(3, earnedScore);
+            pstmt.setInt(4, assignmentID);
+            pstmt.setInt(5, studentID);
+
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println();
+        }
     }
 
     public void closeConnection()

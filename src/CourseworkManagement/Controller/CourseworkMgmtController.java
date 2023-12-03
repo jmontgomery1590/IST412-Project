@@ -31,6 +31,11 @@ public class CourseworkMgmtController {
     {
         if (Objects.equals(currentUser.getRoleID(), "4"))
         {
+            currentStudent = new Student(currentUser.getUserName(), currentUser.getPassword());
+            currentStudent.setUserIDNumber(currentUser.getUserIDNumber());
+            currentStudent.setFirstName(currentUser.getFirstName());
+            currentStudent.setLastName(currentUser.getLastName());
+            currentStudent.setRoleID(currentUser.getRoleID());
             this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
             this.assignmentList = this.currentCourse.getAssignmentList();
             this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
@@ -61,6 +66,7 @@ public class CourseworkMgmtController {
     private AddAssignmentUI addAssignmentUI;
     private ViewAssignmentUI viewAssignmentUI;
     private DatabaseConnection database = new DatabaseConnection();
+    private Student currentStudent;
 
 
     public AddQuestionUI getQuestionInterface() {
@@ -181,5 +187,13 @@ public class CourseworkMgmtController {
 
     public void setAssignmentByStudentTablemodel(AssignmentByStudentTablemodel assignmentByStudentTablemodel) {
         this.assignmentByStudentTablemodel = assignmentByStudentTablemodel;
+    }
+
+    public Student getCurrentStudent() {
+        return currentStudent;
+    }
+
+    public void setCurrentStudent(Student currentStudent) {
+        this.currentStudent = currentStudent;
     }
 }

@@ -5,7 +5,7 @@ public class MultipleChoiceQuestion extends Question{
     private double pointValue;
     private AnswerList answerList;
     private Boolean isCorrect;
-    private String submittedAnswer;
+    private String submittedAnswer = "";
     private int questionID;
     private int assignmentID;
     private int questionType;
@@ -44,8 +44,7 @@ public class MultipleChoiceQuestion extends Question{
     }
 
     @Override
-    public void compareSubmittedAnswer(String selectedAnswer) {
-        submittedAnswer = selectedAnswer;
+    public void compareSubmittedAnswer() {
         for (Answer answer : answerList.getAnswerList())
         {
             if (answer.getAnswer().equalsIgnoreCase(submittedAnswer) && answer.getIsCorrect())
@@ -53,6 +52,11 @@ public class MultipleChoiceQuestion extends Question{
                 isCorrect = true;
             }
         }
+    }
+
+    @Override
+    public String showSubmittedAnswer() {
+        return submittedAnswer;
     }
 
     public void setQuestion(String question) {
@@ -89,6 +93,16 @@ public class MultipleChoiceQuestion extends Question{
     @Override
     public int getQuestionID() {
         return questionID;
+    }
+
+    @Override
+    public void saveAnswer(String submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+    }
+
+    @Override
+    public Boolean getIsCorrect() {
+        return isCorrect;
     }
 
     public void setQuestionID(int questionID) {

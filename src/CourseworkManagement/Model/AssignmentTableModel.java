@@ -22,7 +22,7 @@ public class AssignmentTableModel extends AbstractTableModel {
             case 0 -> assignmentList.get(rowIndex).getAssignmentTitle();
             case 1 -> assignmentList.get(rowIndex).getEarnedScore();
             case 2 -> assignmentList.get(rowIndex).getPossibleScore();
-            case 3 -> assignmentList.get(rowIndex).getGrade();
+            case 3 -> assignmentList.get(rowIndex).getGrade() + "%";
             default -> null;
         };
     }

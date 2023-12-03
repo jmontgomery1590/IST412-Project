@@ -9,7 +9,13 @@ public abstract class Question {
 
     public abstract double getQuestionPointWorth();
 
-    public abstract void compareSubmittedAnswer(String selectedAnswer);
+    public abstract void compareSubmittedAnswer();
 
     public abstract int getQuestionID();
+
+    public abstract void saveAnswer(String submittedAnswer);
+
+    public abstract String showSubmittedAnswer();
+
+    public abstract Boolean getIsCorrect();
 }
