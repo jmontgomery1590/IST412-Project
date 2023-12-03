@@ -232,10 +232,6 @@ public class CourseMgmtController {
         this.editLessonUI = editLessonUI;
     }
 
-    public ConfirmationUI getConfirmationUI() {
-        return confirmationUI;
-    }
-
     public void setConfirmationUI(ConfirmationUI confirmationUI) {
         this.confirmationUI = confirmationUI;
     }
