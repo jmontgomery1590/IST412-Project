@@ -2,7 +2,7 @@ package CourseworkManagement.Model;
 
 public class OpenEndedQuestion extends Question{
     private String question;
-    private String submittedAnswer;
+    private String submittedAnswer = "";
     private double pointValue;
     private AnswerList answerList;
     private Boolean isCorrect;
@@ -37,8 +37,7 @@ public class OpenEndedQuestion extends Question{
     }
 
     @Override
-    public void compareSubmittedAnswer(String submittedAnswer) {
-        this.submittedAnswer = submittedAnswer;
+    public void compareSubmittedAnswer() {
         isCorrect = this.submittedAnswer.equalsIgnoreCase(answerList.getAnswerList().get(0).toString());
     }
 
@@ -83,6 +82,21 @@ public class OpenEndedQuestion extends Question{
     @Override
     public int getQuestionID() {
         return questionID;
+    }
+
+    @Override
+    public void saveAnswer(String submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+    }
+
+    @Override
+    public String showSubmittedAnswer() {
+        return submittedAnswer;
+    }
+
+    @Override
+    public Boolean getIsCorrect() {
+        return isCorrect;
     }
 
     public void setQuestionID(int questionID) {

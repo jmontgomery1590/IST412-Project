@@ -5,6 +5,7 @@ import CourseManagement.View.*;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import DatabaseMgmt.DatabaseConnection;
 import UserAuthentication.Controller.HomepageController;
+import UserAuthentication.Model.Student;
 import UserAuthentication.Model.User;
 
 public class CourseMgmtController {

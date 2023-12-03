@@ -1,15 +1,13 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import CourseworkManagement.Model.Answer;
-import CourseworkManagement.Model.MultipleChoiceQuestion;
-import CourseworkManagement.Model.Question;
-import CourseworkManagement.Model.QuestionList;
+import CourseworkManagement.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 public class ViewAssignmentUI {
 
@@ -18,8 +16,46 @@ public class ViewAssignmentUI {
         questionNumber = 0;
         setQuestions(0);
         addALButtons();
+        verifyButtonAccess();
         updateAssignmentLabel();
         checkNextAndPrevButtons();
+    }
+
+    public void verifyButtonAccess()
+    {
+        if (courseworkMgmtController.getCurrentUser().getRoleID().equals("4"))
+        {
+            if (courseworkMgmtController.getAssignment().isCompleted())
+            {
+                submitButton.setEnabled(false);
+                answerPanel.setEnabled(false);
+                answerSubmittedLabel.setVisible(true);
+                submittedAnswerLabel.setVisible(true);
+                trueAnswerLabel.setVisible(true);
+                correctAnswerLabel.setVisible(true);
+            }
+        }
+        else
+        {
+            submitButton.setEnabled(false);
+            answerPanel.setEnabled(false);
+            answerSubmittedLabel.setVisible(true);
+            submittedAnswerLabel.setVisible(true);
+            trueAnswerLabel.setVisible(true);
+            correctAnswerLabel.setVisible(true);
+        }
+    }
+
+    public void loadAnswerComparison()
+    {
+        answerSubmittedLabel.setText(currentQuestion.showSubmittedAnswer());
+        for (Answer answer : currentQuestion.getAnswerList().getAnswerList())
+        {
+            if (answer.getIsCorrect())
+            {
+                trueAnswerLabel.setText(answer.getAnswer());
+            }
+        }
     }
 
     public void fillMultiChoiceAnswerPanel(Question question){
@@ -30,14 +66,18 @@ public class ViewAssignmentUI {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        ButtonGroup group = new ButtonGroup();
+        answerGroup = new ButtonGroup();
 
         for (Answer option : question.getAnswerList().getAnswerList())
         {
             JRadioButton answerOption = new JRadioButton(option.getAnswer());
             answerOption.setFont(new Font("Arial", Font.BOLD, 20));
-            group.add(answerOption);
+            answerGroup.add(answerOption);
             answerPanel.add(answerOption, gbc);
+        }
+        if (!currentQuestion.showSubmittedAnswer().isEmpty())
+        {
+            showSelectedAnswer();
         }
         answerPanel.revalidate();
         answerPanel.repaint();
@@ -51,14 +91,14 @@ public class ViewAssignmentUI {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JTextField textField = new JTextField();
+        typedAnswer.setText(currentQuestion.showSubmittedAnswer());
         JLabel answerLabel = new JLabel();
         answerLabel.setText("Your Answer: ");
         answerLabel.setFont(new Font("Arial",Font.BOLD, 20));
-        textField.setSize(100, 10);
-        answerLabel.setLabelFor(textField);
+        typedAnswer.setSize(100, 10);
+        answerLabel.setLabelFor(typedAnswer);
         answerPanel.add(answerLabel, gbc);
-        answerPanel.add(textField, gbc);
+        answerPanel.add(typedAnswer, gbc);
 
         answerPanel.revalidate();
         answerPanel.repaint();
@@ -78,6 +118,7 @@ public class ViewAssignmentUI {
         questionNumber = questionListNumber;
         questionList = courseworkMgmtController.getAssignment().getQuestionList();
         currentQuestion = questionList.getQuestionList().get(questionNumber);
+        loadAnswerComparison();
 
         if (questionListNumber > 0)
         {
@@ -115,12 +156,47 @@ public class ViewAssignmentUI {
         nextButton.setEnabled(nextQuestion != null);
     }
 
+    public void getSelectedAnswer(){
+        if (currentQuestion.getClass().equals(MultipleChoiceQuestion.class))
+        {
+            for (Enumeration<AbstractButton> buttons = answerGroup.getElements(); buttons.hasMoreElements();)
+            {
+                AbstractButton button = buttons.nextElement();
+
+                if (button.isSelected())
+                {
+                    currentQuestion.saveAnswer(button.getText());
+                }
+            }
+        }
+        else
+        {
+            currentQuestion.saveAnswer(typedAnswer.getText());
+        }
+    }
+
+    public void showSelectedAnswer(){
+        if (currentQuestion.getClass().equals(MultipleChoiceQuestion.class))
+        {
+            for (Enumeration<AbstractButton> buttons = answerGroup.getElements(); buttons.hasMoreElements();)
+            {
+                AbstractButton button = buttons.nextElement();
+
+                if (button.getText().equalsIgnoreCase(currentQuestion.showSubmittedAnswer()))
+                {
+                    button.setSelected(true);
+                }
+            }
+        }
+    }
+
     public void addALButtons(){
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (nextQuestion != null)
                 {
+                    getSelectedAnswer();
                     setQuestions(questionNumber + 1);
                     checkNextAndPrevButtons();
                 }
@@ -132,9 +208,22 @@ public class ViewAssignmentUI {
             public void actionPerformed(ActionEvent e) {
                 if (prevQuestion != null)
                 {
+                    getSelectedAnswer();
                     setQuestions(questionNumber - 1);
                     checkNextAndPrevButtons();
                 }
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSelectedAnswer();
+                courseworkMgmtController.getDatabase().submitStudentAnswersToAssignmentQuestions(courseworkMgmtController.getAssignment());
+
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getCardSwapper().show(courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel(), "Course Work");
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
         });
     }
@@ -150,12 +239,18 @@ public class ViewAssignmentUI {
     private JPanel answerPanel;
     private JPanel questionPanel;
     private JPanel titlePanel;
+    private JLabel correctAnswerLabel;
+    private JLabel submittedAnswerLabel;
+    private JLabel trueAnswerLabel;
+    private JLabel answerSubmittedLabel;
 
     private CourseworkMgmtController courseworkMgmtController;
     private Question prevQuestion;
     private Question currentQuestion;
     private Question nextQuestion;
     private int questionNumber;
+    private JTextField typedAnswer = new JTextField();
+    private ButtonGroup answerGroup;
     private QuestionList questionList;
 
     public JPanel getReadPanel() {

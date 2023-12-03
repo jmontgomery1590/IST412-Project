@@ -18,19 +18,18 @@ public class Assignment {
 
     public Assignment(String assignmentTitle){
         this.setAssignmentTitle(assignmentTitle);
-        this.setEarnedScore(0.0);
         this.setCompleted(false);
-        this.setGrade("--");
     }
 
     /**
      * Grade assignment and post grade
      */
     public void gradeAssignment() {
+        updateEarnedScore();
         double num = ((this.getEarnedScore() / this.getPossibleScore()) * 100);
         DecimalFormat df = new DecimalFormat("###.#");
         String roundedGrade = df.format(num);
-        this.setGrade(roundedGrade+ "%");
+        this.setGrade(roundedGrade);
     }
 
     public void updatePossibleScore()
@@ -39,6 +38,16 @@ public class Assignment {
         for (Question question : questionList.getQuestionList())
         {
             this.possibleScore += question.getQuestionPointWorth();
+        }
+    }
+
+    public void updateEarnedScore() {
+        for (Question question : questionList.getQuestionList())
+        {
+            if (question.getIsCorrect())
+            {
+                this.earnedScore += question.getQuestionPointWorth();
+            }
         }
     }
 
@@ -85,7 +94,14 @@ public class Assignment {
     }
 
     public String getGrade() {
-        return grade;
+        if (!completed)
+        {
+            return "--";
+        }
+        else
+        {
+            return grade;
+        }
     }
 
     public void setGrade(String grade) {
