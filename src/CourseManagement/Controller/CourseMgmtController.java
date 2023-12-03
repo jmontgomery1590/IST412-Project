@@ -29,6 +29,7 @@ public class CourseMgmtController {
     private EditAnnouncementUI editAnnouncementUI;
     private EditCourseUI editCourseUI;
     private EditLessonUI editLessonUI;
+    private ConfirmationUI confirmationUI;
     private Announcement announcement;
     private Lesson lesson;
     DatabaseConnection database = new DatabaseConnection();
@@ -229,5 +230,13 @@ public class CourseMgmtController {
 
     public void setEditLessonUI(EditLessonUI editLessonUI) {
         this.editLessonUI = editLessonUI;
+    }
+
+    public ConfirmationUI getConfirmationUI() {
+        return confirmationUI;
+    }
+
+    public void setConfirmationUI(ConfirmationUI confirmationUI) {
+        this.confirmationUI = confirmationUI;
     }
 }

@@ -63,7 +63,8 @@ public class CourseMgmtUI {
         this.getDeleteCourseButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                courseMgmtCntrl.setConfirmationUI(new ConfirmationUI(courseMgmtCntrl));
+                courseMgmtCntrl.getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
     }
