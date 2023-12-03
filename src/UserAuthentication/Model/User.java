@@ -37,10 +37,6 @@ public class User {
         this.roleID = roleID;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getFirstName() {
         return firstName;
     }

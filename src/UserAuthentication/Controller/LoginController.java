@@ -14,7 +14,6 @@ public class LoginController {
     private String loginID;
     private String password;
     private String roleID;
-    private ProfileMgmtController studentCntrl;
     private HomepageController homepageCntrl;
     private DatabaseConnection database;
 
@@ -26,9 +25,6 @@ public class LoginController {
 
     public boolean verifyUser(){
         return database.getUserLoginInfo(this);
-    }
-    public LoginUI getLoginUI() {
-        return loginUI;
     }
 
     public void setLoginUI(LoginUI loginUI) {
@@ -45,10 +41,6 @@ public class LoginController {
 
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getLoginID() {

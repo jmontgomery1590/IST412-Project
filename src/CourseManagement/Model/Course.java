@@ -34,10 +34,6 @@ public class Course {
         return courseTableID;
     }
 
-    public void setCourseTableID(int courseTableID) {
-        this.courseTableID = courseTableID;
-    }
-
     public String getCourseName() {
         return this.courseName;
     }
@@ -74,16 +70,8 @@ public class Course {
         this.instructor = instructor;
     }
 
-    public LessonList getLessonList() {
-        return lessonList;
-    }
-
     public AssignmentList getAssignmentList() {
         return assignmentList;
-    }
-
-    public AnnouncementList getAnnouncementList() {
-        return announcementList;
     }
 
     public void setAssignmentList(AssignmentList assignmentList) {
@@ -92,9 +80,5 @@ public class Course {
 
     public ArrayList<Student> getStudentsEnrolled() {
         return studentsEnrolled;
-    }
-
-    public void setStudentsEnrolled(ArrayList<Student> studentsEnrolled) {
-        this.studentsEnrolled = studentsEnrolled;
     }
 }

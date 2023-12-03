@@ -10,10 +10,7 @@ public class Instructor extends User {
     private String userName;
     private String firstName;
     private String lastName;
-    private String userPassword;
     private String roleID;
-
-    public ArrayList<Course> coursesTeaching;
 
     /**
      * Super constructor for Instructor User class
@@ -45,11 +42,6 @@ public class Instructor extends User {
     }
 
     @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    @Override
     public String getFirstName() {
         return firstName;
     }
@@ -67,14 +59,6 @@ public class Instructor extends User {
     @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
     }
 
     @Override

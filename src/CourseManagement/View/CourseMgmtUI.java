@@ -13,18 +13,11 @@ import java.awt.event.ActionListener;
 public class CourseMgmtUI {
     public CourseTableModel tableModel;
     public JFrame courseFrame;
-    public JPanel navigationPanel;
-    public JPanel controlPanel;
+    public JPanel navigationPanel, controlPanel, courseMgmtPanel, buttonPanel, tablePanel;
     public JTable courseTable;
-    private JPanel courseMgmtPanel;
-    private JPanel buttonPanel;
     public JButton newCourseButton, editCourseButton, deleteCourseButton, viewCourseButton;
-    private JPanel tablePanel;
     private JScrollPane tableScrollPane;
     private CourseMgmtController courseMgmtCntrl;
-    private Lesson selectedLesson;
-    private Announcement selectedAnnouncement;
-    private Course selectedCourse;
     private int selectedRow;
 
 
@@ -75,18 +68,6 @@ public class CourseMgmtUI {
         });
     }
 
-    public Course getSelectedCourse() {
-        return selectedCourse;
-    }
-
-    public void setSelectedCourse(Course selectedCourse) {
-        this.selectedCourse = selectedCourse;
-    }
-
-    public JFrame getCourseFrame() {
-        return courseFrame;
-    }
-
     public JPanel getCourseMgmtPanel() {
         return courseMgmtPanel;
     }
@@ -107,15 +88,7 @@ public class CourseMgmtUI {
         return viewCourseButton;
     }
 
-    public CourseMgmtController getCourseMgmtCntrl() {
-        return courseMgmtCntrl;
-    }
-
     public int getSelectedRow() {
         return selectedRow;
-    }
-
-    public void setSelectedRow(int selectedRow) {
-        this.selectedRow = selectedRow;
     }
 }

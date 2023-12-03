@@ -88,20 +88,8 @@ public class LoginUI extends JFrame {
         return loginPanel;
     }
 
-    public JTextField getUsernameField() {
-        return usernameField;
-    }
-
     public JPasswordField getPasswordField() {
         return passwordField;
-    }
-
-    public JButton getLoginButton() {
-        return loginButton;
-    }
-
-    public JButton getExitButton() {
-        return exitButton;
     }
 
     public JLabel getLoginTextLabel() {

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Admin extends User {
     public ArrayList<Instructor> instructorsOverseen;
-    public ArrayList<Course> masterCourseList;
 
     /**
      * Super constructor for Admin User class

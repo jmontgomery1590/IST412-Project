@@ -175,14 +175,6 @@ public class CourseMgmtController {
         return lessonList;
     }
 
-    public void setLessonList(LessonList lessonList) {
-        this.lessonList = lessonList;
-    }
-
-    public void setAnnouncementList(AnnouncementList announcementList) {
-        this.announcementList = announcementList;
-    }
-
     public void setAddLessonUI(AddLessonUI addLessonUI) {
         this.addLessonUI = addLessonUI;
     }
@@ -227,28 +219,12 @@ public class CourseMgmtController {
         return database;
     }
 
-    public void setDatabase(DatabaseConnection database) {
-        this.database = database;
-    }
-
-    public EditAnnouncementUI getEditAnnouncementUI() {
-        return editAnnouncementUI;
-    }
-
     public void setEditAnnouncementUI(EditAnnouncementUI editAnnouncementUI) {
         this.editAnnouncementUI = editAnnouncementUI;
     }
 
-    public EditCourseUI getEditCourseUI() {
-        return editCourseUI;
-    }
-
     public void setEditCourseUI(EditCourseUI editCourseUI) {
         this.editCourseUI = editCourseUI;
-    }
-
-    public EditLessonUI getEditLessonUI() {
-        return editLessonUI;
     }
 
     public void setEditLessonUI(EditLessonUI editLessonUI) {

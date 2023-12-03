@@ -11,13 +11,10 @@ import java.awt.event.ActionListener;
 
 public class EditAnnouncementUI {
     private JFrame editAnnouncementFrame;
-    private JPanel editAnnouncementPanel, announcementInfoPanel;
+    private JPanel editAnnouncementPanel, announcementInfoPanel, buttonPanel, titlePanel, announcementPanel;
     private JTextField titleTextField;
     private JTextArea announcementTextArea;
-    private JPanel buttonPanel;
     private JButton saveButton, cancelButton;
-    private JPanel titlePanel;
-    private JPanel announcementPanel;
     private JScrollPane announcementScrollPane;
     private CourseMgmtController courseMgmtController;
     private Announcement currentAnnouncement;
@@ -32,7 +29,7 @@ public class EditAnnouncementUI {
         editAnnouncementFrame.setContentPane(editAnnouncementPanel);
         editAnnouncementFrame.setLocationRelativeTo(null);
         editAnnouncementFrame.setVisible(true);
-        editAnnouncementFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        editAnnouncementFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         announcementNumber = this.courseMgmtController.getAnnouncementMgmtUI().getAnnouncementListPosition();
         setAnnouncements(announcementNumber);
@@ -90,29 +87,5 @@ public class EditAnnouncementUI {
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
-    }
-
-    public JTextField getTitleTextField() {
-        return titleTextField;
-    }
-
-    public void setTitleTextField(JTextField titleTextField) {
-        this.titleTextField = titleTextField;
-    }
-
-    public JTextArea getAnnouncementTextArea() {
-        return announcementTextArea;
-    }
-
-    public void setAnnouncementTextArea(JTextArea announcementTextArea) {
-        this.announcementTextArea = announcementTextArea;
-    }
-
-    public Announcement getCurrentAnnouncement() {
-        return currentAnnouncement;
-    }
-
-    public void setCurrentAnnouncement(Announcement currentAnnouncement) {
-        this.currentAnnouncement = currentAnnouncement;
     }
 }

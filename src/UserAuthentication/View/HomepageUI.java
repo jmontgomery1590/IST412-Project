@@ -86,28 +86,8 @@ public class HomepageUI extends JFrame{
 		return homeFrame;
 	}
 
-	public JButton getHomeButton() {
-		return homeButton;
-	}
-
-	public JButton getCoursesButton() {
-		return coursesButton;
-	}
-
-	public JButton getProfileButton() {
-		return profileButton;
-	}
-
-	public JButton getExitButton() {
-		return exitButton;
-	}
-
 	public JPanel getViewPanel() {
 		return viewPanel;
-	}
-
-	public void setViewPanel(JPanel viewPanel) {
-		this.viewPanel = viewPanel;
 	}
 
 	public CardLayout getCardSwapper() {

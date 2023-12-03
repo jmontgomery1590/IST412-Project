@@ -12,15 +12,12 @@ import java.awt.event.WindowEvent;
 
 public class AddLessonUI extends JFrame{
     private JFrame addLessonFrame;
-    private JPanel addLessonPanel, readingPanel, titlePanel;
-    private JPanel contentPanel;
+    private JPanel addLessonPanel, readingPanel, titlePanel, contentPanel;
     private JTextField titleTextField;
     private JTextArea lessonContentArea, lessonReadingArea;
     private JButton saveButton, cancelButton;
-    private JScrollPane lessonContentScrollPane;
-    private JScrollPane readingScrollPane;
+    private JScrollPane lessonContentScrollPane, readingScrollPane;
     CourseMgmtController courseMgmtCntrl;
-    private Lesson currentLesson;
 
     public AddLessonUI(CourseMgmtController courseMgmtController) {
         courseMgmtCntrl = courseMgmtController;
