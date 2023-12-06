@@ -83,6 +83,9 @@ public class CourseworkMgmtController {
     private DatabaseConnection database = new DatabaseConnection();
     private Student currentStudent;
     private CourseAssignmentTableModel courseAssignmentTableModel;
+    private EditAssignmentUI editAssignmentUI;
+    private EditQuestionUI editQuestionUI;
+    private EditAnswerUI editAnswerUI;
 
 
     public AddQuestionUI getQuestionInterface() {
@@ -221,5 +224,51 @@ public class CourseworkMgmtController {
         this.courseAssignmentTableModel = courseAssignmentTableModel;
     }
 
+    public AddQuestionUI getAddQuestionUI() {
+        return addQuestionUI;
+    }
 
+    public void setAddQuestionUI(AddQuestionUI addQuestionUI) {
+        this.addQuestionUI = addQuestionUI;
+    }
+
+    public AddAnswerUI getAddAnswerUI() {
+        return addAnswerUI;
+    }
+
+    public void setAddAnswerUI(AddAnswerUI addAnswerUI) {
+        this.addAnswerUI = addAnswerUI;
+    }
+
+    public AddAssignmentUI getAddAssignmentUI() {
+        return addAssignmentUI;
+    }
+
+    public void setAddAssignmentUI(AddAssignmentUI addAssignmentUI) {
+        this.addAssignmentUI = addAssignmentUI;
+    }
+
+    public EditAssignmentUI getEditAssignmentUI() {
+        return editAssignmentUI;
+    }
+
+    public void setEditAssignmentUI(EditAssignmentUI editAssignmentUI) {
+        this.editAssignmentUI = editAssignmentUI;
+    }
+
+    public EditQuestionUI getEditQuestionUI() {
+        return editQuestionUI;
+    }
+
+    public void setEditQuestionUI(EditQuestionUI editQuestionUI) {
+        this.editQuestionUI = editQuestionUI;
+    }
+
+    public EditAnswerUI getEditAnswerUI() {
+        return editAnswerUI;
+    }
+
+    public void setEditAnswerUI(EditAnswerUI editAnswerUI) {
+        this.editAnswerUI = editAnswerUI;
+    }
 }

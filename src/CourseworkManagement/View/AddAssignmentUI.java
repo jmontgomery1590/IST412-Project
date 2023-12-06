@@ -290,4 +290,12 @@ public class AddAssignmentUI extends JFrame {
     public void setAssignmentFrame(JFrame assignmentFrame) {
         this.assignmentFrame = assignmentFrame;
     }
+
+    public Assignment getCurrentAssignment() {
+        return currentAssignment;
+    }
+
+    public void setCurrentAssignment(Assignment currentAssignment) {
+        this.currentAssignment = currentAssignment;
+    }
 }

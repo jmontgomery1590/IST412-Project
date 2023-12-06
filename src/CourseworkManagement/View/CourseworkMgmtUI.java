@@ -1,6 +1,7 @@
 package CourseworkManagement.View;
 
 import CourseworkManagement.Controller.CourseworkMgmtController;
+import CourseworkManagement.Model.Assignment;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -83,7 +84,10 @@ public class CourseworkMgmtUI extends JFrame{
         this.editAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Assignment currentAssignment = courseworkMgmtCntrl.getAssignmentList().getAssignments().get(assignmentTable.getSelectedRow());
+                courseworkMgmtCntrl.setEditAssignmentUI(new EditAssignmentUI(courseworkMgmtCntrl, currentAssignment));
 
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.newAssignmentButton.addActionListener(new ActionListener() {

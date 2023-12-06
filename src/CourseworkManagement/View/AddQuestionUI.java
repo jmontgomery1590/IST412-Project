@@ -34,7 +34,7 @@ public class AddQuestionUI extends JFrame {
     }
 
 
-    private void setUpAnswerListData(){
+    public void setUpAnswerListData(){
         DefaultListModel<Answer> model = new DefaultListModel<>();
         answerList.setModel(model);
 
@@ -74,6 +74,12 @@ public class AddQuestionUI extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 if (questionTextField.getText().isEmpty())
+                {
+                    questionTextField.setText("Type your question here:");
+                    isValidQuestion = false;
+                    addAnswerButton.setEnabled(false);
+                }
+                else if (questionTextField.getText().equals("Type your question here:") || questionTextField.getText().equals("This question already exists!"))
                 {
                     questionTextField.setText("Type your question here:");
                     isValidQuestion = false;
@@ -143,6 +149,18 @@ public class AddQuestionUI extends JFrame {
         }
     }
 
+    public boolean checkIfAnyAnswersAreCorrect()
+    {
+        for (Answer answer : currentQuestion.getAnswerList().getAnswerList())
+        {
+            if (answer.getIsCorrect())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void addALButtons(){
         this.addAnswerButton.addActionListener(new ActionListener() {
             @Override
@@ -165,6 +183,7 @@ public class AddQuestionUI extends JFrame {
                 Question question = courseworkMgmtCntrl.getQuestion();
                 courseworkMgmtCntrl.getAssignment().getQuestionList().addToList(question);
                 courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().setEnabled(true);
+                courseworkMgmtCntrl.getAssignmentInterface().checkAssignmentForQuestions();
                 courseworkMgmtCntrl.setQuestion(null);
                 questionFrame.dispose();
             }
@@ -173,10 +192,9 @@ public class AddQuestionUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 checkValidDoubleEntered(pointValueTextField.getText());
-                if (isValidQuestion && isValidPointValue)
+                if (isQuestionValid(courseworkMgmtCntrl.getAssignmentInterface().getCurrentAssignment()))
                 {
                     addAnswerButton.setEnabled(true);
-                    saveQuestionButton.setEnabled(true);
                     questionComboBox.setEnabled(false);
                     questionTextField.setEnabled(false);
                     pointValueTextField.setEnabled(false);
@@ -197,6 +215,7 @@ public class AddQuestionUI extends JFrame {
                 }
                 else
                 {
+                    questionTextField.setText("This question already exists!");
                     addAnswerButton.setEnabled(false);
                     saveQuestionButton.setEnabled(false);
                 }
@@ -208,6 +227,36 @@ public class AddQuestionUI extends JFrame {
     {
         courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().setEnabled(true);
         courseworkMgmtCntrl.getAssignmentInterface().getAssignmentFrame().transferFocus();
+    }
+
+    private boolean checkIfQuestionIsNew(Assignment assignment){
+        for (Question question : assignment.getQuestionList().getQuestionList())
+        {
+            if (question.getQuestion().equalsIgnoreCase(questionTextField.getText()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isQuestionValid(Assignment assignment){
+        if (!isValidQuestion)
+        {
+            return false;
+        }
+        else if (!isValidPointValue)
+        {
+            return false;
+        }
+        else if (!checkIfQuestionIsNew(assignment))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     private Question currentQuestion;
@@ -232,6 +281,7 @@ public class AddQuestionUI extends JFrame {
     private JLabel pointValueLabel;
     private JTextField pointValueTextField;
     private JButton submitButton;
+    private JButton editAnswerButton;
 
     public JButton getSaveQuestionButton() {
         return saveQuestionButton;
