@@ -83,10 +83,7 @@ public class CourseworkMgmtUI extends JFrame{
         this.editAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = assignmentTable.getSelectedRow();
-                courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
-                courseworkMgmtCntrl.setAssignmentInterface(new AddAssignmentUI(courseworkMgmtCntrl, courseworkMgmtCntrl.getAssignment()));
-                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
+
             }
         });
         this.newAssignmentButton.addActionListener(new ActionListener() {

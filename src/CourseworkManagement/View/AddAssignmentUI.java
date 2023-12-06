@@ -59,17 +59,22 @@ public class AddAssignmentUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 currentAssignment.updatePossibleScore();
                 courseworkMgmtCntrl.getAssignmentList().getAssignments().add(currentAssignment);
+                courseworkMgmtCntrl.getDatabase().addAssignmentToDatabase(currentAssignment, courseworkMgmtCntrl.getCurrentCourse());
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
-                courseworkMgmtCntrl.getAssignmentTable().fireTableDataChanged();
+                courseworkMgmtCntrl.getCourseAssignmentTableModel().fireTableDataChanged();
+                if (courseworkMgmtCntrl.getAssignmentByStudentTablemodel() != null)
+                {
+                    courseworkMgmtCntrl.loadAllStudentsAssignmentList();
+                    courseworkMgmtCntrl.getCourseworkMgmtInterface().getAssignmentTable().setModel(courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
+                }
                 assignmentFrame.dispose();
             }
         });
         this.submitButton.addActionListener(e -> {
-            if (!assignmentNameTextField.getText().isEmpty() && !Objects.equals(assignmentNameTextField.getText(), "Enter Assignment Name Here"))
+            if (confirmIsNewAssignment(assignmentNameTextField.getText()))
             {
                 isValidAssignmentName = true;
                 addQuestionButton.setEnabled(true);
-                createAssignmentButton.setEnabled(true);
                 assignmentNameTextField.setEnabled(false);
                 submitButton.setEnabled(false);
                 currentAssignment.setAssignmentTitle(assignmentNameTextField.getText());
@@ -82,6 +87,17 @@ public class AddAssignmentUI extends JFrame {
                 createAssignmentButton.setEnabled(false);
             }
         });
+    }
+
+    private boolean isNewAssignmentName(String assignmentName){
+        for (Assignment assignment : courseworkMgmtCntrl.getCurrentCourse().getAssignmentList().getAssignments()) {
+            if (assignment.getAssignmentTitle().equalsIgnoreCase(assignmentName))
+            {
+                assignmentNameTextField.setText("This assignment name already exists!");
+                return false;
+            }
+        }
+        return true;
     }
 
     private void addFocusListeners(){
@@ -118,6 +134,37 @@ public class AddAssignmentUI extends JFrame {
                 questionList.setListData(questionArray);
             }
         });
+    }
+
+    public void checkAssignmentForQuestions()
+    {
+        if (!currentAssignment.getQuestionList().getQuestionList().isEmpty())
+        {
+            createAssignmentButton.setEnabled(true);
+        }
+    }
+
+    private boolean confirmIsNewAssignment(String string){
+        if (string.isEmpty())
+        {
+            return false;
+        }
+        else if (string.equals("Enter Assignment Name Here"))
+        {
+            return false;
+        }
+        else if (!isNewAssignmentName(string))
+        {
+            return false;
+        }
+        else if (string.equals("This assignment name already exists!"))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
 
