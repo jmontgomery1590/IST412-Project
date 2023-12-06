@@ -8,6 +8,7 @@ import CourseManagement.View.AnnouncementMgmtUI;
 import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
+import CourseworkManagement.View.AddAssignmentUI;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.Instructor;
 import UserAuthentication.Model.Student;
@@ -464,7 +465,7 @@ public class DatabaseConnection {
     public AssignmentList getAllStudentAssignmentByCourse(CourseworkMgmtController courseworkMgmtController, ArrayList<Student> students) {
         openConnection();
         int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
-        AssignmentList assignmentList = courseworkMgmtController.getAssignmentList();
+        AssignmentList assignmentList = new AssignmentList();
 
         for (Student student : students)
         {
@@ -503,6 +504,41 @@ public class DatabaseConnection {
             {
                 System.out.println(e);
             }
+        }
+        closeConnection();
+        return assignmentList;
+    }
+
+    public AssignmentList getAssignmentsByCourseAlone(CourseworkMgmtController courseworkMgmtController) {
+        openConnection();
+        int courseTableID = courseworkMgmtController.getCurrentCourse().getCourseTableID();
+        AssignmentList assignmentList = new AssignmentList();
+        try
+        {
+            String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName "
+                    + "FROM AssignmentTable "
+                    + "WHERE AssignmentTable.CourseID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, courseTableID);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                int assignmentID = rs.getInt("ID");
+                String assignmentTitle = rs.getString("AssignmentName");
+
+                Assignment assignment = new Assignment(assignmentTitle);
+                assignment.setAssignmentID(assignmentID);
+                assignment.setQuestionList(getQuestionsByAssignment(assignment));
+                assignment.setEarnedScore(0);
+                assignment.setGrade(String.valueOf(0));
+                assignmentList.getAssignments().add(assignment);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
         }
         closeConnection();
         return assignmentList;
@@ -669,7 +705,10 @@ public class DatabaseConnection {
                     multiQuestion.setAssignmentID(assignmentID);
                     multiQuestion.setQuestionType(questionType);
                     multiQuestion.setAnswerList(getAnswersByQuestion(multiQuestion));
-                    getSubmittedAnswer(assignment, multiQuestion);
+                    if (assignment.getAssignedStudent() != null)
+                    {
+                        getSubmittedAnswer(assignment, multiQuestion);
+                    }
 
                     questionList.addToList(multiQuestion);
                 }
@@ -680,7 +719,10 @@ public class DatabaseConnection {
                     openEndedQuestion.setAssignmentID(assignmentID);
                     openEndedQuestion.setQuestionType(questionType);
                     openEndedQuestion.setAnswerList(getAnswersByQuestion(openEndedQuestion));
-                    getSubmittedAnswer(assignment, openEndedQuestion);
+                    if (assignment.getAssignedStudent() != null)
+                    {
+                        getSubmittedAnswer(assignment, openEndedQuestion);
+                    }
 
                     questionList.addToList(openEndedQuestion);
                 }
@@ -774,6 +816,126 @@ public class DatabaseConnection {
         closeConnection();
     }
 
+    public void addAssignmentToDatabase(Assignment assignment, Course course) {
+        openConnection();
+
+        try
+        {
+            String query = "INSERT INTO AssignmentTable (CourseID, AssignmentName) "
+                    + "VALUES (?, ?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, course.getCourseTableID());
+            pstmt.setString(2, assignment.getAssignmentTitle());
+            pstmt.executeUpdate();
+
+            String query2 = "SELECT AssignmentTable.ID "
+                    + "FROM AssignmentTable "
+                    + "WHERE AssignmentTable.AssignmentName = ?";
+
+            PreparedStatement pstmt2 = connection.prepareStatement(query2);
+            pstmt2.setString(1, assignment.getAssignmentTitle());
+            ResultSet rs = pstmt2.executeQuery();
+
+            while (rs.next())
+            {
+                assignment.setAssignmentID(rs.getInt("ID"));
+            }
+
+            for (Student student : course.getStudentsEnrolled())
+            {
+                String query3 = "INSERT INTO StudentAssignmentTable (assignmentid, userid, completed, grade, earnedscore) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+
+                PreparedStatement pstmt3 = connection.prepareStatement(query3);
+                pstmt3.setInt(1, assignment.getAssignmentID());
+                pstmt3.setInt(2, student.getUserIDNumber());
+                pstmt3.setBoolean(3, false);
+                pstmt3.setDouble(4, 0);
+                pstmt3.setDouble(5, 0);
+
+                pstmt3.executeUpdate();
+            }
+            addQuestionToDatabase(assignment);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
+    }
+
+    public void addQuestionToDatabase(Assignment assignment){
+        try
+        {
+            for (Question question : assignment.getQuestionList().getQuestionList())
+            {
+                int questionType = 0;
+                if (question.getClass().equals(MultipleChoiceQuestion.class))
+                {
+                    questionType = 1;
+                }
+                else if (question.getClass().equals(OpenEndedQuestion.class))
+                {
+                    questionType = 2;
+                }
+
+                String query = "INSERT INTO QuestionTable (Question, PointValue, assignmentid, questiontype) "
+                        + "VALUES (?, ?, ?, ?)";
+
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, question.getQuestion());
+                pstmt.setDouble(2, question.getQuestionPointWorth());
+                pstmt.setInt(3, assignment.getAssignmentID());
+                pstmt.setInt(4, questionType);
+
+                pstmt.executeUpdate();
+
+                String query2 = "SELECT QuestionTable.ID "
+                        + "FROM QuestionTable "
+                        + "WHERE QuestionTable.Question = ? AND QuestionTable.assignmentid = ?";
+
+                PreparedStatement pstmt2 = connection.prepareStatement(query2);
+                pstmt2.setString(1, question.getQuestion());
+                pstmt2.setInt(2, assignment.getAssignmentID());
+                ResultSet rs = pstmt2.executeQuery();
+
+                while (rs.next())
+                {
+                    question.setQuestionID(rs.getInt("ID"));
+                }
+
+                addAnswersToDatabase(question);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void addAnswersToDatabase(Question question){
+        try
+        {
+            for (Answer answer : question.getAnswerList().getAnswerList())
+            {
+                String query = "INSERT INTO AnswerTable (Answer, isCorrect, questionid) "
+                        + "VALUES (?, ?, ?)";
+
+                PreparedStatement pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, answer.getAnswer());
+                pstmt.setBoolean(2, answer.getIsCorrect());
+                pstmt.setInt(3, question.getQuestionID());
+
+                pstmt.executeUpdate();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
     public void markAssignmentCompleteAndGrade(Assignment assignment){
         assignment.gradeAssignment();
         int assignmentID = assignment.getAssignmentID();
@@ -801,6 +963,76 @@ public class DatabaseConnection {
             System.out.println();
         }
     }
+
+    public void editAssignment(Assignment assignment){
+        openConnection();
+        try
+        {
+            String query = "UPDATE AssignmentTable "
+                    + "SET AssignmentName = ? "
+                    + "WHERE ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, assignment.getAssignmentTitle());
+            pstmt.setInt(2, assignment.getAssignmentID());
+
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        for (Question question : assignment.getQuestionList().getQuestionList())
+        {
+            editQuestion(question);
+        }
+        closeConnection();
+    }
+
+    public void editQuestion(Question question){
+        try
+        {
+            String query = "UPDATE QuestionTable "
+                    + "SET Question = ?, PointValue = ? "
+                    + "WHERE ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, question.getQuestion());
+            pstmt.setDouble(2, question.getQuestionPointWorth());
+            pstmt.setInt(3, question.getQuestionID());
+
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        for (Answer answer : question.getAnswerList().getAnswerList())
+        {
+            editAnswer(answer);
+        }
+    }
+
+    public void editAnswer(Answer answer){
+        try
+        {
+            String query = "UPDATE AnswerTable "
+                    + "SET Answer = ?, isCorrect = ? "
+                    + "WHERE ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, answer.getAnswer());
+            pstmt.setBoolean(2, answer.getIsCorrect());
+            pstmt.setInt(3, answer.getAnswerID());
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
 
     public void closeConnection()
     {

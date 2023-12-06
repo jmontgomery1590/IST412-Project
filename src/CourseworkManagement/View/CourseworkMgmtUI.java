@@ -1,8 +1,6 @@
 package CourseworkManagement.View;
 
-import CourseManagement.Controller.CourseMgmtController;
 import CourseworkManagement.Controller.CourseworkMgmtController;
-import UserAuthentication.Model.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,6 +17,8 @@ public class CourseworkMgmtUI extends JFrame{
     private JScrollPane tableScrollPane;
     private JTable assignmentTable;
     private JButton viewAssignmentButton;
+    private JButton courseAssignmentButton;
+    private JButton studentAssignmentsButton;
     private CourseworkMgmtController courseworkMgmtCntrl;
     private JFrame view;
 
@@ -49,7 +49,7 @@ public class CourseworkMgmtUI extends JFrame{
             public void windowGainedFocus(WindowEvent e) {
                 super.windowGainedFocus(e);
 
-                courseworkMgmtCntrl.getAssignmentTable().fireTableDataChanged();
+                courseworkMgmtCntrl.getStudentAssignmentTableModel().fireTableDataChanged();
             }
         });
     }
@@ -58,11 +58,11 @@ public class CourseworkMgmtUI extends JFrame{
     {
         if (courseworkMgmtCntrl.getCurrentUser().getRoleID().equals("4"))
         {
-            assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
+            assignmentTable.setModel(this.courseworkMgmtCntrl.getStudentAssignmentTableModel());
         }
         else
         {
-            assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
+            assignmentTable.setModel(this.courseworkMgmtCntrl.getCourseAssignmentTableModel());
         }
     }
 
@@ -72,7 +72,6 @@ public class CourseworkMgmtUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = assignmentTable.getSelectedRow();
                 courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
-                //courseworkMgmtCntrl.setQuestion(courseworkMgmtCntrl.getAssignment().getQuestionList().getQuestionList().get(0));
                 courseworkMgmtCntrl.setViewAssignmentUI(new ViewAssignmentUI(courseworkMgmtCntrl));
 
                 courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().add(courseworkMgmtCntrl.getViewAssignmentUI().getReadPanel(), "Load Assignment");
@@ -84,7 +83,10 @@ public class CourseworkMgmtUI extends JFrame{
         this.editAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int selectedRow = assignmentTable.getSelectedRow();
+                courseworkMgmtCntrl.setAssignment(courseworkMgmtCntrl.getAssignmentList().getAssignments().get(selectedRow));
+                courseworkMgmtCntrl.setAssignmentInterface(new AddAssignmentUI(courseworkMgmtCntrl, courseworkMgmtCntrl.getAssignment()));
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(false);
             }
         });
         this.newAssignmentButton.addActionListener(new ActionListener() {
@@ -98,6 +100,22 @@ public class CourseworkMgmtUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+
+        this.courseAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.loadCourseAssignmentList();
+                assignmentTable.setModel(courseworkMgmtCntrl.getCourseAssignmentTableModel());
+            }
+        });
+
+        this.studentAssignmentsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtCntrl.loadAllStudentsAssignmentList();
+                assignmentTable.setModel(courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
             }
         });
     }

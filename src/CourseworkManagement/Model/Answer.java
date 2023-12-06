@@ -8,4 +8,9 @@ public abstract class Answer {
     public abstract void markIncorrect();
 
     public abstract boolean getIsCorrect();
+
+    public abstract void setAnswerID(int answerID);
+
+    public abstract int getAnswerID();
+    public abstract void setAnswer(String answer);
 }

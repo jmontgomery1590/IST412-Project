@@ -18,4 +18,10 @@ public abstract class Question {
     public abstract String showSubmittedAnswer();
 
     public abstract Boolean getIsCorrect();
+    public abstract void setQuestionID(int questionid);
+
+    public abstract int getQuestionType();
+
+    public abstract void setQuestion(String string);
+    public abstract void setPointValue(double pointValue);
 }

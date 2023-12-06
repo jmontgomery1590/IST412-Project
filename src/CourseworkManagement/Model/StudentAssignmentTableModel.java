@@ -1,14 +1,13 @@
 package CourseworkManagement.Model;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class AssignmentTableModel extends AbstractTableModel {
+public class StudentAssignmentTableModel extends AbstractTableModel {
     String columnNames[] = {"Assignment", "Earned Score", "Possible Score", "Grade"};
     private ArrayList<Assignment> assignmentList;
 
-    public AssignmentTableModel(ArrayList<Assignment> newAssignmentList) { assignmentList = newAssignmentList; }
+    public StudentAssignmentTableModel(ArrayList<Assignment> newAssignmentList) { assignmentList = newAssignmentList; }
 
     @Override
     public int getRowCount() { return assignmentList.size(); }
