@@ -86,10 +86,22 @@ public class EditAssignmentUI extends JFrame {
             public void windowGainedFocus(WindowEvent e) {
                 super.windowGainedFocus(e);
 
-                Question[] questionArray = assignment.getQuestionList().getQuestionList().toArray(new Question[0]);
-                questionList.setListData(questionArray);
+                setupQuestionListData();
             }
         });
+    }
+
+    public void setupQuestionListData(){
+        DefaultListModel<Question> model = new DefaultListModel<>();
+        questionList.setModel(model);
+
+        if (assignment != null)
+        {
+            for (Question question : assignment.getQuestionList().getQuestionList())
+            {
+                model.addElement(question);
+            }
+        }
     }
 
     private void addALButtons(){
@@ -102,8 +114,7 @@ public class EditAssignmentUI extends JFrame {
                     assignmentNameTextField.setEnabled(false);
                     submitButton.setEnabled(false);
                     editQuestionButton.setEnabled(true);
-                    assignment.setAssignmentTitle(assignmentNameTextField.getText());
-                    courseworkMgmtController.setAssignment(assignment);
+                    checkAssignmentForQuestions();
                 }
             }
         });
@@ -123,6 +134,24 @@ public class EditAssignmentUI extends JFrame {
                 courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
                 editAssignmentFrame.dispose();
                 courseworkMgmtController.setAssignmentInterface(null);
+            }
+        });
+
+        saveAssignmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                assignment.updatePossibleScore();
+                assignment.setAssignmentTitle(assignmentNameTextField.getText());
+                courseworkMgmtController.setAssignment(assignment);
+                courseworkMgmtController.getDatabase().editAssignment(assignment);
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
+                courseworkMgmtController.getCourseAssignmentTableModel().fireTableDataChanged();
+                if (courseworkMgmtController.getAssignmentByStudentTablemodel() != null)
+                {
+                    courseworkMgmtController.loadAllStudentsAssignmentList();
+                    courseworkMgmtController.getCourseworkMgmtInterface().getAssignmentTable().setModel(courseworkMgmtController.getAssignmentByStudentTablemodel());
+                }
+                editAssignmentFrame.dispose();
             }
         });
     }

@@ -31,13 +31,14 @@ public class EditQuestionUI extends JFrame {
     private CourseworkMgmtController courseworkMgmtController;
     private Assignment assignment;
     private JFrame editQuestionFrame;
-    private Question question;
+    private Question questionToEdit;
     private boolean isValidPointValue;
     private boolean isValidQuestion;
 
-    public EditQuestionUI(CourseworkMgmtController courseworkMgmtController, Question question){
+    public EditQuestionUI(CourseworkMgmtController courseworkMgmtController, Question questionToEdit){
         this.courseworkMgmtController = courseworkMgmtController;
-        this.question = question;
+        this.questionToEdit = questionToEdit;
+        this.assignment = courseworkMgmtController.getEditAssignmentUI().getAssignment();
         editQuestionFrame = new JFrame("Question Builder");
         questionComboBox.addItem("Multiple Choice");
         questionComboBox.addItem("Open Ended");
@@ -56,17 +57,21 @@ public class EditQuestionUI extends JFrame {
         addALButtons();
         addFocusListenerTextField();
         setUpAnswerListData();
-        isValidPointValue = false;
-        isValidQuestion = false;
+        isValidPointValue = true;
+        isValidQuestion = true;
+        questionTextField.setText(questionToEdit.getQuestion());
+        pointValueTextField.setText(String.valueOf(questionToEdit.getQuestionPointWorth()));
+        questionComboBox.setSelectedIndex(questionToEdit.getQuestionType() - 1);
+        questionComboBox.setEnabled(false);
     }
 
     public void setUpAnswerListData(){
         DefaultListModel<Answer> model = new DefaultListModel<>();
         answerList.setModel(model);
 
-        if (question != null)
+        if (questionToEdit != null)
         {
-            for (Answer answer : question.getAnswerList().getAnswerList())
+            for (Answer answer : questionToEdit.getAnswerList().getAnswerList())
             {
                 model.addElement(answer);
             }
@@ -78,7 +83,7 @@ public class EditQuestionUI extends JFrame {
         editAnswerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Answer answer = question.getAnswerList().getAnswerList().get(answerList.getSelectedIndex());
+                Answer answer = questionToEdit.getAnswerList().getAnswerList().get(answerList.getSelectedIndex());
                 courseworkMgmtController.setEditAnswerUI(new EditAnswerUI(courseworkMgmtController, answer));
                 editQuestionFrame.setEnabled(false);
             }
@@ -92,6 +97,41 @@ public class EditQuestionUI extends JFrame {
                 courseworkMgmtController.setEditQuestionUI(null);
             }
         });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checkValidDoubleEntered(pointValueTextField.getText());
+                if (isQuestionValid(assignment))
+                {
+                    editAnswerButton.setEnabled(true);
+                    questionTextField.setEnabled(false);
+                    pointValueTextField.setEnabled(false);
+                    submitButton.setEnabled(false);
+                    if (!questionToEdit.getAnswerList().getAnswerList().isEmpty() && checkIfAnyAnswersAreCorrect())
+                    {
+                        saveQuestionButton.setEnabled(true);
+                    }
+                }
+            }
+        });
+
+        saveQuestionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String question = questionTextField.getText();
+                double pointValue = Double.parseDouble(pointValueTextField.getText());
+
+                questionToEdit.setQuestion(question);
+                questionToEdit.setPointValue(pointValue);
+
+                courseworkMgmtController.getEditAssignmentUI().getEditAssignmentFrame().setEnabled(true);
+                courseworkMgmtController.getEditAssignmentUI().checkAssignmentForQuestions();
+                courseworkMgmtController.setEditQuestionUI(null);
+                courseworkMgmtController.getEditAssignmentUI().setupQuestionListData();
+                editQuestionFrame.dispose();
+            }
+        });
     }
 
     private void onWindowClosing()
@@ -103,7 +143,7 @@ public class EditQuestionUI extends JFrame {
     private boolean checkIfQuestionIsNew(Assignment assignment){
         for (Question question : assignment.getQuestionList().getQuestionList())
         {
-            if (question.getQuestion().equalsIgnoreCase(questionTextField.getText()))
+            if (question.getQuestion().equalsIgnoreCase(questionTextField.getText()) && !questionTextField.getText().equals(questionToEdit.getQuestion()))
             {
                 return false;
             }
@@ -127,7 +167,7 @@ public class EditQuestionUI extends JFrame {
 
     public boolean checkIfAnyAnswersAreCorrect()
     {
-        for (Answer answer : question.getAnswerList().getAnswerList())
+        for (Answer answer : questionToEdit.getAnswerList().getAnswerList())
         {
             if (answer.getIsCorrect())
             {
@@ -237,4 +277,187 @@ public class EditQuestionUI extends JFrame {
         });
     }
 
+    public JPanel getQuestionViewPanel() {
+        return questionViewPanel;
+    }
+
+    public void setQuestionViewPanel(JPanel questionViewPanel) {
+        this.questionViewPanel = questionViewPanel;
+    }
+
+    public JPanel getBodyPanel() {
+        return bodyPanel;
+    }
+
+    public void setBodyPanel(JPanel bodyPanel) {
+        this.bodyPanel = bodyPanel;
+    }
+
+    public JPanel getAnswerListPanel() {
+        return answerListPanel;
+    }
+
+    public void setAnswerListPanel(JPanel answerListPanel) {
+        this.answerListPanel = answerListPanel;
+    }
+
+    public JList getAnswerList() {
+        return answerList;
+    }
+
+    public void setAnswerList(JList answerList) {
+        this.answerList = answerList;
+    }
+
+    public JLabel getAnswerListLabel() {
+        return answerListLabel;
+    }
+
+    public void setAnswerListLabel(JLabel answerListLabel) {
+        this.answerListLabel = answerListLabel;
+    }
+
+    public JComboBox getQuestionComboBox() {
+        return questionComboBox;
+    }
+
+    public void setQuestionComboBox(JComboBox questionComboBox) {
+        this.questionComboBox = questionComboBox;
+    }
+
+    public JLabel getQuestionTypeLabel() {
+        return questionTypeLabel;
+    }
+
+    public void setQuestionTypeLabel(JLabel questionTypeLabel) {
+        this.questionTypeLabel = questionTypeLabel;
+    }
+
+    public JLabel getQuestionLabel() {
+        return questionLabel;
+    }
+
+    public void setQuestionLabel(JLabel questionLabel) {
+        this.questionLabel = questionLabel;
+    }
+
+    public JTextField getQuestionTextField() {
+        return questionTextField;
+    }
+
+    public void setQuestionTextField(JTextField questionTextField) {
+        this.questionTextField = questionTextField;
+    }
+
+    public JLabel getPointValueLabel() {
+        return pointValueLabel;
+    }
+
+    public void setPointValueLabel(JLabel pointValueLabel) {
+        this.pointValueLabel = pointValueLabel;
+    }
+
+    public JTextField getPointValueTextField() {
+        return pointValueTextField;
+    }
+
+    public void setPointValueTextField(JTextField pointValueTextField) {
+        this.pointValueTextField = pointValueTextField;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public void setSubmitButton(JButton submitButton) {
+        this.submitButton = submitButton;
+    }
+
+    public JPanel getTitlePanel() {
+        return titlePanel;
+    }
+
+    public void setTitlePanel(JPanel titlePanel) {
+        this.titlePanel = titlePanel;
+    }
+
+    public JLabel getQuestionTitleLabel() {
+        return questionTitleLabel;
+    }
+
+    public void setQuestionTitleLabel(JLabel questionTitleLabel) {
+        this.questionTitleLabel = questionTitleLabel;
+    }
+
+    public JButton getSaveQuestionButton() {
+        return saveQuestionButton;
+    }
+
+    public void setSaveQuestionButton(JButton saveQuestionButton) {
+        this.saveQuestionButton = saveQuestionButton;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(JButton cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public JButton getEditAnswerButton() {
+        return editAnswerButton;
+    }
+
+    public void setEditAnswerButton(JButton editAnswerButton) {
+        this.editAnswerButton = editAnswerButton;
+    }
+
+    public CourseworkMgmtController getCourseworkMgmtController() {
+        return courseworkMgmtController;
+    }
+
+    public void setCourseworkMgmtController(CourseworkMgmtController courseworkMgmtController) {
+        this.courseworkMgmtController = courseworkMgmtController;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public JFrame getEditQuestionFrame() {
+        return editQuestionFrame;
+    }
+
+    public void setEditQuestionFrame(JFrame editQuestionFrame) {
+        this.editQuestionFrame = editQuestionFrame;
+    }
+
+    public Question getQuestionToEdit() {
+        return questionToEdit;
+    }
+
+    public void setQuestionToEdit(Question questionToEdit) {
+        this.questionToEdit = questionToEdit;
+    }
+
+    public boolean isValidPointValue() {
+        return isValidPointValue;
+    }
+
+    public void setValidPointValue(boolean validPointValue) {
+        isValidPointValue = validPointValue;
+    }
+
+    public boolean isValidQuestion() {
+        return isValidQuestion;
+    }
+
+    public void setValidQuestion(boolean validQuestion) {
+        isValidQuestion = validQuestion;
+    }
 }

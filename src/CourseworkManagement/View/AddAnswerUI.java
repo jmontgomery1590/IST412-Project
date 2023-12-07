@@ -49,8 +49,6 @@ public class AddAnswerUI extends JFrame {
                 }
             }
         });
-
-
     }
 
     private void checkQuestionType(){
@@ -84,7 +82,6 @@ public class AddAnswerUI extends JFrame {
                 markAsCorrect(answer);
                 courseworkMgmtCntrl.getQuestion().getAnswerList().addToList(answer);
                 courseworkMgmtCntrl.getQuestionInterface().getQuestionFrame().setEnabled(true);
-                courseworkMgmtCntrl.getQuestionInterface().getSaveQuestionButton().setEnabled(true);
                 courseworkMgmtCntrl.getQuestionInterface().disableButtonAfterAddingOpenEndedAnswer();
                 courseworkMgmtCntrl.getQuestionInterface().getSaveQuestionButton().setEnabled(courseworkMgmtCntrl.getQuestionInterface().checkIfAnyAnswersAreCorrect());
                 courseworkMgmtCntrl.getQuestionInterface().setUpAnswerListData();

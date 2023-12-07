@@ -109,6 +109,7 @@ public class CourseworkMgmtUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 courseworkMgmtCntrl.loadCourseAssignmentList();
                 assignmentTable.setModel(courseworkMgmtCntrl.getCourseAssignmentTableModel());
+                editAssignmentButton.setEnabled(true);
             }
         });
 
@@ -117,6 +118,7 @@ public class CourseworkMgmtUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 courseworkMgmtCntrl.loadAllStudentsAssignmentList();
                 assignmentTable.setModel(courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
+                editAssignmentButton.setEnabled(false);
             }
         });
     }
