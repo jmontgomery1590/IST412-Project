@@ -25,6 +25,10 @@ public class Assignment {
      * Grade assignment and post grade
      */
     public void gradeAssignment() {
+        for (Question question : questionList.getQuestionList())
+        {
+            question.compareSubmittedAnswer();
+        }
         updateEarnedScore();
         double num = ((this.getEarnedScore() / this.getPossibleScore()) * 100);
         DecimalFormat df = new DecimalFormat("###.#");
@@ -42,6 +46,7 @@ public class Assignment {
     }
 
     public void updateEarnedScore() {
+        this.earnedScore = 0;
         for (Question question : questionList.getQuestionList())
         {
             if (question.getIsCorrect())

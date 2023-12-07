@@ -54,12 +54,22 @@ public class CourseworkMgmtController {
         currentStudent.setRoleID(currentUser.getRoleID());
         this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
         this.assignmentList = this.currentCourse.getAssignmentList();
+        /**
+         * INSERT HERE
+         */
         this.studentAssignmentTableModel = new StudentAssignmentTableModel(this.assignmentList.getAssignments());
     }
 
     public void loadAllStudentsAssignmentList(){
         this.currentCourse.setAssignmentList(database.getAllStudentAssignmentByCourse(this, currentCourse.getStudentsEnrolled()));
         this.assignmentList = this.currentCourse.getAssignmentList();
+        for (Assignment assignmentToGrade : assignmentList.getAssignments())
+        {
+            assignmentToGrade.gradeAssignment();
+            if (assignmentToGrade.isCompleted()){
+                database.updateAssignmentPointsEarnedAndGrade(assignmentToGrade);
+            }
+        }
         //this.studentAssignmentTableModel = new StudentAssignmentTableModel(this.assignmentList.getAssignments());
         this.assignmentByStudentTablemodel = new AssignmentByStudentTablemodel(this.assignmentList.getAssignments());
     }

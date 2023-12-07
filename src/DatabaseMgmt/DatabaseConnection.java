@@ -475,11 +475,12 @@ public class DatabaseConnection {
                 String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade, StudentAssignmentTable.earnedscore "
                         + "FROM AssignmentTable "
                         + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
-                        + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
+                        + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? AND AssignmentTable.isEnabled = ?";
 
                 PreparedStatement pstmt = connection.prepareStatement(query);
                 pstmt.setInt(1, courseTableID);
                 pstmt.setInt(2, userID);
+                pstmt.setBoolean(3, true);
                 ResultSet rs = pstmt.executeQuery();
 
                 while (rs.next())
@@ -517,11 +518,11 @@ public class DatabaseConnection {
         {
             String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName "
                     + "FROM AssignmentTable "
-                    + "WHERE AssignmentTable.CourseID = ?";
+                    + "WHERE AssignmentTable.CourseID = ? AND AssignmentTable.isEnabled = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, courseTableID);
-
+            pstmt.setBoolean(2, true);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next())
             {
@@ -554,11 +555,12 @@ public class DatabaseConnection {
             String query = "SELECT AssignmentTable.ID, AssignmentTable.AssignmentName, StudentAssignmentTable.completed, StudentAssignmentTable.grade, StudentAssignmentTable.earnedscore  "
                     + "FROM AssignmentTable "
                     + "JOIN StudentAssignmentTable ON AssignmentTable.ID = StudentAssignmentTable.assignmentid "
-                    + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? ";
+                    + "WHERE AssignmentTable.CourseID = ? AND StudentAssignmentTable.userid = ? AND AssignmentTable.isEnabled = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, courseTableID);
             pstmt.setInt(2, userID);
+            pstmt.setBoolean(3, true);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next())
@@ -586,6 +588,26 @@ public class DatabaseConnection {
         }
         closeConnection();
         return assignmentList;
+    }
+
+    public void disableAssignmentFromDatabase(Assignment assignment) {
+        openConnection();
+        try
+        {
+            String query = "UPDATE AssignmentTable "
+                + "SET AssignmentTable.isEnabled = ? "
+                + "WHERE AssignmentTable.ID = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setBoolean(1, false);
+            pstmt.setInt(2, assignment.getAssignmentID());
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
     }
 
     public void addAnnouncementToDatabase(AnnouncementMgmtUI announcementMgmtUI) {
@@ -821,20 +843,22 @@ public class DatabaseConnection {
 
         try
         {
-            String query = "INSERT INTO AssignmentTable (CourseID, AssignmentName) "
-                    + "VALUES (?, ?)";
+            String query = "INSERT INTO AssignmentTable (CourseID, AssignmentName, isEnabled) "
+                    + "VALUES (?, ?, ?)";
 
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, course.getCourseTableID());
             pstmt.setString(2, assignment.getAssignmentTitle());
+            pstmt.setBoolean(3, true);
             pstmt.executeUpdate();
 
             String query2 = "SELECT AssignmentTable.ID "
                     + "FROM AssignmentTable "
-                    + "WHERE AssignmentTable.AssignmentName = ?";
+                    + "WHERE AssignmentTable.AssignmentName = ? AND AssignmentTable.isEnabled = ?";
 
             PreparedStatement pstmt2 = connection.prepareStatement(query2);
             pstmt2.setString(1, assignment.getAssignmentTitle());
+            pstmt2.setBoolean(2, true);
             ResultSet rs = pstmt2.executeQuery();
 
             while (rs.next())
@@ -962,6 +986,32 @@ public class DatabaseConnection {
         {
             System.out.println();
         }
+    }
+
+    public void updateAssignmentPointsEarnedAndGrade(Assignment assignment) {
+        openConnection();
+        int assignmentID = assignment.getAssignmentID();
+        double grade = Double.parseDouble(assignment.getGrade());
+        double earnedScore = assignment.getEarnedScore();
+        int studentID = assignment.getAssignedStudent().getUserIDNumber();
+        try
+        {
+            String query = "UPDATE StudentAssignmentTable "
+                    + "SET grade = ?, earnedscore = ? "
+                    + "WHERE StudentAssignmentTable.assignmentid = ? AND StudentAssignmentTable.userid = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setDouble(1, grade);
+            pstmt.setDouble(2, earnedScore);
+            pstmt.setInt(3, assignmentID);
+            pstmt.setInt(4, studentID);
+            pstmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        closeConnection();
     }
 
     public void editAssignment(Assignment assignment){

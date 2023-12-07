@@ -100,7 +100,13 @@ public class CourseworkMgmtUI extends JFrame{
         this.deleteAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Assignment currentAssignment = courseworkMgmtCntrl.getAssignmentList().getAssignments().get(assignmentTable.getSelectedRow());
+                courseworkMgmtCntrl.getDatabase().disableAssignmentFromDatabase(currentAssignment);
 
+                courseworkMgmtCntrl.getAssignmentList().getAssignments().remove(currentAssignment);
+                courseworkMgmtCntrl.getCourseAssignmentTableModel().fireTableDataChanged();
+
+                courseworkMgmtCntrl.getCourseMgmtController().getHomepageController().getHomepageUI().getHomeFrame().setEnabled(true);
             }
         });
 
@@ -110,6 +116,7 @@ public class CourseworkMgmtUI extends JFrame{
                 courseworkMgmtCntrl.loadCourseAssignmentList();
                 assignmentTable.setModel(courseworkMgmtCntrl.getCourseAssignmentTableModel());
                 editAssignmentButton.setEnabled(true);
+                deleteAssignmentButton.setEnabled(true);
             }
         });
 
@@ -119,6 +126,7 @@ public class CourseworkMgmtUI extends JFrame{
                 courseworkMgmtCntrl.loadAllStudentsAssignmentList();
                 assignmentTable.setModel(courseworkMgmtCntrl.getAssignmentByStudentTablemodel());
                 editAssignmentButton.setEnabled(false);
+                deleteAssignmentButton.setEnabled(false);
             }
         });
     }
