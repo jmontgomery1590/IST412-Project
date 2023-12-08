@@ -44,11 +44,16 @@ public class OpenEndedAnswer extends Answer {
         return this.isCorrect;
     }
 
+    @Override
+    public void setAnswerID(int answerID) {
+        this.answerID = answerID;
+    }
+
     public int getAnswerID() {
         return answerID;
     }
-
-    public void setAnswerID(int answerID) {
-        this.answerID = answerID;
+    @Override
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

@@ -21,6 +21,7 @@ public class CourseworkMgmtController {
         this.currentUser = this.courseMgmtController.getHomepageController().getUser();
         this.currentCourse = this.courseMgmtController.getSelectedCourse();
         //this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
+        this.database.getStudentListForCourse(currentCourse);
         this.loadAssignmentByRole();
         //this.assignmentList = this.currentCourse.getAssignmentList();
         //this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
@@ -31,22 +32,46 @@ public class CourseworkMgmtController {
     {
         if (Objects.equals(currentUser.getRoleID(), "4"))
         {
-            currentStudent = new Student(currentUser.getUserName(), currentUser.getPassword());
-            currentStudent.setUserIDNumber(currentUser.getUserIDNumber());
-            currentStudent.setFirstName(currentUser.getFirstName());
-            currentStudent.setLastName(currentUser.getLastName());
-            currentStudent.setRoleID(currentUser.getRoleID());
-            this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
-            this.assignmentList = this.currentCourse.getAssignmentList();
-            this.assignmentTable = new AssignmentTableModel(this.getAssignmentList().getAssignments());
+            loadStudentAssignmentList();
         }
         else
         {
-            this.database.getStudentListForCourse(currentCourse);
-            this.currentCourse.setAssignmentList(database.getAllStudentAssignmentByCourse(this, currentCourse.getStudentsEnrolled()));
-            this.assignmentList = this.currentCourse.getAssignmentList();
-            this.assignmentByStudentTablemodel = new AssignmentByStudentTablemodel(this.getAssignmentList().getAssignments());
+            loadCourseAssignmentList();
         }
+    }
+
+    public void loadCourseAssignmentList(){
+        this.currentCourse.setAssignmentList(database.getAssignmentsByCourseAlone(this));
+        this.assignmentList = this.currentCourse.getAssignmentList();
+        this.courseAssignmentTableModel = new CourseAssignmentTableModel(this.assignmentList.getAssignments());
+    }
+
+    public void loadStudentAssignmentList(){
+        currentStudent = new Student(currentUser.getUserName(), currentUser.getPassword());
+        currentStudent.setUserIDNumber(currentUser.getUserIDNumber());
+        currentStudent.setFirstName(currentUser.getFirstName());
+        currentStudent.setLastName(currentUser.getLastName());
+        currentStudent.setRoleID(currentUser.getRoleID());
+        this.currentCourse.setAssignmentList(database.getStudentAssignmentByCourse(this));
+        this.assignmentList = this.currentCourse.getAssignmentList();
+        /**
+         * INSERT HERE
+         */
+        this.studentAssignmentTableModel = new StudentAssignmentTableModel(this.assignmentList.getAssignments());
+    }
+
+    public void loadAllStudentsAssignmentList(){
+        this.currentCourse.setAssignmentList(database.getAllStudentAssignmentByCourse(this, currentCourse.getStudentsEnrolled()));
+        this.assignmentList = this.currentCourse.getAssignmentList();
+        for (Assignment assignmentToGrade : assignmentList.getAssignments())
+        {
+            assignmentToGrade.gradeAssignment();
+            if (assignmentToGrade.isCompleted()){
+                database.updateAssignmentPointsEarnedAndGrade(assignmentToGrade);
+            }
+        }
+        //this.studentAssignmentTableModel = new StudentAssignmentTableModel(this.assignmentList.getAssignments());
+        this.assignmentByStudentTablemodel = new AssignmentByStudentTablemodel(this.assignmentList.getAssignments());
     }
 
     private Question question;
@@ -59,7 +84,7 @@ public class CourseworkMgmtController {
     private Course currentCourse;
     private Assignment assignment;
     private User currentUser;
-    private AssignmentTableModel assignmentTable;
+    private StudentAssignmentTableModel studentAssignmentTableModel;
     private AssignmentByStudentTablemodel assignmentByStudentTablemodel;
     private AssignmentList assignmentList = new AssignmentList();
 
@@ -67,6 +92,10 @@ public class CourseworkMgmtController {
     private ViewAssignmentUI viewAssignmentUI;
     private DatabaseConnection database = new DatabaseConnection();
     private Student currentStudent;
+    private CourseAssignmentTableModel courseAssignmentTableModel;
+    private EditAssignmentUI editAssignmentUI;
+    private EditQuestionUI editQuestionUI;
+    private EditAnswerUI editAnswerUI;
 
 
     public AddQuestionUI getQuestionInterface() {
@@ -101,12 +130,12 @@ public class CourseworkMgmtController {
         this.currentUser = currentUser;
     }
 
-    public AssignmentTableModel getAssignmentTable() {
-        return assignmentTable;
+    public StudentAssignmentTableModel getStudentAssignmentTableModel() {
+        return studentAssignmentTableModel;
     }
 
-    public void setAssignmentTable(AssignmentTableModel assignmentTable) {
-        this.assignmentTable = assignmentTable;
+    public void setStudentAssignmentTableModel(StudentAssignmentTableModel studentAssignmentTableModel) {
+        this.studentAssignmentTableModel = studentAssignmentTableModel;
     }
 
     public AssignmentList getAssignmentList() {
@@ -195,5 +224,61 @@ public class CourseworkMgmtController {
 
     public void setCurrentStudent(Student currentStudent) {
         this.currentStudent = currentStudent;
+    }
+
+    public CourseAssignmentTableModel getCourseAssignmentTableModel() {
+        return courseAssignmentTableModel;
+    }
+
+    public void setCourseAssignmentTableModel(CourseAssignmentTableModel courseAssignmentTableModel) {
+        this.courseAssignmentTableModel = courseAssignmentTableModel;
+    }
+
+    public AddQuestionUI getAddQuestionUI() {
+        return addQuestionUI;
+    }
+
+    public void setAddQuestionUI(AddQuestionUI addQuestionUI) {
+        this.addQuestionUI = addQuestionUI;
+    }
+
+    public AddAnswerUI getAddAnswerUI() {
+        return addAnswerUI;
+    }
+
+    public void setAddAnswerUI(AddAnswerUI addAnswerUI) {
+        this.addAnswerUI = addAnswerUI;
+    }
+
+    public AddAssignmentUI getAddAssignmentUI() {
+        return addAssignmentUI;
+    }
+
+    public void setAddAssignmentUI(AddAssignmentUI addAssignmentUI) {
+        this.addAssignmentUI = addAssignmentUI;
+    }
+
+    public EditAssignmentUI getEditAssignmentUI() {
+        return editAssignmentUI;
+    }
+
+    public void setEditAssignmentUI(EditAssignmentUI editAssignmentUI) {
+        this.editAssignmentUI = editAssignmentUI;
+    }
+
+    public EditQuestionUI getEditQuestionUI() {
+        return editQuestionUI;
+    }
+
+    public void setEditQuestionUI(EditQuestionUI editQuestionUI) {
+        this.editQuestionUI = editQuestionUI;
+    }
+
+    public EditAnswerUI getEditAnswerUI() {
+        return editAnswerUI;
+    }
+
+    public void setEditAnswerUI(EditAnswerUI editAnswerUI) {
+        this.editAnswerUI = editAnswerUI;
     }
 }

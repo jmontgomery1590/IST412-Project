@@ -105,6 +105,7 @@ public class MultipleChoiceQuestion extends Question{
         return isCorrect;
     }
 
+    @Override
     public void setQuestionID(int questionID) {
         this.questionID = questionID;
     }
