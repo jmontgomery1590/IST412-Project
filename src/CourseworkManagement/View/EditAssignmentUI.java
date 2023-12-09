@@ -24,6 +24,7 @@ public class EditAssignmentUI extends JFrame {
     private JPanel listPanel;
     private JList questionList;
     private JLabel questionListLabel;
+    private JScrollPane questionListScrollPane;
     private JFrame editAssignmentFrame;
     private CourseworkMgmtController courseworkMgmtController;
     private Assignment assignment;

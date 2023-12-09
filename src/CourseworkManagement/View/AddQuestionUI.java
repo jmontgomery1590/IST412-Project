@@ -281,6 +281,7 @@ public class AddQuestionUI extends JFrame {
     private JLabel pointValueLabel;
     private JTextField pointValueTextField;
     private JButton submitButton;
+    private JScrollPane answerScrollPane;
     private JButton editAnswerButton;
 
     public JButton getSaveQuestionButton() {
