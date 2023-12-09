@@ -36,7 +36,7 @@ public class HomepageUI extends JFrame{
 	}
 
 	public void loadHomeImage(){
-		ImageIcon backgroundImage = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//PSU.png");
+		ImageIcon backgroundImage = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//resizedPSU.png");
 		homePanel = new JPanel(new BorderLayout()) {
 			@Override
 			public void paintComponent(Graphics g) {

@@ -7,11 +7,11 @@ public class HomeViewUI extends JFrame{
     private JFrame homeFrame;
     private JPanel homePanel;
     private String pcUserName = System.getenv("USERNAME");
-    private String imagePath = "C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//PSU.png";
+    private String imagePath = "C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//resizedPSU.png";
 
     public HomeViewUI(){
         homeFrame = new JFrame("Home Page");
-        ImageIcon backgroundImage = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//PSU.png");
+        ImageIcon backgroundImage = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//resizedPSU.png");
         homePanel = new JPanel(new BorderLayout()) {
             @Override
             public void paintComponent(Graphics g) {
