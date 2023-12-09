@@ -239,6 +239,15 @@ public class ViewAssignmentUI {
                 courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().repaint();
             }
         });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getCardSwapper().show(courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel(), "Course Work");
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().revalidate();
+                courseworkMgmtController.getCourseMgmtController().getHomepageController().getHomepageUI().getViewPanel().repaint();
+            }
+        });
     }
 
     private JPanel readPanel;

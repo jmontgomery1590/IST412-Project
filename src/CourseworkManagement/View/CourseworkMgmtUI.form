@@ -26,7 +26,7 @@
             </constraints>
             <properties>
               <background color="-16777216"/>
-              <font size="18"/>
+              <font size="36" style="1"/>
               <foreground color="-16777216"/>
               <text value="Title"/>
             </properties>
