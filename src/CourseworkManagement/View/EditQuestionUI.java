@@ -28,6 +28,7 @@ public class EditQuestionUI extends JFrame {
     private JButton saveQuestionButton;
     private JButton cancelButton;
     private JButton editAnswerButton;
+    private JScrollPane answersScrollPane;
     private CourseworkMgmtController courseworkMgmtController;
     private Assignment assignment;
     private JFrame editQuestionFrame;

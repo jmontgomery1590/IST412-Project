@@ -186,6 +186,7 @@ public class AddAssignmentUI extends JFrame {
     private JPanel assignmentNamePanel;
     private JLabel questionListLabel;
     private JButton submitButton;
+    private JScrollPane questionsScrollPane;
 
     public JPanel getNewAssignmentPanel() {
         return newAssignmentPanel;

@@ -12,7 +12,7 @@ public class AddAnswerUI extends JFrame {
     public AddAnswerUI(CourseworkMgmtController courseworkMgmtController){
         courseworkMgmtCntrl = courseworkMgmtController;
         answerFrame = new JFrame("Answer Builder");
-        questionDescriptionLabel.setText(courseworkMgmtCntrl.getQuestionInterface().getQuestionTextField().getText());
+        questionTextArea.setText(courseworkMgmtCntrl.getQuestionInterface().getQuestionTextField().getText());
         answerFrame.setResizable(false);
         answerFrame.setMinimumSize(new Dimension(700, 600));
         answerFrame.setContentPane(answerInterfacePanel);
@@ -144,6 +144,8 @@ public class AddAnswerUI extends JFrame {
     private JLabel questionDescriptionLabel;
     private JPanel radioPanel;
     private JButton submitButton;
+    private JTextArea questionTextArea;
+    private JTextPane questionDisplayPane;
     private CourseworkMgmtController courseworkMgmtCntrl;
 
     public JFrame getAnswerFrame() {

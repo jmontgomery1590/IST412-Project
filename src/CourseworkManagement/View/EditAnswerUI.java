@@ -4,7 +4,6 @@ import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.Answer;
 import CourseworkManagement.Model.MultipleChoiceAnswer;
 import CourseworkManagement.Model.OpenEndedAnswer;
-import CourseworkManagement.Model.OpenEndedQuestion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +25,7 @@ public class EditAnswerUI extends JFrame {
     private JRadioButton yesRadioButton;
     private JRadioButton noRadioButton;
     private JLabel radioLabel;
+    private JTextArea questionTextArea;
     private CourseworkMgmtController courseworkMgmtController;
     private Answer answerToEdit;
     private JFrame editAnswerFrame;
@@ -34,7 +34,7 @@ public class EditAnswerUI extends JFrame {
         this.courseworkMgmtController = courseworkMgmtController;
         this.answerToEdit = answer;
         editAnswerFrame = new JFrame("Answer Builder");
-        questionDescriptionLabel.setText(courseworkMgmtController.getEditQuestionUI().getQuestionTextField().getText());
+        questionTextArea.setText(courseworkMgmtController.getEditQuestionUI().getQuestionTextField().getText());
         editAnswerFrame.setResizable(false);
         editAnswerFrame.setMinimumSize(new Dimension(700, 600));
         editAnswerFrame.setContentPane(editAnswerPanel);
@@ -94,8 +94,8 @@ public class EditAnswerUI extends JFrame {
     }
 
     private void onWindowClosing() {
-        courseworkMgmtController.getQuestionInterface().getQuestionFrame().setEnabled(true);
-        courseworkMgmtController.getQuestionInterface().getQuestionFrame().transferFocus();
+        courseworkMgmtController.getEditQuestionUI().getEditQuestionFrame().setEnabled(true);
+        courseworkMgmtController.getEditQuestionUI().getEditQuestionFrame().transferFocus();
     }
 
     private void addALButtons() {
