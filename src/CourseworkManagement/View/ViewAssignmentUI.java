@@ -72,8 +72,15 @@ public class ViewAssignmentUI {
         {
             JRadioButton answerOption = new JRadioButton(option.getAnswer());
             answerOption.setFont(new Font("Arial", Font.BOLD, 20));
+            answerOption.setBackground(Color.getColor("B3B5C2"));
+            answerOption.setForeground(Color.white);
             answerGroup.add(answerOption);
             answerPanel.add(answerOption, gbc);
+
+            if (courseworkMgmtController.getAssignment().isCompleted())
+            {
+                answerOption.setEnabled(false);
+            }
         }
         if (!currentQuestion.showSubmittedAnswer().isEmpty())
         {
@@ -95,10 +102,16 @@ public class ViewAssignmentUI {
         JLabel answerLabel = new JLabel();
         answerLabel.setText("Your Answer: ");
         answerLabel.setFont(new Font("Arial",Font.BOLD, 20));
+        answerLabel.setForeground(Color.white);
         typedAnswer.setSize(100, 10);
         answerLabel.setLabelFor(typedAnswer);
         answerPanel.add(answerLabel, gbc);
         answerPanel.add(typedAnswer, gbc);
+
+        if (courseworkMgmtController.getAssignment().isCompleted())
+        {
+            typedAnswer.setEnabled(false);
+        }
 
         answerPanel.revalidate();
         answerPanel.repaint();

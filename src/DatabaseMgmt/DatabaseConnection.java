@@ -965,6 +965,7 @@ public class DatabaseConnection {
         int assignmentID = assignment.getAssignmentID();
         int studentID = assignment.getAssignedStudent().getUserIDNumber();
         boolean completed = true;
+        assignment.setCompleted(completed);
         double grade = Double.parseDouble(assignment.getGrade());
         double earnedScore = assignment.getEarnedScore();
         try
