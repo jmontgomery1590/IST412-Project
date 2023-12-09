@@ -5,6 +5,7 @@ public class MultipleChoiceAnswer extends Answer {
     private Boolean isCorrect;
     private Boolean isSelected;
     private int answerID;
+
     public MultipleChoiceAnswer(String answer)
     {
         this.answer = answer;
@@ -40,8 +41,6 @@ public class MultipleChoiceAnswer extends Answer {
         this.isCorrect = false;
     }
 
-    public void markSelected() { this.isSelected = true; }
-    public void markUnselected() { this.isSelected = false; }
     @Override
     public boolean getIsCorrect()
     {

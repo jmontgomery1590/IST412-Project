@@ -1082,7 +1082,6 @@ public class DatabaseConnection {
         }
     }
 
-
     public void closeConnection()
     {
         try

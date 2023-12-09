@@ -200,29 +200,12 @@ public class EditAssignmentUI extends JFrame {
         }
     }
 
-
-    public JPanel getEditAssignmentPanel() {
-        return editAssignmentPanel;
-    }
-
-    public void setEditAssignmentPanel(JPanel editAssignmentPanel) {
-        this.editAssignmentPanel = editAssignmentPanel;
-    }
-
     public JPanel getTitlePanel() {
         return titlePanel;
     }
 
     public void setTitlePanel(JPanel titlePanel) {
         this.titlePanel = titlePanel;
-    }
-
-    public JLabel getTitleLabel() {
-        return titleLabel;
-    }
-
-    public void setTitleLabel(JLabel titleLabel) {
-        this.titleLabel = titleLabel;
     }
 
     public JPanel getButtonPanel() {
@@ -233,52 +216,12 @@ public class EditAssignmentUI extends JFrame {
         this.buttonPanel = buttonPanel;
     }
 
-    public JButton getSaveAssignmentButton() {
-        return saveAssignmentButton;
-    }
-
-    public void setSaveAssignmentButton(JButton saveAssignmentButton) {
-        this.saveAssignmentButton = saveAssignmentButton;
-    }
-
     public JButton getCancelButton() {
         return cancelButton;
     }
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
-    }
-
-    public JButton getEditQuestionButton() {
-        return editQuestionButton;
-    }
-
-    public void setEditQuestionButton(JButton editQuestionButton) {
-        this.editQuestionButton = editQuestionButton;
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public void setMainPanel(JPanel mainPanel) {
-        this.mainPanel = mainPanel;
-    }
-
-    public JPanel getAssignmentNamePanel() {
-        return assignmentNamePanel;
-    }
-
-    public void setAssignmentNamePanel(JPanel assignmentNamePanel) {
-        this.assignmentNamePanel = assignmentNamePanel;
-    }
-
-    public JTextField getAssignmentNameTextField() {
-        return assignmentNameTextField;
-    }
-
-    public void setAssignmentNameTextField(JTextField assignmentNameTextField) {
-        this.assignmentNameTextField = assignmentNameTextField;
     }
 
     public JButton getSubmitButton() {
@@ -289,44 +232,8 @@ public class EditAssignmentUI extends JFrame {
         this.submitButton = submitButton;
     }
 
-    public JPanel getListPanel() {
-        return listPanel;
-    }
-
-    public void setListPanel(JPanel listPanel) {
-        this.listPanel = listPanel;
-    }
-
-    public JList getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(JList questionList) {
-        this.questionList = questionList;
-    }
-
-    public JLabel getQuestionListLabel() {
-        return questionListLabel;
-    }
-
-    public void setQuestionListLabel(JLabel questionListLabel) {
-        this.questionListLabel = questionListLabel;
-    }
-
     public JFrame getEditAssignmentFrame() {
         return editAssignmentFrame;
-    }
-
-    public void setEditAssignmentFrame(JFrame editAssignmentFrame) {
-        this.editAssignmentFrame = editAssignmentFrame;
-    }
-
-    public CourseworkMgmtController getCourseworkMgmtController() {
-        return courseworkMgmtController;
-    }
-
-    public void setCourseworkMgmtController(CourseworkMgmtController courseworkMgmtController) {
-        this.courseworkMgmtController = courseworkMgmtController;
     }
 
     public Assignment getAssignment() {

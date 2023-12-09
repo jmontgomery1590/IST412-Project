@@ -3,7 +3,6 @@ package CourseManagement.View;
 import CourseManagement.Controller.CourseMgmtController;
 import CourseManagement.Model.Announcement;
 import CourseManagement.Model.AnnouncementTableModel;
-import UserAuthentication.Controller.HomepageController;
 import UserAuthentication.Model.User;
 
 import javax.swing.*;
@@ -11,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AnnouncementMgmtUI {
-    private HomepageController homepageController;
-    private AnnouncementMgmtUI announcementMgmtUI;
     private JFrame announcementFrame;
     private JPanel announcementTablePanel, announcementMgmtPanel, buttonPanel, announcementTitlePanel;
     private JButton newAnnouncementButton, editAnnouncementButton, viewAnnouncementButton, deleteAnnouncementButton;

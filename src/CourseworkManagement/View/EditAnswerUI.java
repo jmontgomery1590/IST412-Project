@@ -19,7 +19,6 @@ public class EditAnswerUI extends JFrame {
     private JLabel answerLabel;
     private JTextField answerField;
     private JLabel questionLabel;
-    private JLabel questionDescriptionLabel;
     private JButton submitButton;
     private JPanel radioPanel;
     private JRadioButton yesRadioButton;

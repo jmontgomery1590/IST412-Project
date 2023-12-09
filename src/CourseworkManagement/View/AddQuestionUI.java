@@ -282,14 +282,9 @@ public class AddQuestionUI extends JFrame {
     private JTextField pointValueTextField;
     private JButton submitButton;
     private JScrollPane answerScrollPane;
-    private JButton editAnswerButton;
 
     public JButton getSaveQuestionButton() {
         return saveQuestionButton;
-    }
-
-    public void setSaveQuestionButton(JButton saveQuestionButton) {
-        this.saveQuestionButton = saveQuestionButton;
     }
 
     public JButton getCancelButton() {
@@ -300,47 +295,11 @@ public class AddQuestionUI extends JFrame {
         this.cancelButton = cancelButton;
     }
 
-    public JList getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(JList answerList) {
-        this.answerList = answerList;
-    }
-
-    public JButton getAddAnswerButton() {
-        return addAnswerButton;
-    }
-
-    public void setAddAnswerButton(JButton addAnswerButton) {
-        this.addAnswerButton = addAnswerButton;
-    }
-
     public JFrame getQuestionFrame() {
         return questionFrame;
     }
 
-    public void setQuestionFrame(JFrame questionFrame) {
-        this.questionFrame = questionFrame;
-    }
-
     public JTextField getQuestionTextField() {
         return questionTextField;
-    }
-
-    public void setQuestionTextField(JTextField questionTextField) {
-        this.questionTextField = questionTextField;
-    }
-
-    public JComboBox getQuestionComboBox() {
-        return questionComboBox;
-    }
-
-    public JTextField getPointValueTextField() {
-        return pointValueTextField;
-    }
-
-    public void setPointValueTextField(JTextField pointValueTextField) {
-        this.pointValueTextField = pointValueTextField;
     }
 }

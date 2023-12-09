@@ -9,6 +9,7 @@ public class OpenEndedQuestion extends Question{
     private int questionID;
     private int assignmentID;
     private int questionType;
+
     public OpenEndedQuestion(String question, double pointValue){
         this.question = question;
         this.pointValue = pointValue;
@@ -41,7 +42,6 @@ public class OpenEndedQuestion extends Question{
         isCorrect = this.submittedAnswer.equalsIgnoreCase(answerList.getAnswerList().get(0).toString());
     }
 
-
     @Override
     public String toString() {
         return this.question;
@@ -51,32 +51,12 @@ public class OpenEndedQuestion extends Question{
         this.question = question;
     }
 
-    public String getSubmittedAnswer() {
-        return submittedAnswer;
-    }
-
-    public void setSubmittedAnswer(String submittedAnswer) {
-        this.submittedAnswer = submittedAnswer;
-    }
-
-    public double getPointValue() {
-        return pointValue;
-    }
-
     public void setPointValue(double pointValue) {
         this.pointValue = pointValue;
     }
 
     public void setAnswerList(AnswerList answerList) {
         this.answerList = answerList;
-    }
-
-    public Boolean getCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
     }
 
     @Override
@@ -102,10 +82,6 @@ public class OpenEndedQuestion extends Question{
     @Override
     public void setQuestionID(int questionID) {
         this.questionID = questionID;
-    }
-
-    public int getAssignmentID() {
-        return assignmentID;
     }
 
     public void setAssignmentID(int assignmentID) {

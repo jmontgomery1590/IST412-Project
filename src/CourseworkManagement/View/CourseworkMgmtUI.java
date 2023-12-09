@@ -28,7 +28,6 @@ public class CourseworkMgmtUI extends JFrame{
         this.setCourseworkMgmtCntrl(courseworkMgmtCntrl);
         this.courseAssignmentLabel.setText(courseworkMgmtCntrl.getCurrentCourse().getCourseID() + " " + courseworkMgmtCntrl.getCurrentCourse().getCourseName());
         loadAssignmentTable();
-        //assignmentTable.setModel(this.courseworkMgmtCntrl.getAssignmentTable());
         view.add(courseworkPanel);
         this.addALButtons();
         this.verifyButtonAccess();
@@ -131,28 +130,12 @@ public class CourseworkMgmtUI extends JFrame{
         });
     }
 
-    public CourseworkMgmtController getCourseworkMgmtCntrl() {
-        return courseworkMgmtCntrl;
-    }
-
     public void setCourseworkMgmtCntrl(CourseworkMgmtController courseworkMgmtCntrl) {
         this.courseworkMgmtCntrl = courseworkMgmtCntrl;
     }
 
     public JPanel getCourseworkPanel() {
         return courseworkPanel;
-    }
-
-    public void setCourseworkPanel(JPanel courseworkPanel) {
-        this.courseworkPanel = courseworkPanel;
-    }
-
-    public JLabel getCourseAssignmentLabel() {
-        return courseAssignmentLabel;
-    }
-
-    public void setCourseAssignmentLabel(JLabel courseAssignmentLabel) {
-        this.courseAssignmentLabel = courseAssignmentLabel;
     }
 
     public JPanel getButtonPanel() {
@@ -163,68 +146,8 @@ public class CourseworkMgmtUI extends JFrame{
         this.buttonPanel = buttonPanel;
     }
 
-    public JButton getNewAssignmentButton() {
-        return newAssignmentButton;
-    }
-
-    public void setNewAssignmentButton(JButton newAssignmentButton) {
-        this.newAssignmentButton = newAssignmentButton;
-    }
-
-    public JButton getEditAssignmentButton() {
-        return editAssignmentButton;
-    }
-
-    public void setEditAssignmentButton(JButton editAssignmentButton) {
-        this.editAssignmentButton = editAssignmentButton;
-    }
-
-    public JButton getDeleteAssignmentButton() {
-        return deleteAssignmentButton;
-    }
-
-    public void setDeleteAssignmentButton(JButton deleteAssignmentButton) {
-        this.deleteAssignmentButton = deleteAssignmentButton;
-    }
-
-    public JPanel getTablePanel() {
-        return tablePanel;
-    }
-
-    public void setTablePanel(JPanel tablePanel) {
-        this.tablePanel = tablePanel;
-    }
-
-    public JPanel getCourseworkTitlePanel() {
-        return courseworkTitlePanel;
-    }
-
-    public void setCourseworkTitlePanel(JPanel courseworkTitlePanel) {
-        this.courseworkTitlePanel = courseworkTitlePanel;
-    }
-
-    public JScrollPane getTableScrollPane() {
-        return tableScrollPane;
-    }
-
-    public void setTableScrollPane(JScrollPane tableScrollPane) {
-        this.tableScrollPane = tableScrollPane;
-    }
-
     public JTable getAssignmentTable() {
         return assignmentTable;
-    }
-
-    public void setAssignmentTable(JTable assignmentTable) {
-        this.assignmentTable = assignmentTable;
-    }
-
-    public JButton getViewAssignmentButton() {
-        return viewAssignmentButton;
-    }
-
-    public void setViewAssignmentButton(JButton viewAssignmentButton) {
-        this.viewAssignmentButton = viewAssignmentButton;
     }
 
     public JFrame getView() {

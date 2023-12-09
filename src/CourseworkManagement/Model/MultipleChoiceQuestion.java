@@ -75,21 +75,6 @@ public class MultipleChoiceQuestion extends Question{
         this.answerList = answerList;
     }
 
-    public Boolean getCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
-    }
-
-    public String getSubmittedAnswer() {
-        return submittedAnswer;
-    }
-
-    public void setSubmittedAnswer(String submittedAnswer) {
-        this.submittedAnswer = submittedAnswer;
-    }
     @Override
     public int getQuestionID() {
         return questionID;
@@ -108,10 +93,6 @@ public class MultipleChoiceQuestion extends Question{
     @Override
     public void setQuestionID(int questionID) {
         this.questionID = questionID;
-    }
-
-    public int getAssignmentID() {
-        return assignmentID;
     }
 
     public void setAssignmentID(int assignmentID) {

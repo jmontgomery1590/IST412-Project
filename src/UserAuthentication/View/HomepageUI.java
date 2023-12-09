@@ -13,7 +13,6 @@ public class HomepageUI extends JFrame{
 	private JFrame homeFrame;
 	private JButton homeButton, coursesButton, profileButton, exitButton;
 	private JPanel navigationPanel, HomePage, viewPanel, homePanel;
-	private JLabel homeWelcomeLabel;
 	private HomepageController homepageCntrl;
 	private CardLayout cardSwapper;
 	private String pcUserName = System.getenv("USERNAME");

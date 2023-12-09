@@ -11,7 +11,6 @@ public class Assignment {
     private double possibleScore;
     private double earnedScore;
     private int assignmentID;
-
     private String grade;
     private boolean completed;
     private Student assignedStudent;

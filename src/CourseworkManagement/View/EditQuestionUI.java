@@ -278,92 +278,8 @@ public class EditQuestionUI extends JFrame {
         });
     }
 
-    public JPanel getQuestionViewPanel() {
-        return questionViewPanel;
-    }
-
-    public void setQuestionViewPanel(JPanel questionViewPanel) {
-        this.questionViewPanel = questionViewPanel;
-    }
-
-    public JPanel getBodyPanel() {
-        return bodyPanel;
-    }
-
-    public void setBodyPanel(JPanel bodyPanel) {
-        this.bodyPanel = bodyPanel;
-    }
-
-    public JPanel getAnswerListPanel() {
-        return answerListPanel;
-    }
-
-    public void setAnswerListPanel(JPanel answerListPanel) {
-        this.answerListPanel = answerListPanel;
-    }
-
-    public JList getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(JList answerList) {
-        this.answerList = answerList;
-    }
-
-    public JLabel getAnswerListLabel() {
-        return answerListLabel;
-    }
-
-    public void setAnswerListLabel(JLabel answerListLabel) {
-        this.answerListLabel = answerListLabel;
-    }
-
-    public JComboBox getQuestionComboBox() {
-        return questionComboBox;
-    }
-
-    public void setQuestionComboBox(JComboBox questionComboBox) {
-        this.questionComboBox = questionComboBox;
-    }
-
-    public JLabel getQuestionTypeLabel() {
-        return questionTypeLabel;
-    }
-
-    public void setQuestionTypeLabel(JLabel questionTypeLabel) {
-        this.questionTypeLabel = questionTypeLabel;
-    }
-
-    public JLabel getQuestionLabel() {
-        return questionLabel;
-    }
-
-    public void setQuestionLabel(JLabel questionLabel) {
-        this.questionLabel = questionLabel;
-    }
-
     public JTextField getQuestionTextField() {
         return questionTextField;
-    }
-
-    public void setQuestionTextField(JTextField questionTextField) {
-        this.questionTextField = questionTextField;
-    }
-
-    public JLabel getPointValueLabel() {
-        return pointValueLabel;
-    }
-
-    public void setPointValueLabel(JLabel pointValueLabel) {
-        this.pointValueLabel = pointValueLabel;
-    }
-
-    public JTextField getPointValueTextField() {
-        return pointValueTextField;
-    }
-
-    public void setPointValueTextField(JTextField pointValueTextField) {
-        this.pointValueTextField = pointValueTextField;
     }
 
     public JButton getSubmitButton() {
@@ -382,20 +298,8 @@ public class EditQuestionUI extends JFrame {
         this.titlePanel = titlePanel;
     }
 
-    public JLabel getQuestionTitleLabel() {
-        return questionTitleLabel;
-    }
-
-    public void setQuestionTitleLabel(JLabel questionTitleLabel) {
-        this.questionTitleLabel = questionTitleLabel;
-    }
-
     public JButton getSaveQuestionButton() {
         return saveQuestionButton;
-    }
-
-    public void setSaveQuestionButton(JButton saveQuestionButton) {
-        this.saveQuestionButton = saveQuestionButton;
     }
 
     public JButton getCancelButton() {
@@ -404,22 +308,6 @@ public class EditQuestionUI extends JFrame {
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
-    }
-
-    public JButton getEditAnswerButton() {
-        return editAnswerButton;
-    }
-
-    public void setEditAnswerButton(JButton editAnswerButton) {
-        this.editAnswerButton = editAnswerButton;
-    }
-
-    public CourseworkMgmtController getCourseworkMgmtController() {
-        return courseworkMgmtController;
-    }
-
-    public void setCourseworkMgmtController(CourseworkMgmtController courseworkMgmtController) {
-        this.courseworkMgmtController = courseworkMgmtController;
     }
 
     public Assignment getAssignment() {
@@ -432,33 +320,5 @@ public class EditQuestionUI extends JFrame {
 
     public JFrame getEditQuestionFrame() {
         return editQuestionFrame;
-    }
-
-    public void setEditQuestionFrame(JFrame editQuestionFrame) {
-        this.editQuestionFrame = editQuestionFrame;
-    }
-
-    public Question getQuestionToEdit() {
-        return questionToEdit;
-    }
-
-    public void setQuestionToEdit(Question questionToEdit) {
-        this.questionToEdit = questionToEdit;
-    }
-
-    public boolean isValidPointValue() {
-        return isValidPointValue;
-    }
-
-    public void setValidPointValue(boolean validPointValue) {
-        isValidPointValue = validPointValue;
-    }
-
-    public boolean isValidQuestion() {
-        return isValidQuestion;
-    }
-
-    public void setValidQuestion(boolean validQuestion) {
-        isValidQuestion = validQuestion;
     }
 }

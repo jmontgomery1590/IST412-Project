@@ -12,7 +12,6 @@ public class CourseAssignmentTableModel extends AbstractTableModel {
 
     public CourseAssignmentTableModel(ArrayList<Assignment> newAssignmentList) { assignmentList = newAssignmentList; }
 
-
     @Override
     public int getRowCount() { return assignmentList.size(); }
 
@@ -32,5 +31,4 @@ public class CourseAssignmentTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int col) { return columnNames[col] ;}
-
 }

@@ -265,7 +265,6 @@ public class ViewAssignmentUI {
     private JLabel submittedAnswerLabel;
     private JLabel trueAnswerLabel;
     private JLabel answerSubmittedLabel;
-
     private CourseworkMgmtController courseworkMgmtController;
     private Question prevQuestion;
     private Question currentQuestion;
@@ -277,9 +276,5 @@ public class ViewAssignmentUI {
 
     public JPanel getReadPanel() {
         return readPanel;
-    }
-
-    public void setReadPanel(JPanel readPanel) {
-        this.readPanel = readPanel;
     }
 }

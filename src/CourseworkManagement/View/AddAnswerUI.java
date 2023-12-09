@@ -141,28 +141,10 @@ public class AddAnswerUI extends JFrame {
     private JButton saveAnswerButton;
     private JButton cancelButton;
     private JLabel questionLabel;
-    private JLabel questionDescriptionLabel;
     private JPanel radioPanel;
     private JButton submitButton;
     private JTextArea questionTextArea;
-    private JTextPane questionDisplayPane;
     private CourseworkMgmtController courseworkMgmtCntrl;
-
-    public JFrame getAnswerFrame() {
-        return answerFrame;
-    }
-
-    public void setAnswerFrame(JFrame answerFrame) {
-        this.answerFrame = answerFrame;
-    }
-
-    public JButton getSaveAnswerButton() {
-        return saveAnswerButton;
-    }
-
-    public void setSaveAnswerButton(JButton saveAnswerButton) {
-        this.saveAnswerButton = saveAnswerButton;
-    }
 
     public JButton getCancelButton() {
         return cancelButton;

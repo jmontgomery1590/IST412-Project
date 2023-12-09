@@ -3,8 +3,8 @@ package CourseworkManagement.Model;
 import java.util.ArrayList;
 
 public class QuestionList {
-
     private ArrayList<Question> questionList;
+
     public QuestionList()
     {
         this.questionList = new ArrayList<>();

@@ -19,8 +19,6 @@ public class ConfirmationUI {
     private JLabel confirmationLabel2;
     private JLabel confirmationLabel3;
     private CourseMgmtController courseMgmtController;
-    private int courseNumber;
-    private CourseList courseList;
     private Course selectedCourse;
 
     public ConfirmationUI(CourseMgmtController courseMgmtController) {

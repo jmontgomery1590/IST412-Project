@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LessonMgmtUI {
-    private HomepageController homepageController;
-    private LessonMgmtUI lessonMgmtUI;
     private JFrame lessonMgmtFrame;
     private JPanel buttonPanel, lessonMgmtPanel, lessonTablePanel;
     private JButton newLessonButton, editLessonButton, viewLessonButton, deleteLessonButton;
