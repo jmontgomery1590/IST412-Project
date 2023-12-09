@@ -20,6 +20,7 @@ public class CourseworkMgmtUI extends JFrame{
     private JButton viewAssignmentButton;
     private JButton courseAssignmentButton;
     private JButton studentAssignmentsButton;
+    private JPanel assignmentSwitcherPanel;
     private CourseworkMgmtController courseworkMgmtCntrl;
     private JFrame view;
 
@@ -40,6 +41,7 @@ public class CourseworkMgmtUI extends JFrame{
             newAssignmentButton.setVisible(false);
             deleteAssignmentButton.setVisible(false);
             editAssignmentButton.setVisible(false);
+            assignmentSwitcherPanel.setVisible(false);
         }
     }
 
