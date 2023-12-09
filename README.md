@@ -26,7 +26,10 @@ Test profiles have the following login info for various user functionalities:
           Username: admina
           Password: Admin321
 
-Database paths depending on current machine:
+    Please note that these are only a few of the logins available. You can see login credentials for other created users
+    within the Database itself if you would like.
+
+(IMPORTANT!!!) Database paths depending on current machine:
 
     We will provide access to our database within PSU OneDrive with our Final Project Implementation. This can be saved
     to your personal PSU OneDrive, and after you add the shortcut to the database to your personal OneDrive in your file
@@ -36,20 +39,38 @@ Database paths depending on current machine:
  
     Joe (Cloud): "jdbc:ucanaccess://C://Users//Joe//OneDrive - The Pennsylvania State University//Database//LMSDBJoe.accdb"
     Justin: (Cloud): "jdbc:ucanaccess://C://Users//jmont//OneDrive - The Pennsylvania State University//Database//LMSDBjmont.accdb"
-    Ethan:
 
-As of current, TestHarness application flow for these profiles are:
+    Professor: I have shared the database with you via one drive through Penn State. If your local one drive file path 
+                is similar to mine and Justin's, your file path will most likely be similar. Feel free to adjust the 
+                database connection to what works best for you in the DatabaseConnection.java class. The way it is set 
+                up currently lets both myself and Justin use it without manually repointing everytime.
 
-	All Users: Upon successful login, LMS homepage is displayed with navigation bar at the top of the page.
-          To view this deliverable's two use cases (view courses and page types within course/ creating new assignments), 
-          follow the listed sequence:
-          
-          Start at homepage -> Click "Courses" within the navigation bar -> Select a course from the list provided ->
-          Click "View Course" from the option menu on the left -> Select a page type from the three buttons provided ->
-          For first use case click "View Announcement/Lesson/Assignment" from the option menu on the left. For second 
-          use case, click add assignment and follow the path to create various types of new assignments.
+Use Cases Demonstrated:
 
-    ***Student and TA will only have the "View Course" button on the option menu for courses (will be implemented for 
-       various page types in final deliverable). Admins and Instructors will have additional "Add", "Edit", and "Delete"
-       buttons (Edit and Delete not yet fully functional): Admins for both Course and Page, Instructors will only have
-       these functions for various Page types.
+    User Authentication/Login
+
+    View Profile for current user
+
+    CRUD for Courses (only when logged in as an Admin account)
+    -- Students only have access to View Courses they are enrolled in
+    -- Instructors only have access to View Courses they are assigned to
+    ---- Deleting Courses disables the course in the database incase course needs to be reactivated thus preserving 
+            student enrollment/assignments/etc.
+
+    CRUD for Announcements & Lessons
+    -- Students only have view access
+    -- Instructors & Admin have full CRUD access
+    ---- Deleting Announcements & Lessons fully delete them from the database
+
+    CRUD for Assignments
+    -- Students can view Assignments
+    -- Admin and Instructors have full CRUD for Assignments
+    ---- Deleting Assignments disable in the database just incase reactivation/reversal is needed and students grades 
+            can be reaccessed
+    ---- Editing an Assignment (reassigning points worth/marking question right or wrong) updates Student's grades 
+            & earned points
+
+    Taking/Submitting Assignments
+    -- Only Students can take assignments and submit for a grade
+    ---- Assignments are autograded by the application
+    -- Teachers and Admin can view enrolled Students submitted assignments

@@ -8,11 +8,9 @@ import CourseManagement.View.AnnouncementMgmtUI;
 import CourseManagement.View.LessonMgmtUI;
 import CourseworkManagement.Controller.CourseworkMgmtController;
 import CourseworkManagement.Model.*;
-import CourseworkManagement.View.AddAssignmentUI;
 import UserAuthentication.Controller.LoginController;
 import UserAuthentication.Model.Instructor;
 import UserAuthentication.Model.Student;
-import UserAuthentication.Model.User;
 
 import java.sql.*;
 import java.util.ArrayList;

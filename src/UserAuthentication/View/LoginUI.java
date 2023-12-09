@@ -16,11 +16,20 @@ public class LoginUI extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton, exitButton;
     private JLabel loginTextLabel, userNameLabel, passwordLabel, loginRequestLabel;
+    private JPanel backgroundPanel;
     private LoginController loginController;
+    private String pcUserName = System.getenv("USERNAME");
+    private ImageIcon background = new ImageIcon("C://Users//" + pcUserName + "//IdeaProjects//IST412-Project//images//WeArePSU.jpg");
+    private Image image = background.getImage();
 
     public LoginUI(LoginController loginController) {
         this.setLoginController(loginController);
         this.setLoginFrame(new JFrame("LMS Login"));
+        loadLoginImage();
+        loginPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
+        this.getLoginPanel().add(backgroundPanel, gbc);
         this.getLoginFrame().add(this.getLoginPanel());
         this.getLoginTextLabel().setForeground(Color.WHITE);
         this.getLoginRequestLabel().setForeground(Color.WHITE);
@@ -31,6 +40,19 @@ public class LoginUI extends JFrame {
         this.getLoginFrame().setVisible(true);
         addALButtons();
     }
+
+    public void loadLoginImage() {
+        loginPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (image != null) {
+                    g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+    }
+
 
     public void addALButtons(){
         loginButton.addActionListener(new ActionListener() {
